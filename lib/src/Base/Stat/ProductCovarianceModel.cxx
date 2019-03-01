@@ -81,6 +81,12 @@ void ProductCovarianceModel::setCollection(const CovarianceModelCollection & col
   // Handle 'specific' parameters
   extraParameterNumber_ = Indices(collection.getSize());
 
+  // check that scale parametrizations match
+  const ScaleParametrization scaleParametrization = collection[0].getScaleParametrization();
+  for (UnsignedInteger i = 1; i < size; ++ i)
+    if (collection[i].getScaleParametrization() != scaleParametrization)
+      throw InvalidArgumentException(HERE) << "ProductCovarianceModel does not allow different scale parametrizations";
+
   // Filling the active parameters
   activeParameter_ = Indices(0);
   for (UnsignedInteger i = 0; i < size; ++i)
@@ -365,6 +371,12 @@ Bool ProductCovarianceModel::isStationary() const
 {
   for (UnsignedInteger i = 0; i < collection_.getSize(); ++i)
     if (!collection_[i].isStationary()) return false;
+  return true;
+}
+
+/* Is it a composite model ? */
+Bool ProductCovarianceModel::isComposite() const
+{
   return true;
 }
 

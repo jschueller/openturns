@@ -46,6 +46,8 @@ public:
 
   typedef GeneralLinearModelResult::BasisCollection BasisCollection;
   typedef GeneralLinearModelResult::BasisPersistentCollection BasisPersistentCollection;
+  typedef enum {NONE, JOINTLYROBUSTPRIOR, REFERENCEPRIOR} ScalePrior;
+  typedef CovarianceModel::ScaleParametrization ScaleParametrization;
 
   /** Default constructor */
   GeneralLinearModelAlgorithm();
@@ -107,6 +109,10 @@ public:
   void setOptimizationBounds(const Interval & optimizationBounds);
   Interval getOptimizationBounds() const;
 
+  /** Scale parametrization accessor */
+  ScaleParametrization getScaleParametrization() const;
+  void setScaleParametrization(const ScaleParametrization scaleParametrization);
+
   /** Observation noise accessor */
   void setNoise(const Point & noise);
   Point getNoise() const;
@@ -141,6 +147,10 @@ protected:
 
   friend class KrigingAlgorithm;
   Point getRho() const;
+
+  // Scale prior accessor
+  ScalePrior getScalePrior() const;
+  void setScalePrior(const ScalePrior likelihoodPrior);
 
 private:
 
@@ -293,6 +303,13 @@ private:
 
   /** Cache of the last computed reduced log-likelihood */
   mutable Scalar lastReducedLogLikelihood_;
+
+  // scale prior
+  ScalePrior scalePrior_;
+
+  // scale parametrization
+  ScaleParametrization scaleParametrization_;
+
 }; // class GeneralLinearModelAlgorithm
 
 

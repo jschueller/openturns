@@ -296,3 +296,16 @@ Returns
 noise : sequence of positive float
     The noise variance :math:`\tau_k^2` of each output value."
 
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::KrigingAlgorithm::setScaleParametrization
+OT_CovarianceModel_setScaleParametrization_doc
+%feature("docstring") OT::KrigingAlgorithm::getScaleParametrization
+OT_CovarianceModel_getScaleParametrization_doc
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::KrigingAlgorithm::setScalePrior
+OT_GeneralLinearModelAlgorithm_setScalePrior_doc
+%feature("docstring") OT::KrigingAlgorithm::getScalePrior
+OT_GeneralLinearModelAlgorithm_getScalePrior_doc

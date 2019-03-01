@@ -258,6 +258,27 @@ Point KrigingAlgorithm::getNoise() const
   return glmAlgo_.getNoise();
 }
 
+// Scale prior accessor
+KrigingAlgorithm::ScalePrior KrigingAlgorithm::getScalePrior() const
+{
+  return glmAlgo_.getScalePrior();
+}
+
+void KrigingAlgorithm::setScalePrior(const ScalePrior scalePrior)
+{
+  glmAlgo_.setScalePrior(scalePrior);
+}
+
+void KrigingAlgorithm::setScaleParametrization(const ScaleParametrization scaleParametrization)
+{
+  glmAlgo_.setScaleParametrization(scaleParametrization);
+}
+
+KrigingAlgorithm::ScaleParametrization KrigingAlgorithm::getScaleParametrization() const
+{
+  return glmAlgo_.getScaleParametrization();
+}
+
 /* Method save() stores the object through the StorageManager */
 void KrigingAlgorithm::save(Advocate & adv) const
 {
