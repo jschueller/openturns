@@ -45,6 +45,7 @@ Kriging metamodel
     kriging_advanced.ipynb
     kriging_beam_arbitrary_trend.ipynb
     kriging_hyperparameters_optimization.ipynb
+    kriging_robust.ipynb
 
 Fields metamodels
 -----------------

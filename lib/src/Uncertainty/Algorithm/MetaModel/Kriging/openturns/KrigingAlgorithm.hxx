@@ -46,6 +46,8 @@ public:
 
   typedef KrigingResult::BasisCollection BasisCollection;
   typedef KrigingResult::BasisPersistentCollection BasisPersistentCollection;
+  typedef GeneralLinearModelAlgorithm::ScalePrior ScalePrior;
+  typedef CovarianceModel::ScaleParametrization ScaleParametrization;
 
   /** Default constructor */
   KrigingAlgorithm();
@@ -98,6 +100,14 @@ public:
   /** Observation noise accessor */
   void setNoise(const Point & noise);
   Point getNoise() const;
+
+  // Scale prior accessor
+  ScalePrior getScalePrior() const;
+  void setScalePrior(const ScalePrior likelihoodPrior);
+
+  // Scale parametrization accessor
+  ScaleParametrization getScaleParametrization() const;
+  void setScaleParametrization(const ScaleParametrization scaleParametrization);
 
   /** Method save() stores the object through the StorageManager */
   void save(Advocate & adv) const;

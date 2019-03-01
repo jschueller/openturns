@@ -67,6 +67,9 @@ Bibliography
 .. [gamboa2013] Gamboa, F., Janon, A., Klein, T. & Lagnoux, A. *Sensitivity
     analysis for multidimensional and functional outputs.* 2013.
     `pdf <http://doc.openturns.org/papers/gamboa2013.pdf>`__
+.. [gu2016] Gu M., *Robust Uncertainty Quantification and Scalable Computation
+    for Computer Models with Massive Output*, 2016.
+    `pdf <http://doc.openturns.org/papers/gu2016.pdf>`__
 .. [hormann1993] Hormann W., *The generation of Binomial Random Variates* Journal
     of Statistical Computation and Simulation 46, pp. 101-110, 1993.
     `pdf <http://doc.openturns.org/papers/hormann1992.pdf>`__

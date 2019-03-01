@@ -77,6 +77,9 @@ public:
   /** Is it a stationary covariance model ? */
   virtual Bool isStationary() const;
 
+  /** Is it a composite covariance model ? */
+  virtual Bool isComposite() const;
+
   /** String converter */
   String __repr__() const;
 
