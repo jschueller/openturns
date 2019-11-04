@@ -36,10 +36,10 @@ for prior in [ot.GeneralLinearModelAlgorithm.NONE, ot.GeneralLinearModelAlgorith
         # create algorithm
         basis = ConstantBasisFactory(dimension).build()
         covarianceModel = SquaredExponential([1e-05], [4.11749])
+        covarianceModel.setScaleParametrization(parametrization)
 
         algo = KrigingAlgorithm(X, Y, covarianceModel, basis)
         algo.setScalePrior(prior)
-        algo.setScaleParametrization(parametrization)
         algo.run()
 
         # perform an evaluation

@@ -109,10 +109,6 @@ public:
   void setOptimizationBounds(const Interval & optimizationBounds);
   Interval getOptimizationBounds() const;
 
-  /** Scale parametrization accessor */
-  ScaleParametrization getScaleParametrization() const;
-  void setScaleParametrization(const ScaleParametrization scaleParametrization);
-
   /** Observation noise accessor */
   void setNoise(const Point & noise);
   Point getNoise() const;
@@ -306,9 +302,6 @@ private:
 
   // scale prior
   ScalePrior scalePrior_;
-
-  // scale parametrization
-  ScaleParametrization scaleParametrization_;
 
 }; // class GeneralLinearModelAlgorithm
 

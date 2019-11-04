@@ -20,8 +20,8 @@ def evalueErreur(noyau_covariance, realisation, base=ot.Basis(0), prior=0, param
     realisation -- ot.Realization sur laquelle est faite l'estimation
     base -- ot.Basis : doit être spécifié pour le krigeage universel
     """
-    
-    processus = ot.GaussianProcess(noyau_covariance,realisation.getMesh())
+    noyau_covariance.setScaleParametrization(parametrization)
+    processus = ot.GaussianProcess(noyau_covariance, realisation.getMesh())
     
     sigma = np.array(noyau_covariance.getAmplitude()) # vraie amplitude
     matrice_covariance = noyau_covariance.discretize(realisation.getMesh()) # vraie matrice de covariance
@@ -31,7 +31,6 @@ def evalueErreur(noyau_covariance, realisation, base=ot.Basis(0), prior=0, param
     #La ligne suivante définit l'algorithme de krigeage. C'est à ce niveau qu'il faut permettre d'estimer les paramètres par les méthodes de Gu.
     krigeage = ot.KrigingAlgorithm(realisation.getMesh().getVertices(),realisation,noyau_covariance,base,False)
     krigeage.setScalePrior(prior)
-    krigeage.setScaleParametrization(parametrization)
     krigeage.run()
 
     resultat = krigeage.getResult()

@@ -366,6 +366,20 @@ void ProductCovarianceModel::setScale(const Point & scale)
   scale_ = scale;
 }
 
+// Scale parametrization accessor
+CovarianceModelImplementation::ScaleParametrization ProductCovarianceModel::getScaleParametrization() const
+{
+  return collection_[0].getScaleParametrization();
+}
+
+void ProductCovarianceModel::setScaleParametrization(const ScaleParametrization scaleParametrization)
+{
+  for (UnsignedInteger i = 0; i < collection_.getSize(); ++i)
+  {
+    collection_[i].setScaleParametrization(scaleParametrization);
+  }
+}
+
 /* Is it a stationary model ? */
 Bool ProductCovarianceModel::isStationary() const
 {
