@@ -378,6 +378,12 @@ void ProductCovarianceModel::setScaleParametrization(const ScaleParametrization 
   {
     collection_[i].setScaleParametrization(scaleParametrization);
   }
+
+  // copy back scale
+  Point scale;
+  for (UnsignedInteger i = 0; i < collection_.getSize(); ++i)
+    scale.add(collection_[i].getScale());
+  scale_ = scale;
 }
 
 /* Is it a stationary model ? */
