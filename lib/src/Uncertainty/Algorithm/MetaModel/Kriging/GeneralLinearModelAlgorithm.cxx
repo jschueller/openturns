@@ -73,7 +73,6 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm()
   , analyticalAmplitude_(false)
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
-  , scaleParametrization_(CovarianceModelImplementation::STANDARD)
 {
   // Set the default covariance to adapt the active parameters of the covariance model
   setCovarianceModel(CovarianceModel());
@@ -110,7 +109,6 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , analyticalAmplitude_(false)
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
-  , scaleParametrization_(CovarianceModelImplementation::STANDARD)
 {
   // Set data
   setData(inputSample, outputSample);
@@ -172,7 +170,6 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , analyticalAmplitude_(false)
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
-  , scaleParametrization_(CovarianceModelImplementation::STANDARD)
 {
   // Set data
   setData(inputSample, outputSample);
@@ -247,7 +244,6 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , analyticalAmplitude_(false)
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
-  , scaleParametrization_(CovarianceModelImplementation::STANDARD)
 {
   // Set data
   setData(inputSample, outputSample);
@@ -364,8 +360,8 @@ void GeneralLinearModelAlgorithm::setCovarianceModel(const CovarianceModel & cov
     const Scalar scaleFactor(ResourceMap::GetAsScalar( "GeneralLinearModelAlgorithm-DefaultOptimizationScaleFactor"));
     if (!(scaleFactor > 0))
       throw InvalidArgumentException(HERE) << "Scale factor set in ResourceMap is invalid. It should be a positive value. Here, scale = " << scaleFactor ;
-    const Point lowerBound(optimizationDimension, ResourceMap::GetAsScalar( "GeneralLinearModelAlgorithm-DefaultOptimizationLowerBound"));
-    Point upperBound(optimizationDimension, ResourceMap::GetAsScalar( "GeneralLinearModelAlgorithm-DefaultOptimizationUpperBound"));
+    Point lowerBound(optimizationDimension, ResourceMap::GetAsScalar("GeneralLinearModelAlgorithm-DefaultOptimizationLowerBound"));
+    Point upperBound(optimizationDimension, ResourceMap::GetAsScalar("GeneralLinearModelAlgorithm-DefaultOptimizationUpperBound"));
     // We could set scale parameter if these parameters are enabled.
     // check if scale is active
     const Indices activeParameters(reducedCovarianceModel_.getActiveParameter());
@@ -378,7 +374,39 @@ void GeneralLinearModelAlgorithm::setCovarianceModel(const CovarianceModel & cov
     if (isScaleActive)
     {
       const Point inputSampleRange(normalizedInputSample_.getMax() - normalizedInputSample_.getMin());
-      for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++k) upperBound[k] = inputSampleRange[k] * scaleFactor;
+      for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++ k)
+        upperBound[k] = inputSampleRange[k] * scaleFactor;
+
+      // transform bounds in the target parametrization
+      const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();
+      switch (scaleParametrization)
+      {
+        case ScaleParametrization::STANDARD:
+          // nothing to do
+          break;
+        case ScaleParametrization::INVERSE:
+        {
+          for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++k)
+          {
+            const Scalar lb = 1.0 / upperBound[k];
+            const Scalar ub = 1.0 / lowerBound[k];
+            lowerBound[k] = lb;
+            upperBound[k] = ub;
+          }
+          break;
+        }
+        case ScaleParametrization::LOGINVERSE:
+        {
+          for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++k)
+          {
+            const Scalar lb = -std::log(upperBound[k]);
+            const Scalar ub = -std::log(lowerBound[k]);
+            lowerBound[k] = lb;
+            upperBound[k] = ub;
+          }
+          break;
+        }
+      }
     }
     LOGWARN(OSS() <<  "Warning! For coherency we set scale upper bounds = " << upperBound.__str__());
     optimizationBounds_ = Interval(lowerBound, upperBound);
@@ -660,8 +688,6 @@ void GeneralLinearModelAlgorithm::run()
 Scalar GeneralLinearModelAlgorithm::maximizeReducedLogLikelihood()
 {
   // initial guess
-  ScaleParametrization originalParametrization = reducedCovarianceModel_.getScaleParametrization();
-  reducedCovarianceModel_.setScaleParametrization(scaleParametrization_);
   Point initialParameters(reducedCovarianceModel_.getParameter());
   Indices initialActiveParameters(reducedCovarianceModel_.getActiveParameter());
   // We use the functional form of the log-likelihood computation to benefit from the cache mechanism
@@ -700,7 +726,6 @@ Scalar GeneralLinearModelAlgorithm::maximizeReducedLogLikelihood()
   // Final call to reducedLogLikelihoodFunction() in order to update the amplitude
   // No additional cost since the cache mechanism is activated
   LOGINFO(OSS() << evaluationNumber << " evaluations, optimized parameters=" << optimalParameters << ", log-likelihood=" << optimalLogLikelihood);
-  reducedCovarianceModel_.setScaleParametrization(originalParametrization);
   return optimalLogLikelihood;
 }
 
@@ -770,19 +795,28 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
       const Scalar dotCscale = C.dot(scale);
       const Scalar nugget = reducedCovarianceModel_.getNuggetFactor();
       penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);
-      if (scaleParametrization_ == ScaleParametrization::STANDARD)
+      const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();
+      switch (scaleParametrization)
       {
-        Scalar sumLog = 0.0;
-        for (UnsignedInteger j = 0; j < inputDimension; ++ j)
-          sumLog += std::log(scale[j]);
-        penalizationFactor -= 2.0 * sumLog;
-      }
-      else if (scaleParametrization_ == ScaleParametrization::LOGINVERSE)
-      {
-        Scalar sumXi = 0.0;
-        for (UnsignedInteger j = 0; j < inputDimension; ++ j)
-          sumXi += scale[j];
-        penalizationFactor += sumXi;
+        case ScaleParametrization::STANDARD:
+        {
+          Scalar sumLog = 0.0;
+          for (UnsignedInteger j = 0; j < inputDimension; ++ j)
+            sumLog += std::log(scale[j]);
+          penalizationFactor -= 2.0 * sumLog;
+          break;
+        }
+        case ScaleParametrization::INVERSE:
+          // nothing to do
+          break;
+        case ScaleParametrization::LOGINVERSE:
+        {
+          Scalar sumXi = 0.0;
+          for (UnsignedInteger j = 0; j < inputDimension; ++ j)
+            sumXi += scale[j];
+          penalizationFactor += sumXi;
+          break;
+        }
       }
       LOGINFO(OSS(false) << "penalizationFactor=" << penalizationFactor);
       logDeterminant -= penalizationFactor;
@@ -1085,44 +1119,6 @@ GeneralLinearModelAlgorithm::ScalePrior GeneralLinearModelAlgorithm::getScalePri
 void GeneralLinearModelAlgorithm::setScalePrior(const ScalePrior scalePrior)
 {
   scalePrior_ = scalePrior;
-}
-
-void GeneralLinearModelAlgorithm::setScaleParametrization(const ScaleParametrization scaleParametrization)
-{
-  scaleParametrization_ = scaleParametrization;
-
-  Point lowerBound(optimizationBounds_.getLowerBound());
-  Point upperBound(optimizationBounds_.getUpperBound());
-
-  // transform bounds in the target parametrization
-  if (scaleParametrization_ == ScaleParametrization::INVERSE)
-  {
-    for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++k)
-    {
-      const Scalar lb = 1.0 / upperBound[k];
-      const Scalar ub = 1.0 / lowerBound[k];
-      lowerBound[k] = lb;
-      upperBound[k] = ub;
-    }
-  }
-  else if (scaleParametrization_ == ScaleParametrization::LOGINVERSE)
-  {
-    {
-      for (UnsignedInteger k = 0; k < reducedCovarianceModel_.getScale().getSize(); ++k)
-      {
-        const Scalar lb = -std::log(upperBound[k]);
-        const Scalar ub = -std::log(lowerBound[k]);
-        lowerBound[k] = lb;
-        upperBound[k] = ub;
-      }
-    }
-  }
-  optimizationBounds_ = Interval(lowerBound, upperBound);
-}
-
-GeneralLinearModelAlgorithm::ScaleParametrization GeneralLinearModelAlgorithm::getScaleParametrization() const
-{
-  return scaleParametrization_;
 }
 
 /* String converter */

@@ -105,10 +105,6 @@ public:
   ScalePrior getScalePrior() const;
   void setScalePrior(const ScalePrior likelihoodPrior);
 
-  // Scale parametrization accessor
-  ScaleParametrization getScaleParametrization() const;
-  void setScaleParametrization(const ScaleParametrization scaleParametrization);
-
   /** Method save() stores the object through the StorageManager */
   void save(Advocate & adv) const;
 

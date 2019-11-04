@@ -74,6 +74,10 @@ public:
   /** Scale accessor */
   void setScale(const Point & scale);
 
+  /** Scale parametrization accessor */
+  virtual ScaleParametrization getScaleParametrization() const;
+  virtual void setScaleParametrization(const ScaleParametrization scaleParametrization);
+
   /** Is it a stationary covariance model ? */
   virtual Bool isStationary() const;
 

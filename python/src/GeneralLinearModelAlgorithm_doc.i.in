@@ -413,13 +413,6 @@ noise : sequence of positive float
 
 // ---------------------------------------------------------------------
 
-%feature("docstring") OT::GeneralLinearModelAlgorithm::setScaleParametrization
-OT_CovarianceModel_setScaleParametrization_doc
-%feature("docstring") OT::GeneralLinearModelAlgorithm::getScaleParametrization
-OT_CovarianceModel_getScaleParametrization_doc
-
-// ---------------------------------------------------------------------
-
 %define OT_GeneralLinearModelAlgorithm_setScalePrior_doc
 "Accessor to the scale prior type.
 
