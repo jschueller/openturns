@@ -617,7 +617,7 @@ CovarianceModelImplementation::ScaleParametrization CovarianceModelImplementatio
 
 void CovarianceModelImplementation::setScaleParametrization(const ScaleParametrization scaleParametrization)
 {
-  Point scale(scale_);
+  Point scale(getScale());
   switch (scaleParametrization_)
   {
     case STANDARD:
@@ -629,7 +629,7 @@ void CovarianceModelImplementation::setScaleParametrization(const ScaleParametri
         case INVERSE:
           // STANDARD -> INVERSE
           for(UnsignedInteger i = 0; i < inputDimension_; ++i)
-            scale[i] = 1.0/scale[i];
+            scale[i] = 1.0 / scale[i];
           break;
         case LOGINVERSE:
           // STANDARD -> LOGINVERSE
@@ -644,7 +644,7 @@ void CovarianceModelImplementation::setScaleParametrization(const ScaleParametri
         case STANDARD:
           // INVERSE -> STANDARD
           for(UnsignedInteger i = 0; i < inputDimension_; ++i)
-            scale[i] = 1.0/scale[i];
+            scale[i] = 1.0 / scale[i];
           break;
         case INVERSE:
           // nothing to do
@@ -676,7 +676,7 @@ void CovarianceModelImplementation::setScaleParametrization(const ScaleParametri
       break;
   }
   scaleParametrization_ = scaleParametrization;
-  scale_ = scale;
+  setScale(scale);
 }
 
 /* Output correlation accessor */
