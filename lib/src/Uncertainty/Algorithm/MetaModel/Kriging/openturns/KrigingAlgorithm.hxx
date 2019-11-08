@@ -101,7 +101,7 @@ public:
   void setNoise(const Point & noise);
   Point getNoise() const;
 
-  // Scale prior accessor
+  /** Scale prior accessor */
   ScalePrior getScalePrior() const;
   void setScalePrior(const ScalePrior likelihoodPrior);
 

@@ -729,6 +729,7 @@ Scalar GeneralLinearModelAlgorithm::maximizeReducedLogLikelihood()
   return optimalLogLikelihood;
 }
 
+/* Actual computation of reduced log-likelihood */
 Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & parameters) const
 {
   // Check that the parameters have a size compatible with the covariance model
@@ -739,6 +740,10 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
   LOGDEBUG(OSS(false) << "Compute reduced log-likelihood for parameters=" << parameters);
   const UnsignedInteger size = inputSample_.getSize();
   const Scalar constant = - SpecFunc::LOGSQRT2PI * static_cast<Scalar>(size) * static_cast<Scalar>(outputSample_.getDimension());
+
+  //BREAKPOINT 0
+  //LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
+
   Scalar logDeterminant = 0.0;
   // If the amplitude is deduced from the other parameters, work with
   // the correlation function
@@ -750,6 +755,9 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
     logDeterminant = computeLapackLogDeterminantCholesky();
   else
     logDeterminant = computeHMatLogDeterminantCholesky();
+
+  //BREAKPOINT 1
+  LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 1=" << logDeterminant);
 
   if ((scalePrior_ != NONE) && (basisCollection_.getSize() > 0))
   {
@@ -763,6 +771,9 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
   }
   // Compute the amplitude using an analytical formula if needed
   // and update the reduced log-likelihood.
+
+  //BREAKPOINT 2
+  LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 2=" << logDeterminant);  
 
   const UnsignedInteger inputDimension = inputSample_.getDimension();
 
@@ -868,12 +879,20 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
       // bottom right corner
       iTheta(inputDimension, inputDimension) = size - beta_.getSize();
 
+      //LOGWARN(OSS() <<  "iTheta(0,0)=" << iTheta(0,0));
+      //LOGWARN(OSS() <<  "iTheta(0,1)=" << iTheta(0,1));
+      //LOGWARN(OSS() <<  "iTheta(1,0)=" << iTheta(1,0));
+      //LOGWARN(OSS() <<  "iTheta(1,1)=" << iTheta(1,1));
+
       Scalar sign = 1.0;
       penalizationFactor = -iTheta.computeLogAbsoluteDeterminant(sign, false);
       logDeterminant += penalizationFactor;
       break;
     }
   }
+
+  //BREAKPOINT 3
+  LOGWARN(OSS() <<  "penalizationFactor value at BREAKPOINT 3=" << penalizationFactor);
 
   if (analyticalAmplitude_)
   {
@@ -884,8 +903,19 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
     // \sigma=\sqrt{(Y-M)^tR^{-1}(Y-M)/N}
     const Scalar sigma = std::sqrt(rho_.normSquare() / (ResourceMap::GetAsBool("GeneralLinearModelAlgorithm-UnbiasedVariance") ? size - beta_.getSize() : size));
     LOGDEBUG(OSS(false) << "sigma=" << sigma);
+
+    //BREAKPOINT 4
+    LOGWARN(OSS() <<  "sigma value at BREAKPOINT 4=" << sigma);  
+  
     reducedCovarianceModel_.setAmplitude(Point(1, sigma));
     logDeterminant += 2.0 * ((scalePrior_ == NONE) ? size : size - beta_.getSize()) * std::log(sigma);
+
+    //BREAKPOINT 5
+    LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 5=" << logDeterminant);  
+
+    //BREAKPOINT 6
+    LOGWARN(OSS() <<  "-0.5 * logDeterminant value at BREAKPOINT 6=" << -0.5 * logDeterminant);  
+    
     rho_ /= sigma;
     LOGDEBUG(OSS(false) << "rho_=" << rho_);
   } // analyticalAmplitude
@@ -894,10 +924,16 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
   const Scalar epsilon = rho_.normSquare();
   LOGDEBUG(OSS(false) << "epsilon=||rho||^2=" << epsilon);
 
+  //BREAKPOINT 7
+  LOGWARN(OSS() <<  "epsilon at BREAKPOINT 7=" << epsilon);
+
   if (epsilon <= 0) lastReducedLogLikelihood_ = SpecFunc::LogMinScalar;
   // For the general multidimensional case, we have to compute the general log-likelihood (ie including marginal variances)
   else lastReducedLogLikelihood_ = constant - 0.5 * (logDeterminant + epsilon);
   LOGINFO(OSS(false) << "Reduced log-likelihood=" << lastReducedLogLikelihood_);
+
+  //BREAKPOINT 8
+  LOGWARN(OSS() <<  "lastReducedLogLikelihood_ at BREAKPOINT 8=" << lastReducedLogLikelihood_);
   return Point(1, lastReducedLogLikelihood_);
 }
 

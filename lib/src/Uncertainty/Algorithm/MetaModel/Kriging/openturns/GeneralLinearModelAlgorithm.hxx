@@ -119,12 +119,19 @@ public:
   /** Method load() reloads the object from the StorageManager */
   virtual void load(Advocate & adv);
 
+  /** Compute the output log-likelihood function */
+  Point computeReducedLogLikelihood(const Point & parameters) const;
+
+  /** Scale prior accessor */
+  ScalePrior getScalePrior() const;
+  void setScalePrior(const ScalePrior likelihoodPrior);
+
+
 protected:
   // Maximize the reduced log-likelihood
   Scalar maximizeReducedLogLikelihood();
 
-  // Compute the output log-likelihood function
-  Point computeReducedLogLikelihood(const Point & parameters) const;
+  // Compute log-determinant
   Scalar computeLapackLogDeterminantCholesky() const;
   Scalar computeHMatLogDeterminantCholesky() const;
 
@@ -144,9 +151,7 @@ protected:
   friend class KrigingAlgorithm;
   Point getRho() const;
 
-  // Scale prior accessor
-  ScalePrior getScalePrior() const;
-  void setScalePrior(const ScalePrior likelihoodPrior);
+
 
 private:
 
