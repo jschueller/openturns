@@ -132,8 +132,8 @@ protected:
   Scalar maximizeReducedLogLikelihood();
 
   // Compute log-determinant
-  Scalar computeLapackLogDeterminantCholesky() const;
-  Scalar computeHMatLogDeterminantCholesky() const;
+  void computeLapackLogDeterminantCholesky() const;
+  void computeHMatLogDeterminantCholesky() const;
 
   // Compute the design matrix on the normalized input sample
   void computeF();
@@ -147,6 +147,21 @@ protected:
 
   // Initialize default optimization solver
   void initializeDefaultOptimizationAlgorithm();
+
+  // Minimally reduced log-likelihood: only the trend parameter beta is replaced by its MLE
+  void computeDetrendedLogLikelihood() const;
+
+  // Correct logDeterminant_ if the likelihood is integrated: adds log(\det{FtR^{-1}F}) to logDeterminant_
+  void correctIntegratedLikelihoodLogDeterminant() const;
+
+  // If a prior is used, compute its value as a penalization term
+  Scalar computeLogIntegratedLikelihoodPenalization() const;
+
+  // Compute logarithm of integrated likelihood
+  Scalar computeLogIntegratedLikelihood() const;
+
+  // Update several terms of log-likelihood when the analytical amplitude is used.
+  void AnalyticalAmplitudeUpdates() const;
 
   friend class KrigingAlgorithm;
   Point getRho() const;
@@ -268,6 +283,8 @@ private:
   mutable Point beta_;
   // Temporarly used to compute gamma
   mutable Point rho_;
+  // Possibly modified log-determinant of covariance matrix
+  mutable Scalar logDeterminant_;
   // The current output Gram matrix
   mutable Matrix F_;
 

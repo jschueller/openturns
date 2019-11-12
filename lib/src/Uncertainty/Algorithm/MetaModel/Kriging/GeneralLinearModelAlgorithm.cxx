@@ -61,6 +61,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm()
   , optimizationBounds_()
   , beta_(0)
   , rho_(0)
+  , logDeterminant_(0)
   , F_(0, 0)
   , result_()
   , basisCollection_()
@@ -97,6 +98,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , optimizationBounds_()
   , beta_(0)
   , rho_(0)
+  , logDeterminant_(0)
   , F_(0, 0)
   , result_()
   , basisCollection_()
@@ -158,6 +160,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , optimizationBounds_()
   , beta_(0)
   , rho_(0)
+  , logDeterminant_(0)
   , F_(0, 0)
   , result_()
   , basisCollection_()
@@ -171,7 +174,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
 {
-  // Set data
+  // Set data  
   setData(inputSample, outputSample);
   // Build a normalization function if needed
   if (normalize_)
@@ -232,6 +235,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , optimizationBounds_()
   , beta_(0)
   , rho_(0)
+  , logDeterminant_(0)
   , F_(0, 0)
   , result_()
   , basisCollection_()
@@ -729,60 +733,57 @@ Scalar GeneralLinearModelAlgorithm::maximizeReducedLogLikelihood()
   return optimalLogLikelihood;
 }
 
-/* Actual computation of reduced log-likelihood */
-Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & parameters) const
+// Minimally reduced log-likelihood: only the trend parameter beta is replaced by its MLE
+// Used after logDeterminant_ and rho_ have been computed.
+void GeneralLinearModelAlgorithm::computeDetrendedLogLikelihood() const
 {
-  // Check that the parameters have a size compatible with the covariance model
-  if (parameters.getSize() != reducedCovarianceModel_.getParameter().getSize())
-    throw InvalidArgumentException(HERE) << "In GeneralLinearModelAlgorithm::computeReducedLogLikelihood, could not compute likelihood,"
-                                         << " covariance model requires an argument of size " << reducedCovarianceModel_.getParameter().getSize()
-                                         << " but here we got " << parameters.getSize();
-  LOGDEBUG(OSS(false) << "Compute reduced log-likelihood for parameters=" << parameters);
   const UnsignedInteger size = inputSample_.getSize();
   const Scalar constant = - SpecFunc::LOGSQRT2PI * static_cast<Scalar>(size) * static_cast<Scalar>(outputSample_.getDimension());
 
   //BREAKPOINT 0
-  //LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
-
-  Scalar logDeterminant = 0.0;
-  // If the amplitude is deduced from the other parameters, work with
-  // the correlation function
-  if (analyticalAmplitude_) reducedCovarianceModel_.setAmplitude(Point(1, 1.0));
-  reducedCovarianceModel_.setParameter(parameters);
-  // First, compute the log-determinant of the Cholesky factor of the covariance
-  // matrix. As a by-product, also compute rho.
-  if (method_ == 0)
-    logDeterminant = computeLapackLogDeterminantCholesky();
-  else
-    logDeterminant = computeHMatLogDeterminantCholesky();
-
-  //BREAKPOINT 1
-  LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 1=" << logDeterminant);
-
-  if ((scalePrior_ != NONE) && (basisCollection_.getSize() > 0))
-  {
-    // we use the integrated likelihood, add log(\det{FtR^{-1}F}) term to the reduced log-likelihood
-    Matrix LiF(covarianceCholeskyFactor_.solveLinearSystem(F_));
-    Matrix LtiLiF(covarianceCholeskyFactor_.transpose().solveLinearSystem(LiF));
-    Scalar sign = 1.0;
-    SymmetricMatrix FtLtiLiF((F_.transpose()*LtiLiF).getImplementation());
-    const Scalar logDetFtLtiLiF = FtLtiLiF.computeLogAbsoluteDeterminant(sign, false);
-    logDeterminant += logDetFtLtiLiF;
-  }
-  // Compute the amplitude using an analytical formula if needed
-  // and update the reduced log-likelihood.
-
-  //BREAKPOINT 2
-  LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 2=" << logDeterminant);  
+  LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
 
   const UnsignedInteger inputDimension = inputSample_.getDimension();
 
-  Scalar penalizationFactor = 0.0;
+  LOGDEBUG(OSS(false) << "log-determinant=" << logDeterminant_ << ", rho=" << rho_);
+  const Scalar epsilon = rho_.normSquare();
+  LOGDEBUG(OSS(false) << "epsilon=||rho||^2=" << epsilon);
 
+  //BREAKPOINT 7
+  LOGWARN(OSS() <<  "epsilon at BREAKPOINT 7=" << epsilon);
+
+  if (epsilon <= 0) lastReducedLogLikelihood_ = SpecFunc::LogMinScalar;
+  // For the general multidimensional case, we have to compute the general log-likelihood (ie including marginal variances)
+  else lastReducedLogLikelihood_ = constant - 0.5 * (logDeterminant_ + epsilon);
+  LOGINFO(OSS(false) << "Reduced log-likelihood=" << lastReducedLogLikelihood_);
+
+  //BREAKPOINT 8
+  LOGWARN(OSS() <<  "lastReducedLogLikelihood_ at BREAKPOINT 8=" << lastReducedLogLikelihood_);
+}
+
+// Correct logDeterminant_ if the likelihood is integrated: adds log(\det{FtR^{-1}F}) to logDeterminant_
+void GeneralLinearModelAlgorithm::correctIntegratedLikelihoodLogDeterminant() const
+{
+  Matrix LiF(covarianceCholeskyFactor_.solveLinearSystem(F_));
+  Matrix LtiLiF(covarianceCholeskyFactor_.transpose().solveLinearSystem(LiF));
+  Scalar sign = 1.0;
+  SymmetricMatrix FtLtiLiF((F_.transpose()*LtiLiF).getImplementation());
+  const Scalar logDetFtLtiLiF = FtLtiLiF.computeLogAbsoluteDeterminant(sign, false);
+  logDeterminant_ += logDetFtLtiLiF;  
+}
+
+// If a prior is used, compute its value as a penalization term
+Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization() const
+{  
+  const UnsignedInteger size = inputSample_.getSize();
+  const UnsignedInteger inputDimension = inputSample_.getDimension();
+  
+  Scalar penalizationFactor = 0.0;
+  
   switch (scalePrior_)
   {
     case NONE:
-      // nothing to do
+      // Nothing to do
       break;
     case JOINTLYROBUSTPRIOR:
     {
@@ -829,8 +830,9 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
           break;
         }
       }
+      penalizationFactor *= -1.0;
       LOGINFO(OSS(false) << "penalizationFactor=" << penalizationFactor);
-      logDeterminant -= penalizationFactor;
+      // USELESS NOW: logDeterminant -= penalizationFactor;
       break;
     }
     case REFERENCEPRIOR:
@@ -885,17 +887,27 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
       //LOGWARN(OSS() <<  "iTheta(1,1)=" << iTheta(1,1));
 
       Scalar sign = 1.0;
-      penalizationFactor = -iTheta.computeLogAbsoluteDeterminant(sign, false);
-      logDeterminant += penalizationFactor;
+      penalizationFactor = 0.5 * iTheta.computeLogAbsoluteDeterminant(sign, false);
+      //USELESS NOW: logDeterminant += penalizationFactor;
       break;
     }
-  }
+  } 
+  
+  return penalizationFactor; 
+}
 
-  //BREAKPOINT 3
-  LOGWARN(OSS() <<  "penalizationFactor value at BREAKPOINT 3=" << penalizationFactor);
+// Compute logarithm of integrated likelihood
+Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihood() const
+{
+  const UnsignedInteger size = inputSample_.getSize();
+  return -0.5 * logDeterminant_ - 0.5 * ( size - beta_.getSize() ) * std::log(rho_.normSquare());
+}
 
-  if (analyticalAmplitude_)
-  {
+// Update several terms of log-likelihood when the analytical amplitude is used.
+void GeneralLinearModelAlgorithm::AnalyticalAmplitudeUpdates() const
+{
+    const UnsignedInteger size = inputSample_.getSize();
+  
     LOGDEBUG("Analytical amplitude");
     // J(\sigma)=-\log(\sqrt{\sigma^{2N}\det{R}})-(Y-M)^tR^{-1}(Y-M)/(2\sigma^2)
     //          =-N\log(\sigma)-\log(\det{R})/2-(Y-M)^tR^{-1}(Y-M)/(2\sigma^2)
@@ -908,37 +920,90 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
     LOGWARN(OSS() <<  "sigma value at BREAKPOINT 4=" << sigma);  
   
     reducedCovarianceModel_.setAmplitude(Point(1, sigma));
-    logDeterminant += 2.0 * ((scalePrior_ == NONE) ? size : size - beta_.getSize()) * std::log(sigma);
+    logDeterminant_ += 2.0 * size * std::log(sigma);
 
     //BREAKPOINT 5
-    LOGWARN(OSS() <<  "logDeterminant value at BREAKPOINT 5=" << logDeterminant);  
+    LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 5=" << logDeterminant_);  
 
     //BREAKPOINT 6
-    LOGWARN(OSS() <<  "-0.5 * logDeterminant value at BREAKPOINT 6=" << -0.5 * logDeterminant);  
+    LOGWARN(OSS() <<  "-0.5 * logDeterminant_ value at BREAKPOINT 6=" << -0.5 * logDeterminant_);  
     
     rho_ /= sigma;
-    LOGDEBUG(OSS(false) << "rho_=" << rho_);
+    LOGDEBUG(OSS(false) << "rho_=" << rho_);  
+}
+
+/* Actual computation of reduced log-likelihood */
+Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & parameters) const
+{
+  // Check that the parameters have a size compatible with the covariance model
+  if (parameters.getSize() != reducedCovarianceModel_.getParameter().getSize())
+    throw InvalidArgumentException(HERE) << "In GeneralLinearModelAlgorithm::computeReducedLogLikelihood, could not compute likelihood,"
+                                         << " covariance model requires an argument of size " << reducedCovarianceModel_.getParameter().getSize()
+                                         << " but here we got " << parameters.getSize();
+  LOGDEBUG(OSS(false) << "Compute reduced log-likelihood for parameters=" << parameters);
+  const UnsignedInteger size = inputSample_.getSize();
+  const Scalar constant = - SpecFunc::LOGSQRT2PI * static_cast<Scalar>(size) * static_cast<Scalar>(outputSample_.getDimension());
+
+  //BREAKPOINT 0
+  //LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
+
+  // If the amplitude is deduced from the other parameters, work with
+  // the correlation function
+  if (analyticalAmplitude_) reducedCovarianceModel_.setAmplitude(Point(1, 1.0));
+  reducedCovarianceModel_.setParameter(parameters);
+  // First, compute the log-determinant of the Cholesky factor of the covariance
+  // matrix. As a by-product, also compute rho.
+  if (method_ == 0)
+    computeLapackLogDeterminantCholesky();
+  else
+    computeHMatLogDeterminantCholesky();
+ 
+
+  //BREAKPOINT 1
+  LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 1=" << logDeterminant_);
+
+  if ((scalePrior_ != NONE) && (basisCollection_.getSize() > 0))
+  {
+    // we use the integrated likelihood, add log(\det{FtR^{-1}F}) term to logDeterminant_
+    correctIntegratedLikelihoodLogDeterminant();
+  }
+  
+  // Compute the amplitude using an analytical formula if needed
+  // and update the reduced log-likelihood.
+
+  //BREAKPOINT 2
+  LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 2=" << logDeterminant_);  
+
+  const UnsignedInteger inputDimension = inputSample_.getDimension();
+
+
+
+
+  
+  if (scalePrior_ != NONE)
+  {
+    // Compute logarithm of the prior penalization.
+    Scalar penalizationFactor = computeLogIntegratedLikelihoodPenalization();
+    // Compute logarithm of the integrated likelihood.
+    Scalar logIntegratedLikelihood = computeLogIntegratedLikelihood();
+    lastReducedLogLikelihood_ = logIntegratedLikelihood + penalizationFactor;
+    //BREAKPOINT 3
+    LOGWARN(OSS() <<  "penalizationFactor value at BREAKPOINT 3=" << penalizationFactor);
+    return Point(1, lastReducedLogLikelihood_);    
+  }
+
+
+  if (analyticalAmplitude_)
+  {
+    AnalyticalAmplitudeUpdates();
   } // analyticalAmplitude
 
-  LOGDEBUG(OSS(false) << "log-determinant=" << logDeterminant << ", rho=" << rho_);
-  const Scalar epsilon = rho_.normSquare();
-  LOGDEBUG(OSS(false) << "epsilon=||rho||^2=" << epsilon);
-
-  //BREAKPOINT 7
-  LOGWARN(OSS() <<  "epsilon at BREAKPOINT 7=" << epsilon);
-
-  if (epsilon <= 0) lastReducedLogLikelihood_ = SpecFunc::LogMinScalar;
-  // For the general multidimensional case, we have to compute the general log-likelihood (ie including marginal variances)
-  else lastReducedLogLikelihood_ = constant - 0.5 * (logDeterminant + epsilon);
-  LOGINFO(OSS(false) << "Reduced log-likelihood=" << lastReducedLogLikelihood_);
-
-  //BREAKPOINT 8
-  LOGWARN(OSS() <<  "lastReducedLogLikelihood_ at BREAKPOINT 8=" << lastReducedLogLikelihood_);
+  computeDetrendedLogLikelihood(); // lastReducedLogLikelihood is here equal to attribute lastReducedLogLikelihood_
   return Point(1, lastReducedLogLikelihood_);
 }
 
 
-Scalar GeneralLinearModelAlgorithm::computeLapackLogDeterminantCholesky() const
+void GeneralLinearModelAlgorithm::computeLapackLogDeterminantCholesky() const
 {
   // Using the hypothesis that parameters = scale & model writes : C(s,t) = diag(sigma) * R(s,t) * diag(sigma) with R a correlation function
   LOGDEBUG(OSS(false) << "Compute the LAPACK log-determinant of the Cholesky factor for covariance=" << reducedCovarianceModel_);
@@ -1004,17 +1069,25 @@ Scalar GeneralLinearModelAlgorithm::computeLapackLogDeterminantCholesky() const
   }
   LOGDEBUG("Compute log(|det(L)|)=log(sqrt(|det(C)|))");
   Scalar logDetL = 0.0;
+  Bool nonpositive = false;
   for (UnsignedInteger i = 0; i < covarianceCholeskyFactor_.getDimension(); ++i )
   {
     const Scalar lii = covarianceCholeskyFactor_(i, i);
-    if (lii <= 0.0) return -SpecFunc::LogMaxScalar;
-    logDetL += log(lii);
+    if (lii <= 0.0) 
+    {
+      nonpositive = true;
+    }
+    else
+    {
+      logDetL += log(lii);
+    }
   }
+  if(nonpositive) logDetL = - 0.5 * SpecFunc::LogMaxScalar;
   LOGDEBUG(OSS(false) << "logDetL=" << logDetL);
-  return 2.0 * logDetL;
+  logDeterminant_ = 2.0 * logDetL;
 }
 
-Scalar GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
+void GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
 {
   // Using the hypothesis that parameters = scale & model writes : C(s,t) = \sigma^2 * R(s,t) with R a correlation function
   LOGDEBUG(OSS(false) << "Compute the HMAT log-determinant of the Cholesky factor for covariance=" << reducedCovarianceModel_);
@@ -1055,14 +1128,23 @@ Scalar GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
   }
   LOGDEBUG("Compute log(sqrt(|det(C)|)) = log(|det(L)|)");
   Scalar logDetL = 0.0;
+  Bool nonpositive = false;
   Point diagonal(covarianceCholeskyFactorHMatrix_.getDiagonal());
-  for (UnsignedInteger i = 0; i < rho_.getSize(); ++i )
+  for (UnsignedInteger i = 0; i < covarianceCholeskyFactor_.getDimension(); ++i )
   {
     const Scalar lii = diagonal[i];
-    if (lii <= 0.0) return SpecFunc::MaxScalar;
-    logDetL += log(lii);
+    if (lii <= 0.0) 
+    {
+      nonpositive = true;
+    }
+    else
+    {
+      logDetL += log(lii);
+    }
   }
-  return 2.0 * logDetL;
+  if(nonpositive) logDetL = 0.5 * SpecFunc::MaxScalar;
+  LOGDEBUG(OSS(false) << "logDetL=" << logDetL);
+  logDeterminant_ = 2.0 * logDetL;
 }
 
 /* Optimization solver accessor */
