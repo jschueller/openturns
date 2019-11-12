@@ -789,8 +789,8 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
     {
       const Scalar b0 = ResourceMap::GetAsScalar("GeneralLinearModelAlgorithm-JointlyRobustPriorB0");
       const Scalar b1 = ResourceMap::GetAsScalar("GeneralLinearModelAlgorithm-JointlyRobustPriorB1");
-      const Scalar b = b0 * std::pow(1.0 * size, -1.0 / size) * (b1 + inputDimension);
-      const Scalar normF = 2.0 / ((size - 1.0) * size);
+      const Scalar b = b0 * std::pow(1.0 * size, -1.0 / inputDimension) * (b1 + inputDimension);
+      const Scalar normF = 1.0 / std::pow(1.0 * size, 1.0 / inputDimension);
       Point C(inputDimension);
       for (UnsignedInteger k1 = 0; k1 < size; ++ k1)
       {
@@ -799,23 +799,40 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
           const Point dif((inputSample_[k1] - inputSample_[k2]) * normF);
           for (UnsignedInteger j = 0; j < inputDimension; ++ j)
           {
-            C[j] += std::abs(dif[j]);
+            const Scalar jgap(std::abs(dif[j]));
+            if (jgap > C[j]) C[j] = jgap;
           }
         }
       }
-      const Point scale(reducedCovarianceModel_.getScale());
-      const Scalar dotCscale = C.dot(scale);
-      const Scalar nugget = reducedCovarianceModel_.getNuggetFactor();
-      penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);
+      
+      // BREAKPOINT A
+      LOGWARN(OSS() <<  "C[0] at BREAKPOINT A=" << C[0]); 
+      LOGWARN(OSS() <<  "C[1] at BREAKPOINT A=" << C[1]); 
+             
       const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();
+      
+      reducedCovarianceModel_.setScaleParametrization(ScaleParametrization::INVERSE);
+      const Point inverseScale(reducedCovarianceModel_.getScale());
+
+      reducedCovarianceModel_.setScaleParametrization(scaleParametrization);
+      // BREAKPOINT B
+      LOGWARN(OSS() <<  "inverseScale[0] (inverse param) at BREAKPOINT B=" << inverseScale[0]); 
+      LOGWARN(OSS() <<  "inverseScale[1] (inverse param) at BREAKPOINT B=" << inverseScale[1]); 
+      const Scalar dotCscale = C.dot(inverseScale);
+      const Scalar nugget = reducedCovarianceModel_.getNuggetFactor();
+      LOGWARN(OSS() <<  "dotCscale + nugget at BREAKPOINT B=" << dotCscale); 
+      LOGWARN(OSS() <<  "b at BREAKPOINT B=" << b); 
+      penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);
+      LOGWARN(OSS() <<  "penalizationFactor at BREAKPOINT B=" << penalizationFactor);       
+
       switch (scaleParametrization)
       {
         case ScaleParametrization::STANDARD:
         {
           Scalar sumLog = 0.0;
           for (UnsignedInteger j = 0; j < inputDimension; ++ j)
-            sumLog += std::log(scale[j]);
-          penalizationFactor -= 2.0 * sumLog;
+            sumLog += std::log(inverseScale[j]);
+          penalizationFactor += 2.0 * sumLog;
           break;
         }
         case ScaleParametrization::INVERSE:
@@ -823,15 +840,16 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
           break;
         case ScaleParametrization::LOGINVERSE:
         {
-          Scalar sumXi = 0.0;
+          Scalar sumLog = 0.0;
           for (UnsignedInteger j = 0; j < inputDimension; ++ j)
-            sumXi += scale[j];
-          penalizationFactor += sumXi;
+            sumLog += std::log(inverseScale[j]);
+          penalizationFactor += sumLog;
           break;
         }
       }
-      penalizationFactor *= -1.0;
       LOGINFO(OSS(false) << "penalizationFactor=" << penalizationFactor);
+      //BREAKPOINT C
+      LOGWARN(OSS() <<  "penalizationFactor at BREAKPOINT C=" << penalizationFactor);       
       // USELESS NOW: logDeterminant -= penalizationFactor;
       break;
     }
@@ -1142,7 +1160,7 @@ void GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
       logDetL += log(lii);
     }
   }
-  if(nonpositive) logDetL = 0.5 * SpecFunc::MaxScalar;
+  if(nonpositive) logDetL = - 0.5 * SpecFunc::LogMaxScalar;
   LOGDEBUG(OSS(false) << "logDetL=" << logDetL);
   logDeterminant_ = 2.0 * logDetL;
 }
