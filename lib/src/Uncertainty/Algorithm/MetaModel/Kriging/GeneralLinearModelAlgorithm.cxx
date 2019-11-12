@@ -739,26 +739,16 @@ void GeneralLinearModelAlgorithm::computeDetrendedLogLikelihood() const
 {
   const UnsignedInteger size = inputSample_.getSize();
   const Scalar constant = - SpecFunc::LOGSQRT2PI * static_cast<Scalar>(size) * static_cast<Scalar>(outputSample_.getDimension());
-
-  //BREAKPOINT 0
-  LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
-
   const UnsignedInteger inputDimension = inputSample_.getDimension();
 
   LOGDEBUG(OSS(false) << "log-determinant=" << logDeterminant_ << ", rho=" << rho_);
   const Scalar epsilon = rho_.normSquare();
   LOGDEBUG(OSS(false) << "epsilon=||rho||^2=" << epsilon);
 
-  //BREAKPOINT 7
-  LOGWARN(OSS() <<  "epsilon at BREAKPOINT 7=" << epsilon);
-
   if (epsilon <= 0) lastReducedLogLikelihood_ = SpecFunc::LogMinScalar;
   // For the general multidimensional case, we have to compute the general log-likelihood (ie including marginal variances)
   else lastReducedLogLikelihood_ = constant - 0.5 * (logDeterminant_ + epsilon);
   LOGINFO(OSS(false) << "Reduced log-likelihood=" << lastReducedLogLikelihood_);
-
-  //BREAKPOINT 8
-  LOGWARN(OSS() <<  "lastReducedLogLikelihood_ at BREAKPOINT 8=" << lastReducedLogLikelihood_);
 }
 
 // Correct logDeterminant_ if the likelihood is integrated: adds log(\det{FtR^{-1}F}) to logDeterminant_
@@ -804,26 +794,16 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
           }
         }
       }
-      
-      // BREAKPOINT A
-      LOGWARN(OSS() <<  "C[0] at BREAKPOINT A=" << C[0]); 
-      LOGWARN(OSS() <<  "C[1] at BREAKPOINT A=" << C[1]); 
              
-      const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();
-      
+      const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();     
       reducedCovarianceModel_.setScaleParametrization(ScaleParametrization::INVERSE);
       const Point inverseScale(reducedCovarianceModel_.getScale());
-
       reducedCovarianceModel_.setScaleParametrization(scaleParametrization);
-      // BREAKPOINT B
-      LOGWARN(OSS() <<  "inverseScale[0] (inverse param) at BREAKPOINT B=" << inverseScale[0]); 
-      LOGWARN(OSS() <<  "inverseScale[1] (inverse param) at BREAKPOINT B=" << inverseScale[1]); 
+
       const Scalar dotCscale = C.dot(inverseScale);
       const Scalar nugget = reducedCovarianceModel_.getNuggetFactor();
-      LOGWARN(OSS() <<  "dotCscale + nugget at BREAKPOINT B=" << dotCscale); 
-      LOGWARN(OSS() <<  "b at BREAKPOINT B=" << b); 
-      penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);
-      LOGWARN(OSS() <<  "penalizationFactor at BREAKPOINT B=" << penalizationFactor);       
+
+      penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);  
 
       switch (scaleParametrization)
       {
@@ -848,9 +828,6 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
         }
       }
       LOGINFO(OSS(false) << "penalizationFactor=" << penalizationFactor);
-      //BREAKPOINT C
-      LOGWARN(OSS() <<  "penalizationFactor at BREAKPOINT C=" << penalizationFactor);       
-      // USELESS NOW: logDeterminant -= penalizationFactor;
       break;
     }
     case REFERENCEPRIOR:
@@ -933,18 +910,9 @@ void GeneralLinearModelAlgorithm::AnalyticalAmplitudeUpdates() const
     // \sigma=\sqrt{(Y-M)^tR^{-1}(Y-M)/N}
     const Scalar sigma = std::sqrt(rho_.normSquare() / (ResourceMap::GetAsBool("GeneralLinearModelAlgorithm-UnbiasedVariance") ? size - beta_.getSize() : size));
     LOGDEBUG(OSS(false) << "sigma=" << sigma);
-
-    //BREAKPOINT 4
-    LOGWARN(OSS() <<  "sigma value at BREAKPOINT 4=" << sigma);  
   
     reducedCovarianceModel_.setAmplitude(Point(1, sigma));
     logDeterminant_ += 2.0 * size * std::log(sigma);
-
-    //BREAKPOINT 5
-    LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 5=" << logDeterminant_);  
-
-    //BREAKPOINT 6
-    LOGWARN(OSS() <<  "-0.5 * logDeterminant_ value at BREAKPOINT 6=" << -0.5 * logDeterminant_);  
     
     rho_ /= sigma;
     LOGDEBUG(OSS(false) << "rho_=" << rho_);  
@@ -959,11 +927,6 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
                                          << " covariance model requires an argument of size " << reducedCovarianceModel_.getParameter().getSize()
                                          << " but here we got " << parameters.getSize();
   LOGDEBUG(OSS(false) << "Compute reduced log-likelihood for parameters=" << parameters);
-  const UnsignedInteger size = inputSample_.getSize();
-  const Scalar constant = - SpecFunc::LOGSQRT2PI * static_cast<Scalar>(size) * static_cast<Scalar>(outputSample_.getDimension());
-
-  //BREAKPOINT 0
-  //LOGWARN(OSS() <<  "constant value at BREAKPOINT 0=" << constant);
 
   // If the amplitude is deduced from the other parameters, work with
   // the correlation function
@@ -975,29 +938,15 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
     computeLapackLogDeterminantCholesky();
   else
     computeHMatLogDeterminantCholesky();
- 
-
-  //BREAKPOINT 1
-  LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 1=" << logDeterminant_);
 
   if ((scalePrior_ != NONE) && (basisCollection_.getSize() > 0))
   {
     // we use the integrated likelihood, add log(\det{FtR^{-1}F}) term to logDeterminant_
     correctIntegratedLikelihoodLogDeterminant();
   }
-  
-  // Compute the amplitude using an analytical formula if needed
-  // and update the reduced log-likelihood.
 
-  //BREAKPOINT 2
-  LOGWARN(OSS() <<  "logDeterminant_ value at BREAKPOINT 2=" << logDeterminant_);  
-
-  const UnsignedInteger inputDimension = inputSample_.getDimension();
-
-
-
-
-  
+  // If a prior is used as penalization,
+  // compute it and return the log-posterior. 
   if (scalePrior_ != NONE)
   {
     // Compute logarithm of the prior penalization.
@@ -1005,12 +954,11 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
     // Compute logarithm of the integrated likelihood.
     Scalar logIntegratedLikelihood = computeLogIntegratedLikelihood();
     lastReducedLogLikelihood_ = logIntegratedLikelihood + penalizationFactor;
-    //BREAKPOINT 3
-    LOGWARN(OSS() <<  "penalizationFactor value at BREAKPOINT 3=" << penalizationFactor);
     return Point(1, lastReducedLogLikelihood_);    
   }
-
-
+ 
+  // Compute the amplitude using an analytical formula if needed
+  // and update the reduced log-likelihood.
   if (analyticalAmplitude_)
   {
     AnalyticalAmplitudeUpdates();
