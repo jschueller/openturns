@@ -171,6 +171,7 @@ Combining and transforming distributions
     :toctree: _generated/
     :template: class.rst_t
 
+    MixedHistogramUserDefined
     OrderStatisticsMarginalChecker
     PosteriorDistribution
 
@@ -214,6 +215,7 @@ Refer to :ref:`copula`.
     FrankCopula
     GumbelCopula
     IndependentCopula
+    PlackettCopula
     EmpiricalBernsteinCopula
     ExtremeValueCopula
     JoeCopula

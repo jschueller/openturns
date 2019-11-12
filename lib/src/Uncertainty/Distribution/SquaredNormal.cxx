@@ -75,7 +75,7 @@ String SquaredNormal::__repr__() const
 String SquaredNormal::__str__(const String & offset) const
 {
   OSS oss;
-  oss << getClassName();
+  oss << offset << getClassName();
   oss << "(mu = " << getMu() << ", sigma = " << getSigma() << ")";
   return oss;
 }

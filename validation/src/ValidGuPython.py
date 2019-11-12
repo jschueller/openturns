@@ -216,6 +216,26 @@ def derivee_matern_param_log_inverse(x, indice_derive, nu, xi):
 # In[12]:
 
 
+def matern_gen(x, nu, p, param):
+    if param == 'standard':
+        return matern(x, nu, p)
+    elif param == 'inverse':
+        return matern_param_inverse(x, nu, p)
+    elif param == 'log_inverse':
+        return matern_param_log_inverse(x, nu, p)
+    raise ValueError(param)
+
+
+def derivee_matern_gen(x, indice_derive, nu, p, param):
+    if param == 'standard':
+        return derivee_matern(x, indice_derive, nu)
+    elif param == 'inverse':
+        return derivee_matern_param_inverse(x, indice_derive, nu)
+    elif param == 'log_inverse':
+        return derivee_matern_param_log_inverse(x, indice_derive, nu, p)
+    raise ValueError(param)
+
+
 print('matern_param_log_inverse', matern_param_log_inverse(nu=NU, x=[2, 2], xi=[-np.log(3), -np.log(4)]))
 ot_matern.setScaleParametrization(ot.CovarianceModelImplementation.LOGINVERSE)
 print(ot_matern.getParameter(), ot_matern.getParameterDescription())
@@ -346,6 +366,26 @@ def matrice_correlation_derivee_matern_param_log_inverse(indice_derive, nu, plan
     matrice_corr_derivee = np.apply_along_axis(derivee_matern_param_log_inverse, 2, ecarts_algebriques, indice_derive=indice_derive, nu=nu, xi=xi)
     return matrice_corr_derivee  
 
+
+
+def matrice_correlation_matern_gen(nu, plan_xp, p, param):
+    if param == 'standard':
+        return matrice_correlation_matern(nu, plan_xp, p)
+    elif param == 'inverse':
+        return matrice_correlation_matern_param_inverse(nu, plan_xp, p)
+    elif param == 'log_inverse':
+        return matrice_correlation_matern_param_log_inverse(nu, plan_xp, p)
+    raise ValueError(param)
+
+
+def matrice_correlation_derivee_matern_gen(indice_derive, nu, plan_xp, p, param):
+    if param == 'standard':
+        return matrice_correlation_derivee_matern(indice_derive, nu, plan_xp, p)
+    elif param == 'inverse':
+        return matrice_correlation_derivee_matern_param_inverse(indice_derive, nu, plan_xp, p)
+    elif param == 'log_inverse':
+        return matrice_correlation_derivee_matern_param_log_inverse(indice_derive, nu, plan_xp, p)
+    raise ValueError(param)
 
 # ### Calcul des matrices de corrélation correspondant aux différentes parmétrisations
 
@@ -606,6 +646,16 @@ def element_info_fisher_matern_param_log_inverse(dic_correlation, ligne, colonne
 # In[34]:
 
 
+def element_info_fisher_matern_gen(dic_correlation, ligne, colonne, p, nu, plan_xp, param):
+    if param == 'standard':
+        return element_info_fisher_matern(dic_correlation, ligne, colonne, p, nu, plan_xp)
+    elif param == 'inverse':
+        return element_info_fisher_matern_param_inverse(dic_correlation, ligne, colonne, p, nu, plan_xp)
+    elif param == 'log_inverse':
+        return element_info_fisher_matern_param_log_inverse(dic_correlation, ligne, colonne, p, nu, plan_xp)
+    raise ValueError(param)
+
+
 def info_fisher_matern(dic_correlation, theta, nu, plan_xp):
     """Renvoie la matrice d'information de Fisher"""
     nb_lignes_colonnes = plan_xp.getDimension()+1
@@ -669,7 +719,16 @@ def info_fisher_matern_param_log_inverse(dic_correlation, xi, nu, plan_xp):
 
 # In[37]:
 
-
+def info_fisher_matern_gen(dic_correlation, p, nu, plan_xp, param):
+    if param == 'standard':
+        return info_fisher_matern(dic_correlation, p, nu, plan_xp)
+    elif param == 'inverse':
+        return info_fisher_matern_param_inverse(dic_correlation, p, nu, plan_xp)
+    elif param == 'log_inverse':
+        return info_fisher_matern_param_log_inverse(dic_correlation, p, nu, plan_xp)
+    raise ValueError(param)
+  
+  
 #info_fisher_matern(dic_correlation=DIC_CORR, theta=SCALE, nu=NU, plan_xp=points)
 
 
@@ -729,6 +788,14 @@ def log_prior_jeffreys_matern_param_log_inverse(xi, nu, plan_xp, liste_fonctions
 
 # In[43]:
 
+def log_prior_jeffreys_matern_gen(p, nu, plan_xp, liste_fonctions_tendance, pepite, param):
+    if param == 'standard':
+        return log_prior_jeffreys_matern(p, nu, plan_xp, liste_fonctions_tendance, pepite)
+    elif param == 'inverse':
+        return log_prior_jeffreys_matern_param_inverse(p, nu, plan_xp, liste_fonctions_tendance, pepite)
+    elif param == 'log_inverse':
+        return log_prior_jeffreys_matern_param_log_inverse(p, nu, plan_xp, liste_fonctions_tendance, pepite)
+    raise ValueError(param)
 
 #log_prior_jeffreys_matern(SCALE, NU, points, LISTE_TENDANCE, pepite=0.)
 
@@ -790,6 +857,16 @@ def log_vraisemblance_penalisee_matern_param_log_inverse(xi, plan_xp, sorties, n
 # In[45]:
 
 
+def log_vraisemblance_penalisee_matern_gen(p, plan_xp, sorties, nu, liste_fonctions_tendance=None, pepite=0., param='standard'):
+    if param == 'standard':
+        return log_vraisemblance_penalisee_matern(p, plan_xp, sorties, nu, liste_fonctions_tendance, pepite)
+    elif param == 'inverse':
+        return log_vraisemblance_penalisee_matern_param_inverse(p, plan_xp, sorties, nu, liste_fonctions_tendance, pepite)
+    elif param == 'log_inverse':
+        return log_vraisemblance_penalisee_matern_param_log_inverse(p, plan_xp, sorties, nu, liste_fonctions_tendance, pepite)
+    raise ValueError(param)
+  
+
 #log_vraisemblance_penalisee_matern(SCALE, plan_xp=points, sorties=sorties, nu=NU, liste_fonctions_tendance=LISTE_TENDANCE)
 
 
@@ -820,7 +897,6 @@ def courbe_vraisemblance_penalisee_matern(seed, theta, plan_xp, tendance, nu, li
         ot.RandomGenerator.SetSeed(seed)
         modele_covariance = ot.MaternModel(theta, AMPLITUDE, nu)
         realisation = ot.GaussianProcess(ot.TrendTransform(tendance ,ot.Mesh(plan_xp)), modele_covariance,ot.Mesh(plan_xp)).getRealization()
-        print('sorties=', realisation.getValues())
         nb_abs = 50
         lin = np.linspace(1./nb_abs, 1, nb_abs).reshape(nb_abs, 1)
         mat = np.concatenate((lin,lin,lin), axis=1)
@@ -892,31 +968,75 @@ def courbe_vraisemblance_penalisee_matern_param_log_inverse(seed, theta, plan_xp
 # In[116]:
 
 
+def courbe_vraisemblance_penalisee_matern_gen(seed, theta, plan_xp, tendance, nu, liste_fonctions_tendance=None, pepite=0., param='standard'):
+    ot.RandomGenerator.SetSeed(seed)
+    modele_covariance = ot.MaternModel(theta, AMPLITUDE, nu)
+    realisation = ot.GaussianProcess(ot.TrendTransform(tendance, ot.Mesh(plan_xp)), modele_covariance,ot.Mesh(plan_xp)).getRealization()
+    nb_abs = 50
+    lin = np.linspace(1./nb_abs, 1, nb_abs).reshape(nb_abs, 1)
+    mat = np.concatenate((lin,lin,lin), axis=1)
+    if param == 'standard':
+        pass
+    elif param == 'inverse':
+        mat = 1./mat
+    elif param == 'log_inverse':
+        mat = -np.log(mat)
+    else:
+        raise ValueError(param)
+    posterior = np.apply_along_axis(log_vraisemblance_penalisee_matern_gen, 1, mat, plan_xp=plan_xp, sorties=realisation.getValues(), nu=nu, liste_fonctions_tendance=liste_fonctions_tendance, pepite=pepite, param=param)
+    prior = np.apply_along_axis(log_prior_jeffreys_matern_gen, 1, mat, plan_xp=plan_xp, nu=nu, liste_fonctions_tendance=liste_fonctions_tendance, pepite=pepite, param=param)
+    vraisemblance_integree = posterior - prior
+
+    figure = plt.figure()
+    ax = figure.add_subplot(111)
+    line_posterior = ax.plot(lin, posterior, label='Penalized likelihood')
+    line_vrais_integree = ax.plot(lin, vraisemblance_integree, label='Integrated likelihood')
+    ax.set_title('py prior=reference param='+ param)
+    ax.set_xlabel('p')
+    ax.legend()
+    figure.savefig('py_refprior_'+param+'.png')
+
+
 courbe_vraisemblance_penalisee_matern(seed=0, theta = SCALE, plan_xp=points, tendance=TREND, nu=NU, liste_fonctions_tendance=[un, coord1, coord2, coord3])
 
 LISTE_TENDANCE=[ot.SymbolicFunction(['x1','x2', 'x3'], ['1']),ot.SymbolicFunction(['x1','x2', 'x3'], ['x1']),ot.SymbolicFunction(['x1','x2', 'x3'], ['x2']),ot.SymbolicFunction(['x1','x2', 'x3'], ['x3'])]
 seed = 0
 
 
-modele_covariance = ot.MaternModel(SCALE, AMPLITUDE, NU)
-ot.RandomGenerator.SetSeed(seed)
-realisation = ot.GaussianProcess(ot.TrendTransform(TREND ,ot.Mesh(points)), modele_covariance,ot.Mesh(points)).getRealization()
-krigeage = ot.KrigingAlgorithm(points,realisation.getValues(),modele_covariance,ot.Basis(LISTE_TENDANCE),False)
+def courbe_vraisemblance_penalisee_matern_gen_ot(param):
+    modele_covariance = ot.MaternModel(SCALE, AMPLITUDE, NU)
+    parametrization = {'standard': ot.CovarianceModelImplementation.STANDARD, 'inverse': ot.CovarianceModelImplementation.INVERSE, 'log_inverse': ot.CovarianceModelImplementation.LOGINVERSE}[param]
+    modele_covariance.setScaleParametrization(parametrization)
+    ot.RandomGenerator.SetSeed(seed)
+    realisation = ot.GaussianProcess(ot.TrendTransform(TREND ,ot.Mesh(points)), modele_covariance,ot.Mesh(points)).getRealization()
+    krigeage = ot.KrigingAlgorithm(points,realisation.getValues(),modele_covariance,ot.Basis(LISTE_TENDANCE),False)
 
-krigeage.setScalePrior(ot.GeneralLinearModelAlgorithm.REFERENCEPRIOR)
-#krigeage.setScaleParametrization(parametrization)
-llf = krigeage.getReducedLogLikelihoodFunction()
-nb_abs = 50
-lin = np.linspace(1./nb_abs, 1, nb_abs).reshape(nb_abs, 1)
-mat = np.concatenate((lin,lin,lin), axis=1)
-figure = plt.figure()
-ax = figure.add_subplot(111)
-posterior = [llf(mat[i])[0] for i in range(nb_abs)]
-ax.plot(lin, posterior, label='Vraisemblance pénalisée')
-ax.set_title('ot prior=reference param=standard')
-ax.set_xlabel('theta')
-ax.legend()
-figure.savefig('ot_refprior_standard.png')
+    krigeage.setScalePrior(ot.GeneralLinearModelAlgorithm.REFERENCEPRIOR)
+    llf = krigeage.getReducedLogLikelihoodFunction()
+    nb_abs = 50
+    lin = np.linspace(1./nb_abs, 1, nb_abs).reshape(nb_abs, 1)
+    mat = np.concatenate((lin,lin,lin), axis=1)
+    if param == 'standard':
+        pass
+    elif param == 'inverse':
+        mat = 1./mat
+    elif param == 'log_inverse':
+        mat = -np.log(mat)
+    else:
+        raise ValueError(param)
+    figure = plt.figure()
+    ax = figure.add_subplot(111)
+    posterior = [llf(mat[i])[0] for i in range(nb_abs)]
+    ax.plot(lin, posterior, label='Penalized likelihood')
+    ax.set_title('ot prior=reference param='+ param)
+    ax.set_xlabel('p')
+    ax.legend()
+    figure.savefig('ot_refprior_'+param+'.png')
+
+for param in ['standard', 'inverse', 'log_inverse']:
+    courbe_vraisemblance_penalisee_matern_gen(seed=0, theta = SCALE, plan_xp=points, tendance=TREND, nu=NU, liste_fonctions_tendance=[un, coord1, coord2, coord3], param=param)
+    courbe_vraisemblance_penalisee_matern_gen_ot(param)
+
 
 
 

@@ -166,7 +166,9 @@ protected:
   friend class KrigingAlgorithm;
   Point getRho() const;
 
-
+  // Scale prior accessor
+  ScalePrior getScalePrior() const;
+  void setScalePrior(const ScalePrior likelihoodPrior);
 
 private:
 

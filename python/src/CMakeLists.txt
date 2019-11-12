@@ -541,6 +541,8 @@ ot_add_python_module(model_copula model_copula_module.i
                       ComposedDistribution.i ComposedDistribution_doc.i.in
                       ComposedCopula.i ComposedCopula_doc.i.in
                       CumulativeDistributionNetwork.i CumulativeDistributionNetwork_doc.i.in
+                      PlackettCopula.i PlackettCopula_doc.i.in
+                      PlackettCopulaFactory.i PlackettCopulaFactory_doc.i.in
                       PythonDistribution.cxx
                       UncertaintyModelCopulaCollection.i
                       UncertaintyModelCopulaTemplateDefs.i
@@ -670,6 +672,7 @@ ot_add_python_module(dist_bundle2 dist_bundle2_module.i
                       MeixnerDistribution.i MeixnerDistribution_doc.i.in
                       MeixnerDistributionFactory.i MeixnerDistributionFactory_doc.i.in
                       MethodOfMomentsFactory.i MethodOfMomentsFactory_doc.i.in
+                      MixedHistogramUserDefined.i MixedHistogramUserDefined_doc.i.in
                       Mixture.i  Mixture_doc.i.in
                       ConditionalDistribution.i ConditionalDistribution_doc.i.in
                       PosteriorDistribution.i PosteriorDistribution_doc.i.in
