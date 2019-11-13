@@ -161,7 +161,7 @@ protected:
   Scalar computeLogIntegratedLikelihood() const;
 
   // Update several terms of log-likelihood when the analytical amplitude is used.
-  void AnalyticalAmplitudeUpdates() const;
+  void analyticalAmplitudeUpdates() const;
 
   friend class KrigingAlgorithm;
   Point getRho() const;

@@ -174,7 +174,7 @@ GeneralLinearModelAlgorithm::GeneralLinearModelAlgorithm(const Sample & inputSam
   , lastReducedLogLikelihood_(SpecFunc::LogMinScalar)
   , scalePrior_(NONE)
 {
-  // Set data  
+  // Set data
   setData(inputSample, outputSample);
   // Build a normalization function if needed
   if (normalize_)
@@ -794,13 +794,14 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
           }
         }
       }
-             
+      
+      // Compute dot product between C and the inverse scale vector.       
       const ScaleParametrization scaleParametrization = reducedCovarianceModel_.getScaleParametrization();     
       reducedCovarianceModel_.setScaleParametrization(ScaleParametrization::INVERSE);
       const Point inverseScale(reducedCovarianceModel_.getScale());
       reducedCovarianceModel_.setScaleParametrization(scaleParametrization);
-
       const Scalar dotCscale = C.dot(inverseScale);
+
       const Scalar nugget = reducedCovarianceModel_.getNuggetFactor();
 
       penalizationFactor = b1 * std::log(dotCscale + nugget) - b * (dotCscale + nugget);  
@@ -876,14 +877,8 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
       // bottom right corner
       iTheta(inputDimension, inputDimension) = size - beta_.getSize();
 
-      //LOGWARN(OSS() <<  "iTheta(0,0)=" << iTheta(0,0));
-      //LOGWARN(OSS() <<  "iTheta(0,1)=" << iTheta(0,1));
-      //LOGWARN(OSS() <<  "iTheta(1,0)=" << iTheta(1,0));
-      //LOGWARN(OSS() <<  "iTheta(1,1)=" << iTheta(1,1));
-
       Scalar sign = 1.0;
       penalizationFactor = 0.5 * iTheta.computeLogAbsoluteDeterminant(sign, false);
-      //USELESS NOW: logDeterminant += penalizationFactor;
       break;
     }
   } 
@@ -899,7 +894,7 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihood() const
 }
 
 // Update several terms of log-likelihood when the analytical amplitude is used.
-void GeneralLinearModelAlgorithm::AnalyticalAmplitudeUpdates() const
+void GeneralLinearModelAlgorithm::analyticalAmplitudeUpdates() const
 {
     const UnsignedInteger size = inputSample_.getSize();
   
@@ -939,32 +934,28 @@ Point GeneralLinearModelAlgorithm::computeReducedLogLikelihood(const Point & par
   else
     computeHMatLogDeterminantCholesky();
 
-  if ((scalePrior_ != NONE) && (basisCollection_.getSize() > 0))
+  // If no prior is used
+  if (scalePrior_ == NONE)
   {
-    // we use the integrated likelihood, add log(\det{FtR^{-1}F}) term to logDeterminant_
-    correctIntegratedLikelihoodLogDeterminant();
-  }
+    // Compute the amplitude using an analytical formula if needed
+    // and update the reduced log-likelihood.
+    if (analyticalAmplitude_) analyticalAmplitudeUpdates();
 
+    computeDetrendedLogLikelihood(); // lastReducedLogLikelihood is here equal to attribute lastReducedLogLikelihood_
+  }
   // If a prior is used as penalization,
   // compute it and return the log-posterior. 
-  if (scalePrior_ != NONE)
+  else
   {
+    // we use the integrated likelihood, add log(\det{FtR^{-1}F}) term to logDeterminant_
+    if (basisCollection_.getSize() > 0) correctIntegratedLikelihoodLogDeterminant();
     // Compute logarithm of the prior penalization.
     Scalar penalizationFactor = computeLogIntegratedLikelihoodPenalization();
     // Compute logarithm of the integrated likelihood.
     Scalar logIntegratedLikelihood = computeLogIntegratedLikelihood();
     lastReducedLogLikelihood_ = logIntegratedLikelihood + penalizationFactor;
-    return Point(1, lastReducedLogLikelihood_);    
   }
- 
-  // Compute the amplitude using an analytical formula if needed
-  // and update the reduced log-likelihood.
-  if (analyticalAmplitude_)
-  {
-    AnalyticalAmplitudeUpdates();
-  } // analyticalAmplitude
 
-  computeDetrendedLogLikelihood(); // lastReducedLogLikelihood is here equal to attribute lastReducedLogLikelihood_
   return Point(1, lastReducedLogLikelihood_);
 }
 
@@ -1042,15 +1033,24 @@ void GeneralLinearModelAlgorithm::computeLapackLogDeterminantCholesky() const
     if (lii <= 0.0) 
     {
       nonpositive = true;
+      break;
     }
     else
     {
       logDetL += log(lii);
     }
   }
-  if(nonpositive) logDetL = - 0.5 * SpecFunc::LogMaxScalar;
+  
   LOGDEBUG(OSS(false) << "logDetL=" << logDetL);
-  logDeterminant_ = 2.0 * logDetL;
+
+  if(nonpositive)
+  {
+    logDeterminant_ = - SpecFunc::LogMaxScalar;
+  }
+  else
+  {
+    logDeterminant_ = 2.0 * logDetL;
+  }
 }
 
 void GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
@@ -1096,21 +1096,30 @@ void GeneralLinearModelAlgorithm::computeHMatLogDeterminantCholesky() const
   Scalar logDetL = 0.0;
   Bool nonpositive = false;
   Point diagonal(covarianceCholeskyFactorHMatrix_.getDiagonal());
-  for (UnsignedInteger i = 0; i < covarianceCholeskyFactor_.getDimension(); ++i )
+  for (UnsignedInteger i = 0; i < rho_.getSize(); ++i )
   {
     const Scalar lii = diagonal[i];
     if (lii <= 0.0) 
     {
       nonpositive = true;
+      break;
     }
     else
     {
       logDetL += log(lii);
     }
   }
-  if(nonpositive) logDetL = - 0.5 * SpecFunc::LogMaxScalar;
+
   LOGDEBUG(OSS(false) << "logDetL=" << logDetL);
-  logDeterminant_ = 2.0 * logDetL;
+
+  if(nonpositive)
+  {
+    logDeterminant_ = - SpecFunc::LogMaxScalar;
+  }
+  else
+  {
+    logDeterminant_ = 2.0 * logDetL;
+  }
 }
 
 /* Optimization solver accessor */
