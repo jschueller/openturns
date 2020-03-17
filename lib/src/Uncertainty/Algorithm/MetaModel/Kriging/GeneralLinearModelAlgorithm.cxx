@@ -827,18 +827,26 @@ Scalar GeneralLinearModelAlgorithm::computeLogIntegratedLikelihoodPenalization()
         sigmaTheta = sigmaTheta - LLtinvFFtLLtinvFiFtLLtinv;
       }
 
+      // compute "log-derivative" of the correlation matrix with respect to the scale parameters
+      Collection<SquareMatrix> correlationMatrixLogDerivatives(inputDimension, SquareMatrix(size));
+      for (UnsignedInteger i = 0; i < inputDimension; ++ i)
+      {
+        correlationMatrixLogDerivatives[i] = sigmaTheta * dCds[i];        
+      }
+
+      // compute Fisher information matrix iTheta
       // lower triangle
       for (UnsignedInteger i = 0; i < inputDimension; ++ i)
       {
         for (UnsignedInteger j = 0; j <= i; ++ j)
         {
-          iTheta(i, j) = (sigmaTheta * dCds[i] * sigmaTheta * dCds[j]).computeTrace();
+          iTheta(i, j) = (correlationMatrixLogDerivatives[i] * correlationMatrixLogDerivatives[j]).computeTrace();
         }
       }
       // bottom line
       for (UnsignedInteger j = 0; j < inputDimension; ++ j)
       {
-        iTheta(inputDimension, j) = (sigmaTheta * dCds[j]).computeTrace();
+        iTheta(inputDimension, j) = correlationMatrixLogDerivatives[j].computeTrace();
       }
       // bottom right corner
       iTheta(inputDimension, inputDimension) = size - beta_.getSize();
