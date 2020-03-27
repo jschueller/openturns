@@ -28,6 +28,8 @@
 #include "openturns/OTthread.hxx"
 
 #include "openturns/TBB.hxx"
+#include "openturns/Log.hxx"
+#include "openturns/OSS.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/Exception.hxx"
 
@@ -139,10 +141,12 @@ TBBContext::TBBContext()
     // disable threading
 #ifdef OPENTURNS_HAVE_OPENMP
     ompNumThreads_ = omp_get_max_threads();
+    Log::Debug(OSS() << "OpenMP number of threads = " << ompNumThreads_);
     omp_set_num_threads(1);
 #endif
 #ifdef OPENTURNS_HAVE_OPENBLAS
     openblasNumThreads_ = goto_get_num_procs();
+    Log::Debug(OSS() << "OpenBLAS number of threads = " << openblasNumThreads_);
     openblas_set_num_threads(1);
 #endif
   }
