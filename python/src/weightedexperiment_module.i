@@ -27,6 +27,7 @@
 %include WeightedExperimentImplementation.i
 %include WeightedExperiment.i
 %include BootstrapExperiment.i
+%include DualBootstrapExperiment.i
 %include FixedExperiment.i
 %include GaussProductExperiment.i
 %include ImportanceSamplingExperiment.i

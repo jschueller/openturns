@@ -58,6 +58,10 @@ Random weighted experiments
     MonteCarloExperiment
     ImportanceSamplingExperiment
 
+    :template: class.rst_t
+
+    DualBootstrapExperiment
+
 Deterministic weighted experiments
 ----------------------------------
 
