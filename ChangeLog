@@ -5,8 +5,10 @@
 === Library ===
 
 ==== Major changes ====
+ * RandomWalkMetropolisHastings now updates all components at a time, previously updated componentwise
 
 ==== New classes ====
+ * Gibbs
 
 ==== API changes ====
  * Removed deprecated Hanning alias
@@ -16,6 +18,8 @@
  * Removed deprecated TBB.SetNumberOfThreads/GetNumberOfThreads
  * Removed deprecated MultiFORM.setMaximumNumberOfDesignPoints/getMaximumNumberOfDesignPoints
  * Removed deprecated SubsetSampling.getNumberOfSteps
+ * RandomWalkMetropolisHastings API breaks to split the likelihood definition
+ * Deprecated CalibrationStrategy class
 
 === Documentation ===
 
