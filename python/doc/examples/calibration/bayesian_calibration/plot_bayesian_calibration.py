@@ -108,8 +108,8 @@ x_obs
 # %%
 fullModel = ot.SymbolicFunction(
     ['x1', 'theta1', 'theta2', 'theta3'], ['theta1+theta2*x1+theta3*x1^2', '1.0'])
-model = ot.ParametricFunction(fullModel, [0], x_obs[0])
-model
+linkFunction = ot.ParametricFunction(fullModel, [0], x_obs[0])
+linkFunction
 
 # %%
 # - Define the observation noise :math:`\varepsilon {\sim} \mathcal N(0, 1)` and create a sample from it.
@@ -133,8 +133,8 @@ thetaTrue = [-4.5, 4.8, 2.2]
 # %%
 y_obs = ot.Sample(obsSize, 1)
 for i in range(obsSize):
-    model.setParameter(x_obs[i])
-    y_obs[i, 0] = model(thetaTrue)[0] + noiseSample[i, 0]
+    linkFunction.setParameter(x_obs[i])
+    y_obs[i, 0] = linkFunction(thetaTrue)[0] + noiseSample[i, 0]
 y_obs
 
 # %%
@@ -177,23 +177,11 @@ prior.setDescription(['theta1', 'theta2', 'theta3'])
 prior
 
 # %%
-# - Proposal distribution: uniform.
+# - Instrumental distribution: uniform.
 
 # %%
-proposal = [ot.Uniform(-1., 1.)] * paramDim
-proposal
-
-# %%
-# Test the MCMC sampler
-# ---------------------
-#
-# The MCMC sampler essentially computes the log-likelihood of the parameters.
-
-# %%
-mymcmc = ot.MCMC(prior, conditional, model, x_obs, y_obs, thetaPriorMean)
-
-# %%
-mymcmc.computeLogLikelihood(thetaPriorMean)
+instrumental = ot.Uniform(-1., 1.)
+instrumental
 
 # %%
 # Test the Metropolis-Hastings sampler
@@ -206,48 +194,35 @@ mymcmc.computeLogLikelihood(thetaPriorMean)
 initialState = thetaPriorMean
 
 # %%
-RWMHsampler = ot.RandomWalkMetropolisHastings(
-    prior, conditional, model, x_obs, y_obs, initialState, proposal)
+mh_coll = [ot.RandomWalkMetropolisHastings(prior, initialState, instrumental, [i]) for i in range(paramDim)]
+for mh in mh_coll: mh.setLikelihood(conditional, y_obs, linkFunction, x_obs)
+sampler = ot.Gibbs(mh_coll)
 
 # %%
 # In order to check our model before simulating it, we compute the log-likelihood.
 
 # %%
-RWMHsampler.computeLogLikelihood(initialState)
-
-# %%
-# We observe that, as expected, the previous value is equal to the output of the same method in the MCMC object.
+[mh.computeLogLikelihood(initialState) for mh in mh_coll]
 
 # %%
 # Tuning of the RWMH algorithm.
 
 # %%
-# Strategy of calibration for the random walk (trivial example: default).
-
-# %%
-strategy = ot.CalibrationStrategyCollection(paramDim)
-RWMHsampler.setCalibrationStrategyPerComponent(strategy)
-
-# %%
-# Other parameters.
-
-# %%
-RWMHsampler.setVerbose(True)
-RWMHsampler.setThinning(1)
-RWMHsampler.setBurnIn(2000)
+sampler.setThinning(1)
+sampler.setBurnIn(2000)
 
 # %%
 # Generate a sample from the posterior distribution of the parameters theta.
 
 # %%
 sampleSize = 10000
-sample = RWMHsampler.getSample(sampleSize)
+sample = sampler.getSample(sampleSize)
 
 # %%
 # Look at the acceptance rate (basic checking of the efficiency of the tuning; value close to 0.2 usually recommended).
 
 # %%
-RWMHsampler.getAcceptanceRate()
+[mh.getAcceptanceRate() for mh in sampler.getMetropolisHastingsCollection()]
 
 # %%
 # Build the distribution of the posterior by kernel smoothing.

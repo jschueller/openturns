@@ -176,8 +176,8 @@ def fullModelPy(X):
 
 
 fullModel = ot.PythonFunction(4, 2, fullModelPy)
-model = ot.ParametricFunction(fullModel, [0], Qobs[0])
-model
+linkFunction = ot.ParametricFunction(fullModel, [0], Qobs[0])
+linkFunction
 
 # %%
 # Define the value of the reference values of the :math:`\theta` parameter. In the bayesian framework, this is called the mean of the *prior* gaussian distribution. In the data assimilation framework, this is called the *background*.
@@ -222,68 +222,55 @@ conditional = ot.Normal()
 conditional
 
 # %%
-# Proposal distribution: uniform.
+# Instrumental distribution: uniform.
 
 # %%
-proposal = [ot.Uniform(-5., 5.), ot.Uniform(-1., 1.), ot.Uniform(-1., 1.)]
-proposal
+instrumental = ot.ComposedDistribution([ot.Uniform(-5., 5.), ot.Uniform(-1., 1.), ot.Uniform(-1., 1.)])
+instrumental
 
 # %%
-# Test the MCMC sampler
+# Test the RWMH sampler
 # ---------------------
 #
-# The MCMC sampler essentially computes the log-likelihood of the parameters.
+# The RWMH sampler essentially computes the log-likelihood of the parameters.
 
 # %%
-mymcmc = ot.MCMC(prior, conditional, model, Qobs, Hobs, parameterPriorMean)
+mymcmc = ot.RandomWalkMetropolisHastings(prior, parameterPriorMean, instrumental)
+mymcmc.setLikelihood(conditional, Hobs, linkFunction, Qobs)
 
 # %%
 mymcmc.computeLogLikelihood(parameterPriorMean)
 
-# %%
-# Test the Metropolis-Hastings sampler
-# ------------------------------------
 
 # %%
-# - Creation of the Random Walk Metropolis-Hastings (RWMH) sampler.
+# Test the Gibbs sampler
+# ----------------------
 
 # %%
 initialState = parameterPriorMean
-
-# %%
-RWMHsampler = ot.RandomWalkMetropolisHastings(
-    prior, conditional, model, Qobs, Hobs, initialState, proposal)
+mh_coll = [ot.RandomWalkMetropolisHastings(prior, initialState, instrumental.getMarginal(i), [i]) for i in range(paramDim)]
+for mh in mh_coll: mh.setLikelihood(conditional, Hobs, linkFunction, Qobs)
+sampler = ot.Gibbs(mh_coll)
 
 # %%
 # Tuning of the RWMH algorithm.
 
 # %%
-# Strategy of calibration for the random walk (trivial example: default).
-
-# %%
-strategy = ot.CalibrationStrategyCollection(paramDim)
-RWMHsampler.setCalibrationStrategyPerComponent(strategy)
-
-# %%
-# Other parameters.
-
-# %%
-RWMHsampler.setVerbose(True)
-RWMHsampler.setThinning(1)
-RWMHsampler.setBurnIn(200)
+sampler.setThinning(1)
+sampler.setBurnIn(200)
 
 # %%
 # Generate a sample from the posterior distribution of the parameters theta.
 
 # %%
 sampleSize = 1000
-sample = RWMHsampler.getSample(sampleSize)
+sample = sampler.getSample(sampleSize)
 
 # %%
 # Look at the acceptance rate (basic checking of the efficiency of the tuning; value close to 0.2 usually recommended).
 
 # %%
-RWMHsampler.getAcceptanceRate()
+[mh.getAcceptanceRate() for mh in sampler.getMetropolisHastingsCollection()]
 
 # %%
 # Build the distribution of the posterior by kernel smoothing.
