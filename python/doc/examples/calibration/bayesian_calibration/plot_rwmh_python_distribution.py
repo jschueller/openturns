@@ -130,7 +130,7 @@ x = ot.Sample(np.vstack((Tobs, fail)).T)
 
 
 # %%
-# Define a uniform prior distribution for :math:`\alpha` and a Gamma prior distribution for :math:`\beta`
+# Define a uniform prior distribution for :math:`\alpha` and a Gamma prior distribution for :math:`\beta`.
 #
 
 # %%
@@ -180,7 +180,7 @@ sample = sampler.getSample(sampleSize)
 print("Acceptance rate: %s" % (sampler.getAcceptanceRate()))
 
 # %%
-# Plot prior to posterior marginal plots
+# Plot prior to posterior marginal plots.
 #
 
 # %%
@@ -202,7 +202,11 @@ _ = View(grid)
 # --------------------------
 
 # %%
-# Now, define an improper prior which log pdf is defined by f(beta, alpha) = -log(beta)
+# Now, define an improper prior:
+#
+# .. math::
+#   \mathcal \pi(\beta, \alpha) \propto \frac{1}{\beta}.
+#
 
 logpdf = ot.SymbolicFunction(['beta', 'alpha'], ['-log(beta)'])
 support = ot.Interval([0] * 2, [1] * 2)
@@ -217,7 +221,7 @@ sample2 = sampler2.getSample(1000)
 print("Acceptance rate: %s" % (sampler2.getAcceptanceRate()))
 
 # %%
-# Plot posterior marginal plots only as prior cannot be drawn meaningfully
+# Plot posterior marginal plots only as prior cannot be drawn meaningfully.
 #
 
 # %%

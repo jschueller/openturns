@@ -13,29 +13,26 @@ Parameters
 targetDistribution : :class:`~openturns.Distribution`
     Target distribution sampled
 targetLogPDF : :class:`~openturns.Function`
-    Target log-pdf as a function
-support : :class:`~openturns.Interval`
+    Target log-density up to an additive constant
+support : :class:`~openturns.Domain`
     Support of the target when defined with *targetLogPDF*
 instrumental : :class:`~openturns.Distribution`
-    Distribution from which the transition kernel of the MCMC is defined,
-    as explained hereafter.
-    In the following of this paragraph, :math:`\delta \sim p` means that the
-    realization :math:`\delta` is obtained according to the *instrumental* distribution.
-    The underlying algorithm is a Metropolis-Hastings one which draws candidates (for the
-    next state of the chain) using a random walk: from the current state
-    :math:`\vect{\theta}^k`, the candidate :math:`\vect{c}^k` for
-    :math:`\vect{\theta}^{k+1}` can be expressed as
-    :math:`\vect{c}^k = \vect{\theta}^k +\vect{\delta}^k` where the
-    distribution of :math:`\vect{\delta}^k` does not depend on
-    :math:`\vect{\theta}^k`.
+    Distribution of the steps of the random walk
 marginalIndices : sequence of int, optional
-    Bloc indices to indicate which components are updated
-    If not specified, all components are updated
+    Indices of the components to be updated.
+    If not specified, all components are updated.
+    The number of updated components must be equal to the dimension of *instrumental*.
 
 Notes
 -----
-RandomWalkMetropolisHastings enables to carry out a Metropolis-Hastings like
-sampling from the current state of the chain plus a random step.
+The random walk Metropolis-Hastings algorithm 
+is a Markov Chain Monte-Carlo algorithm.
+It draws candidates for the
+next state of the chain as follows: denoting the current state by
+:math:`\vect{\theta}^k`, the candidate :math:`\vect{c}^k` for
+:math:`\vect{\theta}^{k+1}` can be expressed as
+:math:`\vect{c}^k = \vect{\theta}^k +\vect{\delta}^k` where the
+distribution of :math:`\vect{\delta}^k` is the provided *instrumental* distribution.
 
 Examples
 --------
@@ -43,19 +40,28 @@ Examples
 >>> import math as m
 >>> ot.RandomGenerator.SetSeed(0)
 
-Estimate a target distribution without likelihood:
+Sample from a target distribution defined through its log-PDF (defined up to some additive constant) and its support:
 
->>> instrumental = ot.Normal([0.0] * 2, [0.5, 0.05], ot.IdentityMatrix(2))
->>> target = ot.ComposedDistribution([ot.Uniform(-100.0, 100.0)] * 2)
->>> initialState = [0.0] * 2
->>> sampler = ot.RandomWalkMetropolisHastings(target, initialState, instrumental)
+>>> log_density = ot.SymbolicFunction('x', 'log(2 + sin(x)^2) - (2 + cos(3*x)^3 + sin(2*x)^3) * x')
+>>> support = ot.Interval([0.0], [2.0 * m.pi])
+>>> instrumental = ot.Normal(0.0, 2.0)
+>>> initialState = [3.0]
+>>> sampler = ot.RandomWalkMetropolisHastings(log_density, support, initialState, instrumental)
 >>> sampler.setBurnIn(20)
 >>> sampler.setThinning(2)
->>> alpha_beta = sampler.getSample(10)
+>>> x = sampler.getSample(10)
 
-Now estimate a the distribution by defining the likelihood:
+The target distribution can also be an OpenTURNS :class:`~openturns.Distribution`.
+Since all OpenTURNS :class:`~openturns.Distribution` objects have a :meth:`~openturns.Distribution.getSample`
+method, this is only useful in Bayesian settings where we also define a likelihood.
+The likelihood function penalizes the initially provided target distribution (now viewed as the *prior*)
+in order to get the *posterior* distribution.
+We sample from the posterior.
 
->>> sampler = ot.RandomWalkMetropolisHastings(target, initialState, instrumental)
+>>> prior = ot.ComposedDistribution([ot.Uniform(-100.0, 100.0)] * 2)
+>>> instrumental = ot.Normal([0.0] * 2, [0.5, 0.05], ot.IdentityMatrix(2))
+>>> initialState = [0.0] * 2
+>>> sampler = ot.RandomWalkMetropolisHastings(prior, initialState, instrumental)
 >>> conditional = ot.Bernoulli()
 >>> data = ot.Sample([[53, 1], [57, 1], [58, 1], [63, 1], [66, 0], [67, 0],
 ... [67, 0], [67, 0], [68, 0], [69, 0], [70, 0], [70, 0], [70, 1], [70, 1],
@@ -65,16 +71,7 @@ Now estimate a the distribution by defining the likelihood:
 >>> fun = ot.SymbolicFunction(['alpha', 'beta', 'x'], ['exp(alpha + beta * x) / (1 + exp(alpha + beta * x))'])
 >>> linkFunction = ot.ParametricFunction(fun, [2], [0.0])
 >>> sampler.setLikelihood(conditional, observations, linkFunction, covariates)
->>> alpha_beta = sampler.getSample(10)
-
-Now with an improper prior defined via its log-pdf and its support:
-
->>> log_density = ot.SymbolicFunction('x', 'log(2 + sin(x)^2) - (2 + cos(3*x)^3 + sin(2*x)^3) * x')
->>> support = ot.Interval([0.0], [2.0 * m.pi])
->>> instrumental = ot.Normal(0.0, 2.0)
->>> initialState = [3.0]
->>> sampler = ot.RandomWalkMetropolisHastings(log_density, support, initialState, instrumental)
->>> x = sampler.getSample(10)"
+>>> alpha_beta = sampler.getSample(10)"
 
 // ---------------------------------------------------------------------
 

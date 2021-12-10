@@ -10,11 +10,15 @@ samplers : sequence of :class:`~openturns.MetropolisHastings`
 
 Notes
 -----
-Gibbs enables to carry out MCMC updating component per component or at least
-per blocs of components using several Metropolis-Hastings samplers.
+Assume we want to sample from a complicated joint distribution.
+The Gibbs algorithm is a Markov Chain Monte-Carlo algorithm
+which sequentially calls samplers
+(implemented as :class:`MetropolisHastings` objects)
+of the conditional distributions of one or several components.
 
 Examples
 --------
+
 >>> import openturns as ot
 >>> ot.RandomGenerator.SetSeed(0)
 >>> chainDim = 3
@@ -36,7 +40,7 @@ Examples
 ...          ['p1', 'p2', 'p3', 'x1', 'x2', 'x3'],
 ...          ['p1*x1+p2*x2+p3*x3', '1.0'])
 >>> parametersSet = range(chainDim)
->>> parametersValue = [0.0] * len(parametersSet)
+>>> parametersValue = [0.0] * len(parametersSet) # 0.0 is a placeholder
 >>> linkFunction = ot.ParametricFunction(fullModel, parametersSet, parametersValue)
 >>> # Calibration parameters
 >>> # Proposal distribution
@@ -74,12 +78,12 @@ samplers : list of :class:`~openturns.MetropolisHastings`
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::Gibbs::getMetropolisHastingsCollection
-"Get whether the posterior of a bloc is recomputed.
+"Get the list of Metropolis-Hastings samplers.
 
 Returns
 -------
-recompute : :class:`~openturns.Indices`
-    Whether the posterior of a bloc is recomputed"
+samplers : sequence of :class:`MetropolisHastings`
+    List of all Metropolis-Hastings samplers used in the Gibbs algorithm"
 
 // ---------------------------------------------------------------------
 
@@ -88,7 +92,7 @@ recompute : :class:`~openturns.Indices`
 
 Returns
 -------
-lenght : int
+length : int
     Length of the burn-in period, that is the number of first iterates of the
     MCMC chain which will be thrown away when generating the sample."
 
@@ -99,7 +103,7 @@ lenght : int
 
 Parameters
 ----------
-lenght : int
+length : int
     Length of the burn-in period, that is the number of first iterates of the
     MCMC chain which will be thrown away when generating the sample."
 
@@ -145,10 +149,7 @@ and :math:`k` the thinning parameter."
 Returns
 -------
 recompute : :class:`~openturns.Indices`
-    Whether the posterior is recomputed for the next bloc.
-    It depends on the value of the posterior from the initial state:
-    if the value is the same it wont be necessary to recompute the posterior each time.
-    This is computed once at the first realization.
+    Whether the posterior at the state received from the previous sampler is recomputed.
     For debug use only."
 
 // ---------------------------------------------------------------------
