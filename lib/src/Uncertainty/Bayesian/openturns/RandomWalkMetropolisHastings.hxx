@@ -23,6 +23,7 @@
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/MetropolisHastingsImplementation.hxx"
+#include "openturns/MetropolisHastings.hxx"
 #include "openturns/ResourceMap.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
@@ -54,6 +55,10 @@ public:
                               const Point & initialState,
                               const Distribution & proposal,
                               const Indices & marginalIndices = Indices());
+
+  /* Constructor from interface class */
+  RandomWalkMetropolisHastings(const MetropolisHastings & mh);
+
   /** String converter */
   String __repr__() const override;
 
@@ -107,6 +112,9 @@ private:
   Scalar adaptationExpansionFactor_ = 0.0;
   Scalar adaptationShrinkFactor_ = 0.0;
   UnsignedInteger adaptationPeriod_ = 0;
+
+  // Copy the attributes of an other instance
+  void copyAttributes(const RandomWalkMetropolisHastings * rwmh);
 
 }; /* class RandomWalkMetropolisHastings */
 

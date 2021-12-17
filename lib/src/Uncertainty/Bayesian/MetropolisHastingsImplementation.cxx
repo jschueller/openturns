@@ -373,6 +373,32 @@ Scalar MetropolisHastingsImplementation::getAcceptanceRate() const
   return static_cast<Scalar>(acceptedNumber_) / samplesNumber_;
 }
 
+void MetropolisHastingsImplementation::copyAttributes(const MetropolisHastingsImplementation * mhi)
+{
+  initialState_ = mhi->getInitialState();
+  marginalIndices_ = mhi->getMarginalIndices();
+  history_ = mhi->getHistory();
+  const Sample historySample(history_.getSample());
+  samplesNumber_ = historySample.getSize();
+  if (samplesNumber_==0)
+    currentState_ = initialState_;
+  else
+    currentState_ = historySample[samplesNumber_ - 1];
+  const Scalar acceptanceRate = mhi->getAcceptanceRate();
+  acceptedNumber_ = static_cast<UnsignedInteger>(std::round(acceptanceRate * samplesNumber_));
+  targetDistribution_ = mhi->getTargetDistribution();
+  targetLogPDF_ = mhi->getTargetLogPDF();
+  support_ = mhi->getTargetLogPDFSupport();
+  conditional_ = mhi->getConditional();
+  linkFunction_ = mhi->getLinkFunction();
+  covariates_ = mhi->getCovariates();
+  observations_ = mhi->getObservations();
+  burnIn_ = mhi->getBurnIn();
+  thinning_ = mhi->getThinning();
+  verbose_ = mhi->getVerbose();
+  currentLogPosterior_ = mhi->computeLogPosterior(currentState_);
+}
+
 /* Method save() stores the object through the StorageManager */
 void MetropolisHastingsImplementation::save(Advocate & adv) const
 {

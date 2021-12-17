@@ -149,6 +149,9 @@ protected:
   /** Propose a new point in the chain */
   virtual Point getCandidate() const;
 
+  // Copy the attributes of an other instance
+  void copyAttributes(const MetropolisHastingsImplementation * mhi);
+
 private:
   // target distribution
   Distribution targetDistribution_;

@@ -70,6 +70,18 @@ RandomWalkMetropolisHastings::RandomWalkMetropolisHastings(const Function & targ
   setProposal(proposal);
 }
 
+/* Constructor from interface class */
+RandomWalkMetropolisHastings::RandomWalkMetropolisHastings(const MetropolisHastings & mh)
+  : RandomWalkMetropolisHastings()
+{
+  if (mh.getImplementation()->getClassName() != "RandomWalkMetropolisHastings")
+    throw InvalidArgumentException(HERE) << "Cannot copy attributes of non-RandomWalkMetropolisHastings object";
+
+  const MetropolisHastingsImplementation * mhi(dynamic_cast<const MetropolisHastingsImplementation *>(mh.getImplementation().get()));
+  const RandomWalkMetropolisHastings * rwmh(dynamic_cast<const RandomWalkMetropolisHastings *>(mh.getImplementation().get()));
+  MetropolisHastingsImplementation::copyAttributes(mhi);
+  copyAttributes(rwmh);
+}
 
 /* String converter */
 String RandomWalkMetropolisHastings::__repr__() const
@@ -189,6 +201,17 @@ UnsignedInteger RandomWalkMetropolisHastings::getAdaptationPeriod() const
 Scalar RandomWalkMetropolisHastings::getAdaptationFactor() const
 {
   return adaptationFactor_;
+}
+
+void RandomWalkMetropolisHastings::copyAttributes(const RandomWalkMetropolisHastings * rwmh)
+{
+  MetropolisHastingsImplementation::copyAttributes(rwmh);
+  proposal_ = rwmh->getProposal();
+  adaptationFactor_ = rwmh->getAdaptationFactor();
+  adaptationRange_ = rwmh->getAdaptationRange();
+  adaptationExpansionFactor_ = rwmh->getAdaptationExpansionFactor();
+  adaptationShrinkFactor_ = rwmh->getAdaptationShrinkFactor();
+  adaptationPeriod_ = rwmh->getAdaptationPeriod();
 }
 
 /* Method save() stores the object through the StorageManager */
