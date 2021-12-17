@@ -83,6 +83,22 @@ RandomWalkMetropolisHastings::RandomWalkMetropolisHastings(const MetropolisHasti
   copyAttributes(rwmh);
 }
 
+/* Virtual constructor */
+RandomWalkMetropolisHastings * RandomWalkMetropolisHastings::clone() const
+{
+  return new RandomWalkMetropolisHastings(*this);
+}
+
+RandomWalkMetropolisHastings RandomWalkMetropolisHastings::get(const MetropolisHastings & mh)
+{
+  if (mh.getImplementation()->getClassName() != "RandomWalkMetropolisHastings")
+    throw InvalidArgumentException(HERE) << "Cannot copy non-RandomWalkMetropolisHastings object";
+
+  const RandomWalkMetropolisHastings * rwmh(dynamic_cast<const RandomWalkMetropolisHastings *>(mh.getImplementation().get()));
+
+  return *rwmh;
+}
+
 /* String converter */
 String RandomWalkMetropolisHastings::__repr__() const
 {
@@ -91,13 +107,6 @@ String RandomWalkMetropolisHastings::__repr__() const
          << " derived from " << MetropolisHastingsImplementation::__repr__()
          << " proposal=" << proposal_;
 }
-
-
-RandomWalkMetropolisHastings* RandomWalkMetropolisHastings::clone() const
-{
-  return new RandomWalkMetropolisHastings(*this);
-}
-
 
 Point RandomWalkMetropolisHastings::getCandidate() const
 {

@@ -93,6 +93,12 @@ MetropolisHastingsImplementation::MetropolisHastingsImplementation(const Functio
   }
 }
 
+/* Virtual constructor */
+MetropolisHastingsImplementation * MetropolisHastingsImplementation::clone() const
+{
+  return new MetropolisHastingsImplementation(*this);
+}
+
 /* Likelihood accessor */
 void MetropolisHastingsImplementation::setLikelihood(const Distribution & conditional,
                                                       const Sample & observations,
@@ -146,12 +152,6 @@ String MetropolisHastingsImplementation::__repr__() const
          << " observations=" << observations_
          << " burnIn=" << burnIn_
          << " thinning=" << thinning_;
-}
-
-
-MetropolisHastingsImplementation* MetropolisHastingsImplementation::clone() const
-{
-  return new MetropolisHastingsImplementation(*this);
 }
 
 Point MetropolisHastingsImplementation::getCandidate() const

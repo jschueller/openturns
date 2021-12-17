@@ -43,7 +43,7 @@ public:
   /** Default constructor */
   RandomWalkMetropolisHastings();
 
-  /** Constructor with parameters*/
+  /** Constructor with parameters */
   RandomWalkMetropolisHastings(const Distribution & targetDistribution,
                                const Point & initialState,
                                const Distribution & proposal,
@@ -66,6 +66,9 @@ public:
 
   /** Virtual constructor */
   RandomWalkMetropolisHastings * clone() const override;
+
+  /** Get from interface class */
+  static RandomWalkMetropolisHastings get(const MetropolisHastings & mh);
 
   /** Intrumental accessor */
   void setProposal(const Distribution & proposal);

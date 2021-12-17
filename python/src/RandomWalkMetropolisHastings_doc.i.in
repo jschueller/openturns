@@ -184,4 +184,25 @@ shrinkFactor : float, :math:`0 < s < 1`
 Returns
 -------
 factor : float
-    Current adaptation factor, for inspection."
+    Current adaptation factor, for inspection"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomWalkMetropolisHastings::get
+"Get the underlying :class:`RandomWalkMetropolisHastings` from a :class:`~openturns.MetropolisHastings`.
+
+Parameters
+----------
+interface : :class:`~openturns.MetropolisHastings`
+    Interface of a Metropolis-Hastings sampler
+
+Returns
+-------
+implementation : :class:`RandomWalkMetropolisHastings`
+    The actual sampler
+
+Notes
+-----
+Only works if the :class:`~openturns.MetropolisHastings` object
+really interfaces a :class:`RandomWalkMetropolisHastings`.
+Useful in order to access :class:`RandomWalkMetropolisHastings`-specific methods."
