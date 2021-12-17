@@ -65,6 +65,9 @@ public:
   /** Initial state accessor */
   Point getInitialState() const;
 
+  /** Marginal indices accessor */
+  virtual Indices getMarginalIndices() const;
+
   /** Burnin accessor */
   void setBurnIn(UnsignedInteger burnIn);
   UnsignedInteger getBurnIn() const;

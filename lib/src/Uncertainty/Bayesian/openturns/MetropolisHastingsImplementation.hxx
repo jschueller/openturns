@@ -82,6 +82,9 @@ public:
   /** Initial state accessor */
   virtual Point getInitialState() const;
 
+  /** Marginal indices accessor */
+  virtual Indices getMarginalIndices() const;
+
   /** Likelihood accessor */
   virtual void setLikelihood(const Distribution & conditional,
                             const Sample & observations,

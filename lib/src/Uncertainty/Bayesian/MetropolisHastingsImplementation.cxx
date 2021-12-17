@@ -288,6 +288,11 @@ Point MetropolisHastingsImplementation::getInitialState() const
   return initialState_;
 }
 
+Indices MetropolisHastingsImplementation::getMarginalIndices() const
+{
+  return marginalIndices_;
+}
+
 Distribution MetropolisHastingsImplementation::getConditional() const
 {
   return conditional_;

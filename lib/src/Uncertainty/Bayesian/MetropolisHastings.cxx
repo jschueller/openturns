@@ -73,6 +73,11 @@ Point MetropolisHastings::getInitialState() const
   return getImplementation()->getInitialState();
 }
 
+Indices MetropolisHastings::getMarginalIndices() const
+{
+  return getImplementation()->getMarginalIndices();
+}
+
 UnsignedInteger MetropolisHastings::getDimension() const
 {
   return getImplementation()->getDimension();

@@ -450,3 +450,16 @@ support : :class:`~openturns.Interval`
 %enddef
 %feature("docstring") OT::MetropolisHastingsImplementation::getTargetLogPDFSupport
 OT_MetropolisHastings_getTargetLogPDFSupport_doc
+
+// ---------------------------------------------------------------------
+
+%define OT_MetropolisHastings_getMarginalIndices_doc
+"Get the indices of the sampled components.
+
+Returns
+-------
+marginalIndices : :class:`~openturns.Indices`
+    The *marginalIndices* argument provided to the constructor"
+%enddef
+%feature("docstring") OT::MetropolisHastingsImplementation::getMarginalIndices
+OT_MetropolisHastings_getMarginalIndices_doc
