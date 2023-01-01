@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ADAPTATIVEDIRECTIONALSAMPLING_HXX
-#define OPENTURNS_ADAPTATIVEDIRECTIONALSAMPLING_HXX
+#pragma once
 
 #include "openturns/EventSimulation.hxx"
 #include "openturns/StorageManager.hxx"
@@ -113,4 +112,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ADAPTATIVEDIRECTIONALSAMPLING_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CALIBRATIONRESULT_HXX
-#define OPENTURNS_CALIBRATIONRESULT_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/PersistentObject.hxx"
@@ -138,5 +137,4 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CALIBRATIONRESULT_HXX */
 

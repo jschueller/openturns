@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_APPROXIMATIONALGORITHMIMPLEMENTATIONFACTORY_HXX
-#define OPENTURNS_APPROXIMATIONALGORITHMIMPLEMENTATIONFACTORY_HXX
+#pragma once
 
 #include <iostream>
 #include "openturns/ApproximationAlgorithmImplementation.hxx"
@@ -77,4 +76,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_APPROXIMATIONALGORITHMIMPLEMENTATIONFACTORY_HXX */

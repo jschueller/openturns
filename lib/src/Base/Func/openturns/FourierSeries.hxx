@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FOURIERSERIES_HXX
-#define OPENTURNS_FOURIERSERIES_HXX
+#pragma once
 
 #include "openturns/UniVariateFunctionImplementation.hxx"
 #include "openturns/UniVariatePolynomial.hxx"
@@ -74,4 +73,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FOURIERSERIES_HXX */

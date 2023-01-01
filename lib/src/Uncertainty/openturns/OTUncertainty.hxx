@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTUNCERTAINTY_HXX
-#define OPENTURNS_OTUNCERTAINTY_HXX
+#pragma once
 
 #include "openturns/OTAlgorithm.hxx"
 #include "openturns/OTBayesian.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/OTStatTests.hxx"
 #include "openturns/OTProcess.hxx"
 
-#endif /* OPENTURNS_OTUNCERTAINTY_HXX */

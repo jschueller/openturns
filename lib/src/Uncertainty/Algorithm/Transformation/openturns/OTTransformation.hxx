@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTTRANSFORMATION_HXX
-#define OPENTURNS_OTTRANSFORMATION_HXX
+#pragma once
 
 #include "openturns/DistributionTransformation.hxx"
 #include "openturns/OTMarginalTransformation.hxx"
@@ -30,4 +29,3 @@
 #include "openturns/OTRosenblatt.hxx"
 #include "openturns/OTProcessTransformation.hxx"
 
-#endif /* OPENTURNS_OTTRANSFORMATION_HXX */

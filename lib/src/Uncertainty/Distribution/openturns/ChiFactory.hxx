@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CHIFACTORY_HXX
-#define OPENTURNS_CHIFACTORY_HXX
+#pragma once
 
 #include "openturns/Chi.hxx"
 #include "openturns/DistributionFactoryImplementation.hxx"
@@ -57,4 +56,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CHIFACTORY_HXX */

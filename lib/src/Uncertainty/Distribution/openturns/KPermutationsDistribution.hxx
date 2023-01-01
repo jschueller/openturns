@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KPERMUTATIONSDISTRIBUTION_HXX
-#define OPENTURNS_KPERMUTATIONSDISTRIBUTION_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DiscreteDistribution.hxx"
@@ -149,4 +148,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KPERMUTATIONSDISTRIBUTION_HXX */

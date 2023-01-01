@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_BOXCOXGRADIENT_HXX
-#define OPENTURNS_BOXCOXGRADIENT_HXX
+#pragma once
 
 #include "openturns/GradientImplementation.hxx"
 #include "openturns/BoxCoxEvaluation.hxx"
@@ -94,4 +93,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BOXCOXGRADIENT_HXX */

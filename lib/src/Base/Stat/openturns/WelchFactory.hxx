@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_WELCHFACTORY_HXX
-#define OPENTURNS_WELCHFACTORY_HXX
+#pragma once
 
 #include "openturns/SpectralModelFactoryImplementation.hxx"
 #include "openturns/UserDefinedSpectralModel.hxx"
@@ -100,4 +99,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_WELCHFACTORY_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LAPACK_HXX
-#define OPENTURNS_LAPACK_HXX
+#pragma once
 
 #include "openturns/OTconfig.hxx"
 
@@ -187,4 +186,3 @@ void dposv_(char *uplo, int *n, int *nrhs, double *A, int *lda, double *B, int *
 
 END_C_DECLS
 
-#endif /* OPENTURNS_LAPACK_HXX */

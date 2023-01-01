@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_XMLSTORAGEMANAGER_HXX
-#define OPENTURNS_XMLSTORAGEMANAGER_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include <stack>                 // for std::stack
@@ -347,4 +346,3 @@ struct XMLStorageManagerState : public StorageManager::InternalObject
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_XMLSTORAGEMANAGER_HXX */

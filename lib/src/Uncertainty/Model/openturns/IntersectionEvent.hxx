@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_INTERSECTIONEVENT_HXX
-#define OPENTURNS_INTERSECTIONEVENT_HXX
+#pragma once
 
 #include "openturns/RandomVectorImplementation.hxx"
 #include "openturns/RandomVector.hxx"
@@ -108,4 +107,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INTERSECTIONEVENT_HXX */

@@ -17,8 +17,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DIRACCOVARIANCEMODEL_HXX
-#define OPENTURNS_DIRACCOVARIANCEMODEL_HXX
+#pragma once
 
 #include "openturns/CovarianceModelImplementation.hxx"
 
@@ -120,4 +119,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

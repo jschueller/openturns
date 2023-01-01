@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INTEGRATIONALGORITHM_HXX
-#define OPENTURNS_INTEGRATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/IntegrationAlgorithmImplementation.hxx"
@@ -83,4 +82,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INTEGRATIONALGORITHM_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DISTRIBUTIONIMPLEMENTATION_HXX
-#define OPENTURNS_DISTRIBUTIONIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Point.hxx"
@@ -1831,4 +1830,3 @@ OT_API Distribution maximum(const DistributionImplementation & left,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DISTRIBUTIONIMPLEMENTATION_HXX */

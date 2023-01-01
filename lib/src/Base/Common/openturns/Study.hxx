@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_STUDY_HXX
-#define OPENTURNS_STUDY_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include <map>                   // for std::map
@@ -229,4 +228,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_STUDY_HXX */

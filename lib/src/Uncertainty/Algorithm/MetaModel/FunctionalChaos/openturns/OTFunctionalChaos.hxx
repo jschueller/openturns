@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTFUNCTIONALCHAOS_HXX
-#define OPENTURNS_OTFUNCTIONALCHAOS_HXX
+#pragma once
 
 #include "openturns/AdaptiveStrategy.hxx"
 #include "openturns/AdaptiveStrategyImplementation.hxx"
@@ -37,4 +36,3 @@
 #include "openturns/FieldToPointFunctionalChaosAlgorithm.hxx"
 #include "openturns/FieldFunctionalChaosSobolIndices.hxx"
 
-#endif /* OPENTURNS_OTFUNCTIONALCHAOS_HXX */

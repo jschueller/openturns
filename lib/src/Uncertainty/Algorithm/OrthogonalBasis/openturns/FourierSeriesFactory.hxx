@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FOURIERSERIESFACTORY_HXX
-#define OPENTURNS_FOURIERSERIESFACTORY_HXX
+#pragma once
 
 #include "openturns/OrthogonalUniVariateFunctionFactory.hxx"
 
@@ -65,4 +64,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FOURIERSERIESFACTORY_HXX */

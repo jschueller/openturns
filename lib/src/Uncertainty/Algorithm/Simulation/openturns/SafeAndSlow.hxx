@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SAFEANDSLOW_HXX
-#define OPENTURNS_SAFEANDSLOW_HXX
+#pragma once
 
 #include "openturns/RootStrategyImplementation.hxx"
 
@@ -67,4 +66,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SAFEANDSLOW_HXX */

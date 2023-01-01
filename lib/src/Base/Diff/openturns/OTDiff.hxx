@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTDIFF_HXX
-#define OPENTURNS_OTDIFF_HXX
+#pragma once
 
 #include "openturns/FiniteDifferenceStepImplementation.hxx"
 #include "openturns/FiniteDifferenceStep.hxx"
@@ -32,4 +31,3 @@
 #include "openturns/CenteredFiniteDifferenceHessian.hxx"
 #include "openturns/NonCenteredFiniteDifferenceGradient.hxx"
 
-#endif /* OPENTURNS_OTDIFF_HXX */

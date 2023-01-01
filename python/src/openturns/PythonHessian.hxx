@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONHESSIAN_HXX
-#define OPENTURNS_PYTHONHESSIAN_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/HessianImplementation.hxx"
@@ -96,5 +95,4 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONHESSIAN_HXX */
 

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_METHODBOUNDEVALUATION_HXX
-#define OPENTURNS_METHODBOUNDEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/FunctionImplementation.hxx"
@@ -216,4 +215,3 @@ bindMethod (const EvaluableObject & obj,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_METHODBOUNDEVALUATION_HXX */

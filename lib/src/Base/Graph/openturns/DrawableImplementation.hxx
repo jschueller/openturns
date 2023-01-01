@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DRAWABLEIMPLEMENTATION_HXX
-#define OPENTURNS_DRAWABLEIMPLEMENTATION_HXX
+#pragma once
 
 #include <map>
 #include "openturns/Description.hxx"
@@ -306,4 +305,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DRAWABLEIMPLEMENTATION_HXX */

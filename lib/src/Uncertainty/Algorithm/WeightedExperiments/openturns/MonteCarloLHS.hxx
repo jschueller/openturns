@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MONTECARLOLHS_HXX
-#define OPENTURNS_MONTECARLOLHS_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/StorageManager.hxx"
@@ -69,4 +68,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_MONTECARLOLHS_HXX */

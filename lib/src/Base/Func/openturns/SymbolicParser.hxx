@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_SYMBOLICPARSER_HXX
-#define OPENTURNS_SYMBOLICPARSER_HXX
+#pragma once
 
 #include "openturns/SymbolicParserImplementation.hxx"
 #include "openturns/Pointer.hxx"
@@ -70,4 +69,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif // OPENTURNS_SYMBOLICPARSER_HXX

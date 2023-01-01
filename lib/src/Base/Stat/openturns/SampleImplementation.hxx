@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SAMPLEIMPLEMENTATION_HXX
-#define OPENTURNS_SAMPLEIMPLEMENTATION_HXX
+#pragma once
 
 #include <stdint.h> // for uint64_t
 
@@ -839,4 +838,3 @@ OT_API SampleImplementation operator *(const Scalar, const SampleImplementation 
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SAMPLEIMPLEMENTATION_HXX */

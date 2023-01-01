@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INVERSENATAFELLIPTICALCOPULAEVALUATION_HXX
-#define OPENTURNS_INVERSENATAFELLIPTICALCOPULAEVALUATION_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/EvaluationImplementation.hxx"
@@ -88,4 +87,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INVERSENATAFELLIPTICALCOPULAEVALUATION_HXX */

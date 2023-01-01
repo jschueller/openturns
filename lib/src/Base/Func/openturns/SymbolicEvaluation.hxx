@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_SYMBOLICEVALUATION_HXX
-#define OPENTURNS_SYMBOLICEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/SymbolicParser.hxx"
@@ -126,4 +125,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SYMBOLICEVALUATION_HXX */

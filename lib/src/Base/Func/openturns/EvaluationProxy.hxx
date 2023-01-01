@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_EVALUATIONPROXY_HXX
-#define OPENTURNS_EVALUATIONPROXY_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Evaluation.hxx"
@@ -171,4 +170,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_EVALUATIONPROXY_HXX */

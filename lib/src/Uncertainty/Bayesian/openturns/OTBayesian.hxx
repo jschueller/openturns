@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTBAYESIAN_HXX
-#define OPENTURNS_OTBAYESIAN_HXX
+#pragma once
 
 #include "openturns/GaussianLinearCalibration.hxx"
 #include "openturns/CalibrationAlgorithm.hxx"
@@ -36,4 +35,3 @@
 #include "openturns/Gibbs.hxx"
 #include "openturns/RandomVectorMetropolisHastings.hxx"
 
-#endif /* OPENTURNS_OTBAYESIAN_HXX */

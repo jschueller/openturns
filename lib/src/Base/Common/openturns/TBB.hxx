@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TBB_HXX
-#define OPENTURNS_TBB_HXX
+#pragma once
 
 #include "openturns/Exception.hxx"
 
@@ -41,4 +40,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TBB_HXX */

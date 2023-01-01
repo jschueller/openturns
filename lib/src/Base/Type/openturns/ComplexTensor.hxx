@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COMPLEXTENSOR_HXX
-#define OPENTURNS_COMPLEXTENSOR_HXX
+#pragma once
 
 #include "openturns/ComplexTensorImplementation.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -142,4 +141,3 @@ ComplexTensor::ComplexTensor(const UnsignedInteger rowDim,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COMPLEXTENSOR_HXX */

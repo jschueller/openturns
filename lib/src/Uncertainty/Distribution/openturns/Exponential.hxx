@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_EXPONENTIAL_HXX
-#define OPENTURNS_EXPONENTIAL_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ContinuousDistribution.hxx"
@@ -162,4 +161,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_EXPONENTIAL_HXX */

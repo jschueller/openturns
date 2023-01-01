@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RANDOMDIRECTION_HXX
-#define OPENTURNS_RANDOMDIRECTION_HXX
+#pragma once
 
 #include "openturns/SamplingStrategyImplementation.hxx"
 
@@ -60,4 +59,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RANDOMDIRECTION_HXX */

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_HASELGROVESEQUENCE_HXX
-#define OPENTURNS_HASELGROVESEQUENCE_HXX
+#pragma once
 
 #include "openturns/LowDiscrepancySequenceImplementation.hxx"
 
@@ -74,4 +73,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HASELGROVESEQUENCE_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HISTORYSTRATEGY_HXX
-#define OPENTURNS_HISTORYSTRATEGY_HXX
+#pragma once
 
 #include "openturns/HistoryStrategyImplementation.hxx"
 #include "openturns/Pointer.hxx"
@@ -72,4 +71,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HISTORYSTRATEGY_HXX */

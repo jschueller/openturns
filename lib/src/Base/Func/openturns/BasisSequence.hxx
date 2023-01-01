@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BASISSEQUENCE_HXX
-#define OPENTURNS_BASISSEQUENCE_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/BasisSequenceImplementation.hxx"
@@ -82,4 +81,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BASISSEQUENCE_HXX */

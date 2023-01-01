@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTNATAFELLIPTICALCOPULA_HXX
-#define OPENTURNS_OTNATAFELLIPTICALCOPULA_HXX
+#pragma once
 
 #include "openturns/InverseNatafEllipticalCopulaEvaluation.hxx"
 #include "openturns/InverseNatafEllipticalCopulaGradient.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/NatafEllipticalCopulaGradient.hxx"
 #include "openturns/NatafEllipticalCopulaHessian.hxx"
 
-#endif /* OPENTURNS_OTNATAFELLIPTICALCOPULA_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RANDOMMIXTURE_HXX
-#define OPENTURNS_RANDOMMIXTURE_HXX
+#pragma once
 
 #include "openturns/Distribution.hxx"
 #include "openturns/DistributionFactory.hxx"
@@ -471,4 +470,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RANDOMMIXTURE_HXX */

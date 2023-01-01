@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ITERATIVETHRESHOLDEXCEEDANCE_HXX
-#define OPENTURNS_ITERATIVETHRESHOLDEXCEEDANCE_HXX
+#pragma once
 
 #include "openturns/IterativeAlgorithmImplementation.hxx"
 #include "openturns/Point.hxx"
@@ -92,4 +91,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ITERATIVETHRESHOLDEXCEEDANCE_HXX */

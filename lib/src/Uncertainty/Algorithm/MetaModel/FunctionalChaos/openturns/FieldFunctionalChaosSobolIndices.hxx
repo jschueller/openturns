@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FIELDFUNCTIONALCHAOSSOBOLINDICES_HXX
-#define OPENTURNS_FIELDFUNCTIONALCHAOSSOBOLINDICES_HXX
+#pragma once
 
 #include "openturns/FieldFunctionalChaosResult.hxx"
 
@@ -77,4 +76,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FIELDFUNCTIONALCHAOSSOBOLINDICES_HXX */

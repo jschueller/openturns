@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HMATRIX_HXX
-#define OPENTURNS_HMATRIX_HXX
+#pragma once
 
 #include "openturns/HMatrixImplementation.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -119,4 +118,3 @@ class OT_API HMatrix :
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HMATRIX_HXX */

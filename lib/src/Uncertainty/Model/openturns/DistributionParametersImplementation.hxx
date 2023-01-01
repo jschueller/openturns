@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DISTRIBUTIONPARAMETERSIMPLEMENTATION_HXX
-#define OPENTURNS_DISTRIBUTIONPARAMETERSIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Distribution.hxx"
@@ -79,5 +78,4 @@ public:
 }; /* class DistributionParametersImplementation */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DISTRIBUTIONPARAMETERSIMPLEMENTATION_HXX */
 

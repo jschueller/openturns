@@ -22,8 +22,7 @@
  *
  */
 
-#ifndef OPENTURNS_DOMAINEVENT_HXX
-#define OPENTURNS_DOMAINEVENT_HXX
+#pragma once
 
 #include "openturns/CompositeRandomVector.hxx"
 #include "openturns/Domain.hxx"
@@ -92,4 +91,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DOMAINEVENT_HXX */

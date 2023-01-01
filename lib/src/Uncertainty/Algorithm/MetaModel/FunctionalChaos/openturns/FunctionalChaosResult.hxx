@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FUNCTIONALCHAOSRESULT_HXX
-#define OPENTURNS_FUNCTIONALCHAOSRESULT_HXX
+#pragma once
 
 #include "openturns/MetaModelResult.hxx"
 #include "openturns/Point.hxx"
@@ -138,4 +137,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FUNCTIONALCHAOSRESULT_HXX */

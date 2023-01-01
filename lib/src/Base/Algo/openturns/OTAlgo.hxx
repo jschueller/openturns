@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTALGO_HXX
-#define OPENTURNS_OTALGO_HXX
+#pragma once
 
 #include "openturns/ApproximationAlgorithmImplementation.hxx"
 #include "openturns/ApproximationAlgorithm.hxx"
@@ -77,4 +76,3 @@
 #include "openturns/KarhunenLoeveValidation.hxx"
 #include "openturns/P1LagrangeInterpolation.hxx"
 
-#endif /* OPENTURNS_OTALGO_HXX */

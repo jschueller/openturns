@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NORMALCDF2D_HXX
-#define OPENTURNS_NORMALCDF2D_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -33,4 +32,3 @@ Scalar Normal2DCDF(const Scalar x1,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NORMALCDF2D_HXX */

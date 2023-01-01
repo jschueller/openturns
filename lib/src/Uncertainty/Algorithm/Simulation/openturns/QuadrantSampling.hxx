@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_QUADRANTSAMPLING_HXX
-#define OPENTURNS_QUADRANTSAMPLING_HXX
+#pragma once
 
 #include "openturns/SamplingStrategy.hxx"
 #include "openturns/RandomDirection.hxx"
@@ -87,4 +86,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_QUADRANTSAMPLING_HXX */

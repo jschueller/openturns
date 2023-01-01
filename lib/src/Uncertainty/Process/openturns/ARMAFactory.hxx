@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ARMAFACTORY_HXX
-#define OPENTURNS_ARMAFACTORY_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/Pointer.hxx"
@@ -76,4 +75,3 @@ public:
 }; /* class ARMAFactory */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ARMAFACTORY_HXX */

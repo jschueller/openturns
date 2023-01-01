@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NATAFELLIPTICALDISTRIBUTIONHESSIAN_HXX
-#define OPENTURNS_NATAFELLIPTICALDISTRIBUTIONHESSIAN_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ConstantHessian.hxx"
@@ -67,4 +66,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NATAFELLIPTICALDISTRIBUTIONHESSIAN_HXX */

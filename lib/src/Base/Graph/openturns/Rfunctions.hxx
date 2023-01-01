@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RFUNCTIONS_HXX
-#define OPENTURNS_RFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -33,4 +32,3 @@ static const String R_PIE = "pie <- function (x,center=c(0,0), labels = names(x)
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RFUNCTIONS_HXX */

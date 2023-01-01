@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTTYPE_HXX
-#define OPENTURNS_OTTYPE_HXX
+#pragma once
 
 #include "openturns/BipartiteGraph.hxx"
 #include "openturns/Cache.hxx"
@@ -54,4 +53,3 @@
 #include "openturns/TriangularMatrix.hxx"
 #include "openturns/TriangularComplexMatrix.hxx"
 
-#endif /* OPENTURNS_OTTYPE_HXX */

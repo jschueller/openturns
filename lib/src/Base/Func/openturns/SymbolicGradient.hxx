@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_SYMBOLICGRADIENT_HXX
-#define OPENTURNS_SYMBOLICGRADIENT_HXX
+#pragma once
 
 #include "openturns/GradientImplementation.hxx"
 #include "openturns/Gradient.hxx"
@@ -107,4 +106,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SYMBOLICGRADIENT_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SIMULATIONALGORITHM_HXX
-#define OPENTURNS_SIMULATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/HistoryStrategy.hxx"
@@ -117,4 +116,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SIMULATIONALGORITHM_HXX */

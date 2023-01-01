@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPACEFILLINGC2_HXX
-#define OPENTURNS_SPACEFILLINGC2_HXX
+#pragma once
 
 #include "openturns/SpaceFillingImplementation.hxx"
 
@@ -59,4 +58,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_SPACEFILLINGC2_HXX */

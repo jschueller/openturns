@@ -19,12 +19,10 @@
  *
  */
 
-#ifndef OPENTURNS_LINEARMODELMETAMODEL_HXX
-#define OPENTURNS_LINEARMODELMETAMODEL_HXX
+#pragma once
 
 #include "openturns/LinearModelResult.hxx"
 #include "openturns/LinearModelAlgorithm.hxx"
 #include "openturns/LinearModelStepwiseAlgorithm.hxx"
 #include "openturns/LinearModelAnalysis.hxx"
 
-#endif /* OPENTURNS_LINEARMODELMETAMODEL_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SYMMETRICMATRIX_HXX
-#define OPENTURNS_SYMMETRICMATRIX_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/SquareMatrix.hxx"
@@ -181,4 +180,3 @@ inline SymmetricMatrix operator * (const Scalar & s,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MATRIX_HXX */

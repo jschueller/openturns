@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPLITTERIMPLEMENTATION_HXX
-#define OPENTURNS_SPLITTERIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/IndicesCollection.hxx"
 #include "openturns/StorageManager.hxx"
@@ -78,4 +77,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPLITTERIMPLEMENTATION_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OPTIMIZATIONALGORITHM_HXX
-#define OPENTURNS_OPTIMIZATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -126,4 +125,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_OPTIMIZATIONALGORITHM_HXX */

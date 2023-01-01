@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_ANCOVA_HXX
-#define OPENTURNS_ANCOVA_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/FunctionalChaosResult.hxx"
@@ -72,4 +71,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ANCOVA_HXX */

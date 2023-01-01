@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_FAURESEQUENCE_HXX
-#define OPENTURNS_FAURESEQUENCE_HXX
+#pragma once
 
 #include "openturns/LowDiscrepancySequenceImplementation.hxx"
 
@@ -87,4 +86,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FAURESEQUENCE_HXX */

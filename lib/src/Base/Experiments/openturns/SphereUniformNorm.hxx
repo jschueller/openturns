@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPHEREUNIFORMNORM_HXX
-#define OPENTURNS_SPHEREUNIFORMNORM_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/SphereUniformNormImplementation.hxx"
@@ -76,4 +75,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPHEREUNIFORMNORM_HXX */

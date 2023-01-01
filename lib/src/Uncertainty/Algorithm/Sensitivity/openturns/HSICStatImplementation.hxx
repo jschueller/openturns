@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HSICSTATIMPLEMENTATION_HXX
-#define OPENTURNS_HSICSTATIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Sample.hxx"
@@ -61,4 +60,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HSICSTATIMPLEMENTATION_HXX */

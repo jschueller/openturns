@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_IDENTITYMATRIX_HXX
-#define OPENTURNS_IDENTITYMATRIX_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/CorrelationMatrix.hxx"
@@ -121,4 +120,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COVARIANCEMATRIX_HXX */

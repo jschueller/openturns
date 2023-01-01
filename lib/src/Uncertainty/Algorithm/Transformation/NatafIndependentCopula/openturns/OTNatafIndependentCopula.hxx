@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTNATAFINDEPENDENTCOPULA_HXX
-#define OPENTURNS_OTNATAFINDEPENDENTCOPULA_HXX
+#pragma once
 
 #include "openturns/InverseNatafIndependentCopulaEvaluation.hxx"
 #include "openturns/InverseNatafIndependentCopulaGradient.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/NatafIndependentCopulaGradient.hxx"
 #include "openturns/NatafIndependentCopulaHessian.hxx"
 
-#endif /* OPENTURNS_OTNATAFINDEPENDENTCOPULA_HXX */

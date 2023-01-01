@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SOBOLINDICESALGORITHMIMPLEMENTATION_HXX
-#define OPENTURNS_SOBOLINDICESALGORITHMIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/Distribution.hxx"
 #include "openturns/Indices.hxx"
@@ -238,4 +237,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SOBOLINDICESALGORITHMIMPLEMENTATION_HXX */

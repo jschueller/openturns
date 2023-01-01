@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OBJECT_HXX
-#define OPENTURNS_OBJECT_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include <sstream>               // for std::ostringstream
@@ -119,4 +118,3 @@ OT_API std::ostream & operator <<(std::ostream & os, const Object & obj);
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_OBJECT_HXX */

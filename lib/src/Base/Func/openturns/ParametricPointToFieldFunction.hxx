@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PARAMETRICPOINTTOFIELDFUNCTION_HXX
-#define OPENTURNS_PARAMETRICPOINTTOFIELDFUNCTION_HXX
+#pragma once
 
 #include <openturns/PointToFieldFunction.hxx>
 
@@ -88,4 +87,3 @@ private:
 
 };
 }
-#endif

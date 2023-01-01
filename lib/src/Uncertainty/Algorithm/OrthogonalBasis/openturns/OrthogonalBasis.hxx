@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ORTHOGONALBASIS_HXX
-#define OPENTURNS_ORTHOGONALBASIS_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/OrthogonalFunctionFactory.hxx"
@@ -71,4 +70,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ORTHOGONALBASIS_HXX */

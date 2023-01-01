@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FIELDTOPOINTFUNCTIONALCHAOSALGORITHM_HXX
-#define OPENTURNS_FIELDTOPOINTFUNCTIONALCHAOSALGORITHM_HXX
+#pragma once
 
 #include "openturns/FieldFunctionalChaosResult.hxx"
 #include "openturns/ProcessSample.hxx"
@@ -118,4 +117,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FIELDTOPOINTFUNCTIONALCHAOSALGORITHM_HXX */

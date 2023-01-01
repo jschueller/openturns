@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DICKEYFULLERTEST_HXX
-#define OPENTURNS_DICKEYFULLERTEST_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/TestResult.hxx"
@@ -174,4 +173,3 @@ private:
 }; /* class DickeyFullerTest */
 
 END_NAMESPACE_OPENTURNS
-#endif /* OPENTURNS_DICKEYFULLERTEST_HXX */

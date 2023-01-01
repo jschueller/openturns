@@ -70,13 +70,11 @@ First, add the class to the C++ library
    The files must have the standard header comment, with a brief description
    of the class in Doxygen form and the standard reference to the LGPL license.
 
-   For the header file ``MyClass.hxx``, the interface must be embraced
-   between the preprocessing clauses:
+   For the header file ``MyClass.hxx``, the interface must include the pragma once
+   to prevent from multiple inclusions. 
 
    ::
-
-       #ifndef OPENTURNS_MYCLASS_HXX
-       #define OPENTURNS_MYCLASS_HXX
+       #pragma once
 
        BEGIN_NAMESPACE_OPENTURNS
 
@@ -91,10 +89,6 @@ First, add the class to the C++ library
        };
 
        END_NAMESPACE_OPENTURNS
-
-       #endif // OPENTURNS_MYCLASS_HXX
-
-   to prevent from multiple inclusions.
 
    See any pair of .hxx/.cxx files in the current directory and the PGQL
    document for the  coding rules: case convention for the static

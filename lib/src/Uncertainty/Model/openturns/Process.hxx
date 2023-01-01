@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PROCESS_HXX
-#define OPENTURNS_PROCESS_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/Pointer.hxx"
@@ -118,4 +117,3 @@ public:
 }; /* class Process */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RANDOMVECTOR_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FUNCTIONALBASISPROCESS_HXX
-#define OPENTURNS_FUNCTIONALBASISPROCESS_HXX
+#pragma once
 
 #include "openturns/ProcessImplementation.hxx"
 #include "openturns/Function.hxx"
@@ -121,4 +120,3 @@ private:
 }; /* class FunctionalBasisProcess */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FUNCTIONALBASISPROCESS_HXX */

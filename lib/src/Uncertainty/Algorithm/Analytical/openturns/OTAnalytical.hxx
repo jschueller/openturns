@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTANALYTICAL_HXX
-#define OPENTURNS_OTANALYTICAL_HXX
+#pragma once
 
 #include "openturns/Analytical.hxx"
 #include "openturns/AnalyticalResult.hxx"
@@ -33,4 +32,3 @@
 #include "openturns/SystemFORM.hxx"
 #include "openturns/MultiFORM.hxx"
 
-#endif /* OPENTURNS_OTANALYTICAL_HXX */

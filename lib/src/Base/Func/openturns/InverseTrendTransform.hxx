@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INVERSETRENDTRANSOFORM_HXX
-#define OPENTURNS_INVERSETRENDTRANSOFORM_HXX
+#pragma once
 
 
 #include "openturns/VertexValueFunction.hxx"
@@ -79,4 +78,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INVERSETRENDTRANSOFORM_HXX */

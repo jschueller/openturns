@@ -19,10 +19,8 @@
  *
  */
 
-#ifndef OPENTURNS_OTCLASSIFICATION_HXX
-#define OPENTURNS_OTCLASSIFICATION_HXX
+#pragma once
 
 #include "openturns/MixtureClassifier.hxx"
 #include "openturns/MinimumVolumeClassifier.hxx"
 
-#endif /* OPENTURNS_OTCLASSIFICATION_HXX */

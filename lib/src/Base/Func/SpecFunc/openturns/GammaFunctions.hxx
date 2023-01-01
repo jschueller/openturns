@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GAMMAFUNCTIONS_HXX
-#define OPENTURNS_GAMMAFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -48,4 +47,3 @@ Scalar RegularizedIncompleteGammaInverse(const Scalar a,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GAMMAFUNCTIONS_HXX */

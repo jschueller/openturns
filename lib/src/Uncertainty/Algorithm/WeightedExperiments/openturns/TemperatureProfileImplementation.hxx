@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OPTIMALTEMPERATUREPROFILEIMPLEMENTATION_HXX
-#define OPENTURNS_OPTIMALTEMPERATUREPROFILEIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/StorageManager.hxx"
@@ -74,4 +73,3 @@ protected:
 
 } /* namespace OT */
 
-#endif /* OT_OPTIMALTEMPERATUREPROFILEIMPLEMENTATION_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KARHUNENLOEVEVALIDATION_HXX
-#define OPENTURNS_KARHUNENLOEVEVALIDATION_HXX
+#pragma once
 
 #include "openturns/KarhunenLoeveResult.hxx"
 #include "openturns/GridLayout.hxx"
@@ -91,4 +90,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KARHUNENLOEVEVALIDATION_HXX */

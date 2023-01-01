@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FUNCTIONALCHAOSRANDOMVECTOR_HXX
-#define OPENTURNS_FUNCTIONALCHAOSRANDOMVECTOR_HXX
+#pragma once
 
 #include "openturns/CompositeRandomVector.hxx"
 #include "openturns/FunctionalChaosResult.hxx"
@@ -85,4 +84,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FUNCTIONALCHAOSRANDOMVECTOR_HXX */

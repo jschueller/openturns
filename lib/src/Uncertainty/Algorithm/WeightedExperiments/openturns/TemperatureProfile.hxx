@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OPTIMALTEMPERATUREPROFILE_HXX
-#define OPENTURNS_OPTIMALTEMPERATUREPROFILE_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/TemperatureProfileImplementation.hxx"
@@ -73,4 +72,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_OPTIMALTEMPERATUREPROFILE_HXX */

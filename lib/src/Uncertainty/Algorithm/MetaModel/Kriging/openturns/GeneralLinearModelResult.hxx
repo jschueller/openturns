@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GENERALLINEARMODELRESULT_HXX
-#define OPENTURNS_GENERALLINEARMODELRESULT_HXX
+#pragma once
 
 #include "openturns/MetaModelResult.hxx"
 #include "openturns/CovarianceModel.hxx"
@@ -142,4 +141,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KRIGINGRESULT_HXX */

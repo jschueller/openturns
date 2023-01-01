@@ -17,8 +17,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FRACTIONALBROWNIANMOTIONMODEL_HXX
-#define OPENTURNS_FRACTIONALBROWNIANMOTIONMODEL_HXX
+#pragma once
 
 #include "openturns/CovarianceModelImplementation.hxx"
 #include "openturns/Point.hxx"
@@ -114,4 +113,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

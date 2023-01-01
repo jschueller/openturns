@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TRIANGULARCOMPLEXMATRIX_HXX
-#define OPENTURNS_TRIANGULARCOMPLEXMATRIX_HXX
+#pragma once
 
 #include "openturns/SquareComplexMatrix.hxx"
 #include "openturns/Collection.hxx"
@@ -163,4 +162,3 @@ inline TriangularComplexMatrix operator * (const Complex s,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TRIANGULARCOMPLEXMATRIX_HXX */

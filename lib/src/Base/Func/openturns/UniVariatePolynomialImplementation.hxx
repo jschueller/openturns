@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_UNIVARIATEPOLYNOMIALIMPLEMENTATION_HXX
-#define OPENTURNS_UNIVARIATEPOLYNOMIALIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/Point.hxx"
@@ -119,4 +118,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_UNIVARIATEPOLYNOMIALIMPLEMENTATION_HXX */

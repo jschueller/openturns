@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSTOCHASTICPROCESS_HXX
-#define OPENTURNS_OTSTOCHASTICPROCESS_HXX
+#pragma once
 
 #include "openturns/ARMA.hxx"
 #include "openturns/ARMACoefficients.hxx"
@@ -42,4 +41,3 @@
 #include "openturns/KarhunenLoeveQuadratureAlgorithm.hxx"
 #include "openturns/KarhunenLoeveSVDAlgorithm.hxx"
 
-#endif /* OPENTURNS_OTSTOCHASTICPROCESS_HXX */

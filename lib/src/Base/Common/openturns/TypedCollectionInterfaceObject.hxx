@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TYPEDCOLLECTIONINTERFACEOBJECT_HXX
-#define OPENTURNS_TYPEDCOLLECTIONINTERFACEOBJECT_HXX
+#pragma once
 
 #include <stdexcept>
 #include "openturns/TypedInterfaceObject.hxx"
@@ -223,4 +222,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TYPEDCOLLECTIONINTERFACEOBJECT_HXX */

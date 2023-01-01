@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ORTHOGONALFUNCTIONFACTORY_HXX
-#define OPENTURNS_ORTHOGONALFUNCTIONFACTORY_HXX
+#pragma once
 
 #include "openturns/BasisImplementation.hxx"
 #include "openturns/Function.hxx"
@@ -85,4 +84,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ORTHOGONALFUNCTIONFACTORY_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FIELDFUNCTIONIMPLEMENTATION_HXX
-#define OPENTURNS_FIELDFUNCTIONIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Description.hxx"
@@ -135,4 +134,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FIELDFUNCTIONIMPLEMENTATION_HXX */

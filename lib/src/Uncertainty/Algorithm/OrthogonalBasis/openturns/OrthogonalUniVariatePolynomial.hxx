@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ORTHOGONALUNIVARIATEPOLYNOMIAL_HXX
-#define OPENTURNS_ORTHOGONALUNIVARIATEPOLYNOMIAL_HXX
+#pragma once
 
 #include "openturns/UniVariatePolynomialImplementation.hxx"
 #include "openturns/Collection.hxx"
@@ -86,4 +85,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ORTHOGONALUNIVARIATEPOLYNOMIAL_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SORMResult_HXX
-#define OPENTURNS_SORMResult_HXX
+#pragma once
 
 #include "openturns/AnalyticalResult.hxx"
 #include "openturns/SquareMatrix.hxx"
@@ -105,4 +104,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SORMResult_HXX */

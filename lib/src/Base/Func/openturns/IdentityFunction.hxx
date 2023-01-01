@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_IDENTITYFUNCTION_HXX
-#define OPENTURNS_IDENTITYFUNCTION_HXX
+#pragma once
 
 #include "openturns/Function.hxx"
 
@@ -58,4 +57,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_IDENTITYFUNCTION_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DLIBFUNCTIONS_HXX
-#define OPENTURNS_DLIBFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OSS.hxx"
 #include "openturns/Os.hxx"
@@ -121,4 +120,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif // OPENTURNS_DLIBFUNCTIONS_HXX

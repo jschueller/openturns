@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FUNCTIONALCHAOSALGORITHM_HXX
-#define OPENTURNS_FUNCTIONALCHAOSALGORITHM_HXX
+#pragma once
 
 #include "openturns/MetaModelResult.hxx"
 #include "openturns/MetaModelAlgorithm.hxx"
@@ -149,4 +148,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FUNCTIONALCHAOSALGORITHM_HXX */

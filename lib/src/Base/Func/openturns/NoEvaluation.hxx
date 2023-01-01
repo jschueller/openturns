@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_NOEVALUATION_HXX
-#define OPENTURNS_NOEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 
@@ -90,4 +89,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NONOEVALUATION_HXX */

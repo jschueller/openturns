@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CATALOG_HXX
-#define OPENTURNS_CATALOG_HXX
+#pragma once
 
 #include <map>         // for std::map
 #include <vector>
@@ -100,4 +99,3 @@ struct OT_API Catalog_init
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CATALOG_HXX */

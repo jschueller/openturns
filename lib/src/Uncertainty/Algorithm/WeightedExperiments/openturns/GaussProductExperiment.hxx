@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GAUSSPRODUCTEXPERIMENT_HXX
-#define OPENTURNS_GAUSSPRODUCTEXPERIMENT_HXX
+#pragma once
 
 #include "openturns/WeightedExperimentImplementation.hxx"
 #include "openturns/OrthogonalUniVariatePolynomialFamily.hxx"
@@ -109,4 +108,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GAUSSPRODUCTEXPERIMENT_HXX */

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_DISTRIBUTIONFACTORY_HXX
-#define OPENTURNS_DISTRIBUTIONFACTORY_HXX
+#pragma once
 
 #include "openturns/DistributionFactoryImplementation.hxx"
 #include "openturns/DistributionFactoryResult.hxx"
@@ -88,4 +87,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DISTRIBUTIONFACTORY_HXX */

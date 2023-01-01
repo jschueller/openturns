@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_TTY_HXX
-#define OPENTURNS_TTY_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -67,4 +66,3 @@ struct OT_API TTY
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TTY_HXX */

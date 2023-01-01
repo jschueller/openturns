@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSTATTESTS_HXX
-#define OPENTURNS_OTSTATTESTS_HXX
+#pragma once
 
 #include "openturns/FittingTest.hxx"
 #include "openturns/HypothesisTest.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/VisualTest.hxx"
 #include "openturns/DickeyFullerTest.hxx"
 
-#endif /* OPENTURNS_OTSTATTESTS_HXX */

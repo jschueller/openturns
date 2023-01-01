@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HISTOGRAMFACTORY_HXX
-#define OPENTURNS_HISTOGRAMFACTORY_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DistributionFactoryImplementation.hxx"
@@ -77,4 +76,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HISTOGRAMFACTORY_HXX */

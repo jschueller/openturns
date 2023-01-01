@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_POINTER_HXX
-#define OPENTURNS_POINTER_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -258,4 +257,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINTER_HXX */

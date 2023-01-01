@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HSICESTIMATOR_HXX
-#define OPENTURNS_HSICESTIMATOR_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/HSICEstimatorImplementation.hxx"
@@ -140,4 +139,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HSICESTIMATOR_HXX */

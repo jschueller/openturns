@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TNC_HXX
-#define OPENTURNS_TNC_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/OptimizationAlgorithmImplementation.hxx"
@@ -141,4 +140,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TNC_HXX */

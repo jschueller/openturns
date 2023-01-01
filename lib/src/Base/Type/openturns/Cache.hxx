@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CACHE_HXX
-#define OPENTURNS_CACHE_HXX
+#pragma once
 
 #include <map>
 #include <list>
@@ -381,4 +380,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CACHE_HXX */

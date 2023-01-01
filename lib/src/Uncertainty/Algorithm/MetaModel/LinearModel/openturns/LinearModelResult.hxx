@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LINEARMODELRESULT_HXX
-#define OPENTURNS_LINEARMODELRESULT_HXX
+#pragma once
 
 #include "openturns/MetaModelResult.hxx"
 #include "openturns/Sample.hxx"
@@ -161,4 +160,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LINEARMODELRESULT_HXX */

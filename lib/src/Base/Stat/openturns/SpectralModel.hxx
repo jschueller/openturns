@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPECTRALMODEL_HXX
-#define OPENTURNS_SPECTRALMODEL_HXX
+#pragma once
 
 #include "openturns/SpectralModelImplementation.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -97,4 +96,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPECTRALMODEL_HXX */

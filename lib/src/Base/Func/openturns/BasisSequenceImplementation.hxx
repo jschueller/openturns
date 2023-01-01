@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BASISSEQUENCEIMPLEMENTATION_HXX
-#define OPENTURNS_BASISSEQUENCEIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Indices.hxx"
@@ -97,4 +96,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BASISSEQUENCEIMPLEMENTATION_HXX */

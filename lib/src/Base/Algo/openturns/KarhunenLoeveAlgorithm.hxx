@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KARHUNENLOEVEALGORITHM_HXX
-#define OPENTURNS_KARHUNENLOEVEALGORITHM_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/KarhunenLoeveAlgorithmImplementation.hxx"
@@ -77,4 +76,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KARHUNENLOEVEALGORITHM_HXX */

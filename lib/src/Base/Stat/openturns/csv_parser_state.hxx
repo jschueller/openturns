@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CSV_PARSER_STATE_HXX
-#define OPENTURNS_CSV_PARSER_STATE_HXX
+#pragma once
 
 #include <string>
 #include "openturns/Point.hxx"
@@ -50,4 +49,3 @@ struct OT_API CSVParserState
 END_NAMESPACE_OPENTURNS
 
 
-#endif /* OPENTURNS_CSV_PARSER_STATE_HXX */

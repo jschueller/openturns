@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTWEIGHTEDEXPERIMENTS_HXX
-#define OPENTURNS_OTWEIGHTEDEXPERIMENTS_HXX
+#pragma once
 
 #include "openturns/BootstrapExperiment.hxx"
 #include "openturns/FixedExperiment.hxx"
@@ -46,4 +45,3 @@
 #include "openturns/LeaveOneOutSplitter.hxx"
 #include "openturns/TensorProductExperiment.hxx"
 
-#endif /* OPENTURNS_OTWEIGHTEDEXPERIMENTS_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LOG_HXX
-#define OPENTURNS_LOG_HXX
+#pragma once
 
 #include <fstream>
 #include <map>
@@ -240,4 +239,3 @@ struct OT_API Log_init
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LOG_HXX */

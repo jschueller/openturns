@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_FINITEDIFFERENCESTEP_HXX
-#define OPENTURNS_FINITEDIFFERENCESTEP_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/FiniteDifferenceStepImplementation.hxx"
@@ -60,5 +59,4 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif
 

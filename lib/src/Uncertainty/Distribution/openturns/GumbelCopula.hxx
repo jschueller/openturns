@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GUMBELCOPULA_HXX
-#define OPENTURNS_GUMBELCOPULA_HXX
+#pragma once
 
 #include "openturns/ArchimedeanCopula.hxx"
 
@@ -143,4 +142,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GUMBELCOPULA_HXX */

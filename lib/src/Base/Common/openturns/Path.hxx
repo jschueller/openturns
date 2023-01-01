@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PATH_HXX
-#define OPENTURNS_PATH_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include <vector>                // for std::vector
@@ -136,4 +135,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PATH_HXX */

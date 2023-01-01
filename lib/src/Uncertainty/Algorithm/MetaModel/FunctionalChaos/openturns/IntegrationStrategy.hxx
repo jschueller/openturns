@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INTEGRATIONSTRATEGY_HXX
-#define OPENTURNS_INTEGRATIONSTRATEGY_HXX
+#pragma once
 
 #include "openturns/ProjectionStrategyImplementation.hxx"
 
@@ -92,4 +91,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INTEGRATIONSTRATEGY_HXX */

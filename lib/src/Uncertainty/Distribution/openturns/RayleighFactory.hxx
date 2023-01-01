@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RAYLEIGHFACTORY_HXX
-#define OPENTURNS_RAYLEIGHFACTORY_HXX
+#pragma once
 
 #include "openturns/DistributionFactoryImplementation.hxx"
 #include "openturns/Rayleigh.hxx"
@@ -55,4 +54,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RAYLEIGHFACTORY_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_EXPECTATIONSIMULATIONALGORITHM_HXX
-#define OPENTURNS_EXPECTATIONSIMULATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/SimulationAlgorithm.hxx"
 #include "openturns/ExpectationSimulationResult.hxx"
@@ -106,4 +105,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_EXPECTATIONSIMULATIONALGORITHM_HXX */

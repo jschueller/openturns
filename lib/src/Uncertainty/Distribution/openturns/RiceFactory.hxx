@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RICEFACTORY_HXX
-#define OPENTURNS_RICEFACTORY_HXX
+#pragma once
 
 #include "openturns/Rice.hxx"
 #include "openturns/DistributionFactoryImplementation.hxx"
@@ -55,4 +54,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RICEFACTORY_HXX */

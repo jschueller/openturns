@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTITERATIVESTAT_HXX
-#define OPENTURNS_OTITERATIVESTAT_HXX
+#pragma once
 
 #include "openturns/IterativeAlgorithmImplementation.hxx"
 #include "openturns/IterativeAlgorithm.hxx"
@@ -28,4 +27,3 @@
 #include "openturns/IterativeThresholdExceedance.hxx"
 #include "openturns/IterativeMoments.hxx"
 
-#endif /* OPENTURNS_OTITERATIVESTAT_HXX */

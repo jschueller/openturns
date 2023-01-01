@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_CORRELATIONANALYSIS_HXX
-#define OPENTURNS_CORRELATIONANALYSIS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/PersistentObject.hxx"
@@ -106,4 +105,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CORRELATIONANALYSIS_HXX */

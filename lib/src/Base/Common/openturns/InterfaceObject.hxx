@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INTERFACEOBJECT_HXX
-#define OPENTURNS_INTERFACEOBJECT_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/Pointer.hxx"
@@ -85,4 +84,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INTERFACEOBJECT_HXX */

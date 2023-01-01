@@ -56,8 +56,7 @@
  *
  * The OpenTURNS core team.
  */
-#ifndef OPENTURNS_OTPRIVATE_HXX
-#define OPENTURNS_OTPRIVATE_HXX
+#pragma once
 
 /*
  * This include defines the debug level in all source code.
@@ -102,4 +101,3 @@ void deleteC(const T * ptr)
   free( const_cast<T *>( ptr ) );
 }
 
-#endif /* OPENTURNS_OTPRIVATE_HXX */

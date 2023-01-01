@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DOMAINIMPLEMENTATION_HXX
-#define OPENTURNS_DOMAINIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Point.hxx"
@@ -80,4 +79,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DOMAINIMPLEMENTATION_HXX */

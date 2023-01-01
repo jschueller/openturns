@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_POINTWITHDESCRIPTION_HXX
-#define OPENTURNS_POINTWITHDESCRIPTION_HXX
+#pragma once
 
 #include "openturns/Point.hxx"
 #include "openturns/Description.hxx"
@@ -85,4 +84,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINTWITHDESCRIPTION_HXX */

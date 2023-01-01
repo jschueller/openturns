@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SMOOTHEDUNIFORM_HXX
-#define OPENTURNS_SMOOTHEDUNIFORM_HXX
+#pragma once
 
 #include "openturns/RandomMixture.hxx"
 
@@ -162,4 +161,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SMOOTHEDUNIFORM_HXX */

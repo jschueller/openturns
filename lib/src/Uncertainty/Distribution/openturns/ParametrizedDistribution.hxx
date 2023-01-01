@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PARAMETRIZEDDISTRIBUTION_HXX
-#define OPENTURNS_PARAMETRIZEDDISTRIBUTION_HXX
+#pragma once
 
 #include "openturns/DistributionImplementation.hxx"
 #include "openturns/DistributionParameters.hxx"
@@ -152,4 +151,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PARAMETRIZEDDISTRIBUTION_HXX */

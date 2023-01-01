@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FISHERSNEDECOR_HXX
-#define OPENTURNS_FISHERSNEDECOR_HXX
+#pragma once
 
 #include "openturns/ContinuousDistribution.hxx"
 
@@ -146,4 +145,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FISHERSNEDECOR_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DUALLINEARCOMBINATIONHESSIAN_HXX
-#define OPENTURNS_DUALLINEARCOMBINATIONHESSIAN_HXX
+#pragma once
 
 #include "openturns/HessianImplementation.hxx"
 #include "openturns/DualLinearCombinationEvaluation.hxx"
@@ -83,4 +82,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DUALLINEARCOMBINATIONHESSIAN_HXX */

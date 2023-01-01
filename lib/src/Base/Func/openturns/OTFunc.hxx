@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTFUNC_HXX
-#define OPENTURNS_OTFUNC_HXX
+#pragma once
 
 #include "openturns/AggregatedFunction.hxx"
 #include "openturns/AggregatedEvaluation.hxx"
@@ -156,4 +155,3 @@
 #include "openturns/MarginalGradient.hxx"
 #include "openturns/MarginalHessian.hxx"
 
-#endif /* OPENTURNS_OTFUNC_HXX */

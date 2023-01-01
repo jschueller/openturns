@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KFACTORFUNCTIONS_HXX
-#define OPENTURNS_KFACTORFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -35,4 +34,3 @@ Scalar KFactor(const Scalar n,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KFACTORFUNCTIONS_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NORMALGAMMA_HXX
-#define OPENTURNS_NORMALGAMMA_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/BayesDistribution.hxx"
@@ -166,4 +165,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NORMALGAMMA_HXX */

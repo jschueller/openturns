@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FITTINGALGORITHMIMPLEMENTATION_HXX
-#define OPENTURNS_FITTINGALGORITHMIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Sample.hxx"
@@ -90,4 +89,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FITTINGALGORITHMIMPLEMENTATION_HXX */

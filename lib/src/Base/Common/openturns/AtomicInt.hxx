@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ATOMICINT_HXX
-#define OPENTURNS_ATOMICINT_HXX
+#pragma once
 
 #include <cassert>
 #include <atomic>
@@ -98,4 +97,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ATOMICINT_HXX */

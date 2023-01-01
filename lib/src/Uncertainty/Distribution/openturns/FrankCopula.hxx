@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FRANKCOPULA_HXX
-#define OPENTURNS_FRANKCOPULA_HXX
+#pragma once
 
 #include "openturns/ArchimedeanCopula.hxx"
 
@@ -152,4 +151,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FRANKCOPULA_HXX */

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSTAT_HXX
-#define OPENTURNS_OTSTAT_HXX
+#pragma once
 
 #include "openturns/Compact.hxx"
 #include "openturns/CorrelationAnalysis.hxx"
@@ -88,4 +87,3 @@
 #include "openturns/HMatrixFactory.hxx"
 #include "openturns/IsotropicCovarianceModel.hxx"
 
-#endif /* OPENTURNS_OTSTAT_HXX */

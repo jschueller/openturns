@@ -17,8 +17,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_RANKMCOVARIANCEMODEL_HXX
-#define OPENTURNS_RANKMCOVARIANCEMODEL_HXX
+#pragma once
 
 #include "openturns/CovarianceModelImplementation.hxx"
 #include "openturns/Basis.hxx"
@@ -104,4 +103,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

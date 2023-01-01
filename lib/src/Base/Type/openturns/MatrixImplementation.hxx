@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MATRIXIMPLEMENTATION_HXX
-#define OPENTURNS_MATRIXIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentCollection.hxx"
 #include "openturns/Description.hxx"
@@ -371,4 +370,3 @@ MatrixImplementation::MatrixImplementation(const UnsignedInteger rowDim,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MATRIXIMPLEMENTATION_HXX */

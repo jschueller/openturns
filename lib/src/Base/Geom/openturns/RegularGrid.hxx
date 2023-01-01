@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_REGULARGRID_HXX
-#define OPENTURNS_REGULARGRID_HXX
+#pragma once
 
 #include "openturns/Mesh.hxx"
 
@@ -115,4 +114,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_REGULARGRID_HXX */

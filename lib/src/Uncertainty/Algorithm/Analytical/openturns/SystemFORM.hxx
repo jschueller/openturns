@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SYSTEMFORM_HXX
-#define OPENTURNS_SYSTEMFORM_HXX
+#pragma once
 
 #include "openturns/Analytical.hxx"
 #include "openturns/MultiFORMResult.hxx"
@@ -73,7 +72,6 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SYSTEMFORM_HXX */
 
 
 

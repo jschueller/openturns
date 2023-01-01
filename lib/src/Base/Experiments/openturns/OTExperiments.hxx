@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTEXPERIMENTS_HXX
-#define OPENTURNS_OTEXPERIMENTS_HXX
+#pragma once
 
 #include "openturns/Axial.hxx"
 #include "openturns/Box.hxx"
@@ -37,4 +36,3 @@
 #include "openturns/StratifiedExperiment.hxx"
 #include "openturns/Tuples.hxx"
 
-#endif /* OPENTURNS_OTEXPERIMENTS_HXX */

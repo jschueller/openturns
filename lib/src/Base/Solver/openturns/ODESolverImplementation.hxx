@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ODESOLVERIMPLEMENTATION_HXX
-#define OPENTURNS_ODESOLVERIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Function.hxx"
@@ -77,4 +76,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ODESOLVERIMPLEMENTATION_HXX */

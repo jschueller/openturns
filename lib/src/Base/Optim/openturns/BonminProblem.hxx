@@ -20,8 +20,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BONMINPROBLEM_HXX
-#define OPENTURNS_BONMINPROBLEM_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/OptimizationAlgorithmImplementation.hxx"
@@ -193,4 +192,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

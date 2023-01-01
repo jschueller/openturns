@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CALIBRATIONALGORITHM_HXX
-#define OPENTURNS_CALIBRATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/CalibrationAlgorithmImplementation.hxx"
@@ -65,4 +64,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CALIBRATIONALGORITHM_HXX */

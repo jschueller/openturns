@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_IDENTITYEVALUATION_HXX
-#define OPENTURNS_IDENTITYEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Point.hxx"
@@ -85,4 +84,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_IDENTITYEVALUATION_HXX */

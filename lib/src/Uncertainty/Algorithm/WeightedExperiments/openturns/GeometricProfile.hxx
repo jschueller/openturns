@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OPTIMALGEOMETRICPROFILE_HXX
-#define OPENTURNS_OPTIMALGEOMETRICPROFILE_HXX
+#pragma once
 
 #include "openturns/TemperatureProfileImplementation.hxx"
 
@@ -63,4 +62,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_OPTIMALGEOMETRICPROFILE_HXX */

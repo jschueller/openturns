@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MINIMUMVOLUMECLASSIFIER_HXX
-#define OPENTURNS_MINIMUMVOLUMECLASSIFIER_HXX
+#pragma once
 
 #include "openturns/LevelSet.hxx"
 #include "openturns/ClassifierImplementation.hxx"
@@ -97,4 +96,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MINIMUMVOLUMECLASSIFIER_HXX */

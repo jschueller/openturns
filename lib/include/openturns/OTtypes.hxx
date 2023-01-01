@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OTTYPES_HXX
-#define OPENTURNS_OTTYPES_HXX
+#pragma once
 
 #include <string>                // for std::string
 #include <complex>               // for std::complex
@@ -110,4 +109,3 @@ END_NAMESPACE_OPENTURNS
 namespace OpenTURNS = OT;
 
 
-#endif /* OPENTURNS_OTTYPES_HXX */

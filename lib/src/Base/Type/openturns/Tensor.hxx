@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TENSOR_HXX
-#define OPENTURNS_TENSOR_HXX
+#pragma once
 
 #include "openturns/TensorImplementation.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -142,4 +141,3 @@ Tensor::Tensor(const UnsignedInteger rowDim,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MATRIX_HXX */

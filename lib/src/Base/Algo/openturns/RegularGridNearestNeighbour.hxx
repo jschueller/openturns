@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_REGULARGRIDNEARESTNEIGHBOUR_HXX
-#define OPENTURNS_REGULARGRIDNEARESTNEIGHBOUR_HXX
+#pragma once
 
 #include "openturns/NearestNeighbourAlgorithmImplementation.hxx"
 #include "openturns/RegularGrid.hxx"
@@ -100,4 +99,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_REGULARGRIDNEARESTNEIGHBOUR_HXX */

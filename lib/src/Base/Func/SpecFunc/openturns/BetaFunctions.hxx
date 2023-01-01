@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BETAFUNCTIONS_HXX
-#define OPENTURNS_BETAFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -101,4 +100,3 @@ Scalar BGRAT(const Scalar a,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BETAFUNCTIONS_HXX */

@@ -19,10 +19,8 @@
  *
  */
 
-#ifndef OPENTURNS_OTPROCESSTRANSFORMATION_HXX
-#define OPENTURNS_OTPROCESSTRANSFORMATION_HXX
+#pragma once
 
 #include "openturns/BoxCoxFactory.hxx"
 #include "openturns/TrendFactory.hxx"
 
-#endif /* OPENTURNS_OTPROCESSTRANSFORMATION_HXX  */

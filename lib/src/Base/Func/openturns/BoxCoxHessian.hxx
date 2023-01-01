@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_BOXCOXHESSIAN_HXX
-#define OPENTURNS_BOXCOXHESSIAN_HXX
+#pragma once
 
 #include "openturns/Hessian.hxx"
 #include "openturns/Evaluation.hxx"
@@ -98,4 +97,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BOXCOXHESSIAN_HXX */

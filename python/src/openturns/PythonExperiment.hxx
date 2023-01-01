@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONEXPERIMENT_HXX
-#define OPENTURNS_PYTHONEXPERIMENT_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/ExperimentImplementation.hxx"
@@ -92,4 +91,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONEXPERIMENT_HXX */

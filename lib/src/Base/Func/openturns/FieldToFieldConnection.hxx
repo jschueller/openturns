@@ -20,8 +20,7 @@
  *
  */
 
-#ifndef OPENTURNS_FIELDTOFIELDCONNECTION_HXX
-#define OPENTURNS_FIELDTOFIELDCONNECTION_HXX
+#pragma once
 
 #include "openturns/FieldFunction.hxx"
 #include "openturns/PointToFieldFunction.hxx"
@@ -120,4 +119,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FIELDTOFIELDCONNECTION_HXX */

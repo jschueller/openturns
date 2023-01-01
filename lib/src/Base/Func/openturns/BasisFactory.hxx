@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BASISFACTORY_HXX
-#define OPENTURNS_BASISFACTORY_HXX
+#pragma once
 
 #include "openturns/Basis.hxx"
 
@@ -49,4 +48,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

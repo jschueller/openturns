@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_METHODOFMOMENTSFACTORY_HXX
-#define OPENTURNS_METHODOFMOMENTSFACTORY_HXX
+#pragma once
 
 #include "openturns/DistributionFactoryImplementation.hxx"
 #include "openturns/DistributionFactory.hxx"
@@ -105,4 +104,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_METHODOFMOMENTSFACTORY_HXX */

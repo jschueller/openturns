@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COMPOSITE_HXX
-#define OPENTURNS_COMPOSITE_HXX
+#pragma once
 
 #include "openturns/StratifiedExperiment.hxx"
 
@@ -63,4 +62,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COMPOSITE_HXX */

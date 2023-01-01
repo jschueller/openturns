@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_CONSTANTSTEP_HXX
-#define OPENTURNS_CONSTANTSTEP_HXX
+#pragma once
 
 #include "openturns/FiniteDifferenceStepImplementation.hxx"
 
@@ -60,10 +59,4 @@ public:
 };
 
 END_NAMESPACE_OPENTURNS
-
-
-
-
-
-#endif
 

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SYMMETRICTENSOR_HXX
-#define OPENTURNS_SYMMETRICTENSOR_HXX
+#pragma once
 
 #include "openturns/Tensor.hxx"
 #include "openturns/SymmetricMatrix.hxx"
@@ -120,4 +119,3 @@ SymmetricTensor::SymmetricTensor(const UnsignedInteger squareDim,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SYMMETRICTENSOR_HXX */

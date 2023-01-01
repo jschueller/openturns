@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTDISTRIBUTION_HXX
-#define OPENTURNS_OTDISTRIBUTION_HXX
+#pragma once
 
 #include "openturns/AliMikhailHaqCopula.hxx"
 #include "openturns/AliMikhailHaqCopulaFactory.hxx"
@@ -184,4 +183,3 @@
 #include "openturns/Wishart.hxx"
 #include "openturns/ZipfMandelbrot.hxx"
 
-#endif /* OPENTURNS_OTDISTRIBUTION_HXX */

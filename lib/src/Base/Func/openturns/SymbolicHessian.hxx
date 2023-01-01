@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_SYMBOLICHESSIAN_HXX
-#define OPENTURNS_SYMBOLICHESSIAN_HXX
+#pragma once
 
 #include "openturns/HessianImplementation.hxx"
 #include "openturns/SymbolicEvaluation.hxx"
@@ -107,4 +106,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SYMBOLICHESSIAN_HXX */

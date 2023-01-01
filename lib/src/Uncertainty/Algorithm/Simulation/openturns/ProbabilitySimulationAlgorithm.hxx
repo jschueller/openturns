@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PROBABILITYSIMULATIONALGORITHM_HXX
-#define OPENTURNS_PROBABILITYSIMULATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/EventSimulation.hxx"
 #include "openturns/WeightedExperiment.hxx"
@@ -86,4 +85,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SIMULATION_HXX */

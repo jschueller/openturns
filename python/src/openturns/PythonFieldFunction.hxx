@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONFIELDFUNCTION_HXX
-#define OPENTURNS_PYTHONFIELDFUNCTION_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/FieldFunctionImplementation.hxx"
@@ -100,5 +99,4 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONFIELDFUNCTION_HXX */
 

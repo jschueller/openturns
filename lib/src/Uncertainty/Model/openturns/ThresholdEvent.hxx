@@ -23,8 +23,7 @@
  *
  */
 
-#ifndef OPENTURNS_THRESHOLDEVENT_HXX
-#define OPENTURNS_THRESHOLDEVENT_HXX
+#pragma once
 
 #include "openturns/RandomVector.hxx"
 
@@ -66,4 +65,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_THRESHOLDEVENT_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COVARIANCEMODEL_HXX
-#define OPENTURNS_COVARIANCEMODEL_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/CovarianceModelImplementation.hxx"
@@ -185,4 +184,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COVARIANCEMODEL_HXX */

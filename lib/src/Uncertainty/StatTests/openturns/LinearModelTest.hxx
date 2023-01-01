@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LINEARMODELTEST_HXX
-#define OPENTURNS_LINEARMODELTEST_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/TestResult.hxx"
@@ -112,4 +111,3 @@ OT_API TestResultCollection FullRegression(const Sample & firstSample,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LINEARMODELTEST_HXX */

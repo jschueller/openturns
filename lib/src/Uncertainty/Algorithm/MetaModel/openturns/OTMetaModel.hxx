@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTMETAMODEL_HXX
-#define OPENTURNS_OTMETAMODEL_HXX
+#pragma once
 
 #include "openturns/OTFunctionalChaos.hxx"
 #include "openturns/OTKriging.hxx"
@@ -30,4 +29,3 @@
 #include "openturns/MetaModelResult.hxx"
 #include "openturns/MetaModelValidation.hxx"
 
-#endif /* OPENTURNS_OTMETAMODEL_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPECTRALGAUSSIANPROCESS_HXX
-#define OPENTURNS_SPECTRALGAUSSIANPROCESS_HXX
+#pragma once
 
 #include "openturns/ProcessImplementation.hxx"
 #include "openturns/SpectralModel.hxx"
@@ -155,4 +154,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPECTRALGAUSSIANPROCESS_HXX */

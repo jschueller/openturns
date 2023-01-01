@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTCOMMON_HXX
-#define OPENTURNS_OTCOMMON_HXX
+#pragma once
 
 #include "openturns/AtomicInt.hxx"
 #include "openturns/Catalog.hxx"
@@ -56,4 +55,3 @@
 #include "openturns/XMLH5StorageManager.hxx"
 #endif
 
-#endif /* OPENTURNS_OTCOMMON_HXX */

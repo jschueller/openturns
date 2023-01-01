@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_METAMODELRESULT_HXX
-#define OPENTURNS_METAMODELRESULT_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Function.hxx"
@@ -100,4 +99,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_METAMODELRESULT_HXX */

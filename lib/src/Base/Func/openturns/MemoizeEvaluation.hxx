@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_MEMOIZEEVALUATION_HXX
-#define OPENTURNS_MEMOIZEEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationProxy.hxx"
 #include "openturns/Evaluation.hxx"
@@ -150,4 +149,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MEMOIZEEVALUATION_HXX */

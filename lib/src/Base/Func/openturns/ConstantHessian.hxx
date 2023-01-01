@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CONSTANTHESSIAN_HXX
-#define OPENTURNS_CONSTANTHESSIAN_HXX
+#pragma once
 
 #include "openturns/HessianImplementation.hxx"
 #include "openturns/SymmetricTensor.hxx"
@@ -90,4 +89,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CONSTANTHESSIAN_HXX */

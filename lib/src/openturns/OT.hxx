@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OT_HXX
-#define OPENTURNS_OT_HXX
+#pragma once
 
 /*
  * This include defines the configuration flags.
@@ -51,4 +50,3 @@
 #include "openturns/OTBase.hxx"
 #include "openturns/OTUncertainty.hxx"
 
-#endif /* OPENTURNS_OT_HXX */

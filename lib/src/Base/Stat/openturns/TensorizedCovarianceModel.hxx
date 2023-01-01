@@ -17,8 +17,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TENSORIZEDCOVARIANCEMODEL_HXX
-#define OPENTURNS_TENSORIZEDCOVARIANCEMODEL_HXX
+#pragma once
 
 #include "openturns/CovarianceModel.hxx"
 #include "openturns/PersistentCollection.hxx"
@@ -121,4 +120,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

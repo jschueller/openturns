@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LEAVEONEOUTSPLITTER_HXX
-#define OPENTURNS_LEAVEONEOUTSPLITTER_HXX
+#pragma once
 
 #include "openturns/SplitterImplementation.hxx"
 
@@ -66,4 +65,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OPENTURNS_LEAVEONEOUTSPLITTER_HXX */

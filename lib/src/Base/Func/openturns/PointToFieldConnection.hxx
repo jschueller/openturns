@@ -21,8 +21,7 @@
  *
  */
 
-#ifndef OPENTURNS_POINTTOFIELDCONNECTION_HXX
-#define OPENTURNS_POINTTOFIELDCONNECTION_HXX
+#pragma once
 
 #include "openturns/PointToFieldFunctionImplementation.hxx"
 #include "openturns/Function.hxx"
@@ -111,4 +110,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINTTOFIELDCONNECTION_HXX */

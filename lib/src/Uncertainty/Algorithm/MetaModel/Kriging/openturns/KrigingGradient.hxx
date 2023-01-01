@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KRIGINGGRADIENT_HXX
-#define OPENTURNS_KRIGINGGRADIENT_HXX
+#pragma once
 
 #include "openturns/GradientImplementation.hxx"
 #include "openturns/CovarianceModel.hxx"
@@ -99,4 +98,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif

@@ -20,8 +20,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LOWDISCREPANCYSEQUENCEIMPLEMENTATION_HXX
-#define OPENTURNS_LOWDISCREPANCYSEQUENCEIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Interval.hxx"
@@ -112,4 +111,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LOWDISCREPANCYSEQUENCEIMPLEMENTATION_HXX */

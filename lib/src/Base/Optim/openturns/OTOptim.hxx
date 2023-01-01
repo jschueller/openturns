@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTOPTIM_HXX
-#define OPENTURNS_OTOPTIM_HXX
+#pragma once
 
 #include "openturns/AbdoRackwitz.hxx"
 #include "openturns/Bonmin.hxx"
@@ -45,4 +44,3 @@
 #include "openturns/SQP.hxx"
 #include "openturns/TNC.hxx"
 
-#endif /* OPENTURNS_OTOPTIM_HXX */

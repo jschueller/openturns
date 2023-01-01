@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ARMALIKELIHOODFACTORY_HXX
-#define OPENTURNS_ARMALIKELIHOODFACTORY_HXX
+#pragma once
 
 #include "openturns/ARMAFactoryImplementation.hxx"
 #include "openturns/OptimizationAlgorithm.hxx"
@@ -198,4 +197,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ARMALIKELIHOODFACTORY_HXX */

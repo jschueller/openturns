@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NORMALITYTEST_HXX
-#define OPENTURNS_NORMALITYTEST_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/TestResult.hxx"
@@ -46,4 +45,3 @@ OT_API TestResult CramerVonMisesNormal(const Sample & sample,
 }; /* class NormalityTest */
 
 END_NAMESPACE_OPENTURNS
-#endif /* OPENTURNS_NORMALITYTEST_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FITTINGTEST_HXX
-#define OPENTURNS_FITTINGTEST_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/TestResult.hxx"
@@ -153,4 +152,3 @@ OT_API TestResult ChiSquared(const Sample & sample,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FITTINGTEST_HXX */

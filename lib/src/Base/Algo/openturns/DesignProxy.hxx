@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DESIGNPROXY_HXX
-#define OPENTURNS_DESIGNPROXY_HXX
+#pragma once
 
 #include "openturns/Sample.hxx"
 #include "openturns/Basis.hxx"
@@ -109,4 +108,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DESIGNPROXY_HXX */

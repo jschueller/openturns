@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OTCONFIG_HXX
-#define OPENTURNS_OTCONFIG_HXX
+#pragma once
 
 /**
  * The OTconfig.h header file is generated automatically at configuration
@@ -46,4 +45,3 @@
 
 #endif /* OPENTURNS_OTCONFIG_H */
 
-#endif /* OPENTURNS_OTCONFIG_HXX */

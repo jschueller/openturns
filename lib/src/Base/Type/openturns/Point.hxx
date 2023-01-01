@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_POINT_HXX
-#define OPENTURNS_POINT_HXX
+#pragma once
 
 #include <vector>
 #include "openturns/PersistentCollection.hxx"
@@ -200,4 +199,3 @@ OT_API Point operator - (const Point & lhs);
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINT_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OSTREAM_HXX
-#define OPENTURNS_OSTREAM_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include <iomanip>               // for manipulators like setw, setprecision, etc.
@@ -166,4 +165,3 @@ OStream & operator << (OStream & OS, std::_Setfill<char> manip);
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_OSTREAM_HXX */

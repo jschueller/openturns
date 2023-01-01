@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONRANDOMVECTOR_HXX
-#define OPENTURNS_PYTHONRANDOMVECTOR_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/RandomVectorImplementation.hxx"
@@ -114,4 +113,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONRANDOMVECTOR_HXX */

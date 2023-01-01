@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CLOUD_HXX
-#define OPENTURNS_CLOUD_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DrawableImplementation.hxx"
@@ -89,4 +88,3 @@ protected:
 }; /* class Cloud */
 
 END_NAMESPACE_OPENTURNS
-#endif /* OPENTURNS_CLOUD_HXX */

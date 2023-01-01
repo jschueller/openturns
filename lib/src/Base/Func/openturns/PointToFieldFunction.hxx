@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_POINTTOFIELDFUNCTION_HXX
-#define OPENTURNS_POINTTOFIELDFUNCTION_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/PointToFieldFunctionImplementation.hxx"
@@ -109,4 +108,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINTTOFIELDFUNCTION_HXX */

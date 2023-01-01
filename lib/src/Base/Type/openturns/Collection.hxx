@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COLLECTION_HXX
-#define OPENTURNS_COLLECTION_HXX
+#pragma once
 
 #include <vector>
 #include <algorithm>         // for std::copy
@@ -452,4 +451,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COLLECTION_HXX */

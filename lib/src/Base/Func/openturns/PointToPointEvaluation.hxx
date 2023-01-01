@@ -21,8 +21,7 @@
  *
  */
 
-#ifndef OPENTURNS_POINTTOPOINTEVALUATION_HXX
-#define OPENTURNS_POINTTOPOINTEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Evaluation.hxx"
@@ -127,4 +126,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POINTTOPOINTEVALUATION_HXX */

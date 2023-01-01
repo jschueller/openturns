@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_VISUALTEST_HXX
-#define OPENTURNS_VISUALTEST_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/LinearModelResult.hxx"
@@ -105,4 +104,3 @@ OT_API Graph DrawKendallPlot(const Sample & firstSample,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_VISUALTEST_HXX */

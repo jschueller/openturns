@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSOLVER_HXX
-#define OPENTURNS_OTSOLVER_HXX
+#pragma once
 
 #include "openturns/Bisection.hxx"
 #include "openturns/Brent.hxx"
@@ -32,4 +31,3 @@
 #include "openturns/RungeKutta.hxx"
 #include "openturns/Fehlberg.hxx"
 
-#endif /* OPENTURNS_OTSOLVER_HXX */

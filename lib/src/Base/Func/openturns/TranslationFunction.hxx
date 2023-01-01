@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TRANSLATIONFUNCTION_HXX
-#define OPENTURNS_TRANSLATIONFUNCTION_HXX
+#pragma once
 
 #include "openturns/Function.hxx"
 #include "openturns/Point.hxx"
@@ -63,4 +62,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TRANSLATIONFUNCTION_HXX */

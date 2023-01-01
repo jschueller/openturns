@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSIMULATION_HXX
-#define OPENTURNS_OTSIMULATION_HXX
+#pragma once
 
 #include "openturns/DirectionalSampling.hxx"
 #include "openturns/RootStrategy.hxx"
@@ -51,4 +50,3 @@
 #include "openturns/NAISResult.hxx"
 #include "openturns/NAIS.hxx"
 
-#endif /* OPENTURNS_OTSIMULATION_HXX */

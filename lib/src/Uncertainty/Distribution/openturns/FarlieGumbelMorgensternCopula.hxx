@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FARLIEGUMBELMORGENSTERNCOPULA_HXX
-#define OPENTURNS_FARLIEGUMBELMORGENSTERNCOPULA_HXX
+#pragma once
 
 #include "openturns/DistributionImplementation.hxx"
 #include "openturns/Exception.hxx"
@@ -138,4 +137,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FARLIEGUMBELMORGENSTERNCOPULA_HXX */

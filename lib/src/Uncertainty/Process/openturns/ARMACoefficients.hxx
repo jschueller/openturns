@@ -17,8 +17,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ARMACOEFFICIENTS_HXX
-#define OPENTURNS_ARMACOEFFICIENTS_HXX
+#pragma once
 
 #include "openturns/PersistentCollection.hxx"
 #include "openturns/SquareMatrix.hxx"
@@ -83,4 +82,3 @@ private:
 }; /* class ARMACoefficients */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ARMACOEFFICIENTS_HXX */

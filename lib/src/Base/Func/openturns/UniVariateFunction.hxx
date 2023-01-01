@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_UNIVARIATEFUNCTION_HXX
-#define OPENTURNS_UNIVARIATEFUNCTION_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/UniVariateFunctionImplementation.hxx"
@@ -77,4 +76,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_UNIVARIATEFUNCTION_HXX */

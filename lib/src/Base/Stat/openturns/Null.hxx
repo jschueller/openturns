@@ -20,8 +20,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NULL_HXX
-#define OPENTURNS_NULL_HXX
+#pragma once
 
 #include "openturns/HistoryStrategyImplementation.hxx"
 #include "openturns/Sample.hxx"
@@ -62,4 +61,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NULL_HXX */

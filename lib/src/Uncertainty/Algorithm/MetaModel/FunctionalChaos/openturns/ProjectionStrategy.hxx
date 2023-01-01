@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PROJECTIONSTRATEGY_HXX
-#define OPENTURNS_PROJECTIONSTRATEGY_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/ProjectionStrategyImplementation.hxx"
@@ -106,4 +105,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PROJECTIONSTRATEGY_HXX */

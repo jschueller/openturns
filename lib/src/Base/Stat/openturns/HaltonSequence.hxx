@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_HALTONSEQUENCE_HXX
-#define OPENTURNS_HALTONSEQUENCE_HXX
+#pragma once
 
 #include "openturns/IndicesCollection.hxx"
 #include "openturns/ResourceMap.hxx"
@@ -87,4 +86,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HALTONSEQUENCE_HXX */

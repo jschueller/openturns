@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_TRENDEVALUATION_HXX
-#define OPENTURNS_TRENDEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Function.hxx"
@@ -89,4 +88,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TRENDEVALUATION_HXX */

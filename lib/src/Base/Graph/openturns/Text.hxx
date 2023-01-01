@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TEXT_HXX
-#define OPENTURNS_TEXT_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DrawableImplementation.hxx"
@@ -125,4 +124,3 @@ private:
 }; /* class Text */
 
 END_NAMESPACE_OPENTURNS
-#endif /* OPENTURNS_TEXT_HXX */

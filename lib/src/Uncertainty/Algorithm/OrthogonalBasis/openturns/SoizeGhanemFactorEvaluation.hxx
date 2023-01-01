@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SOIZEGHANEMFACTOREVALUATION_HXX
-#define OPENTURNS_SOIZEGHANEMFACTOREVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Distribution.hxx"
@@ -107,4 +106,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SOIZEGHANEMFACTOREVALUATION_HXX */

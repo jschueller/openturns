@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_BERNSTEINCOPULAFACTORY_HXX
-#define OPENTURNS_BERNSTEINCOPULAFACTORY_HXX
+#pragma once
 
 #include "openturns/DistributionFactoryImplementation.hxx"
 #include "openturns/Distribution.hxx"
@@ -101,4 +100,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_BERNSTEINCOPULAFACTORY_HXX */

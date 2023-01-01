@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_QUANTILEMATCHINGFACTORY_HXX
-#define OPENTURNS_QUANTILEMATCHINGFACTORY_HXX
+#pragma once
 
 #include "openturns/DistributionFactoryImplementation.hxx"
 #include "openturns/DistributionFactory.hxx"
@@ -112,4 +111,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_QUANTILEMATCHINGFACTORY_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPECTRALMODELFACTORYIMPLEMENTATION_HXX
-#define OPENTURNS_SPECTRALMODELFACTORYIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/SpectralModel.hxx"
 #include "openturns/ProcessSample.hxx"
@@ -84,4 +83,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPECTRALMODELFACTORYIMPLEMENTATION_HXX */

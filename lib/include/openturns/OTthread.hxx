@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OTTHREAD_HXX
-#define OPENTURNS_OTTHREAD_HXX
+#pragma once
 
 #include "openturns/OTconfig.hxx"
 
@@ -30,4 +29,3 @@
 
 #endif /* OPENTURNS_HAVE_PTHREAD_H */
 
-#endif /* OPENTURNS_OTTHREAD_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OTMEMORY_HXX
-#define OPENTURNS_OTMEMORY_HXX
+#pragma once
 
 #ifdef DEBUG_MEMORY
 #ifndef SWIG
@@ -35,4 +34,3 @@ extern void operator delete [] (void * ptr);
 #endif /* SWIG */
 #endif /* DEBUG_MEMORY */
 
-#endif /* OPENTURNS_OTMEMORY_HXX */

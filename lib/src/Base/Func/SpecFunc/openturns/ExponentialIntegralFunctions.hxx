@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_EXPONENTIALINTEGRALFUNCTIONS_HXX
-#define OPENTURNS_EXPONENTIALINTEGRALFUNCTIONS_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 
@@ -51,4 +50,3 @@ Bool hasConverged(const Complex & current,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_EXPONENTIALINTEGRALFUNCTIONS_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MEMOIZEFUNCTION_HXX
-#define OPENTURNS_MEMOIZEFUNCTION_HXX
+#pragma once
 
 #include "openturns/FunctionImplementation.hxx"
 #include "openturns/Function.hxx"
@@ -128,4 +127,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MEMOIZEFUNCTION_HXX */

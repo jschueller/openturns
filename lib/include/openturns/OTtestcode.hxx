@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_OTTESTCODE_HXX
-#define OPENTURNS_OTTESTCODE_HXX
+#pragma once
 
 #include "openturns/OTconfig.hxx"
 
@@ -392,4 +391,3 @@ void assert_equal(const T & a, const T & b, const String errMsg = "")
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_OTTESTCODE_HXX */

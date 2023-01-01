@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NORMAL_HXX
-#define OPENTURNS_NORMAL_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/EllipticalDistribution.hxx"
@@ -193,4 +192,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NORMAL_HXX */

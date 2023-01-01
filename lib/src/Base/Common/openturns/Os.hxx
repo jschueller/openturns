@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OS_HXX
-#define OPENTURNS_OS_HXX
+#pragma once
 
 #include "openturns/OTtypes.hxx"
 #include "openturns/OTdebug.h"
@@ -92,6 +91,5 @@ private:
 END_NAMESPACE_OPENTURNS
 
 
-#endif /* OPENTURNS_OS_HXX */
 
 

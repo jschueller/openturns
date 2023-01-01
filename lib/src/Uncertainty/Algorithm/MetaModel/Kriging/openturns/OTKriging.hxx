@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTKRIGING_HXX
-#define OPENTURNS_OTKRIGING_HXX
+#pragma once
 
 #include "openturns/KrigingEvaluation.hxx"
 #include "openturns/KrigingGradient.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/GeneralLinearModelResult.hxx"
 #include "openturns/GeneralLinearModelAlgorithm.hxx"
 
-#endif /* OPENTURNS_OTKRIGING_HXX */

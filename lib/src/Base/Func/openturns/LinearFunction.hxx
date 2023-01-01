@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LINEARFUNCTION_HXX
-#define OPENTURNS_LINEARFUNCTION_HXX
+#pragma once
 
 #include "openturns/Function.hxx"
 #include "openturns/Point.hxx"
@@ -65,4 +64,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LINEARFUNCTION_HXX */

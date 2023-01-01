@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_MIXEDHISTOGRAMUSERDEFINED_HXX
-#define OPENTURNS_MIXEDHISTOGRAMUSERDEFINED_HXX
+#pragma once
 
 #include "openturns/DistributionImplementation.hxx"
 #include "openturns/Mixture.hxx"
@@ -179,4 +178,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MIXEDHISTOGRAMUSERDEFINED_HXX */

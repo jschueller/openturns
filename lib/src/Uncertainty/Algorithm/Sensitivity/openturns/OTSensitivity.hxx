@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTSENSITIVITY_HXX
-#define OPENTURNS_OTSENSITIVITY_HXX
+#pragma once
 
 #include "openturns/ANCOVA.hxx"
 #include "openturns/FAST.hxx"
@@ -40,4 +39,3 @@
 #include "openturns/HSICStatImplementation.hxx"
 #include "openturns/HSICUStat.hxx"
 #include "openturns/HSICVStat.hxx"
-#endif /* OPENTURNS_OTSENSITIVITY_HXX */

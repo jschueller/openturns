@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SQUARECOMPLEXMATRIX_HXX
-#define OPENTURNS_SQUARECOMPLEXMATRIX_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ComplexMatrix.hxx"
@@ -131,4 +130,3 @@ inline SquareComplexMatrix operator * (const Complex s,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SQUARECOMPLEXMATRIX_HXX */

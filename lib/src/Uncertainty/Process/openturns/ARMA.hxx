@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ARMA_HXX
-#define OPENTURNS_ARMA_HXX
+#pragma once
 
 #include "openturns/ProcessImplementation.hxx"
 #include "openturns/Process.hxx"
@@ -153,4 +152,3 @@ private:
 }; /* class ARMA */
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ARMA_HXX */

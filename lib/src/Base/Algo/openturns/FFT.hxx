@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FFT_HXX
-#define OPENTURNS_FFT_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/FFTImplementation.hxx"
@@ -177,4 +176,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FFT_HXX */

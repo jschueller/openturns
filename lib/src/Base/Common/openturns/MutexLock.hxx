@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MUTEXLOCK_HXX
-#define OPENTURNS_MUTEXLOCK_HXX
+#pragma once
 
 #include <errno.h>  // for errno(3)
 #include <stdio.h>  // for perror(3)
@@ -107,4 +106,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MUTEXLOCK_HXX */

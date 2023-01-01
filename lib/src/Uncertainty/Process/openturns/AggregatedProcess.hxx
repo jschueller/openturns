@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_AGGREGATEDPROCESS_HXX
-#define OPENTURNS_AGGREGATEDPROCESS_HXX
+#pragma once
 
 #include "openturns/ProcessImplementation.hxx"
 #include "openturns/Collection.hxx"
@@ -109,4 +108,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_AGGREGATEDPROCESS_HXX */

@@ -18,10 +18,8 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DEBYE_HXX
-#define OPENTURNS_DEBYE_HXX
+#pragma once
 
 /** Method that evaluates Debye function up to order 20. */
 double debyen(const double x, const int n);
 
-#endif /* OPENTURNS_DEBYE_HXX */

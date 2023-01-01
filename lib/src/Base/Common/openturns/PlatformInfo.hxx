@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PLATFORMINFO_HXX
-#define OPENTURNS_PLATFORMINFO_HXX
+#pragma once
 
 #include <map>
 #include "openturns/OTprivate.hxx"
@@ -80,4 +79,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PLATFORMINFO_HXX */

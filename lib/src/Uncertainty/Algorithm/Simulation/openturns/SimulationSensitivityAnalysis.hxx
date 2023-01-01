@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SIMULATIONSENSITIVITYANALYSIS_HXX
-#define OPENTURNS_SIMULATIONSENSITIVITYANALYSIS_HXX
+#pragma once
 
 #include <cmath>
 #include "openturns/PersistentObject.hxx"
@@ -118,4 +117,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SIMULATIONSENSITIVITYANALYSIS_HXX */

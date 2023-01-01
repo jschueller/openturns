@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_BLENDEDSTEP_HXX
-#define OPENTURNS_BLENDEDSTEP_HXX
+#pragma once
 
 #include "openturns/FiniteDifferenceStepImplementation.hxx"
 #include "openturns/ResourceMap.hxx"
@@ -76,9 +75,4 @@ protected:
 };
 
 END_NAMESPACE_OPENTURNS
-
-
-
-
-#endif
 

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONEVALUATION_HXX
-#define OPENTURNS_PYTHONEVALUATION_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/EvaluationImplementation.hxx"
@@ -116,5 +115,4 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONEVALUATION_HXX */
 

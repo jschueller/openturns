@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SIMULATEDANNEALINGLHS_HXX
-#define OPENTURNS_SIMULATEDANNEALINGLHS_HXX
+#pragma once
 
 #include "openturns/TemperatureProfile.hxx"
 #include "openturns/GeometricProfile.hxx"
@@ -81,4 +80,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_SIMULATEDANNEALINGLHS_HXX */

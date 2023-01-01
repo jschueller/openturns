@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPACEFILLINGIMPLEMENTATION_HXX
-#define OPENTURNS_SPACEFILLINGIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/StorageManager.hxx"
@@ -84,4 +83,3 @@ private:
 
 } /* namespace OT */
 
-#endif /* OT_SPACEFILLINGIMPLEMENTATION_HXX */

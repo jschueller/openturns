@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INTERVALMESHER_HXX
-#define OPENTURNS_INTERVALMESHER_HXX
+#pragma once
 
 #include "openturns/Interval.hxx"
 #include "openturns/Mesh.hxx"
@@ -70,4 +69,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INTERVALMESHER_HXX */

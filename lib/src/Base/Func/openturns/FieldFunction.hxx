@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FIELDFUNCTION_HXX
-#define OPENTURNS_FIELDFUNCTION_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/FieldFunctionImplementation.hxx"
@@ -116,4 +115,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FIELDFUNCTION_HXX */

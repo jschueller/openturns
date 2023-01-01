@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONWRAPPINGFUNCTIONS_HXX
-#define OPENTURNS_PYTHONWRAPPINGFUNCTIONS_HXX
+#pragma once
 
 #include <Python.h>
 #include <csignal>
@@ -1854,4 +1853,3 @@ inline void SignalHandler(int /*signum*/)
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONWRAPPINGFUNCTIONS_HXX */

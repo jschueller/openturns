@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COMPOSITERANDOMVECTOR_HXX
-#define OPENTURNS_COMPOSITERANDOMVECTOR_HXX
+#pragma once
 
 #include "openturns/RandomVectorImplementation.hxx"
 #include "openturns/RandomVector.hxx"
@@ -113,4 +112,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COMPOSITERANDOMVECTOR_HXX */

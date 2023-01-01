@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HANNINGFILTER_HXX
-#define OPENTURNS_HANNINGFILTER_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/FilteringWindowsImplementation.hxx"
@@ -65,4 +64,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HANNINGFILTER_HXX */

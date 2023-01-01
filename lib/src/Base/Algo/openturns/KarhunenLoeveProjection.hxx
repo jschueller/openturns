@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KARHUNENLOEVEPROJECTION_HXX
-#define OPENTURNS_KARHUNENLOEVEPROJECTION_HXX
+#pragma once
 
 #include "openturns/FieldToPointFunctionImplementation.hxx"
 #include "openturns/KarhunenLoeveResult.hxx"
@@ -80,4 +79,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KARHUNENLOEVEPROJECTION_HXX */

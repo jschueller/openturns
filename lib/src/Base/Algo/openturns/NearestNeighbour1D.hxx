@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NEARESTNEIGHBOUR1D_HXX
-#define OPENTURNS_NEARESTNEIGHBOUR1D_HXX
+#pragma once
 
 #include "openturns/NearestNeighbourAlgorithmImplementation.hxx"
 #include "openturns/Sample.hxx"
@@ -102,4 +101,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NEARESTNEIGHBOUR1D_HXX */

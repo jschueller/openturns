@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TRIANGULARMATRIX_HXX
-#define OPENTURNS_TRIANGULARMATRIX_HXX
+#pragma once
 
 #include "openturns/SquareMatrix.hxx"
 #include "openturns/Collection.hxx"
@@ -164,4 +163,3 @@ inline TriangularMatrix operator * (const Scalar s,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TRIANGULARMATRIX_HXX */

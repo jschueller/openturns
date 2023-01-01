@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ORTHONORMALIZATIONALGORITHM_HXX
-#define OPENTURNS_ORTHONORMALIZATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/OrthonormalizationAlgorithmImplementation.hxx"
 #include "openturns/Pointer.hxx"
@@ -73,4 +72,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ORTHONORMALIZATIONALGORITHM_HXX */

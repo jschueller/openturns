@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_DISTFUNC_HXX
-#define OPENTURNS_DISTFUNC_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ResourceMap.hxx"
@@ -334,4 +333,3 @@ OT_API Scalar qDickeyFullerNoConstant(const Scalar p,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_DISTFUNC_HXX */

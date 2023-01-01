@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONDISTRIBUTION_HXX
-#define OPENTURNS_PYTHONDISTRIBUTION_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/DistributionImplementation.hxx"
@@ -184,4 +183,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONDISTRIBUTION_HXX */

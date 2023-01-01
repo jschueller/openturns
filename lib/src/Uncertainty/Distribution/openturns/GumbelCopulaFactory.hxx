@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GUMBELCOPULAFACTORY_HXX
-#define OPENTURNS_GUMBELCOPULAFACTORY_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DistributionFactoryImplementation.hxx"
@@ -56,4 +55,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GUMBELCOPULAFACTORY_HXX */

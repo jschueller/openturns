@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MAUNTZKUCHERENKOSENSITIVITYALGORITHM_HXX
-#define OPENTURNS_MAUNTZKUCHERENKOSENSITIVITYALGORITHM_HXX
+#pragma once
 
 #include "openturns/SobolIndicesAlgorithmImplementation.hxx"
 
@@ -81,4 +80,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MAUNTZKUCHERENKOSENSITIVITYALGORITHM_HXX */

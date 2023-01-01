@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KARHUNENLOEVERESULTIMPLEMENTATION_HXX
-#define OPENTURNS_KARHUNENLOEVERESULTIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/CovarianceModel.hxx"
@@ -138,4 +137,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KARHUNENLOEVERESULTIMPLEMENTATION_HXX */

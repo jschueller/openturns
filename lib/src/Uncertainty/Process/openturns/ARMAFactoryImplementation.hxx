@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ARMAFACTORYIMPLEMENTATION_HXX
-#define OPENTURNS_ARMAFACTORYIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/ARMA.hxx"
@@ -115,4 +114,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ARMAFACTORYIMPLEMENTATION_HXX */

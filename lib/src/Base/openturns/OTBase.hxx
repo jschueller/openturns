@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTBASE_HXX
-#define OPENTURNS_OTBASE_HXX
+#pragma once
 
 #include "openturns/OTCommon.hxx"
 #include "openturns/OTBaseMetaModel.hxx"
@@ -36,4 +35,3 @@
 #include "openturns/OTAlgo.hxx"
 #include "openturns/OTIterativeStat.hxx"
 
-#endif /* OPENTURNS_OTBASE_HXX */

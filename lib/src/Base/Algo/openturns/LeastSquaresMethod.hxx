@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LEASTSQUARESMETHOD_HXX
-#define OPENTURNS_LEASTSQUARESMETHOD_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/Sample.hxx"
@@ -130,4 +129,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LEASTSQUARESMETHOD_HXX */

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_PYTHONFIELDTOPOINTFUNCTION_HXX
-#define OPENTURNS_PYTHONFIELDTOPOINTFUNCTION_HXX
+#pragma once
 
 #include <Python.h>
 #include "openturns/FieldToPointFunctionImplementation.hxx"
@@ -96,5 +95,4 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PYTHONFIELDTOPOINTFUNCTION_HXX */
 

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MEDIUMSAFE_HXX
-#define OPENTURNS_MEDIUMSAFE_HXX
+#pragma once
 
 #include "openturns/RootStrategyImplementation.hxx"
 
@@ -65,4 +64,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MEDIUMSAFE_HXX */

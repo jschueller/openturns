@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GENERALIZEDEXTREMEVALUE_HXX
-#define OPENTURNS_GENERALIZEDEXTREMEVALUE_HXX
+#pragma once
 
 #include "openturns/WeibullMax.hxx"
 #include "openturns/Frechet.hxx"
@@ -178,4 +177,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GENERALIZEDEXTREMEVALUE_HXX */

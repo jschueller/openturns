@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_GENERALIZEDPARETO_HXX
-#define OPENTURNS_GENERALIZEDPARETO_HXX
+#pragma once
 
 #include "openturns/ContinuousDistribution.hxx"
 #include "openturns/Pareto.hxx"
@@ -176,4 +175,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_GENERALIZEDPARETO_HXX */

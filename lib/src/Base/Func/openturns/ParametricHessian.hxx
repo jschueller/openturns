@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_PARAMETRICHESSIAN_HXX
-#define OPENTURNS_PARAMETRICHESSIAN_HXX
+#pragma once
 
 #include "openturns/HessianImplementation.hxx"
 #include "openturns/StorageManager.hxx"
@@ -85,4 +84,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_PARAMETRICHESSIAN_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HERMITIANMATRIX_HXX
-#define OPENTURNS_HERMITIANMATRIX_HXX
+#pragma once
 
 #include "openturns/SquareComplexMatrix.hxx"
 #include "openturns/Collection.hxx"
@@ -194,4 +193,3 @@ inline HermitianMatrix operator * (const Complex s,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_HERMITIANMATRIX_HXX */

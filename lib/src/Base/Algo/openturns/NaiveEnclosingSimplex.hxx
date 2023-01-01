@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_NAIVEENCLOSINGSIMPLEX_HXX
-#define OPENTURNS_NAIVEENCLOSINGSIMPLEX_HXX
+#pragma once
 
 #include "openturns/EnclosingSimplexAlgorithmImplementation.hxx"
 #include "openturns/Sample.hxx"
@@ -90,4 +89,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_NAIVEENCLOSINGSIMPLEX_HXX */

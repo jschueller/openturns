@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_INVERSEBOXCOXEVALUATION_HXX
-#define OPENTURNS_INVERSEBOXCOXEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Point.hxx"
@@ -101,4 +100,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INVERSEBOXCOXEVALUATION_HXX */

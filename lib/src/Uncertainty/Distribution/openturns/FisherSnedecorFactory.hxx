@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_FISHERSNEDECORFACTORY_HXX
-#define OPENTURNS_FISHERSNEDECORFACTORY_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/DistributionFactoryImplementation.hxx"
@@ -65,4 +64,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_FISHERSNEDECORFACTORY_HXX */

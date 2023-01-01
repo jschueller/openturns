@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTORTHOGONALBASIS_HXX
-#define OPENTURNS_OTORTHOGONALBASIS_HXX
+#pragma once
 
 #include "openturns/AdaptiveStieltjesAlgorithm.hxx"
 #include "openturns/OrthogonalUniVariatePolynomial.hxx"
@@ -50,4 +49,3 @@
 #include "openturns/SoizeGhanemFactory.hxx"
 #include "openturns/SoizeGhanemFactorEvaluation.hxx"
 
-#endif /* OPENTURNS_OTORTHOGONALBASIS_HXX */

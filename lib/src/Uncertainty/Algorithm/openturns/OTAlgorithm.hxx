@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTALGORITHM_HXX
-#define OPENTURNS_OTALGORITHM_HXX
+#pragma once
 
 #include "openturns/TaylorExpansionMoments.hxx"
 
@@ -34,4 +33,3 @@
 #include "openturns/OTTransformation.hxx"
 #include "openturns/OTUncertaintyOptimization.hxx"
 
-#endif /* OPENTURNS_OTALGORITHM_HXX */

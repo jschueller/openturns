@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_CUMULATIVEDISTRIBUTIONNETWORK_HXX
-#define OPENTURNS_CUMULATIVEDISTRIBUTIONNETWORK_HXX
+#pragma once
 
 #include "openturns/Distribution.hxx"
 #include "openturns/DistributionImplementation.hxx"
@@ -137,4 +136,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_CUMULATIVEDISTRIBUTIONNETWORK_HXX */

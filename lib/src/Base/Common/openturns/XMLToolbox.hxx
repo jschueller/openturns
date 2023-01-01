@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_XMLTOOLBOX_HXX
-#define OPENTURNS_XMLTOOLBOX_HXX
+#pragma once
 
 #include <cstdarg>
 #include "openturns/OTprivate.hxx"
@@ -157,4 +156,3 @@ OT_API std::ostream & operator <<(std::ostream & os, const xmlNodePtr & node);
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_XMLTOOLBOX_HXX */

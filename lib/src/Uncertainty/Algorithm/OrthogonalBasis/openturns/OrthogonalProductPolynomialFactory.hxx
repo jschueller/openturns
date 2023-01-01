@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_ORTHOGONALPRODUCTPOLYNOMIALFACTORY_HXX
-#define OPENTURNS_ORTHOGONALPRODUCTPOLYNOMIALFACTORY_HXX
+#pragma once
 
 #include "openturns/OrthogonalFunctionFactory.hxx"
 #include "openturns/Distribution.hxx"
@@ -106,4 +105,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_ORTHOGONALPRODUCTPOLYNOMIALFACTORY_HXX */

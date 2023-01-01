@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_INVERSEBOXCOXHESSIAN_HXX
-#define OPENTURNS_INVERSEBOXCOXHESSIAN_HXX
+#pragma once
 
 #include "openturns/HessianImplementation.hxx"
 #include "openturns/InverseBoxCoxEvaluation.hxx"
@@ -97,4 +96,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INVERSEBOXCOXHESSIAN_HXX */

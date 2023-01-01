@@ -25,8 +25,7 @@
  *
  */
 
-#ifndef OPENTURNS_QUADRATICEVALUATION_HXX
-#define OPENTURNS_QUADRATICEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Point.hxx"
@@ -116,4 +115,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_QUADRATICEVALUATION_HXX */

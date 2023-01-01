@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_COMPLEXMATRIXIMPLEMENTATION_HXX
-#define OPENTURNS_COMPLEXMATRIXIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentCollection.hxx"
 #include "openturns/Collection.hxx"
@@ -264,4 +263,3 @@ ComplexMatrixImplementation::ComplexMatrixImplementation(const UnsignedInteger r
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_COMPLEXMATRIXIMPLEMENTATION_HXX */

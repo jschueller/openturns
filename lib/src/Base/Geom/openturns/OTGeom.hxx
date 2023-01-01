@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTGEOM_HXX
-#define OPENTURNS_OTGEOM_HXX
+#pragma once
 #include "openturns/DomainImplementation.hxx"
 #include "openturns/Domain.hxx"
 #include "openturns/Interval.hxx"
@@ -36,4 +35,3 @@
 #include "openturns/DomainDisjunctiveUnion.hxx"
 #include "openturns/DomainDifference.hxx"
 
-#endif /* OPENTURNS_OTGEOM_HXX */

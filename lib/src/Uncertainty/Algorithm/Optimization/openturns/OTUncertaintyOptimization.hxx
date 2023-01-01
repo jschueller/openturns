@@ -19,9 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTUNCERTAINTYOPTIMIZATION_HXX
-#define OPENTURNS_OTUNCERTAINTYOPTIMIZATION_HXX
+#pragma once
 
 #include "openturns/EfficientGlobalOptimization.hxx"
 
-#endif /* OPENTURNS_OTUNCERTAINTYOPTIMIZATION_HXX */

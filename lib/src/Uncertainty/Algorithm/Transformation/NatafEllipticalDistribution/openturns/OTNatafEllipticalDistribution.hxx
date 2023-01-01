@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTNATAFELLIPTICALDISTRIBUTION_HXX
-#define OPENTURNS_OTNATAFELLIPTICALDISTRIBUTION_HXX
+#pragma once
 
 #include "openturns/InverseNatafEllipticalDistributionEvaluation.hxx"
 #include "openturns/InverseNatafEllipticalDistributionGradient.hxx"
@@ -29,4 +28,3 @@
 #include "openturns/NatafEllipticalDistributionGradient.hxx"
 #include "openturns/NatafEllipticalDistributionHessian.hxx"
 
-#endif /* OPENTURNS_OTNATAFELLIPTICALDISTRIBUTION_HXX */

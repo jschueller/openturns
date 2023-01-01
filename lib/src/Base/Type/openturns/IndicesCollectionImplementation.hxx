@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INDICESCOLLECTIONIMPLEMENTATION_HXX
-#define OPENTURNS_INDICESCOLLECTIONIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Collection.hxx"
@@ -129,4 +128,3 @@ OStream & operator << (OStream & OS, const IndicesCollectionImplementation & col
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INDICESCOLLECTIONIMPLEMENTATION_HXX */

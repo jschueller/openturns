@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INDICESCOLLECTION_HXX
-#define OPENTURNS_INDICESCOLLECTION_HXX
+#pragma once
 
 #include "openturns/IndicesCollectionImplementation.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
@@ -108,4 +107,3 @@ OStream & operator << (OStream & OS, const IndicesCollection & collection)
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INDICESCOLLECTION_HXX */

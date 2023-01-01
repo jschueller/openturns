@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_INVERSENATAFELLIPTICALDISTRIBUTIONGRADIENT_HXX
-#define OPENTURNS_INVERSENATAFELLIPTICALDISTRIBUTIONGRADIENT_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ConstantGradient.hxx"
@@ -69,4 +68,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_INVERSENATAFELLIPTICALDISTRIBUTIONGRADIENT_HXX */

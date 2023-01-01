@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_AGGREGATEDEVALUATION_HXX
-#define OPENTURNS_AGGREGATEDEVALUATION_HXX
+#pragma once
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/Collection.hxx"
@@ -117,4 +116,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_AGGREGATEDEVALUATION_HXX */

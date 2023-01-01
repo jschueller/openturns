@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SPARSEMETHOD_HXX
-#define OPENTURNS_SPARSEMETHOD_HXX
+#pragma once
 
 #include "openturns/LeastSquaresMethodImplementation.hxx"
 #include "openturns/LeastSquaresMethod.hxx"
@@ -111,4 +110,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SPARSEMETHOD_HXX */

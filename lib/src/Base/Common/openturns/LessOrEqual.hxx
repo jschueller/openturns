@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_LESSOREQUAL_HXX
-#define OPENTURNS_LESSOREQUAL_HXX
+#pragma once
 
 #include "openturns/ComparisonOperatorImplementation.hxx"
 
@@ -70,4 +69,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_LESSOREQUAL_HXX */

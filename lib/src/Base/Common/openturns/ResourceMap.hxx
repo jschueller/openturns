@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_RESOURCEMAP_HXX
-#define OPENTURNS_RESOURCEMAP_HXX
+#pragma once
 
 #include <map>
 
@@ -315,4 +314,3 @@ OT_API OStream & operator <<(OStream & OS, const MutexLockSingleton<ResourceMap>
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_RESOURCEMAP_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_STATIONARYCOVARIANCEMODELFACTORY_HXX
-#define OPENTURNS_STATIONARYCOVARIANCEMODELFACTORY_HXX
+#pragma once
 
 #include "openturns/CovarianceModelFactoryImplementation.hxx"
 #include "openturns/UserDefinedStationaryCovarianceModel.hxx"
@@ -89,4 +88,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_STATIONARYCOVARIANCEMODELFACTORY_HXX */

@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTGRAPH_HXX
-#define OPENTURNS_OTGRAPH_HXX
+#pragma once
 
 #include "openturns/BarPlot.hxx"
 #include "openturns/Cloud.hxx"
@@ -38,4 +37,3 @@
 #include "openturns/Staircase.hxx"
 #include "openturns/Text.hxx"
 
-#endif /* OPENTURNS_OTGRAPH_HXX */

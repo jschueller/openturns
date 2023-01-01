@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_TENSORIMPLEMENTATION_HXX
-#define OPENTURNS_TENSORIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentCollection.hxx"
 #include "openturns/Point.hxx"
@@ -175,4 +174,3 @@ inline UnsignedInteger TensorImplementation::convertPosition (const UnsignedInte
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_TENSORIMPLEMENTATION_HXX */

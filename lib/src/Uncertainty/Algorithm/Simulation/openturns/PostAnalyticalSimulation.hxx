@@ -19,8 +19,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_POSTANALYTICALSIMULATION_HXX
-#define OPENTURNS_POSTANALYTICALSIMULATION_HXX
+#pragma once
 
 #include "openturns/EventSimulation.hxx"
 #include "openturns/AnalyticalResult.hxx"
@@ -84,4 +83,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_POSTANALYTICALSIMULATION_HXX */

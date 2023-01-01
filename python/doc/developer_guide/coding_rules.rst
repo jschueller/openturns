@@ -142,10 +142,12 @@ Example for a file named **Sample.hxx**:
 
 ::
 
-    #ifndef OPENTURNS_SAMPLE_HXX
-    #define OPENTURNS_SAMPLE_HXX
-    ...
-    #endif /* OPENTURNS_SAMPLE_HXX */
+    #pragma once
+
+    class Sample
+    {
+      Sample(int size, int dimension);
+    };
 
 Example of header file inclusion:
 

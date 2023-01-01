@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_HYPOTHESISTEST_HXX
-#define OPENTURNS_HYPOTHESISTEST_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/TestResult.hxx"
@@ -87,4 +86,3 @@ OT_API TestResultCollection FullSpearman(const Sample & firstSample,
 } /* HypothesisTest */
 
 END_NAMESPACE_OPENTURNS
-#endif /* OPENTURNS_HYPOTHESISTEST_HXX */

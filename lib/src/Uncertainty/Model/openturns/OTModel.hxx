@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_OTMODEL_HXX
-#define OPENTURNS_OTMODEL_HXX
+#pragma once
 
 #include "openturns/ArchimedeanCopula.hxx"
 #include "openturns/CompositeRandomVector.hxx"
@@ -50,4 +49,3 @@
 #include "openturns/StandardEvent.hxx"
 #include "openturns/UsualRandomVector.hxx"
 
-#endif /* OPENTURNS_OTMODEL_HXX */

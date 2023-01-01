@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_APPROXIMATIONALGORITHM_HXX
-#define OPENTURNS_APPROXIMATIONALGORITHM_HXX
+#pragma once
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/ApproximationAlgorithmImplementation.hxx"
@@ -90,4 +89,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_APPROXIMATIONALGORITHM_HXX */

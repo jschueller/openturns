@@ -19,8 +19,7 @@
  *
  */
 
-#ifndef OPENTURNS_SYMBOLICPARSERIMPLEMENTATION_HXX
-#define OPENTURNS_SYMBOLICPARSERIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Sample.hxx"
@@ -71,4 +70,3 @@ protected:
 
 END_NAMESPACE_OPENTURNS
 
-#endif // OPENTURNS_SYMBOLICPARSERIMPLEMENTATION_HXX

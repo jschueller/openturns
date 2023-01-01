@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_SAMPLE_HXX
-#define OPENTURNS_SAMPLE_HXX
+#pragma once
 
 #include <iostream>              // for std::ostream
 #include "openturns/TypedInterfaceObject.hxx"
@@ -360,4 +359,3 @@ OT_API Sample operator * (const Scalar scalar,
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_SAMPLE_HXX */

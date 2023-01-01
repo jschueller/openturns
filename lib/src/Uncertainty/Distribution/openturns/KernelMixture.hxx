@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_KERNELMIXTURE_HXX
-#define OPENTURNS_KERNELMIXTURE_HXX
+#pragma once
 
 #include "openturns/Distribution.hxx"
 #include "openturns/ContinuousDistribution.hxx"
@@ -218,4 +217,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_KERNELMIXTURE_HXX */

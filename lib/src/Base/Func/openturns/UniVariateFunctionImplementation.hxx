@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_UNIVARIATEFUNCTIONIMPLEMENTATION_HXX
-#define OPENTURNS_UNIVARIATEFUNCTIONIMPLEMENTATION_HXX
+#pragma once
 
 #include "openturns/Graph.hxx"
 
@@ -75,4 +74,3 @@ public:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_UNIVARIATEFUNCTIONIMPLEMENTATION_HXX */

@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_MARGINALTRANSFORMATIONEVALUATION_HXX
-#define OPENTURNS_MARGINALTRANSFORMATIONEVALUATION_HXX
+#pragma once
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/EvaluationImplementation.hxx"
@@ -146,4 +145,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_MARGINALTRANSFORMATIONEVALUATION_HXX */

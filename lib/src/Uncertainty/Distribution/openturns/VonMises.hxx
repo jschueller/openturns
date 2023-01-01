@@ -18,8 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OPENTURNS_VONMISES_HXX
-#define OPENTURNS_VONMISES_HXX
+#pragma once
 
 #include "openturns/ContinuousDistribution.hxx"
 
@@ -133,4 +132,3 @@ private:
 
 END_NAMESPACE_OPENTURNS
 
-#endif /* OPENTURNS_VONMISES_HXX */
