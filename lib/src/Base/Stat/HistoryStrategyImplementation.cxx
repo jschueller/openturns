@@ -21,7 +21,6 @@
 #include "openturns/HistoryStrategyImplementation.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

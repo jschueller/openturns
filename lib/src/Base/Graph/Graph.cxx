@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/Graph.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 CLASSNAMEINIT(Graph)

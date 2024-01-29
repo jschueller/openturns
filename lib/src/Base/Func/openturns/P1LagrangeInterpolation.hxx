@@ -22,8 +22,6 @@
 #define OPENTURNS_P1LAGRANGEINTERPOLATION_HXX
 
 #include "openturns/FieldFunctionImplementation.hxx"
-#include "openturns/Mesh.hxx"
-#include "openturns/Field.hxx"
 #include "openturns/IndicesCollection.hxx"
 #include "openturns/NearestNeighbourAlgorithm.hxx"
 #include "openturns/EnclosingSimplexAlgorithm.hxx"

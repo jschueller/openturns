@@ -18,11 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
 #include <cmath>
-#include <iomanip>
 
 #include "openturns/DistFunc.hxx"
 #include "openturns/SpecFunc.hxx"

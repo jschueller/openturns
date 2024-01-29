@@ -18,8 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-#include <functional>
 #include <numeric>
 #include <cstring> // std::memset
 
@@ -29,7 +27,6 @@
 #include "openturns/Lapack.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/Os.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/Sample.hxx"
 

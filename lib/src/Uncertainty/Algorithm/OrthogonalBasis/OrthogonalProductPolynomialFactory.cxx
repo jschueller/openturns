@@ -31,7 +31,6 @@
 #include "openturns/StandardDistributionPolynomialFactory.hxx"
 #include "openturns/LinearEnumerateFunction.hxx"
 #include "openturns/HyperbolicAnisotropicEnumerateFunction.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

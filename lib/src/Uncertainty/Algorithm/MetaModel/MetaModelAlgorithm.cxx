@@ -29,7 +29,6 @@
 #include "openturns/ComposedDistribution.hxx"
 #include "openturns/FittingTest.hxx"
 #include "openturns/HypothesisTest.hxx"
-#include "openturns/UserDefined.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

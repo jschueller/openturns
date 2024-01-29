@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/StratifiedExperiment.hxx"
-#include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

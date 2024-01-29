@@ -19,11 +19,8 @@
  *
  */
 #include "openturns/IterativeThresholdExceedance.hxx"
-#include "openturns/IterativeAlgorithm.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Point.hxx"
-#include "openturns/IterativeThresholdExceedance.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

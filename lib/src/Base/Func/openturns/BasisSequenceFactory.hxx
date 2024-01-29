@@ -24,7 +24,6 @@
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/BasisSequence.hxx"
 #include "openturns/BasisSequenceFactoryImplementation.hxx"
-#include "openturns/LeastSquaresMethod.hxx"
 
 
 BEGIN_NAMESPACE_OPENTURNS

@@ -23,7 +23,6 @@
 
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Function.hxx"
-#include "openturns/Interval.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

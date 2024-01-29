@@ -18,22 +18,18 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <iomanip>
-#include <cstdlib>
 
-#include "openturns/Analytical.hxx"
+#include "openturns/AnalyticalResult.hxx"
 #include "openturns/Distribution.hxx"
 #include "openturns/Sample.hxx"
 #include "openturns/SobolIndicesAlgorithm.hxx"
-#include "openturns/SymbolicFunction.hxx"
 #include "openturns/BarPlot.hxx"
 #include "openturns/Description.hxx"
 #include "openturns/ThresholdEvent.hxx"
 #include "openturns/RandomVector.hxx"
-#include "openturns/Less.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/ComparisonOperatorImplementation.hxx"
 #include "openturns/GaussLegendre.hxx"
+#include "openturns/StandardEvent.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -21,7 +21,6 @@
 #include "openturns/Domain.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Interval.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

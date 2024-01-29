@@ -23,7 +23,6 @@
 #include "openturns/InterfaceObject.hxx"
 #include "openturns/Study.hxx"
 #include "openturns/OSS.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/OTconfig.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

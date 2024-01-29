@@ -19,16 +19,11 @@
  *
  */
 #include <algorithm>
-#include <cstdio>
-#include <cstdlib>
-#include <sstream>
 
 #include "openturns/DrawableImplementation.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Log.hxx"
-#include "openturns/Os.hxx"
 #include "openturns/ResourceMap.hxx"
-#include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

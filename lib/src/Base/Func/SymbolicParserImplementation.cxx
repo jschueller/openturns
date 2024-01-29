@@ -24,7 +24,6 @@
 
 #include "openturns/SymbolicParserImplementation.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/OTconfig.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

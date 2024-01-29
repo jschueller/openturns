@@ -20,10 +20,6 @@
  */
 #include "openturns/ExpectationSimulationResult.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/DistFunc.hxx"
-#include "openturns/SimulationSensitivityAnalysis.hxx"
-#include "openturns/Log.hxx"
-#include "openturns/Exception.hxx"
 #include "openturns/Normal.hxx"
 #include "openturns/ComposedDistribution.hxx"
 #include "openturns/Dirac.hxx"

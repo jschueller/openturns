@@ -19,10 +19,7 @@
  *
  */
 #include "openturns/SobolIndicesAlgorithm.hxx"
-#include "openturns/JansenSensitivityAlgorithm.hxx"
 #include "openturns/MartinezSensitivityAlgorithm.hxx"
-#include "openturns/MauntzKucherenkoSensitivityAlgorithm.hxx"
-#include "openturns/SaltelliSensitivityAlgorithm.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -21,10 +21,11 @@
 #ifndef OPENTURNS_LEVELSET_HXX
 #define OPENTURNS_LEVELSET_HXX
 
-#include "openturns/PersistentObject.hxx"
 #include "openturns/LessOrEqual.hxx"
 #include "openturns/DomainImplementation.hxx"
 #include "openturns/Function.hxx"
+#include "openturns/ComparisonOperator.hxx"
+#include "openturns/LessOrEqual.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

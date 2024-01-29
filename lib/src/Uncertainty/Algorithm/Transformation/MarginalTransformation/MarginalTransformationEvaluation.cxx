@@ -20,12 +20,10 @@
  */
 #include "openturns/MarginalTransformationEvaluation.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Uniform.hxx"
 #include "openturns/Log.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/SymbolicFunction.hxx"
-#include "openturns/ComposedDistribution.hxx"
 #include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

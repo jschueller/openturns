@@ -22,8 +22,6 @@
 #define OPENTURNS_NAIS_HXX
 
 #include "openturns/EventSimulation.hxx"
-#include "openturns/Mixture.hxx"
-#include "openturns/ComposedDistribution.hxx"
 #include "openturns/NAISResult.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

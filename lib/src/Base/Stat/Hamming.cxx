@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/Hamming.hxx"
-#include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

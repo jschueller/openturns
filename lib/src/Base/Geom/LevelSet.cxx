@@ -20,15 +20,8 @@
  */
 #include "openturns/LevelSet.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Log.hxx"
-#include "openturns/Os.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/SymbolicFunction.hxx"
-#include "openturns/LinearFunction.hxx"
-#include "openturns/Matrix.hxx"
-#include "openturns/Cobyla.hxx"
-#include "openturns/ComposedFunction.hxx"
-#include "openturns/AggregatedFunction.hxx"
 #include "openturns/Less.hxx"
 #include "openturns/SpecFunc.hxx"
 

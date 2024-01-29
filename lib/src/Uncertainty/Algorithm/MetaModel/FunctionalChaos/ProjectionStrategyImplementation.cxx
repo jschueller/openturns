@@ -21,11 +21,9 @@
 #include "openturns/ProjectionStrategyImplementation.hxx"
 #include "openturns/OSS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/MonteCarloExperiment.hxx"
 #include "openturns/FixedExperiment.hxx"
 #include "openturns/UserDefined.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

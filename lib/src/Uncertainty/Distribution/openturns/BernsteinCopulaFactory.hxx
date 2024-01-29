@@ -27,7 +27,6 @@
 #include "openturns/EmpiricalBernsteinCopula.hxx"
 #include "openturns/Sample.hxx"
 #include "openturns/Function.hxx"
-#include "openturns/SymbolicFunction.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

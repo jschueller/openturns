@@ -25,8 +25,6 @@
 #include "openturns/CovarianceModel.hxx"
 #include "openturns/Sample.hxx"
 #include "openturns/Collection.hxx"
-#include "openturns/Basis.hxx"
-#include "openturns/PersistentCollection.hxx"
 #include "openturns/Function.hxx"
 #include "openturns/Normal.hxx"
 #include "openturns/HMatrix.hxx"

@@ -22,7 +22,6 @@
 #include "openturns/LogNormalFactory.hxx"
 #include "openturns/MethodBoundEvaluation.hxx"
 #include "openturns/Brent.hxx"
-#include "openturns/DistFunc.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
@@ -30,7 +29,6 @@
 #include "openturns/LinearLeastSquares.hxx"
 #include "openturns/LeastSquaresProblem.hxx"
 #include "openturns/OptimizationAlgorithm.hxx"
-#include "openturns/LeastSquaresDistributionFactory.hxx"
 #include "openturns/MemoizeFunction.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

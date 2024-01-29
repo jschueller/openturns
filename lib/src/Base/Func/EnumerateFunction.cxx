@@ -20,7 +20,6 @@
  */
 #include "openturns/EnumerateFunction.hxx"
 #include "openturns/LinearEnumerateFunction.hxx"
-#include "openturns/HyperbolicAnisotropicEnumerateFunction.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

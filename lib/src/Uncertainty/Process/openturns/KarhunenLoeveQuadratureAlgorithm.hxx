@@ -25,7 +25,6 @@
 
 #include "openturns/KarhunenLoeveAlgorithmImplementation.hxx"
 #include "openturns/Domain.hxx"
-#include "openturns/Interval.hxx"
 #include "openturns/WeightedExperiment.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

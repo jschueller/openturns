@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/BernoulliFactory.hxx"
-#include "openturns/DiscreteDistribution.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/Binomial.hxx"
 #include "openturns/PersistentObjectFactory.hxx"

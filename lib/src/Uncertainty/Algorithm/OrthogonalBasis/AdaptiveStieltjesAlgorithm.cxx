@@ -26,11 +26,9 @@
 #include "openturns/ResourceMap.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/Uniform.hxx"
-#include "openturns/Histogram.hxx"
 #include "openturns/GaussKronrod.hxx"
 #include "openturns/OrthogonalUniVariatePolynomial.hxx"
 #include "openturns/MethodBoundEvaluation.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

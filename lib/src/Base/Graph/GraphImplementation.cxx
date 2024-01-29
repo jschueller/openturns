@@ -18,17 +18,12 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-#include <fstream>
 
 #include "openturns/GraphImplementation.hxx"
-#include "openturns/Path.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/Log.hxx"
 #include "openturns/OTconfig.hxx"
-#include "openturns/Os.hxx"
-#include "openturns/Pie.hxx"
 #include "openturns/Graph.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

@@ -24,7 +24,6 @@
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/FunctionImplementation.hxx"
 #include "openturns/ProductFunction.hxx"
-#include "openturns/ComparisonOperator.hxx"
 #include "openturns/Collection.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

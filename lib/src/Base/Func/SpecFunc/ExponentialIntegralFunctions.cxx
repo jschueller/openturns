@@ -22,8 +22,6 @@
 #include <cmath>
 
 #include "openturns/ExponentialIntegralFunctions.hxx"
-#include "openturns/Exception.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

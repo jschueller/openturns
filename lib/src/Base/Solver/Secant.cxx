@@ -20,8 +20,6 @@
  *
  */
 #include "openturns/Secant.hxx"
-#include "openturns/Log.hxx"
-#include <cmath>
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

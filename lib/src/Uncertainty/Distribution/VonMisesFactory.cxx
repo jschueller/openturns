@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/VonMisesFactory.hxx"
-#include "openturns/MethodBoundEvaluation.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/Brent.hxx"
 #include "openturns/Point.hxx"

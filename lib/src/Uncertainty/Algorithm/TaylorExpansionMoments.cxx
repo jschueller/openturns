@@ -18,12 +18,10 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <iomanip>
 #include "openturns/TaylorExpansionMoments.hxx"
 #include "openturns/CompositeRandomVector.hxx"
 #include "openturns/Function.hxx"
 #include "openturns/Pointer.hxx"
-#include "openturns/Sample.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/SobolIndicesAlgorithm.hxx"
 

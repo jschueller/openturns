@@ -24,7 +24,6 @@
 #include "openturns/MetaModelAlgorithm.hxx"
 #include "openturns/Basis.hxx"
 #include "openturns/CovarianceModel.hxx"
-#include "openturns/KrigingResult.hxx"
 #include "openturns/HMatrix.hxx"
 #include "openturns/OptimizationAlgorithm.hxx"
 #include "openturns/GeneralLinearModelResult.hxx"

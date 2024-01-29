@@ -21,7 +21,6 @@
 #include <cmath>
 #include "openturns/ConditionalDistribution.hxx"
 #include "openturns/ComposedDistribution.hxx"
-#include "openturns/Dirac.hxx"
 #include "openturns/Uniform.hxx"
 #include "openturns/Box.hxx"
 #include "openturns/WeightedExperiment.hxx"
@@ -30,7 +29,6 @@
 #include "openturns/MonteCarloExperiment.hxx"
 #include "openturns/SobolSequence.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/SpecFunc.hxx"
 #include "openturns/SymbolicFunction.hxx"
 #include "openturns/IdentityFunction.hxx"
 

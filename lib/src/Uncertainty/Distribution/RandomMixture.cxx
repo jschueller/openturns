@@ -18,7 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
 #include <cmath>
 #include <iomanip>
 #include <algorithm>
@@ -26,7 +25,6 @@
 #include "openturns/RandomMixture.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/MethodBoundEvaluation.hxx"
 #include "openturns/Interval.hxx"
 #include "openturns/Tuples.hxx"
 #include "openturns/Function.hxx"
@@ -47,8 +45,6 @@
 #include "openturns/FFT.hxx"
 #include "openturns/TBBImplementation.hxx"
 #include "openturns/OSS.hxx"
-#include "openturns/SobolSequence.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

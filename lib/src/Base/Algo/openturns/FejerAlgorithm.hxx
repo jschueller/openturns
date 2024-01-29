@@ -24,7 +24,6 @@
 #define OPENTURNS_FEJERALGORITHM_HXX
 
 #include "openturns/IntegrationAlgorithmImplementation.hxx"
-#include "openturns/IntegrationAlgorithm.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -25,13 +25,10 @@
 #include "openturns/Log.hxx"
 #include "openturns/Curve.hxx"
 #include "openturns/Point.hxx"
-#include "openturns/ResourceMap.hxx"
 #include "openturns/Less.hxx"
 #include "openturns/Uniform.hxx"
 #include "openturns/IdentityFunction.hxx"
 #include "openturns/CompositeRandomVector.hxx"
-#include "openturns/IntersectionEvent.hxx"
-#include "openturns/UnionEvent.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

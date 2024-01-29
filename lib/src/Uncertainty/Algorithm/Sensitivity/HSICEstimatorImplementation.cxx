@@ -26,8 +26,6 @@
 #include "openturns/HSICStat.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/Cloud.hxx"
-#include "openturns/Curve.hxx"
-#include "openturns/Pie.hxx"
 #include "openturns/Text.hxx"
 #include "openturns/TBBImplementation.hxx"
 #include "openturns/RandomGenerator.hxx"

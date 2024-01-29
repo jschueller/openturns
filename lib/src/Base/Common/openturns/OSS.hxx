@@ -23,7 +23,6 @@
 
 #include <sstream>
 #include <iterator>
-#include <functional>
 #include <utility>        // for std::pair
 #include "openturns/OStream.hxx"
 

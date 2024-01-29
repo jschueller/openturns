@@ -28,8 +28,6 @@
 #include "openturns/AbdoRackwitz.hxx"
 #include "openturns/Cobyla.hxx"
 #include "openturns/Brent.hxx"
-#include "openturns/CenteredFiniteDifferenceGradient.hxx"
-#include "openturns/NLopt.hxx"
 #include "openturns/LinearFunction.hxx"
 #include "openturns/ComposedFunction.hxx"
 

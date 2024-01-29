@@ -23,7 +23,6 @@
 
 #include "openturns/TypedInterfaceObject.hxx"
 #include "openturns/SamplingStrategyImplementation.hxx"
-#include "openturns/TypedInterfaceObject.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -25,7 +25,6 @@
 #include "openturns/LinearCombinationFunction.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/LinearBasisFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -24,7 +24,6 @@
 #include "openturns/ResourceMap.hxx"
 #include "openturns/CholeskyMethod.hxx"
 #include "openturns/TriangularMatrix.hxx"
-#include "openturns/BasisSequenceFactoryImplementation.hxx"
 #include "openturns/Point.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

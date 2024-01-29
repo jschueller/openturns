@@ -22,11 +22,6 @@
 #include "openturns/LinearCombinationEvaluation.hxx"
 #include "openturns/LinearCombinationGradient.hxx"
 #include "openturns/LinearCombinationHessian.hxx"
-#include "openturns/NoGradient.hxx"
-#include "openturns/NoHessian.hxx"
-#include "openturns/P1LagrangeEvaluation.hxx"
-#include "openturns/Log.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

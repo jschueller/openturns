@@ -18,7 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
 #include <map>
 
 #include "openturns/FunctionalChaosAlgorithm.hxx"
@@ -29,7 +28,6 @@
 #include "openturns/ComposedFunction.hxx"
 #include "openturns/DatabaseFunction.hxx"
 #include "openturns/FixedStrategy.hxx"
-#include "openturns/CleaningStrategy.hxx"
 #include "openturns/FixedExperiment.hxx"
 #include "openturns/LeastSquaresStrategy.hxx"
 #include "openturns/Exception.hxx"

@@ -19,13 +19,10 @@
  *
  */
 #include <iostream>
-#include <cstdlib>
 #include <assert.h>
-#include <errno.h>
 #include "openturns/OSS.hxx"
 #include "openturns/Catalog.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/MutexLock.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 

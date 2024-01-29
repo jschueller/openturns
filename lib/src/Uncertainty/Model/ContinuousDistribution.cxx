@@ -19,13 +19,10 @@
  *
  */
 #include <cmath>
-#include <cstdlib>
 
 #include "openturns/ContinuousDistribution.hxx"
 #include "openturns/Collection.hxx"
-#include "openturns/Distribution.hxx"
 #include "openturns/ResourceMap.hxx"
-#include "openturns/MethodBoundEvaluation.hxx"
 #include "openturns/GaussKronrod.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

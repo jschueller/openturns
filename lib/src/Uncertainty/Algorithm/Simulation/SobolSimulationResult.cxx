@@ -20,7 +20,6 @@
  */
 #include "openturns/SobolSimulationResult.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Curve.hxx"
 #include "openturns/SobolIndicesAlgorithm.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

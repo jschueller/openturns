@@ -24,7 +24,6 @@
 #include "openturns/PersistentObject.hxx"
 #include "openturns/StorageManager.hxx"
 #include "openturns/LHSExperiment.hxx"
-#include "openturns/ComposedDistribution.hxx"
 #include "openturns/MarginalTransformationEvaluation.hxx"
 #include "openturns/SpaceFilling.hxx"
 #include "openturns/LHSResult.hxx"

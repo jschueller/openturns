@@ -18,10 +18,7 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-
 #include "openturns/NearestPointProblem.hxx"
-#include "openturns/ResourceMap.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/LinearFunction.hxx"
 #include "openturns/QuadraticFunction.hxx"

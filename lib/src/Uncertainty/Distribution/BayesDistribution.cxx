@@ -23,7 +23,6 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Uniform.hxx"
 #include "openturns/ConditionalDistribution.hxx"
-#include "openturns/SpecFunc.hxx"
 #include "openturns/IdentityFunction.hxx"
 #include "openturns/SymbolicFunction.hxx"
 #include "openturns/IntegrationAlgorithm.hxx"

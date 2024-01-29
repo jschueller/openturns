@@ -22,7 +22,6 @@
 #include "openturns/GumbelCopula.hxx"
 #include "openturns/RandomGenerator.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/DistFunc.hxx"
 #include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

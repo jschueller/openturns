@@ -23,7 +23,6 @@
 
 #include "openturns/OSS.hxx"
 #include "openturns/Object.hxx"
-#include "openturns/StorageManager.hxx"
 #include "openturns/IdFactory.hxx"
 #include "openturns/Pointer.hxx"
 

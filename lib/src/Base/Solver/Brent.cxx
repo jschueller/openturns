@@ -20,7 +20,6 @@
  *
  */
 #include "openturns/Brent.hxx"
-#include <cmath>
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

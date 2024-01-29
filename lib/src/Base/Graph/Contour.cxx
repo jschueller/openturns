@@ -18,13 +18,8 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdio>
-#include <cstdlib>
-
 #include "openturns/Contour.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Log.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

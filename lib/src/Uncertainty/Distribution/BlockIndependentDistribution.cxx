@@ -18,16 +18,12 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cmath>
-
 #include "openturns/BlockIndependentDistribution.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/MarginalDistribution.hxx"
 #include "openturns/RosenblattEvaluation.hxx"
 #include "openturns/InverseRosenblattEvaluation.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/SymbolicFunction.hxx"
-#include "openturns/SpecFunc.hxx"
 #include "openturns/ComposedFunction.hxx"
 #include "openturns/AggregatedFunction.hxx"
 #include "openturns/Uniform.hxx"

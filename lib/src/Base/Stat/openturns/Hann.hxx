@@ -22,7 +22,6 @@
 #ifndef OPENTURNS_HANNINGFILTER_HXX
 #define OPENTURNS_HANNINGFILTER_HXX
 
-#include "openturns/PersistentObject.hxx"
 #include "openturns/FilteringWindowsImplementation.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

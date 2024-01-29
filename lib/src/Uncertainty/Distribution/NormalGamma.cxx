@@ -28,7 +28,6 @@
 #include "openturns/SpecFunc.hxx"
 #include "openturns/DistFunc.hxx"
 #include "openturns/GaussKronrod.hxx"
-#include "openturns/PlatformInfo.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

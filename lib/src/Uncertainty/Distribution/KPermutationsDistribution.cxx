@@ -22,14 +22,11 @@
 #include "openturns/Collection.hxx"
 #include "openturns/KPermutationsDistribution.hxx"
 #include "openturns/KPermutations.hxx"
-#include "openturns/Binomial.hxx"
-#include "openturns/Poisson.hxx"
-#include "openturns/TruncatedDistribution.hxx"
 #include "openturns/RandomGenerator.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/DistFunc.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
+#include "openturns/Distribution.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -22,7 +22,6 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/BasisSequenceFactoryImplementation.hxx"
 #include "openturns/LARS.hxx"
-#include "openturns/PenalizedLeastSquaresAlgorithm.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -21,7 +21,6 @@
 #include "openturns/DualLinearCombinationHessian.hxx"
 #include "openturns/OSS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/SymmetricMatrix.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

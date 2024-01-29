@@ -22,8 +22,6 @@
 #define OPENTURNS_IDFACTORY_HXX
 
 #include "openturns/OTprivate.hxx"
-#include "openturns/AtomicInt.hxx"
-#include "openturns/OStream.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

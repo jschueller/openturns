@@ -21,7 +21,6 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/LinearModelStepwiseAlgorithm.hxx"
 #include "openturns/Function.hxx"
-#include "openturns/Combinations.hxx"
 #include "openturns/ConstantBasisFactory.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/Log.hxx"

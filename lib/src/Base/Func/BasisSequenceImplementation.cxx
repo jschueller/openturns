@@ -19,7 +19,6 @@
  *
  */
 
-#include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/BasisSequenceImplementation.hxx"
 

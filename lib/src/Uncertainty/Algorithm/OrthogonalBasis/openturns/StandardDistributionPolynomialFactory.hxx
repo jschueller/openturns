@@ -21,11 +21,7 @@
 #ifndef OPENTURNS_STANDARDDISTRIBUTIONPOLYNOMIALFACTORY_HXX
 #define OPENTURNS_STANDARDDISTRIBUTIONPOLYNOMIALFACTORY_HXX
 
-#include <map>
-
-#include "openturns/OrthogonalUniVariatePolynomialFactory.hxx"
 #include "openturns/OrthonormalizationAlgorithm.hxx"
-#include "openturns/Collection.hxx"
 #include "openturns/OrthogonalUniVariatePolynomialFamily.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

@@ -21,9 +21,7 @@
 #ifndef OPENTURNS_SIMPLICIALCUBATURE_HXX
 #define OPENTURNS_SIMPLICIALCUBATURE_HXX
 
-#include "openturns/IntegrationAlgorithmImplementation.hxx"
-#include "openturns/IntegrationAlgorithm.hxx"
-#include "openturns/SpecFunc.hxx"
+#include "openturns/Function.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

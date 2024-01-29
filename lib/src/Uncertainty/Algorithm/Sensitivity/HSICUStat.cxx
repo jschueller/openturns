@@ -19,11 +19,8 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include "openturns/Pointer.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/HSICUStat.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -18,16 +18,12 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <sstream>
 #include <cmath>
 #include <fstream>
-#include <iomanip>
 #include <algorithm>
-#include <iterator>
 #include <cstdlib>
 #include <cstdio>        // std::fopen, std::errno
 #include <cstring>       // std::strerror
-#include <regex>
 
 #include "openturns/OTconfig.hxx"
 #include "openturns/SampleImplementation.hxx"
@@ -35,13 +31,10 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Log.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Path.hxx"
 #include "openturns/TBBImplementation.hxx"
 #include "kendall.h"
-#include "openturns/IdentityMatrix.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/Lapack.hxx"
-#include "openturns/Os.hxx"
 
 #include <locale.h>
 #ifdef OPENTURNS_HAVE_XLOCALE_H

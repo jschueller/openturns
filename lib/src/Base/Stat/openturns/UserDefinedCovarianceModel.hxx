@@ -23,7 +23,7 @@
 #ifndef OPENTURNS_USERDEFINEDCOVARIANCEMODEL_HXX
 #define OPENTURNS_USERDEFINEDCOVARIANCEMODEL_HXX
 
-#include "openturns/CovarianceModel.hxx"
+#include "openturns/CovarianceModelImplementation.hxx"
 #include "openturns/RegularGrid.hxx"
 #include "openturns/Mesh.hxx"
 #include "openturns/NearestNeighbourAlgorithm.hxx"

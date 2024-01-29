@@ -27,7 +27,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
-#include <cstring>
 
 #ifdef OPENTURNS_ENABLE_CXX17
 #include <filesystem>

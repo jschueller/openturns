@@ -22,7 +22,6 @@
 #define OPENTURNS_FOURIERSERIES_HXX
 
 #include "openturns/UniVariateFunctionImplementation.hxx"
-#include "openturns/UniVariatePolynomial.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

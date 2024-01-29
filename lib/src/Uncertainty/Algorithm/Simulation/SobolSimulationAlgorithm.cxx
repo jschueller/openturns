@@ -29,7 +29,6 @@
 #include "openturns/Normal.hxx"
 #include "openturns/SobolIndicesExperiment.hxx"
 #include "openturns/SobolIndicesAlgorithm.hxx"
-#include "openturns/SaltelliSensitivityAlgorithm.hxx"
 #include "openturns/ComposedDistribution.hxx"
 #include "openturns/Dirac.hxx"
 

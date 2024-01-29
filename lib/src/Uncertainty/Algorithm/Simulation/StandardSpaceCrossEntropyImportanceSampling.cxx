@@ -21,7 +21,6 @@
 #include "openturns/StandardSpaceCrossEntropyImportanceSampling.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Normal.hxx"
-#include "openturns/EventSimulation.hxx"
 
 
 BEGIN_NAMESPACE_OPENTURNS

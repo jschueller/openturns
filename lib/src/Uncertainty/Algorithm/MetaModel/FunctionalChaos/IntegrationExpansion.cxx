@@ -19,13 +19,11 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
 #include <map>
 
 #include "openturns/IntegrationExpansion.hxx"
 #include "openturns/OSS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/ResourceMap.hxx"
 #include "openturns/DistributionTransformation.hxx"
 #include "openturns/IdentityFunction.hxx"
 

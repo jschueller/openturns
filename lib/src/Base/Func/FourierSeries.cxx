@@ -21,7 +21,6 @@
 #include "openturns/FourierSeries.hxx"
 #include "openturns/OSS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Exception.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

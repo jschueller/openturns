@@ -20,7 +20,6 @@
  */
 
 
-#include "openturns/IterativeAlgorithm.hxx"
 #include "openturns/Log.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Point.hxx"

@@ -23,7 +23,6 @@
 
 #include "openturns/BetaFunctions.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/SpecFunc.hxx"
 #ifdef OPENTURNS_HAVE_BOOST
 #define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS

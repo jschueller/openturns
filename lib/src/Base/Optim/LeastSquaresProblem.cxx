@@ -21,7 +21,6 @@
 
 #include "openturns/LeastSquaresProblem.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/QuadraticFunction.hxx"
 #include "openturns/ComposedFunction.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

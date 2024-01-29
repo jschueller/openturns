@@ -18,8 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-
 #include "openturns/DiscreteDistribution.hxx"
 #include "openturns/Exception.hxx"
 

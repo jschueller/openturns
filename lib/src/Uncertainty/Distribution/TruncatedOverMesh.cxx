@@ -21,7 +21,6 @@
 #include <numeric>
 
 #include "openturns/TruncatedOverMesh.hxx"
-#include "openturns/Domain.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/RegularGrid.hxx"
 #include "openturns/DistFunc.hxx"

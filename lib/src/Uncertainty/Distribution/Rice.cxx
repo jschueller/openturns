@@ -21,10 +21,8 @@
 #include <cmath>
 #include "openturns/Rice.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/RandomGenerator.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/DistFunc.hxx"
-#include "openturns/SpecFunc.hxx"
 #include "openturns/Distribution.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

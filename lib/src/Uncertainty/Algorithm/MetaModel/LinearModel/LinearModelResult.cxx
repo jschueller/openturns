@@ -20,11 +20,9 @@
  */
 #include "openturns/LinearModelResult.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/DatabaseFunction.hxx"
 #include "openturns/OSS.hxx"
 #include "openturns/MatrixImplementation.hxx"
 #include "openturns/SampleImplementation.hxx"
-#include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

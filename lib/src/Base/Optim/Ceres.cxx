@@ -19,10 +19,8 @@
  *
  */
 #include "openturns/Ceres.hxx"
-#include "openturns/Point.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Log.hxx"
-#include "openturns/SpecFunc.hxx"
 #ifdef OPENTURNS_HAVE_CERES
 #include "openturns/OTwindows.h" // ceres includes windows.h
 #include <ceres/ceres.h>

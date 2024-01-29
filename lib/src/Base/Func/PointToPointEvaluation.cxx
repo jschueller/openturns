@@ -22,8 +22,6 @@
 
 #include "openturns/PointToPointEvaluation.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/NoEvaluation.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

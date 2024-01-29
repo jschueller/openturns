@@ -20,9 +20,6 @@
  */
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/SimulationAlgorithm.hxx"
-#include "openturns/Log.hxx"
-#include "openturns/Curve.hxx"
-#include "openturns/Point.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/Compact.hxx"
 

@@ -23,7 +23,6 @@
 #include "openturns/OSS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/TBBImplementation.hxx"
-#include "openturns/UniVariatePolynomialImplementation.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

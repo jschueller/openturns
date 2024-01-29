@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief
+ *  @brief Implementation class for a nonlinear scalar solver
  *
  *  Copyright 2005-2024 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -18,12 +18,9 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-
 #include "openturns/SolverImplementation.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/Point.hxx"
-#include "openturns/ResourceMap.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

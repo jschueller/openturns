@@ -22,9 +22,6 @@
 #define OPENTURNS_PARAMETRICFUNCTION_HXX
 
 #include "openturns/Function.hxx"
-#include "openturns/Point.hxx"
-#include "openturns/Matrix.hxx"
-#include "openturns/SymmetricTensor.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

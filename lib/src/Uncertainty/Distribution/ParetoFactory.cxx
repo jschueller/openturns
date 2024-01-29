@@ -22,7 +22,6 @@
 #include "openturns/SpecFunc.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/MaximumLikelihoodFactory.hxx"
-#include "openturns/MethodOfMomentsFactory.hxx"
 #include "openturns/Brent.hxx"
 #include "openturns/SymbolicFunction.hxx"
 #include "openturns/LinearLeastSquares.hxx"

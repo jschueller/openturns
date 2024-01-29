@@ -20,12 +20,10 @@
  */
 #include <cmath>
 #include <algorithm>
-#include <iterator>
 #include "openturns/OTprivate.hxx"
 #include "openturns/KPermutations.hxx"
 #include "openturns/SpecFunc.hxx"
 #include "openturns/Combinations.hxx"
-#include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

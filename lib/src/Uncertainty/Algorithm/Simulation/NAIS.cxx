@@ -20,6 +20,7 @@
  */
 #include "openturns/NAIS.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
+#include "openturns/Mixture.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

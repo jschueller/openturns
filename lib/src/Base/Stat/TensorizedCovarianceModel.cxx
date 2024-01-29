@@ -21,7 +21,6 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/AbsoluteExponential.hxx"
-#include "openturns/ExponentialModel.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

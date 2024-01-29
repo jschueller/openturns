@@ -20,10 +20,8 @@
  */
 #include "openturns/MemoizeFunction.hxx"
 #include "openturns/MemoizeEvaluation.hxx"
-#include "openturns/NoGradient.hxx"
 #include "openturns/CenteredFiniteDifferenceGradient.hxx"
 #include "openturns/NonCenteredFiniteDifferenceGradient.hxx"
-#include "openturns/NoHessian.hxx"
 #include "openturns/CenteredFiniteDifferenceHessian.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 

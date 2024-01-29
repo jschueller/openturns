@@ -19,17 +19,13 @@
  *
  */
 #include <cmath>
-#include <cstdlib>
 
 #include "openturns/StrongMaximumTest.hxx"
 #include "openturns/Normal.hxx"
-#include "openturns/IdentityMatrix.hxx"
 #include "openturns/NearestPointChecker.hxx"
 #include "openturns/DistributionImplementation.hxx"
-#include "openturns/ComparisonOperatorImplementation.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

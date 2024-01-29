@@ -23,13 +23,11 @@
 
 #include "openturns/EvaluationImplementation.hxx"
 #include "openturns/UniVariateFunction.hxx"
-#include "openturns/PersistentCollection.hxx"
 #include "openturns/Point.hxx"
 
 
 
 BEGIN_NAMESPACE_OPENTURNS
-
 
 
 /**

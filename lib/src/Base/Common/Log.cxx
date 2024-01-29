@@ -21,7 +21,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
-#include <errno.h>
 
 #include "openturns/Log.hxx"
 #include "openturns/OTconfig.hxx"

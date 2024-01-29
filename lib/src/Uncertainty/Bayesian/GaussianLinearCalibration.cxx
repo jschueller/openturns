@@ -23,6 +23,7 @@
 #include "openturns/Normal.hxx"
 #include "openturns/LinearFunction.hxx"
 #include "openturns/SpecFunc.hxx"
+#include "openturns/LeastSquaresMethod.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

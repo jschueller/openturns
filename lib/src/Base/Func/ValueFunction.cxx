@@ -21,7 +21,6 @@
 #include "openturns/ValueFunction.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/EvaluationImplementation.hxx"
-#include "openturns/NoEvaluation.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/DiracFactory.hxx"
-#include "openturns/DiscreteDistribution.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

@@ -18,8 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cmath>
-
 #include "openturns/CorrelationAnalysis.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/LinearLeastSquares.hxx"

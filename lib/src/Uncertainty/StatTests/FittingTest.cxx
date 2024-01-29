@@ -19,7 +19,6 @@
  *
  */
 #include <cmath>
-#include <fstream>
 #include "openturns/FittingTest.hxx"
 #include "openturns/Point.hxx"
 #include "openturns/Description.hxx"
@@ -31,7 +30,6 @@
 #include "openturns/DistFunc.hxx"
 #include "openturns/NearestNeighbour1D.hxx"
 #include "openturns/OTconfig.hxx"
-#include "openturns/HypothesisTest.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

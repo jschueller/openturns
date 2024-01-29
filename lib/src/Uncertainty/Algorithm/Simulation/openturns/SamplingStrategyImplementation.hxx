@@ -24,7 +24,6 @@
 #include "openturns/PersistentObject.hxx"
 #include "openturns/Point.hxx"
 #include "openturns/Sample.hxx"
-#include "openturns/PersistentObject.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

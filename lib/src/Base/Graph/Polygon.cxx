@@ -20,7 +20,6 @@
  */
 #include "openturns/Polygon.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Log.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

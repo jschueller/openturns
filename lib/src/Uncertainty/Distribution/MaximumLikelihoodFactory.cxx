@@ -18,17 +18,12 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-#include <iomanip>
-#include <fstream>
 #include "openturns/MaximumLikelihoodFactory.hxx"
 #include "openturns/Description.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/OTconfig.hxx"
 #include "openturns/Log.hxx"
-#include "openturns/Os.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/TNC.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Matrix.hxx"
 #include "openturns/EvaluationImplementation.hxx"

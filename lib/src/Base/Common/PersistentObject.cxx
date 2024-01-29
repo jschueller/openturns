@@ -19,6 +19,7 @@
  *
  */
 #include "openturns/PersistentObject.hxx"
+#include "openturns/StorageManager.hxx"
 #include "openturns/OTprivate.hxx"
 #include "openturns/OTconfig.hxx"
 

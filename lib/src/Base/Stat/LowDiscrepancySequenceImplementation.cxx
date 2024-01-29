@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/LowDiscrepancySequenceImplementation.hxx"
-#include "openturns/SpecFunc.hxx"
 #include "openturns/Exception.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 

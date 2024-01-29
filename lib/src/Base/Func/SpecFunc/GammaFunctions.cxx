@@ -23,7 +23,6 @@
 
 #include "openturns/GammaFunctions.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/Log.hxx"
 #include "openturns/SpecFunc.hxx"
 #ifdef OPENTURNS_HAVE_BOOST
 #include <boost/math/special_functions/gamma.hpp>

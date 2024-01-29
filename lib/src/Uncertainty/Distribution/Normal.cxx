@@ -18,7 +18,6 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
 #include <cmath>
 
 #include "openturns/Normal.hxx"
@@ -29,7 +28,6 @@
 #include "openturns/OSS.hxx"
 #include "openturns/DistFunc.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/Matrix.hxx"
 #include "openturns/MatrixImplementation.hxx"
 #include "openturns/NormalCopula.hxx"
 #include "openturns/ResourceMap.hxx"

@@ -19,7 +19,6 @@
  *
  */
 #include "openturns/Bisection.hxx"
-#include <cmath>
 #include "openturns/PersistentObjectFactory.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS

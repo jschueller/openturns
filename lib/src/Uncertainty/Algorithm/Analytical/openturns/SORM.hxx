@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief SORM implements the First Order Reliability Method
+ *  @brief SORM implements the Second Order Reliability Method
  *
  *  Copyright 2005-2024 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -22,8 +22,6 @@
 #define OPENTURNS_SORM_HXX
 
 #include "openturns/Analytical.hxx"
-#include "openturns/SquareMatrix.hxx"
-#include "openturns/Distribution.hxx"
 #include "openturns/SORMResult.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
@@ -36,13 +34,10 @@ BEGIN_NAMESPACE_OPENTURNS
  * and compute the results of such kind of analyses
  */
 
-class OT_API SORM :
-  public Analytical
+class OT_API SORM : public Analytical
 {
-
   CLASSNAME
 public:
-
 
   /** Default constructor */
   SORM();

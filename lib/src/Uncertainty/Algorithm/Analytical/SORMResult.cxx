@@ -20,7 +20,7 @@
  */
 #include <cmath>
 
-#include "openturns/SORM.hxx"
+#include "openturns/SORMResult.hxx"
 #include "openturns/StandardEvent.hxx"
 #include "openturns/Function.hxx"
 #include "openturns/SymmetricTensor.hxx"
@@ -31,7 +31,6 @@
 #include "openturns/StandardEvent.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/SpecFunc.hxx"
-#include "openturns/Os.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

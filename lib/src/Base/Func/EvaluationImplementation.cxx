@@ -28,6 +28,7 @@
 #include "openturns/Curve.hxx"
 #include "openturns/Box.hxx"
 #include "openturns/MarginalEvaluation.hxx"
+#include "openturns/Evaluation.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

@@ -19,7 +19,6 @@
  *
  */
 #include <cmath>
-#include <iomanip>
 #include <limits>
 #include "openturns/XMLStorageManager.hxx"
 #include "openturns/PersistentObject.hxx"
@@ -32,7 +31,6 @@
 #include "openturns/Log.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/OTconfig.hxx"
-#include "openturns/SpecFunc.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

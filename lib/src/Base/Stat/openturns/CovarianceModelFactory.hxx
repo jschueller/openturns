@@ -22,7 +22,6 @@
 #define OPENTURNS_COVARIANCEMODELFACTORY_HXX
 
 #include "openturns/CovarianceModelFactoryImplementation.hxx"
-#include "openturns/PersistentObject.hxx"
 #include "openturns/TypedInterfaceObject.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
@@ -30,7 +29,7 @@ BEGIN_NAMESPACE_OPENTURNS
 /**
  * @class  CovarianceModelFactory
  */
-class OT_API  CovarianceModelFactory
+class OT_API CovarianceModelFactory
   : public TypedInterfaceObject<CovarianceModelFactoryImplementation>
 {
   CLASSNAME

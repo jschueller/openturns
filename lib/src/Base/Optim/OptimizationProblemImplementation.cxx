@@ -18,15 +18,9 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-
 #include "openturns/OptimizationProblemImplementation.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/SymmetricTensor.hxx"
-#include "openturns/IdentityMatrix.hxx"
-#include "openturns/QuadraticFunction.hxx"
-#include "openturns/LinearFunction.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 

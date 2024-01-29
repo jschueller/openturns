@@ -20,8 +20,6 @@
  */
 #include <cmath>
 #include <limits>
-#include <cstdlib>
-#include <iostream>
 
 #include "openturns/SpecFunc.hxx"
 #include "openturns/BetaFunctions.hxx"
@@ -30,7 +28,6 @@
 #include "Faddeeva.hh"
 #include "openturns/GammaFunctions.hxx"
 #include "openturns/Exception.hxx"
-#include "openturns/ResourceMap.hxx"
 #include "openturns/Function.hxx"
 #include "openturns/GaussKronrod.hxx"
 #include "openturns/PlatformInfo.hxx"
