@@ -13,7 +13,7 @@ jobs:
     - run: cat /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
     - run: |
         git clone -b v19.24.2 https://github.com/davisking/dlib.git
-        cmake -b dlib/build -DDLIB_USE_BLAS=ON -DDLIB_USE_LAPACK=ON -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=ON dlib
+        cmake -B dlib/build -DDLIB_USE_BLAS=ON -DDLIB_USE_LAPACK=ON -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=ON dlib
         cmake --build dlib/build --target install --parallel 3
     - run: cat /usr/local/lib/cmake/dlib/dlib.cmake
     - run: diff -ur /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake /usr/local/lib/cmake/dlib/dlib.cmake
