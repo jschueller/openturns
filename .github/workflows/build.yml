@@ -9,22 +9,14 @@ jobs:
       CPPFLAGS: -I/usr/local/opt/openblas/include
     steps:
     - uses: actions/checkout@v4
+    - run: brew install dlib
+    - run: cat /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
     - run: |
-        brew --prefix
-        brew --cellar
-        brew install dlib
-        #ls -l /usr/local/lib/cmake/dlib
-        ls -l /usr/local/Cellar
-        ls -l /usr/local/Cellar/dlib
-        ls -l /usr/local/Cellar/dlib/19.24.2
-        ls -l /usr/local/Cellar/dlib/19.24.2/lib
-        ls -l /usr/local/Cellar/dlib/19.24.2/lib/cmake
-        ls -l /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib
-        cat /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/*.cmake
-        #grep -nr system /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib
-        #ls -l /usr/local/lib/Cellar/dlib/19.24.2/lib/cmake/dlib
-        #grep -nr system /usr/local/lib/cmake/dlib
-        
+        git clone -b v19.24.2 https://github.com/davisking/dlib.git
+        cmake -b dlib/build -DDLIB_USE_BLAS=ON -DDLIB_USE_LAPACK=ON -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=ON dlib
+        cmake --build dlib/build --target install --parallel 3
+    - run: cat /usr/local/lib/cmake/dlib/dlib.cmake
+    - run: diff -ur /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake /usr/local/lib/cmake/dlib/dlib.cmake
     - run: |
         cmake \
         -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=32 -DBUILD_PYTHON=OFF .
