@@ -10,7 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-        brew install openblas dlib
+        brew install dlib
+        ls -l /usr/local/lib/cmake/dlib
+        grep -nr system /usr/local/lib/cmake/dlib
     - run: |
         cmake \
         -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=32 -DBUILD_PYTHON=OFF .
