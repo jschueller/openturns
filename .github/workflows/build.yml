@@ -17,11 +17,12 @@ jobs:
         #cmake --build dlib/build --target install --parallel 3
     #- run: cat /tmp/install/lib/cmake/dlib/dlib.cmake
     #- run: diff -ur /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake /tmp/install/lib/cmake/dlib/dlib.cmake
+    - run: sed -i .bak "s|/Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/usr/include||g" /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
     - run: |
         git clone https://github.com/jschueller/dlib-cmake-example
         cmake -B dlib-cmake-example/build dlib-cmake-example
         cmake --build dlib-cmake-example/build
-    - run: sed -i .bak "s|/Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/usr/include||g" /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
+    #- run: sed -i .bak "s|/Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/usr/include||g" /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
     - run: cat /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib/dlib.cmake
     - run: cat /usr/local/lib/cmake/dlib/dlib.cmake
     - run: |
