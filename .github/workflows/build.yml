@@ -20,6 +20,7 @@ jobs:
         ls -l /usr/local/Cellar/dlib/19.24.2/lib
         ls -l /usr/local/Cellar/dlib/19.24.2/lib/cmake
         ls -l /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib
+        grep -nr system /usr/local/Cellar/dlib/19.24.2/lib/cmake/dlib
         #ls -l /usr/local/lib/Cellar/dlib/19.24.2/lib/cmake/dlib
         #grep -nr system /usr/local/lib/cmake/dlib
         
