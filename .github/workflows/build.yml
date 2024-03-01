@@ -10,9 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
+        brew --prefix
+        brew --cellar
         brew install dlib
         ls -l /usr/local/lib/cmake/dlib
-        ls -l ../../Cellar/dlib/19.24.2/lib/cmake/dlib
+        ls -l /usr/local/lib/Cellar/dlib/19.24.2/lib/cmake/dlib
         grep -nr system /usr/local/lib/cmake/dlib
     - run: |
         cmake \
