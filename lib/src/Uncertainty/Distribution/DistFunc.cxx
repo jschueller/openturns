@@ -37,6 +37,10 @@
 
 #include <boost/math/distributions/hypergeometric.hpp>
 
+#if BOOST_VERSION >= 107500
+#include <boost/math/distributions/kolmogorov_smirnov.hpp>
+#endif
+
 #endif
 
 // The following implementation of the Kolmogorov CDF and tail CDF is used in a LGPL context with written permission of the author.
@@ -850,8 +854,15 @@ Scalar DistFunc::pKolmogorov(const UnsignedInteger n,
                              const Scalar x,
                              const Bool tail)
 {
+#if defined(OPENTURNS_HAVE_BOOST) && (BOOST_VERSION >= 107500)
+  if (tail)
+    return boost::math::cdf(complement(boost::math::kolmogorov_smirnov_distribution<Scalar>(static_cast<Scalar>(n)), x));
+  else
+    return boost::math::cdf(boost::math::kolmogorov_smirnov_distribution<Scalar>(static_cast<Scalar>(n)), x);
+#else
   if (tail) return KSfbar(n, x);
   else return KScdf(n, x);
+#endif
 }
 
 /***************************************************************************************************************/
