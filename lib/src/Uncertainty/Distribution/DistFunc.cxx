@@ -39,6 +39,9 @@
 
 #if BOOST_VERSION >= 107500
 #include <boost/math/distributions/kolmogorov_smirnov.hpp>
+#else
+// bundled copy
+#include "kolmogorov_smirnov.hpp"
 #endif
 
 #endif
@@ -854,7 +857,7 @@ Scalar DistFunc::pKolmogorov(const UnsignedInteger n,
                              const Scalar x,
                              const Bool tail)
 {
-#if defined(OPENTURNS_HAVE_BOOST) && (BOOST_VERSION >= 107500)
+#if defined(OPENTURNS_HAVE_BOOST)
   if (tail)
     return boost::math::cdf(complement(boost::math::kolmogorov_smirnov_distribution<Scalar>(static_cast<Scalar>(n)), x));
   else
