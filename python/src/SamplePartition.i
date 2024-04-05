@@ -13,3 +13,31 @@
 %copyctor OT::SamplePartition;
 
 %include openturns/SamplePartition.hxx
+
+%pythoncode %{
+def __SamplePartition_ExtractFromDataFrame(full, partial):
+    """
+    Extract a partition from a pandas dataframe as a SamplePartition.
+
+    Parameters
+    ----------
+    full : pandas DataFrame
+        Full data
+    partial : pandas DataFrame
+        Filtered data from the full Dataframe
+
+    Returns
+    -------
+    partition : :class:`openturns.experimental.SamplePartition`
+        The resulting partition
+    """
+
+    # retrieve the partial indices wrt to the global indices in the full data
+    partial_indices = [i for i, x in enumerate(full.index.isin(partial.index)) if x]
+
+    # convert the full dataframe to a Sample
+    full_sample = openturns.typ.Sample.BuildFromDataFrame(full)
+
+    return openturns.experimental.SamplePartition(full_sample, partial_indices)
+SamplePartition.ExtractFromDataFrame = __SamplePartition_ExtractFromDataFrame
+%}

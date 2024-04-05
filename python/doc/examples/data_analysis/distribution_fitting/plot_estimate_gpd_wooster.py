@@ -59,9 +59,10 @@ view = otv.View(graph)
 # %%
 # Find consecutive exceedances clusters and the associated peaks for several thresholds/minimum gap
 winter = full_season["winter"]
-winter_indices = [i for i, x in enumerate(full.index.isin(winter.index)) if x]
-winter_sample = ot.Sample.BuildFromDataFrame(full)
-part = otexp.SamplePartition(winter_sample, winter_indices)
+
+# partition the aggregated winter sample according to indices (enforces separation of seasons from different years)
+part = otexp.SamplePartition.ExtractFromDataFrame(full, winter)
+
 factory = ot.GeneralizedParetoFactory()
 for u in [-10.0, -20.0]:
     for r in [1, 3]:
