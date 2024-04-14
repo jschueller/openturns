@@ -13,7 +13,13 @@ from openturns.usecases import coles
 import pandas as pd
 
 # %%
-# First, we load the Wooster dataset (negate the values to transform minimum to maximum) and look at it through time.
+# First, we load the Wooster dataset. As we want to model very low temperatures,
+# we first negate the values to transform minimum to maximum. Hence, large positive
+# observations correspond to extreme cold conditions. We look at the negated data
+# through time. The data are plotted as degrees Fahrenheit below zero. We see that
+# there is a strong annual cycle in the data.
+#
+# We use the pandas library.
 full = pd.read_csv(coles.Coles().wooster, index_col=0, parse_dates=True)
 full["Temperature"] = full["Temperature"].apply(lambda x: x * -1.0)
 print(full[:10])
@@ -29,7 +35,10 @@ graph.setIntegerXTick(True)
 view = otv.View(graph)
 
 # %%
-# Stratification of values by season
+# In order to decresae the time-varying trend, we partition the data into the four
+# seasons. To perform that data stratification, we use the pandas library once more.
+# The graphs show that there is still non-stationarity within each season's data
+# but to a lesser extent than in the original series.
 full_season = {}
 full_season["winter"] = full[(full.index.month >= 12) | (full.index.month < 3)]
 full_season["spring"] = full[(full.index.month >= 3) & (full.index.month < 6)]
@@ -47,9 +56,25 @@ for season in full_season:
     view = otv.View(graph)
 
 # %%
-# Draw clusters on the first 40 days
-first40 = ot.Sample.BuildFromDataFrame(full[350:450])
-part = otexp.SamplePartition(first40)
+# Here, we illustrate that threshold exceedances occur in groups: one
+# extremely cold day is likely to be followed by another, implying that observations
+# exceeding a high threshold are dependent. Hence we use the declustering method
+# which filters the dependent observations exceeding a given threshold to obtain a
+# set of threshold excesses that can be assumed independent.
+#
+# First, we specify a threshold :mat:`u`.
+# Consecutive exceedances of the threshold belong to the same cluster. Two distinct
+# clusters are separated by :math:`r` consecutive observations under the
+# threshold. Within each cluster, we select the maximum value that will be used to
+# infer the GPD distribution. The cluster maxima are assumed to be independent.
+#
+# On the graph, we show the clusters associated to the threshold :math:`u=0`
+# and the respective maximum selected from a
+# 100-day portion of the Wooster daily minimum temperature series.
+# It is possible to extract the data belonging to the same cluster and the
+# cluster maximum series.
+first100 = ot.Sample.BuildFromDataFrame(full[350:450])
+part = otexp.SamplePartition(first100)
 u = 0.0
 r = 4
 peaks, clusters = part.getPeakOverThreshold(u, r)
@@ -57,7 +82,21 @@ graph = clusters.draw(u)
 view = otv.View(graph)
 
 # %%
-# Find consecutive exceedances clusters and the associated peaks for several thresholds/minimum gap
+# Here, we illustrate the effect of different choices for :math:`u`
+# and :math:`r` on the estimate of the GPD distriution. We focus on the winter
+# season. We erform the following steps, for each :math:`(u, r)`: 
+#
+# - we extract the clusters and the associated peaks,
+# - we fit a GPD distribution on te excesses by the maximum likelihood method,
+# - we estimate the :math:`95\%` confidence interval of each parameter,
+# - we evaluate the :math:`T=100`-year return level which corresponds to the
+#   :math:`m`-observation return level, where :math:`m = T*n_y` with :math:`n_y`
+#   the number of observations per year. Here, we consider the winter season
+#   which is 90 days long.
+#
+# The stability in the return level estimations confirms that the
+# inference is robust despite the subjective choices that need to be made
+# on :math:`(u, r)`.
 winter = full_season["winter"]
 
 # partition the aggregated winter sample according to indices (enforces separation of seasons from different years)
@@ -77,7 +116,7 @@ for u in [-10.0, -20.0]:
         sigma, xi, _ = result_LL.getParameterDistribution().getMean()
         sigma_stddev, xi_stddev, _ = result_LL.getParameterDistribution().getStandardDeviation()
         print(f"u={u} r={r} nc={nc} sigma={sigma:.2f} ({sigma_stddev:.2f}) xi={xi:.2f} ({xi_stddev:.2f})", end=" ")
-        print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()}) theta={theta:.2f}")
+        print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()})")
 
         # plot the return level
         validation = otexp.GeneralizedParetoValidation(result_LL, peaks)
