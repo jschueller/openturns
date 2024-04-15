@@ -767,10 +767,10 @@ Parameters
 ----------
 result : :class:`~openturns.DistributionFactoryResult`
     Likelihood estimation result of a :class:`~openturns.GeneralizedPareto`
-m : float
-    The return period expressed in terms of number of observations.
 sample : 2-d sequence of float
     The initial sample.
+m : float
+    The return period expressed in terms of number of observations.
 theta : float, optional
     The extremal index defined in :eq:`defThetaZetaU`.
     
@@ -780,7 +780,6 @@ Returns
 -------
 distribution : :class:`~openturns.Distribution`
     The asymptotic distribution of :math:`\hat{z}_m`."
-
 
 // ----------------------------------------------------------------------------
 
@@ -818,6 +817,10 @@ m : float
     The return period expressed in terms of number of observations.
 u : float
     The threshold above which a GPD is fitted.
+theta : float, optional
+    The extremal index defined in :eq:`defThetaZetaU`.
+    
+    Default value is 1.
 
 Returns
 -------
@@ -855,6 +858,10 @@ sample : 2-d sequence of float
     A sample of dimension 1.
 u : float
     The threshold above which a GPD is fitted.
+theta : float, optional
+    The extremal index defined in :eq:`defThetaZetaU`.
+    
+    Default value is 1.
 
 Returns
 -------
