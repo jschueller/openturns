@@ -770,7 +770,7 @@ result : :class:`~openturns.DistributionFactoryResult`
 m : float
     The return period expressed in terms of number of observations.
 sample : 2-d sequence of float
-    The same sample used for the likelihood estimation (to compute :math:`\zeta_u`).
+    The initial sample.
 theta : float, optional
     The extremal index defined in :eq:`defThetaZetaU`.
     
@@ -787,7 +787,10 @@ distribution : :class:`~openturns.Distribution`
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelProfileLikelihoodEstimator
 "Estimate :math:`(z_m, \xi)` and its distribution with the profile likelihood.
 
-The estimators are defined in :meth:`buildReturnLevelProfileLikelihood`.
+The return level :math:`z_m` is defined in :meth:`buildReturnLevelEstimator`.
+
+The profile log-likelihood :math:`\ell_p(z_m)` is defined in
+:meth:`buildReturnLevelProfileLikelihood`.
 
 The parameter estimates are given by:
 
@@ -796,7 +799,7 @@ The parameter estimates are given by:
 
     \begin{align*}
     \hat{z}_m = \argmax_{z_m} \ell_p(z_m)\\
-    \hat{\xi} = \argmax_{(\xi)} \ell(\hat{z}_m, \xi)
+    \hat{\xi} = \argmax_{\xi} \ell(\hat{z}_m, \xi)
     \end{align*}
 
 The result class produced by the method provides:
@@ -812,9 +815,9 @@ Parameters
 sample : 2-d sequence of float
     A sample of dimension 1.
 m : float
-    The :math:`m`-observation return period.
+    The return period expressed in terms of number of observations.
 u : float
-    The location parameter
+    The threshold above which a GPD is fitted.
 
 Returns
 -------
@@ -826,11 +829,14 @@ result : :class:`~openturns.ProfileLikelihoodResult`
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelProfileLikelihood
 "Estimate a return level and its distribution with the profile likelihood.
 
+
+The return level :math:`z_m` is defined in :meth:`buildReturnLevelEstimator`.
+
 The estimator is defined using a nested numerical optimization of the log-likelihood:
 
 .. math::
 
-    \ell_p (z_m) = \max_{(\xi)} \ell (z_m, \xi, u)
+    \ell_p (z_m) = \max_{\xi} \ell (z_m, \xi, u)
 
 where :math:`\ell (z_m, \xi, u)` is the log-likelihood detailed in :eq:`llR1` and :eq:`llR2` where we substitued
 :math:`\sigma` for :math:`z_m` using equations :eq:`xm1` or :eq:`xm2`.
@@ -848,7 +854,7 @@ Parameters
 sample : 2-d sequence of float
     A sample of dimension 1.
 u : float
-    The location parameter
+    The threshold above which a GPD is fitted.
 
 Returns
 -------
