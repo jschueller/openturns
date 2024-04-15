@@ -62,7 +62,7 @@ for season in full_season:
 # which filters the dependent observations exceeding a given threshold to obtain a
 # set of threshold excesses that can be assumed independent.
 #
-# First, we specify a threshold :mat:`u`.
+# First, we specify a threshold :math:`u`.
 # Consecutive exceedances of the threshold belong to the same cluster. Two distinct
 # clusters are separated by :math:`r` consecutive observations under the
 # threshold. Within each cluster, we select the maximum value that will be used to
@@ -84,7 +84,7 @@ view = otv.View(graph)
 # %%
 # Here, we illustrate the effect of different choices for :math:`u`
 # and :math:`r` on the estimate of the GPD distriution. We focus on the winter
-# season. We erform the following steps, for each :math:`(u, r)`:
+# season. We perform the following steps, for each :math:`(u, r)`:
 #
 # - we extract the clusters and the associated peaks,
 # - we fit a GPD distribution on te excesses by the maximum likelihood method,
