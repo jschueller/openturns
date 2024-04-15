@@ -35,8 +35,8 @@ graph.setIntegerXTick(True)
 view = otv.View(graph)
 
 # %%
-# In order to decresae the time-varying trend, we partition the data into the four
-# seasons. To perform that data stratification, we use the pandas library once more.
+# In order to decrease the time-varying trend, we partition the data into the four
+# seasons. To perform that data stratification, we use the pandas library once again.
 # The graphs show that there is still non-stationarity within each season's data
 # but to a lesser extent than in the original series.
 full_season = {}
@@ -62,7 +62,7 @@ for season in full_season:
 # which filters the dependent observations exceeding a given threshold to obtain a
 # set of threshold excesses that can be assumed independent.
 #
-# First, we specify a threshold :mat:`u`.
+# First, we specify a threshold :math:`u`.
 # Consecutive exceedances of the threshold belong to the same cluster. Two distinct
 # clusters are separated by :math:`r` consecutive observations under the
 # threshold. Within each cluster, we select the maximum value that will be used to
@@ -84,15 +84,18 @@ view = otv.View(graph)
 # %%
 # Here, we illustrate the effect of different choices for :math:`u`
 # and :math:`r` on the estimate of the GPD distriution. We focus on the winter
-# season. We erform the following steps, for each :math:`(u, r)`:
+# season. We perform the following steps, for each :math:`(u, r)`:
 #
 # - we extract the clusters and the associated peaks,
-# - we fit a GPD distribution on te excesses by the maximum likelihood method,
+# - we fit a GPD distribution on the excesses by the maximum likelihood method,
 # - we estimate the :math:`95\%` confidence interval of each parameter,
 # - we evaluate the :math:`T=100`-year return level which corresponds to the
 #   :math:`m`-observation return level, where :math:`m = T*n_y` with :math:`n_y`
 #   the number of observations per year. Here, we consider the winter season
-#   which is 90 days long.
+#   which is about 90 days long. To calculate it, we evaluate the extremal index
+#   :math:`\theta` which is the inverse of the mean length of the clusters,
+#   estimated by the ratio between the number of clusters and the number
+#   of exceedances of :math:`u`.
 #
 # The stability in the return level estimations confirms that the
 # inference is robust despite the subjective choices that need to be made
@@ -110,13 +113,17 @@ for u in [-10.0, -20.0]:
         nc = len(peaks)
         nu = (winter > u).values.sum()
 
-        # fit a stationary gpd on the clusters and estimate the return level
-        theta = nc / nu
+        # fit a stationary gpd on the clusters
         result_LL = factory.buildMethodOfLikelihoodMaximizationEstimator(peaks, u)
-        xm_100 = factory.buildReturnLevelEstimator(result_LL, 100.0 * 90, winter_sample, theta)
         sigma, xi, _ = result_LL.getParameterDistribution().getMean()
         sigma_stddev, xi_stddev, _ = result_LL.getParameterDistribution().getStandardDeviation()
         print(f"u={u} r={r} nc={nc} sigma={sigma:.2f} ({sigma_stddev:.2f}) xi={xi:.2f} ({xi_stddev:.2f})", end=" ")
+        
+        # estimate the T-year return level
+        ny = 90
+        T = 100
+        theta = nc / nu
+        xm_100 = factory.buildReturnLevelEstimator(result_LL, T*ny, winter_sample, theta)
         print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()})")
 
         # plot the return level

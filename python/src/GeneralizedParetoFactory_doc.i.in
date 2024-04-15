@@ -715,15 +715,11 @@ result : :class:`~openturns.TimeVaryingResult`
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelEstimator
 "Estimate a return level and its distribution from the GPD parameters.
 
-The :math:`m`-observation return level :math:`x_m` is the level exceeded on
+The :math:`m`-observation return level :math:`z_m` is the level exceeded on
 average once every :math:`m` observations.
 The :math:`m`-observation return level can be translated on the annual-scale: if there
 are :math:`n_y` observations per year, then the :math:`N`-year return level
 corresponds to the :math:`m`-observation return level where :math:`m = n_yN`.
-
-The :math:`m`-observation return level is defined as the quantile as :math:`1-1/m`
-of the observation distribution :math:`X` which is built from the GPD and the
-probability to exceed :math:`u`.
 
 If :math:`\xi \neq 0`:
 
@@ -739,9 +735,19 @@ If :math:`\xi = 0`:
 
     z_m = u + \sigma \log(m \zeta_u \theta)
 
-with :math:`\zeta_u` the sample proportion of points exceeding the threshold :math:`u` and :math:`\theta` the extremal index, estimated by the proportion
-of clusters within the points exceeding the threshold. Hence, :math:`\zeta_u\theta`
-is the proportion of clusters in the sample.
+with :math:`\zeta_u` the probability of an exceedance of :math:`u`
+and :math:`\theta` the extremal index. Denoting the number of observations by
+:math:`n`, the number of  exceedances of the threshold :math:`u` by
+:math:`n_u` and the number of clusters obtained above :math:`u` by
+:math:`n_c`, then :math:`\zeta_u` and :math:`\theta` are estimated as:
+
+.. math::
+    :label: defThetaZetaU 
+
+    \zeta_u & = \dfrac{n_u}{n}\\
+    \theta  & = \dfrac{n_c}{n_u}
+
+If the data are independent, no clustering is performed and :math:`\theta=1`.
 
 The estimator :math:`\hat{z}_m` of :math:`z_m` is deduced from the estimator
 :math:`(\hat{\sigma}, \hat{\xi}, \hat{\zeta_u})` of :math:`(\sigma, \xi, \zeta_u)`
@@ -766,8 +772,9 @@ m : float
 sample : 2-d sequence of float
     The same sample used for the likelihood estimation (to compute :math:`\zeta_u`).
 theta : float, optional
-    When clustering is performed, this is the ratio :math:`\theta = \frac{n_c}{n_u}` of number
-    of clusters over number of exceedances, otherwise defaults to 1.
+    The extremal index defined in :eq:`defThetaZetaU`.
+    
+    Default value is 1.
 
 Returns
 -------
