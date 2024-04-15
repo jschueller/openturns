@@ -60,7 +60,7 @@ for season in full_season:
 # extremely cold day is likely to be followed by another, implying that observations
 # exceeding a high threshold are dependent. Hence we use the declustering method
 # which filters the dependent observations exceeding a given threshold to obtain a
-# set of threshold excesses that can be assumed independent.
+# set of threshold excesses that can be assumed as independent.
 #
 # First, we specify a threshold :math:`u`.
 # Consecutive exceedances of the threshold belong to the same cluster. Two distinct
