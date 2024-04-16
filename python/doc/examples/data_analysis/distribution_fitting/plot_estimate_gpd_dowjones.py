@@ -34,7 +34,7 @@ view = otv.View(graph)
 # %%
 # In that example, the time dependence can
 # not be explained by trends or seasonal cycles. Many empirical
-# studies have adviced to consider the logarithms of ratios of
+# studies have advised to consider the logarithms of ratios of
 # successive observations to get an approximation to stationarity.
 # We apply that transformation:
 #

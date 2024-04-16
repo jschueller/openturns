@@ -145,7 +145,7 @@ except Exception as ex:
 # We evaluate the :math:`T`-year return level which corresponds to the
 # :math:`m`-observation return level, where :math:`m = T*n_y` with :math:`n_y`
 # the number of observations per year. Here, we have daily observations, hence
-# :math:`n_y = 365`. As we assumed that the observations were independent, the extremal index is :math:`\theta=1` wich is the default value.
+# :math:`n_y = 365`. As we assumed that the observations were independent, the extremal index is :math:`\theta=1` which is the default value.
 #
 # The method also provides the asymptotic distribution of the estimator :math:`\hat{z}_m`.
 ny = 365
