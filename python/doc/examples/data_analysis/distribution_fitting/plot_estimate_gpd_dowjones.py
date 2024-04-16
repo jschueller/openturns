@@ -36,7 +36,7 @@ view = otv.View(graph)
 # not be explained by trends or seasonal cycles. Many empirical
 # studies have adviced to consider the logarithms of ratios of
 # successive observations to get an approximation to stationarity.
-# We apply that transformation: 
+# We apply that transformation:
 #
 # .. math::
 #     \tilde{X}_i = \log X_i - \log X_{i-1}.
@@ -156,7 +156,7 @@ part = otexp.SamplePartition(scalTransfDataDJ)
 r = 3
 peaks, clusters = part.getPeakOverThreshold(u, r)
 nc = len(peaks)
-nu = sum([1 if sample[i, 0] > u else 0 for i in range(size)])
+nu = sum([1 if scalTransfDataDJ[i, 0] > u else 0 for i in range(size)])
 print(f"nc={nc} nu={u} theta={nc/nu:.3f}")
 graph = clusters.draw(u)
 graph.setTitle('Threshold exceedances and clusters by transformed Dow Jones Index series')
@@ -181,7 +181,7 @@ print(f"u={u} r={r} nc={nc} sigma={sigma:.2f} ({sigma_stddev:.2f}) xi={xi:.2f} (
 theta = nc / nu
 ny = 365
 T = 100
-xm_100 = factory.buildReturnLevelEstimator(result_LL, T*ny, scalTransfDataDJ, theta)
+xm_100 = factory.buildReturnLevelEstimator(result_LL, T * ny, scalTransfDataDJ, theta)
 print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()}) theta={theta:.3f}")
 
 # %%

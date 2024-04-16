@@ -150,7 +150,7 @@ except Exception as ex:
 # The method also provides the asymptotic distribution of the estimator :math:`\hat{z}_m`.
 ny = 365
 T10 = 10
-zm_10 = factory.buildReturnLevelEstimator(result_LL, T10*ny, dataRain)
+zm_10 = factory.buildReturnLevelEstimator(result_LL, T10 * ny, dataRain)
 return_level_10 = zm_10.getMean()
 print("Maximum log-likelihood function : ")
 print(f"10-year return level = {return_level_10}")
@@ -158,7 +158,7 @@ return_level_ci10 = zm_10.computeBilateralConfidenceInterval(0.95)
 print(f"CI = {return_level_ci10}")
 
 T100 = 100
-zm_100 = factory.buildReturnLevelEstimator(result_LL, T100*ny, dataRain)
+zm_100 = factory.buildReturnLevelEstimator(result_LL, T100 * ny, dataRain)
 return_level_100 = zm_100.getMean()
 print(f"100-year return level = {return_level_100}")
 return_level_ci100 = zm_100.computeBilateralConfidenceInterval(0.95)
@@ -169,7 +169,7 @@ print(f"CI = {return_level_ci100}")
 #
 # We can estimate the :math:`m`-observation return level :math:`z_m` directly from the data using the profile
 # likelihood with respect to :math:`z_m`.
-result_zm_100_PLL = factory.buildReturnLevelProfileLikelihoodEstimator(dataRain, u, T100*ny)
+result_zm_100_PLL = factory.buildReturnLevelProfileLikelihoodEstimator(dataRain, u, T100 * ny)
 zm_100_PLL = result_zm_100_PLL.getParameter()
 print(f"100-year return level (profile) = {zm_100_PLL}")
 
