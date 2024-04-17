@@ -525,9 +525,11 @@ has its own normalization:
 and with three ways of defining :math:`(c_k,d_k)` of the covariate :math:`y_k`:
 
 - the *CenterReduce* method where :math:`c_k = \dfrac{1}{n} \sum_{i=1}^n y_{k,i}` is the covariate mean
-and :math:`d_k = \sqrt{\dfrac{1}{n} \sum_{i=1}^n (y_{k,i}-c_k)^2}` is the standard deviation of the covariates;
-- the *MinMax* method where :math:`c_k = \min_i y_{k,i}` is the min value of the covariate :math:`y_k` and :math:`d_k = \max_i y_{k,i}- \min_i y_{k,i}` its range;
+  and :math:`d_k = \sqrt{\dfrac{1}{n} \sum_{i=1}^n (y_{k,i}-c_k)^2}` is the standard deviation of the covariates;
+- the *MinMax* method where :math:`c_k = \min_i y_{k,i}` is the min value of the covariate
+  :math:`y_k` and :math:`d_k = \max_i y_{k,i}- \min_i y_{k,i}` its range;
 - the *None* method where :math:`c_k = 0` and :math:`d_k = 1`: in that case, data are not normalized.
+
 
 Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
 :math:`(\sigma, \xi,u)`
@@ -622,8 +624,10 @@ The result class provides:
 - the normalizing function :math:`(\tau_1, \dots, \tau_d)`,
 - the optimal log-likelihood value :math:`\hat{\vect{\beta}}`,
 - the GEV distribution at covariate :math:`\vect{y}`,
-- the graphs of the quantile functions of order :math:`p`: :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components of :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each :math:`k`,
-- the graphs of the quantile functions of order :math:`p`: :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where all the components of :math:`\vect{y}` are fixed to a
+- the graphs of the quantile functions of order :math:`p`: :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all
+  the components of :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each :math:`k`,
+- the graphs of the quantile functions of order :math:`p`: :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where
+  all the components of :math:`\vect{y}` are fixed to a
   reference value excepted for :math:`(y_k, y_\ell)`, for each :math:`(k,\ell)`.
 
 
@@ -814,14 +818,14 @@ The :math:`m`-observation return level is defined as a particular quantile of :m
 If :math:`\xi \neq 0`:
 
 .. math::
-    :label: xm1
+    :label: xm1gpd
 
     z_m = u + \frac{\sigma}{\xi}\left[(m \zeta_u \theta)^{\xi} - 1 \right]
 
 If :math:`\xi = 0`:
 
 .. math::
-    :label: xm2
+    :label: xm2gpd
 
     z_m = u + \sigma \log(m \zeta_u \theta)
 
@@ -832,7 +836,7 @@ and :math:`\theta` the extremal index. Denoting the number of observations by
 :math:`n_c`, then :math:`\zeta_u` and :math:`\theta` are estimated as:
 
 .. math::
-    :label: defThetaZetaU 
+    :label: defThetaZetaU
 
     \zeta_u & = \dfrac{n_u}{n}\\
     \theta  & = \dfrac{n_c}{n_u}
@@ -896,10 +900,10 @@ Parameters
 ----------
 sample : 2-d sequence of float
     A sample of dimension 1.
-m : float
-    The return period expressed in terms of number of observations.
 u : float
     The threshold.
+m : float
+    The return period expressed in terms of number of observations.
 theta : float, optional
     The extremal index defined in :eq:`defThetaZetaU`.
     
@@ -926,8 +930,9 @@ The estimator is defined using a nested numerical optimization of the log-likeli
 
     \ell_p (z_m) = \max_{\xi} \ell (z_m, \xi, u)
 
-where :math:`\ell (z_m, \xi, u)` is the log-likelihood detailed in :eq:`llR1` and :eq:`llR2` where we substitued
-:math:`\sigma` for :math:`z_m` using equations :eq:`xm1` or :eq:`xm2`.
+where :math:`\ell (z_m, \xi, u)` is the log-likelihood detailed in :eq:`llgpdR1` and :eq:`llgpdR2`
+where we substitued
+:math:`\sigma` for :math:`z_m` using equations :eq:`xm1gpd` or :eq:`xm2gpd`.
 
 The estimator :math:`\hat{z}_m` of :math:`z_m` is defined by:
 
@@ -943,6 +948,8 @@ sample : 2-d sequence of float
     A sample of dimension 1.
 u : float
     The threshold.
+m : float
+    The return period expressed in terms of number of observations.
 theta : float, optional
     The extremal index defined in :eq:`defThetaZetaU`.
     

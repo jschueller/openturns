@@ -6,8 +6,8 @@ Let :math:`Z_t` be a non stationary GEV or GPD model:
 
 .. math::
 
-    Z_t \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))
-    Z_t \sim \mbox{GPD}(\sigma(t), \xi(t), u)
+    Z_t & \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))\\
+    Z_t & \sim \mbox{GPD}(\sigma(t), \xi(t), u)
 
 For the GPD, the threshold :math:`u` is assumed to be known.
 
@@ -29,6 +29,7 @@ as a function of the time stamps:
     \theta_q(t)  = h_q\left(\sum_{i=1}^{d_{\theta_q}} \beta_i^{\theta_q} \varphi_i^{\theta_q}(\tau(t))\right)
 
 where:
+
 - :math:`d_{\theta_q}` is the size of the functional basis involved in the modelling of
   :math:`\theta_q`,
 - :math:`h_q: \Rset \mapsto \Rset` is usually referred to as the *inverse-link function* of
@@ -202,7 +203,7 @@ If :math:`Z_t` is a non stationary GEV or GPD  model defined as follows:
 
 .. math::
 
-    Z_t & \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))
+    Z_t & \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))\\
     Z_t & \sim \mbox{GPD}(\sigma(t), \xi(t), u)
 
 then the standardized variables :math:`\hat{Z}_t` defined respectively by:
@@ -228,23 +229,23 @@ The *probability-probability* plot consists of the points (respectively for the 
 
 .. math::
     \left\{ \left( i/(n+1),\exp (-\exp (-\hat{z}_{(i)})) \right), i=1, \dots , n\right\}\\
-    \left\{( i/(n+1),1- \exp(-\tilde{y}_{(i)}) ) \right\}, i=1, \dots , n\right\}
+    \left\{ \left( i/(n+1), 1- \exp(-\tilde{y}_{(i)})    \right), i=1, \dots , n\right\}
 
 The *quantile-quantile* plot consists of the points (respectively for the GEV and GPD models):
 
 .. math::
-    \left\{  \left(  \hat{z}_{(i)},  -\log(-\log(i/(n+1)))  \right), i=1, \dots , n\right\} 
-    \left\{(\tilde{y}_{(i)}, -\log(1-i/(n+1)))) \right\}, \quad 1 \leq i \leq   n
+    \left\{  \left(  \hat{z}_{(i)},  -\log(-\log(i/(n+1)))  \right), i=1, \dots , n\right\} \\
+    \left\{ \left(   \tilde{y}_{(i)}, -\log(1-i/(n+1))      \right), i=1, \dots , n\right\}
     
 The *return level* plot consists of the points:
 
 .. math::
-    \left\{ \left( m, \hat{z}_m\right),m> 0\right\}
+    \left\{ \left( m, \hat{z}_m \right), m> 0 \right\}
 
 and the points:
 
 .. math::
-    \left\{ \left( m, \hat{z}_{m}^{emp}\right), m> 0\right\}
+    \left\{ \left( m, \hat{z}_{m}^{emp} \right), m> 0 \right\}
 
 where :math:`\hat{z}_{m}^{emp}` is the empirical :math:`m`-block return level of the transformed data and :math:`\hat{z}_{m}` the 
 :math:`m`-return level of the Gumbel/Exponential distribution.

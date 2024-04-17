@@ -47,7 +47,7 @@ curve = ot.Curve(days[:-1], transfDataDJ)
 graph = ot.Graph(
     "Log-daily returns of the Dow Jones Index", "Day index", "Index", True, ""
 )
-graph.setDrawable(curve, 0)
+graph.add(curve)
 view = otv.View(graph)
 
 
@@ -181,7 +181,7 @@ print(f"u={u} r={r} nc={nc} sigma={sigma:.2f} ({sigma_stddev:.2f}) xi={xi:.2f} (
 theta = nc / nu
 ny = 365
 T = 100
-xm_100 = factory.buildReturnLevelEstimator(result_LL, T * ny, scalTransfDataDJ, theta)
+xm_100 = factory.buildReturnLevelEstimator(result_LL, scalTransfDataDJ, T * ny, theta)
 print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()}) theta={theta:.3f}")
 
 # %%

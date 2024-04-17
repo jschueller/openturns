@@ -357,8 +357,10 @@ The result class provides:
 - the normalizing functions :math:`(\tau_1, \dots, \tau_d)`,
 - the optimal log-likelihood value :math:`\hat{\vect{\beta}}`,
 - the GEV distribution at covariate :math:`\vect{y}`,
-- the graphs of the quantile functions of order :math:`p`: :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components of :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each :math:`k`,
-- the graphs of the quantile functions of order :math:`p`: :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where all the components of :math:`\vect{y}` are fixed to a
+- the graphs of the quantile functions of order :math:`p`: :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components
+  of :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each :math:`k`,
+- the graphs of the quantile functions of order :math:`p`: :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})`
+  where all the components of :math:`\vect{y}` are fixed to a
   reference value excepted for :math:`(y_k, y_\ell)`, for each :math:`(k,\ell)`.
 
 Parameters

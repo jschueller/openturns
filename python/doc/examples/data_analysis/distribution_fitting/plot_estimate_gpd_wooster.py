@@ -123,7 +123,7 @@ for u in [-10.0, -20.0]:
         ny = 90
         T = 100
         theta = nc / nu
-        xm_100 = factory.buildReturnLevelEstimator(result_LL, T * ny, winter_sample, theta)
+        xm_100 = factory.buildReturnLevelEstimator(result_LL, winter_sample, T * ny, theta)
         print(f"x100={xm_100.getMean()} ({xm_100.getStandardDeviation()})")
 
         # plot the return level
