@@ -2,7 +2,14 @@
 "Estimation result class for a GEV or GPD model depending on covariates.
 
 
-Let :math:`Z_{\vect{y}}` be a GEV or GPD model which parameters depend on :math:`d` covariates
+Notes
+-----
+This class is created by the methods  :meth:`~openturns.GeneralizedParetoFactory.buildCovariates` or :meth:`~openturns.GeneralizedExtremeValueFactory.buildCovariates`.
+
+Let :math:`Z_{\vect{y}}` be a random variable which follows a GEV distribution or whose
+excesses above :math:`u` follow a GPD. We assume that the parameters of the GEV model or the GPD
+(except for the threshold of the GPD which is assumed to be known)
+depend on :math:`d` covariates
 denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
 
 .. math::
@@ -10,21 +17,23 @@ denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
     Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y}))\\
     Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
 
-We have the values of :math:`Z_{\vect{y}}` associated to the values of the covariates
-:math:`({\vect{y}}_1, \dots, {\vect{y}}_n)`.
+We denote by :math:`(z_{\vect{y}_1}, \dots, z_{\vect{y}_n})`
+the values of :math:`Z_{\vect{y}}` associated to the values of the
+covariates :math:`(\vect{y}_1, \dots, \vect{y}_n)`.
 
-For numerical reasons, the covariates have been nomralized. Each covariate :math:`y_k`
+For numerical reasons, the covariates have been normalized. Each covariate :math:`y_k`
 has its own normalization: 
 
 .. math::
 
     \tilde{y}_k = \tau_k(y_k) = \dfrac{y_k-c_k}{d_k}
 
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)` for GEV model and among :math:`(\sigma, \xi)` for the GPD model
-which are to be estimated. Then, :math:`\vect{\theta}` depends on all the :math:`d` covariates
-even if each component of :math:`\vect{\theta}` only depends on a subset of the covariates. We
-denote by :math:`(y_1^q, \dots, y_{d_q}^q)` the :math:`d_q` covariates involved in the
+Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters
+:math:`(\mu, \sigma, \xi)` for the GEV model and :math:`(\sigma, \xi)` for the GPD model.
+Then, :math:`\vect{\theta}` depends on all the :math:`d`
+covariates
+even if each component of :math:`\vect{\theta}` only depends on a subset of the covariates.
+We denote by :math:`(y_1^q, \dots, y_{d_q}^q)` the :math:`d_q` covariates involved in the
 modelling of the component :math:`\theta_q`.
 
 Each component :math:`\theta_q` can be written as a function of the covariates:
@@ -54,7 +63,7 @@ The complete vector of parameters is defined by:
 
 where :math:`d_t = \sum_{i=1}^p d_i`.
 
-The estimator of :math:`\Tr{\vect{b}}` maximizes the likelihood of the Parent distriution.
+The estimator of :math:`\Tr{\vect{b}}` maximizes the likelihood of the Parent distribution.
 
 Parameters
 ----------
@@ -76,17 +85,17 @@ GeneralizedExtremeValueFactory"
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::CovariatesResult::getDistribution
-"Accessor to the Parent distribution at a given time.
+"Accessor to the Parent distribution at a given covariate vecteor.
 
 Parameters
 ----------
-t : float
-    Time value.
+covariate : sequence of float, 2-d sequence of float
+    Covariates value :math:`\vect{y} \in \Rset^d`.
 
 Returns
 -------
 distribution : :class:`~openturns.Distribution`
-    The Parent distribution at time :math:`t`."
+    The Parent distribution at *covariate*."
 
 // ------------------Time stamps---------------------------------------------------
 
@@ -136,7 +145,7 @@ covariates : :class:`~openturns.Sample`
 Returns
 -------
 normalizeFunction : :class:`~openturns.Function`
-    The  function :math:`t \mapsto \tau(t)`."
+    The function :math:`\vect{y} \mapsto (\tau_1(y_1), \dots, \tau_d(y_d))`."
 
 
 // ---------------------------------------------------------------------
@@ -177,20 +186,6 @@ llh : float
 %feature("docstring") OT::CovariatesResult::drawParameterFunction1D
 "Draw the parameter function.
 
-
-Let :math:`Z_{\vect{y}}` be a GEV or GPD  model which parameters depends on :math:`d`
-covariates denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
-
-.. math::
-
-    Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y})) \\
-    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
-
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)` for the GEV model and among :math:`(\sigma, \xi)` for the GPD
-model, which have been estimated from :math:`d` covariates
-:math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`.
-
 Once the index :math:`q` has been chosen, the method draws all the graphs
 :math:`y_k \mapsto \theta_q(\vect{y})`, where all the components of
 :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
@@ -218,20 +213,6 @@ grid : :class:`~openturns.GridLayout`
 
 %feature("docstring") OT::CovariatesResult::drawParameterFunction2D
 "Draw the parameter function.
-
-
-Let :math:`Z_{\vect{y}}` be a GEV or GPD  model which parameters depends on :math:`d`
-covariates denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
-
-.. math::
-
-    Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y})) \\
-    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
-
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)` for the GEV model and among :math:`(\sigma, \xi)` for the GPD
-model, which have been estimated from :math:`d` covariates
-:math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`.
 
 Once the index :math:`q` has been chosen, the method draws all the graphs
 :math:`(y_k, y_\ell) \mapsto \theta_q(\vect{y})`, where all the components of
@@ -263,20 +244,7 @@ grid : :class:`~openturns.GridLayout`
 %feature("docstring") OT::CovariatesResult::drawQuantileFunction1D
 "Draw the quantile function.
 
-Let :math:`Z_{\vect{y}}` be a GEV or GPD  model which parameters depends on :math:`d`
-covariates denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
-
-.. math::
-
-    Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y})) \\
-    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
-
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)` for the GEV model and among :math:`(\sigma, \xi)` for the GPD
-model, which have been estimated from :math:`d` covariates
-:math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`.
-
-The method draws all the graphs of the quantile functions of order :math:`p`: of
+The method plots all the graphs of the quantile functions of order :math:`p`: of
 :math:`Z_{\vect{y}}`:  :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components of
 :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
 :math:`1 \leq k \leq d`.
@@ -304,20 +272,7 @@ grid : :class:`~openturns.GridLayout`
 %feature("docstring") OT::CovariatesResult::drawQuantileFunction2D
 "Draw the quantile function.
 
-Let :math:`Z_{\vect{y}}` be a GEV or GPD  model which parameters depends on :math:`d`
-covariates denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
-
-.. math::
-
-    Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y})) \\
-    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
-
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)` for the GEV model and among :math:`(\sigma, \xi)` for the GPD
-model, which have been estimated from :math:`d` covariates
-:math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`.
-
-The method draws all the graphs of the quantile functions of order :math:`p`: of
+The method plots all the graphs of the quantile functions of order :math:`p`: of
 :math:`Z_{\vect{y}}`:  :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where all the
 components of :math:`\vect{y}` are fixed to a reference value excepted for
 :math:`(y_k, y_\ell)`, for each :math:`1 \leq k, \ell \leq d`.

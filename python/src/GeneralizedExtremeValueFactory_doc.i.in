@@ -25,7 +25,6 @@ the parameters of the optimization solver involved in the different estimators:
 %feature("docstring") OT::GeneralizedExtremeValueFactory::build
 "Estimate the distribution via maximum likelihood.
 
-The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = (\mu, \sigma, \xi)` from a given sample.
 
 **Available usages**:
 
@@ -36,7 +35,8 @@ The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = 
 Parameters
 ----------
 sample : 2-d sequence of float
-    The block maxima sample of dimension 1.
+    The block maxima sample of dimension 1 from which
+    :math:`\vect{\theta} = (\mu, \sigma, \xi)` are estimated.
 param : sequence of float
    The parameters of the :class:`~openturns.GeneralizedExtremeValue`.
 
@@ -50,7 +50,6 @@ distribution : :class:`~openturns.GeneralizedExtremeValue`
 %feature("docstring") OT::GeneralizedExtremeValueFactory::buildAsGeneralizedExtremeValue
 "Estimate the distribution as native distribution.
 
-The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = (\mu, \sigma, \xi)` from a given sample.
 
 **Available usages**:
 
@@ -63,7 +62,8 @@ The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = 
 Parameters
 ----------
 sample : 2-d sequence of float
-    Sample from which the distribution parameters are estimated.
+    The block maxima sample of dimension 1 from which
+    :math:`\vect{\theta} = (\mu, \sigma, \xi)` are estimated.
 param : sequence of float
    The parameters of the :class:`~openturns.GeneralizedExtremeValue`.
 
@@ -108,6 +108,7 @@ sample : 2-d sequence of float
     Block maxima grouped in a sample of size :math:`n` and dimension :math:`R`.
 r : int, :math:`1 \leq r \leq R`,
     Number of largest order statistics taken into account among the :math:`R` stored ones.
+
     By default, :math:`r=0` which means that all the maxima are used.
 
 Returns
@@ -123,7 +124,7 @@ distribution : :class:`~openturns.GeneralizedExtremeValue`
 
 The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = (\mu, \sigma, \xi)` from a given sample.
 
-The estimators are defined in :meth:`buildMethodOfXiProfileLikelihood`.
+The estimator :math:`\hat{\vect{\theta}}` is defined in :meth:`buildMethodOfXiProfileLikelihood`.
 
 The result class produced by the method provides:
 
@@ -139,6 +140,9 @@ sample : 2-d sequence of float
     Block maxima grouped in a sample of size :math:`n` and dimension :math:`R`.
 r : int, :math:`1 \leq r \leq R`,
     Number of largest order statistics taken into account among the :math:`R` stored ones.
+    The block maxima sample of dimension 1 from which
+    :math:`\vect{\theta} = (\mu, \sigma, \xi)` are estimated.
+
     By default, :math:`r=0` which means that all the maxima are used.
 
 Returns
@@ -189,6 +193,7 @@ sample : 2-d sequence of float
     Block maxima grouped in a sample of size :math:`n` and dimension :math:`R`.
 r : int, :math:`1 \leq r \leq R`,
     Number of largest order statistics taken into account among the :math:`R` stored ones.
+
     By default, :math:`r=0` which means that all the maxima are used.
 
 Returns
@@ -203,7 +208,7 @@ distribution : :class:`~openturns.GeneralizedExtremeValue`
 
 The method estimates a GEV distribution parameterized by :math:`\vect{\theta} = (\mu, \sigma, \xi)` from a given sample.
 
-The estimators are defined using the profile log-likelihood  as detailed in
+The estimator :math:`\hat{\vect{\theta}}` is defined using the profile log-likelihood  as detailed in
 :meth:`buildMethodOfLikelihoodMaximization`.
 
 The result class produced by the method provides:
@@ -230,15 +235,16 @@ result : :class:`~openturns.DistributionFactoryLikelihoodResult`
 %feature("docstring") OT::GeneralizedExtremeValueFactory::buildCovariates
 "Estimate a GEV from covariates.
 
-Let :math:`Z_{\vect{y}}` be a GEV model which parameters depend on :math:`d` covariates
+Let :math:`Z_{\vect{y}}` be a GEV model whose parameters depend on :math:`d` covariates
 denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
 
 .. math::
 
     Z_{\vect{y}} \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y}))
 
-We have the values of :math:`Z_{\vect{y}}` associated to the values of the covariates
-:math:`({\vect{y}}_1, \dots, {\vect{y}}_n)`.
+We denote by :math:`(z_{\vect{y}_1}, \dots, z_{\vect{y}_n})`
+the values of :math:`Z_{\vect{y}}` associated to the values of the
+covariates :math:`(\vect{y}_1, \dots, \vect{y}_n)`.
 
 For numerical reasons, it is recommended to normalize the covariates. Each covariate
 :math:`y_k` has its own normalization:
@@ -256,9 +262,8 @@ and with three ways of defining :math:`(c_k,d_k)` of the covariate :math:`y_k`:
 - the *None* method where :math:`c_k = 0` and :math:`d_k = 1`: in that case, data are not
   normalized.
 
-Let :math:`\vect{\theta} = (\theta_1, \dots, \theta_p)` be the set of parameters among
-:math:`(\mu, \sigma, \xi)`
-which are to be estimated. Then, :math:`\vect{\theta}` depends on all the :math:`d` covariates
+
+Let :math:`\vect{\theta} = (\mu, \sigma, \xi)` be the vector of parameters. Then, :math:`\vect{\theta}` depends on all the :math:`d` covariates
 even if each component of :math:`\vect{\theta}` only depends on a subset of the covariates. We
 denote by :math:`(y_1^q, \dots, y_{d_q}^q)` the :math:`d_q` covariates involved in the
 modelling of the component :math:`\theta_q`.
@@ -295,7 +300,7 @@ The complete vector of parameters is defined by:
     \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p})} \in  \Rset^{d_t}\\
     \Tr{\vect{b}_q} & =  (\beta_1^q, \dots, \beta_{d_q}^q)\in \Rset^{d_q}
 
-where :math:`d_t = \sum_{i=1}^p d_i`.
+where :math:`d_t = \sum_{q=1}^p d_q`.
 
 The estimator of  :math:`\vect{\beta}` maximizes  the likelihood of the model which is defined
 by:
@@ -304,9 +309,9 @@ by:
 
     L(\vect{\beta}) = \prod_{i=1}^{n} g(z_{\vect{y}_i};\vect{\theta}(\vect{y}_i)))
 
-where :math:`g(z_{\vect{y}_i};\vect{\theta}(\vect{y}_i)))` denotes the GEV density function
+where :math:`g(z_{\vect{y}_i};\vect{\theta}(\vect{y}_i))` denotes the GEV density function
 with parameters
-:math:`\vect{\theta}(\vect{y}_i)` evaluated at :math:`z_{\vect{y}_i}`.
+:math:`\vect{\theta}(\vect{y}_i)` and evaluated at :math:`z_{\vect{y}_i}`.
 
 Then, if none of the :math:`\xi(\vect{y}_i)` is zero, the log-likelihood is defined by:
 
@@ -372,30 +377,38 @@ covariates : 2-d sequence of float
     A constant column is automatically added if it is not provided.
 muIndices : sequence of int, optional
     Indices of covariates considered for parameter :math:`\mu`.
+
     By default, an empty sequence, and the index of the constant covariate is added
     if empty or if the covariates do not initially contain a constant column.
 sigmaIndices : sequence of int, optional
     Indices of covariates considered for parameter :math:`\sigma`.
+
     By default, an empty sequence, and the index of the constant covariate is added
     if empty or if the covariates do not initially contain a constant column.
 xiIndices : sequence of int, optional
     Indices of covariates considered for parameter :math:`\xi`.
+
     By default, an empty sequence, and the index of the constant covariate is added
     if empty or if the covariates do not initially contain a constant column.
 muLink : :class:`~openturns.Function`, optional
     The :math:`h_{\mu}` function.
+
     By default, the identity function.
 sigmaLink : :class:`~openturns.Function`, optional
     The :math:`h_{\sigma}` function.
+
     By default, the identity function.
 xiLink : :class:`~openturns.Function`, optional
     The :math:`h_{\xi}` function.
+
     By default, the identity function.
 initializationMethod : str, optional
     The initialization method for the optimization problem: *Gumbel* or *Static*.
+
     The default value depends on the key *GeneralizedExtremeValueFactory-InitializationMethod*.
 normalizationMethod : str, optional
     The data normalization method: *CenterReduce*, *MinMax* or *None*.
+
     The default value depends on the key *GeneralizedExtremeValueFactory-NormalizationMethod*.
 
 Returns
@@ -414,7 +427,8 @@ Let :math:`Z_t` be a non stationary GEV distribution:
 
     Z_t \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))
 
-We have the values of :math:`Z_t` on the time stamps :math:`(t_1, \dots, t_n)`.
+We denote by :math:`(z_{t_1}, \dots, z_{t_n})` the values of
+:math:`Z_t` on the time stamps :math:`(t_1, \dots, t_n)`.
 
 For numerical reasons, it is recommended to normalize the time stamps.
 The following mapping is applied:
@@ -462,7 +476,7 @@ The estimator of  :math:`\vect{\beta}` maximizes  the likelihood of the non stat
     L(\vect{\beta}) = \prod_{t=1}^{n} g(z_{t};\mu(t), \sigma(t), \xi(t))
 
 where :math:`g(z_{t};\mu(t), \sigma(t), \xi(t))` denotes the GEV density function with parameters
-:math:`\mu(t), \sigma(t), \xi(t)` evaluated at :math:`z_t`.
+:math:`()\mu(t), \sigma(t), \xi(t))` evaluated at :math:`z_t`.
 
 Then, if none of the :math:`\xi(t)` is zero, the log-likelihood is defined by:
 
@@ -519,18 +533,23 @@ xiIndices : sequence of int, optional
     Indices of basis terms considered for parameter :math:`\xi`
 muLink : :class:`~openturns.Function`, optional
     The :math:`h_{\mu}` function.
+
     By default, the identity function.
 sigmaLink : :class:`~openturns.Function`, optional
     The :math:`h_{\sigma}` function.
-    By default it is chosen as the identity function.
+
+    By default, the identity function.
 xiLink : :class:`~openturns.Function`, optional
     The :math:`h_{\xi}` function.
+
     By default, the identity function.
 initializationMethod : str, optional
     The initialization method for the optimization problem: *Gumbel* or *Static*.
+
     The default value depends on the key *GeneralizedExtremeValueFactory-InitializationMethod*.
 normalizationMethod : str, optional
     The data normalization method: *CenterReduce*, *MinMax* or *None*.
+
     The default value depends on the key *GeneralizedExtremeValueFactory-NormalizationMethod*.
 
 Returns
@@ -546,14 +565,13 @@ result : :class:`~openturns.TimeVaryingResult`
 Let :math:`Z` be a random variable which follows a GEV distribution parameterized by
 :math:`\vect{\theta} = (\mu, \sigma, \xi)`.
 
-The :math:`m`-return level :math:`z_m` is the level exceeded on average once every :math:`m`
+The :math:`m`-block return level :math:`z_m` is the level exceeded on average once every :math:`m`
 blocks.
-The parameter :math:`m` is referred to as the *return period*.
-For example, if the GEV distribution is the distribution of the annual maxima,
-then :math:`z_{100}` is the 100-year return period and is exceeded on average once in
-every century.
+The :math:`m`-block return level can be translated into the annual-scale: if there
+are :math:`n_y` blocks per year, then the :math:`N`-year return level
+corresponds to the :math:`m`-bock return level where :math:`m = n_yN`.
 
-The :math:`m`-return level is defined as the quantile of order :math:`1-p=1-1/m` of the GEV
+The :math:`m`-block return level is defined as the quantile of order :math:`1-p=1-1/m` of the GEV
 distribution:
 
 If :math:`\xi \neq 0`:
@@ -603,10 +621,8 @@ distribution : :class:`~openturns.Distribution`
 Let :math:`Z` be a random variable which follows a GEV distribution parameterized by
 :math:`\vect{\theta} = (\mu, \sigma, \xi)`.
 
-The  :math:`m`-return level :math:`z_m` is defined in 
-:meth:`buildReturnLevelEstimator`.
-
-The profile log-likelihood :math:`\ell_p(z_m)` is defined in
+The  :math:`m`-block return level :math:`z_m` is defined in
+:meth:`buildReturnLevelEstimator`. The profile log-likelihood :math:`\ell_p(z_m)` is defined in
 :meth:`buildReturnLevelProfileLikelihood`.
 
 The estimator of  :math:`(\hat{z}_m, \hat{\sigma}, \hat{\xi})` is defined by:
@@ -648,7 +664,7 @@ result : :class:`~openturns.ProfileLikelihoodResult`
 Let :math:`Z` be a random variable which follows a GEV distribution parameterized by
 :math:`\vect{\theta} = (\mu, \sigma, \xi)`.
 
-The  :math:`m`-return level :math:`z_m` is defined in 
+The  :math:`m`-block return level :math:`z_m` is defined in
 :meth:`buildReturnLevelEstimator`.
 
 The estimator is defined using a nested numerical optimization of the log-likelihood:
