@@ -53,6 +53,7 @@
 
 /* Base/Algo */
 %include SimplicialCubature.i
+%include CubaIntegration.i
 
 /* Uncertainty/Algorithm/Metamodel */
 %include UserDefinedMetropolisHastings.i
