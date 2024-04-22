@@ -47,14 +47,14 @@ view = otv.View(graph)
 # to make meaningful inferences. Moreover, the graph is not reliable
 # for large values of :math:`u` due to the limited amount of data on
 # which the estimate and the confidence interval are based.
-# For all these reasons, it appear preferable to chose :math:`u=30`.
+# For all these reasons, it appears preferable to chose :math:`u=30`.
 factory = ot.GeneralizedParetoFactory()
 graph = factory.drawMeanResidualLife(dataRain)
 view = otv.View(graph)
 
 # %%
 # To support that choice, we draw the parameter stability plots.
-# We see tat the perturbations appear small relative to sampling errors.
+# We see tat the perturbations appear small relatively to sampling errors.
 # We can see that the change in pattern observed in the mean
 # residual life plot is still apparent here for high thresholds.
 # Hence, we choose the threshold :math:`u=30`.

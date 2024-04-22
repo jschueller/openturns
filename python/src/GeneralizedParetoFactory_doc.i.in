@@ -7,108 +7,6 @@ DistributionFactory, GeneralizedPareto
 
 Notes
 -----
-Several estimators are available to build a :class:`~openturns.GeneralizedPareto` distribution
-from a scalar sample (see [matthys2003]_ for the theory).
-
-The chosen algorithm depends on the size of the sample compared to the
-:class:`~openturns.ResourceMap` key `GeneralizedParetoFactory-SmallSize`:
-
-- When the size of the sample is small the probability weighted method of moments is used,
-  with a fallback on the exponential regression method
-- When the size of the sample is large the exponential regression method is used,
-  with a fallback on the probability weighted moment method
-
-**Moments based estimator:**
-
-Lets denote:
-
-- :math:`\displaystyle \overline{x}_n = \frac{1}{n} \sum_{i=1}^n x_i` the empirical
-  mean of the sample, 
-- :math:`\displaystyle s_n^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x}_n)^2`
-  its empirical variance.
-
-Then we estimate :math:`(\hat{\sigma}_n, \hat{\xi}_n, \hat{u}_n)` using:
-
-.. math::
-    :nowrap:
-    :label: gpd_moment_estimator
-
-    \begin{eqnarray*}
-        \hat{u}_n &= x_{(1)} - \frac{x_{(1)}}{2 + n} \\
-        \hat{\xi}_n &= -\dfrac{1}{2}\left(\dfrac{(\overline{x}_n - \hat{u}_n)^2}{s_n^2}-1\right) \\
-        \hat{\sigma}_n &= \dfrac{(\overline{x}_n- \hat{u}_n)}{2}\left(\dfrac{(\overline{x}_n- \hat{u}_n)^2}{s_n^2}+1\right)
-    \end{eqnarray*}
-
-This estimator is well-defined only if :math:`\hat{\xi}>-1/4`, otherwise the second moment does not exist.
-
-**Probability weighted moments based estimator:**
-
-Lets denote:
-
-- :math:`\left(x_{(i)}\right)_{i\in\{1,\dots,n\}}` the sample sorted in ascending order
-- :math:`m=\dfrac{1}{n}\sum_{i=1}^n\left(1-\dfrac{i-7/20}{n}\right)x_{(i)}`
-- :math:`\rho=\dfrac{m}{\overline{x}_n}`
-
-Then we estimate :math:`(\hat{\sigma}, \hat{\xi}, \hat{u})` using:
-
-.. math::
-    :nowrap:
-    :label: gpd_probability_weighted_moment_estimator
-
-    \begin{eqnarray*}
-        \hat{u}_n &= x_{(1)} - \frac{x_{(1)}}{2 + n}\\
-        \hat{\xi}_n &= \dfrac{1-4\rho}{1-2\rho} \\
-        \hat{\sigma}_n &= \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho}
-    \end{eqnarray*}
-
-This estimator is well-defined only if :math:`\hat{\xi}_n>-1/2`, otherwise the first moment does not exist.
-
-
-**Maximum likelihood based estimator:**
-
-These estimators are not yet implemented.
-
-For a given :math:`u < x_{(1,n)}`, we get :math:`(\hat{\sigma}_n(u),  \hat{\xi}_n(u)` by maximizing the likelihood of the sample :math:`\ell(\sigma(u),  \xi(u),u)`:
-
-.. math::
-
-    (\hat{\sigma}_n(u), \hat{\xi}_n(u)) = \argmax_{\sigma, \xi}   \ell(\sigma(u), \xi(u)|  x_1, \dots, x_n, u) 
-
-The threshold :math:`u` is obtained by maximizing the optimal likelihood :math:`\ell(\hat{\sigma}_n(u),  \hat{\xi}_n(u), u)`
-
-.. math::
-    
-    \hat{u}_n = \argmax_{u} \ell(\hat{\sigma}_n(u),  \hat{\xi}_n(u),u) \text{ under the constraint } u < x_{(1,n)}
-
-
-The initial point of the optimisation problem is :math:`u_0 = x_{(1,n)} - |x_{(1,n)}|/(2+n)`.
-
-
-**Exponential regression based estimator:**
-
-Lets denote:
-
-- :math:`y_{i}=i\log\left(\dfrac{x_{(n-i)}-x_{(1)}}{x_{(n-i-1)}-x_{(1)}}\right)` for :math:`i\in\{1,n-3\}`
-
-Then we estimate :math:`(\hat{\sigma}, \hat{\xi}, \hat{u})`
-using:
-
-.. math::
-    :label: gpd_exponential_estimator
-
-    \hat{\xi} &= \xi^* \\
-    \hat{\sigma} &= \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho} \\
-    \hat{u} &= x_{(1)} - \frac{x_{(1)}}{2 + n}
-
-Where :math:`\xi^*` maximizes:
-
-.. math::
-    :label: gpd_xi_relation
-    
-    \sum_{i=1}^{n-2}\log\left(\dfrac{1-(j/n)^{\xi}}{\xi}\right)-\dfrac{1-(j/n)^{\xi}}{\xi}y_i
-
-under the constraint :math:`-1 \leq \xi \leq 1`.
-
 The following :class:`~openturns.ResourceMap` entries can be used to tweak
 the parameters of the optimization solver involved in the different estimators:
 
@@ -171,13 +69,14 @@ Notes
 -----
 In the first usage, the default :class:`~openturns.GeneralizedPareto` distribution is built.
 
-In the second usage, the parameters are evaluated according the following strategy:
+In the second usage, the chosen algorithm depends on the size of the sample compared
+to the :class:`~openturns.ResourceMap` key `GeneralizedParetoFactory-SmallSize`
+(see [matthys2003]_ for the theory):
 
 - If the sample size is less or equal to `GeneralizedParetoFactory-SmallSize` from :class:`~openturns.ResourceMap`, then the method of probability weighted moments is used. If it fails, the method of exponential regression is used.
 - Otherwise, the first method tried is the method of exponential regression, then the method of probability weighted moments if the first one fails.
 
 In the third usage, a :class:`~openturns.GeneralizedPareto` distribution corresponding to the given parameters is built."
-
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildAsGeneralizedPareto
@@ -212,7 +111,6 @@ dist : :class:`~openturns.GeneralizedPareto`
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfExponentialRegression
 "Build the distribution based on the exponential regression estimator.
 
-
 Parameters
 ----------
 sample : 2-d sequence of float, of dimension 1
@@ -222,14 +120,40 @@ sample : 2-d sequence of float, of dimension 1
 Returns
 -------
 dist : :class:`~openturns.GeneralizedPareto`
-    The estimated GPD."
+    The estimated GPD.
+
+Notes
+-----
+Lets denote:
+
+- :math:`y_{i}=i\log\left(\dfrac{x_{(n-i)}-x_{(1)}}{x_{(n-i-1)}-x_{(1)}}\right)` for :math:`i\in\{1,n-3\}`
+
+Then we estimate :math:`(\hat{\sigma}, \hat{\xi}, \hat{u})`
+using:
+
+.. math::
+    :label: gpd_exponential_estimator
+
+    \begin{align*}
+    \hat{\xi} & = \xi^* \\
+    \hat{\sigma} & = \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho} \\
+    \hat{u} & = x_{(1)} - \frac{x_{(1)}}{2 + n}
+    \end{align*}
+
+Where :math:`\xi^*` maximizes:
+
+.. math::
+    :label: gpd_xi_relation
+    
+    \sum_{i=1}^{n-2}\log\left(\dfrac{1-(j/n)^{\xi}}{\xi}\right)-\dfrac{1-(j/n)^{\xi}}{\xi}y_i
+
+under the constraint :math:`-1 \leq \xi \leq 1`."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfProbabilityWeightedMoments
 "Build the distribution based on the probability weighted moments estimator.
 
-
 Parameters
 ----------
 sample : 2-d sequence of float, of dimension 1
@@ -239,14 +163,35 @@ sample : 2-d sequence of float, of dimension 1
 Returns
 -------
 dist : :class:`~openturns.GeneralizedPareto`
-    The estimated GPD."
+    The estimated GPD.
+
+Notes
+-----
+Lets denote:
+
+- :math:`\left(x_{(i)}\right)_{i\in\{1,\dots,n\}}` the sample sorted in ascending order
+- :math:`m=\dfrac{1}{n}\sum_{i=1}^n\left(1-\dfrac{i-7/20}{n}\right)x_{(i)}`
+- :math:`\rho=\dfrac{m}{\overline{x}_n}`
+
+Then we estimate :math:`(\hat{\sigma}, \hat{\xi}, \hat{u})` using:
+
+.. math::
+    :nowrap:
+    :label: gpd_probability_weighted_moment_estimator
+
+    \begin{align*}
+        \hat{u}_n & = x_{(1)} - \frac{x_{(1)}}{2 + n}\\
+        \hat{\xi}_n & = \dfrac{1-4\rho}{1-2\rho} \\
+        \hat{\sigma}_n & = \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho}
+    \end{align*}
+
+This estimator is well-defined only if :math:`\hat{\xi}_n>-1/2`, otherwise the first moment does not exist."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfMoments
 "Build the distribution based on the method of moments estimator.
 
-
 Parameters
 ----------
 sample : 2-d sequence of float, of dimension 1
@@ -256,13 +201,49 @@ sample : 2-d sequence of float, of dimension 1
 Returns
 -------
 dist : :class:`~openturns.GeneralizedPareto`
-    The estimated GPD."
+    The estimated GPD.
+
+Notes
+-----
+Lets denote:
+
+- :math:`\displaystyle \overline{x}_n = \frac{1}{n} \sum_{i=1}^n x_i` the empirical
+  mean of the sample, 
+- :math:`\displaystyle s_n^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x}_n)^2`
+  its empirical variance.
+
+Then, we estimate :math:`(\hat{\sigma}_n, \hat{\xi}_n, \hat{u}_n)` using:
+
+.. math::
+    :nowrap:
+    :label: gpd_moment_estimator
+
+    \begin{align*}
+        \hat{u}_n & = x_{(1)} - \dfrac{x_{(1)}}{2 + n} \\
+        \hat{\xi}_n & = -\dfrac{1}{2}\left(\dfrac{(\overline{x}_n - \hat{u}_n)^2}{s_n^2}-1\right) \\
+        \hat{\sigma}_n & = \dfrac{(\overline{x}_n- \hat{u}_n)}{2}\left(\dfrac{(\overline{x}_n- \hat{u}_n)^2}{s_n^2}+1\right)
+    \end{align*}
+
+This estimator is well-defined only if :math:`\hat{\xi}>-1/4`, otherwise the second moment does not exist."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::drawMeanResidualLife
 "Draw the mean residual life plot.
 
+
+Parameters
+----------
+sample : 2-d sequence of float, of dimension 1
+    The sample drawn from :math:`X`.
+
+Returns
+-------
+graph : :class:`~openturns.Graph`
+    The graph of :math:`u \mapsto m_n(u)` and its :math:`95\%` confidence interval.
+    
+Notes
+-----
 This method is complementary to :meth:`drawParameterThresholdStability` as a method of threshold
 selection.
 
@@ -290,18 +271,6 @@ We denote by :math:`m_n(u)` its realization on the sample drawn from :math:`X`. 
 
 The graph :math:`u \mapsto m_n(u)` is termed the *mean residual life plot*.
 
-Parameters
-----------
-sample : 2-d sequence of float, of dimension 1
-    The sample drawn from :math:`X`.
-
-Returns
--------
-graph : :class:`~openturns.Graph`
-    The graph of :math:`u \mapsto m_n(u)` and its :math:`95\%` confidence interval.
-    
-Notes
------
 The confidence level can be set using the :class:`~openturns.ResourceMap` key
 `GeneralizedParetoFactory-MeanResidualLifeConfidenceLevel`
 The number of threshold points in the graph can be set with the key
@@ -313,7 +282,20 @@ The number of threshold points in the graph can be set with the key
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfLikelihoodMaximization
 "Estimate the distribution with the maximum likelihood method.
 
+Parameters
+----------
+sample : 2-d sequence of float
+    Sample drawn from :math:`X`.
+u : float
+    Given threshold value.
 
+Returns
+-------
+distribution : :class:`~openturns.GeneralizedExtremeValue`
+    The estimated distribution of :math:`(\hat{\sigma}, \hat{\xi})`.
+
+Notes
+-----
 Let :math:`X` be a random variable whose excesses above :math:`u` follow
 a GPD parameterized by :math:`\vect{\theta} = (\sigma, \xi)`. We assume
 that :math:`u` is known.
@@ -343,36 +325,12 @@ If :math:`\xi = 0`:
     :label: llgpdR2
 
     \ell(\sigma, \xi) = -n \log \sigma - \sigma^{-1} \sum_{i=1}^n \exp z_i
-
-Parameters
-----------
-sample : 2-d sequence of float
-    Sample drawn from :math:`X`.
-u : float
-    Given threshold value.
-
-Returns
--------
-distribution : :class:`~openturns.GeneralizedExtremeValue`
-    The estimated distribution of :math:`(\hat{\sigma}, \hat{\xi})`."
+"
 
 // ----------------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfLikelihoodMaximizationEstimator
 "Estimate the distribution and the parameter distribution with the maximum likelihood method.
-
-
-Let :math:`X` be a random variable whose excesses above :math:`u` follow
-a GPD parameterized by :math:`\vect{\theta} = (\sigma, \xi)`. We assume
-that :math:`u` is known.
-
-The estimator :math:`(\hat{\sigma}, \hat{\xi})` is defined using the profile log-likelihood  as detailed in
-:meth:`buildMethodOfLikelihoodMaximization`.
-
-The result class produced by the method provides:
-
-- the GPD distribution associated to :math:`(\hat{\sigma}, \hat{\xi}, u)`,
-- the asymptotic distribution of :math:`(\hat{\sigma}, \hat{\xi}, u)`.
 
 Parameters
 ----------
@@ -384,14 +342,42 @@ u : float
 Returns
 -------
 result : :class:`~openturns.DistributionFactoryLikelihoodResult`
-    The result class."
+    The result class.
+
+Notes
+-----
+
+Let :math:`X` be a random variable whose excesses above :math:`u` follow
+a GPD parameterized by :math:`\vect{\theta} = (\sigma, \xi)`. We assume
+that :math:`u` is known.
+
+The estimator :math:`(\hat{\sigma}, \hat{\xi})` is defined using the profile log-likelihood  as detailed in
+:meth:`buildMethodOfLikelihoodMaximization`.
+
+The result class produced by the method provides:
+
+- the GPD distribution associated to :math:`(\hat{\sigma}, \hat{\xi}, u)`,
+- the asymptotic distribution of :math:`(\hat{\sigma}, \hat{\xi}, u)`."
 
 // ----------------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfXiProfileLikelihood
 "Estimate the distribution with the profile likelihood.
 
+Parameters
+----------
+sample : 2-d sequence of float
+    Sample drawn from :math:`X`.
+u : float
+    Given threshold value.
 
+Returns
+-------
+distribution : :class:`~openturns.GeneralizedPareto`
+    The estimated GPD.
+
+Notes
+-----
 Let :math:`X` be a random variable whose excesses above :math:`u` follow
 a GPD parameterized by :math:`\vect{\theta} = (\sigma, \xi)`. We assume
 that :math:`u` is known.
@@ -412,7 +398,14 @@ The estimator is given by:
     \begin{align*}
     \hat{\xi} & =  \argmax_{\xi} \ell_p(\xi)\\
     \hat{\sigma} & = \argmax_{\sigma} \ell(\sigma, \hat{\xi}, u)
-    \end{align*}
+    \end{align}
+"
+
+// ----------------------------------------------------------------------------
+
+%feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfXiProfileLikelihoodEstimator
+"Estimate the distribution and the parameter distribution with the profile likelihood.
+
 
 Parameters
 ----------
@@ -423,16 +416,11 @@ u : float
 
 Returns
 -------
-distribution : :class:`~openturns.GeneralizedPareto`
-    The estimated GPD.
-"
+result : :class:`~openturns.ProfileLikelihoodResult`
+    The result class.
 
-// ----------------------------------------------------------------------------
-
-%feature("docstring") OT::GeneralizedParetoFactory::buildMethodOfXiProfileLikelihoodEstimator
-"Estimate the distribution and the parameter distribution with the profile likelihood.
-
-
+Notes
+-----
 Let :math:`X` be a random variable whose excesses above :math:`u` follow
 a GPD parameterized by :math:`\vect{\theta} = (\sigma, \xi)`. We assume
 that :math:`u` is known.
@@ -445,25 +433,28 @@ The result class produced by the method provides:
 - the asymptotic distribution of :math:`(\hat{\sigma}, \hat{\xi}, u)`,
 - the profile log-likelihood function :math:`\xi \mapsto \ell_p(\xi)`,
 - the optimal profile log-likelihood value :math:`\ell_p(\hat{\xi})`,
-- confidence intervals of level :math:`(1-\alpha)` of :math:`\xi`.
-
-Parameters
-----------
-sample : 2-d sequence of float
-    Sample drawn from :math:`X`.
-u : float
-    Given threshold value.
-
-Returns
--------
-result : :class:`~openturns.ProfileLikelihoodResult`
-    The result class."
+- confidence intervals of level :math:`(1-\alpha)` of :math:`\xi`."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::drawParameterThresholdStability
 "Draw the parameter threshold stability plot.
 
+
+Parameters
+----------
+sample : 2-d sequence of float, of dimension 1
+    The sample drawn from  :math:`X`.
+uRange : :class:`~openturns.Interval`
+    The range of the threshold :math:`u: [u_{min}, u_{max}]`.
+
+Returns
+-------
+graph : :class:`~openturns.Graph`
+    The graphs of :math:`u \mapsto \hat{\sigma}^{\ast}` and :math:`u \mapsto \hat{\xi}`.
+
+Notes
+-----
 This method is complementary to :meth:`drawMeanResidualLife` as a method of threshold
 selection.
 
@@ -496,20 +487,6 @@ for :math:`u \in [u_{min}, u_{max}]`.
 The selected threshold is the lowest value of :math:`u` from which the estimates remain
 near-constant.
 
-Parameters
-----------
-sample : 2-d sequence of float, of dimension 1
-    The sample drawn from  :math:`X`.
-uRange : :class:`~openturns.Interval`
-    The range of the threshold :math:`u: [u_{min}, u_{max}]`.
-
-Returns
--------
-graph : :class:`~openturns.Graph`
-    The graphs of :math:`u \mapsto \hat{\sigma}^{\ast}` and :math:`u \mapsto \hat{\xi}`.
-
-Notes
------
 The confidence level can be set using the :class:`~openturns.ResourceMap` key
 `GeneralizedParetoFactory-ThresholdStabilityConfidenceLevel`
 The number of threshold points in the graph can be set with the key
@@ -521,6 +498,49 @@ The number of threshold points in the graph can be set with the key
 %feature("docstring") OT::GeneralizedParetoFactory::buildCovariates
 "Estimate a GPD from covariates.
 
+Parameters
+----------
+sample : 2-d sequence of float
+    Sample drawn from a GPD.
+u : float
+    The threshold.
+covariates : 2-d sequence of float
+    Covariates sample.
+    A constant column is automatically added if none is not provided.
+sigmaIndices : sequence of int, optional
+    Indices of covariates considered for parameter :math:`\sigma`.
+
+    By default, an empty sequence, and the index of the constant covariate is added
+    if empty or if the covariates do not initially contain a constant column.
+xiIndices : sequence of int, optional
+    Indices of covariates considered for parameter :math:`\xi`.
+
+    By default, an empty sequence, and the index of the constant covariate is added
+    if empty or if the covariates do not initially contain a constant column.
+sigmaLink : :class:`~openturns.Function`, optional
+    The :math:`h_{\sigma}` function.
+
+    By default, the identity function.
+xiLink : :class:`~openturns.Function`, optional
+    The :math:`h_{\xi}` function.
+
+    By default, the identity function.
+initializationMethod : str, optional
+    The initialization method for the optimization problem: *Gumbel* or *Static*.
+
+    The default value depends on the key *GeneralizedExtremeValueFactory-InitializationMethod*.
+normalizationMethod : str, optional
+    The data normalization method: *CenterReduce*, *MinMax* or *None*.
+
+    The default value depends on the key *GeneralizedExtremeValueFactory-NormalizationMethod*.
+
+Returns
+-------
+result : :class:`~openturns.CovariatesResult`
+    The result class.
+
+Notes
+-----
 Let :math:`Z_{\vect{y}}` whose excesses above the threshold :math:`u` follow a GPD whose parameters :math:`(\sigma, \xi)` depend on :math:`d` covariates
 denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
 
@@ -582,8 +602,10 @@ The complete vector of parameters is defined by:
 
 .. math::
 
-    \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p})} \in  \Rset^{d_t}\\
+    \begin{align*}
+    \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p} )} \in  \Rset^{d_t}\\
     \Tr{\vect{b}_q} & =  (\beta_1^q, \dots, \beta_{d_q}^q)\in \Rset^{d_q}
+    \end{align*}
 
 where :math:`d_t = \sum_{q=1}^p d_q`.
 
@@ -619,7 +641,7 @@ The initialization of the optimization problem is crucial.
 Two initial points :math:`(\mu_0, \sigma_0, \xi_0)` are proposed:
 
 - the *Exponential* initial point: in that case, we assume that the GPD is a stationary
-  Exponential distribution (:math:`\xi=0`) and we deduce
+  Exponential distribution :math:`(\xi=0)` and we deduce
   :math:`\sigma_0` from the mean of the data: :math:`\sigma_0 = \dfrac{1}{n}
   \sum_{i=1}^n z_{\vect{y}_i}`;
 - the *Static* initial point: in that case, we assume that the GPD is stationary and
@@ -643,28 +665,27 @@ The result class provides:
   the components of :math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each :math:`k`,
 - the graphs of the quantile functions of order :math:`p`: :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where
   all the components of :math:`\vect{y}` are fixed to a
-  reference value excepted for :math:`(y_k, y_\ell)`, for each :math:`(k,\ell)`.
+  reference value excepted for :math:`(y_k, y_\ell)`, for each :math:`(k,\ell)`."
 
+// ----------------------------------------------------------------------------
+
+%feature("docstring") OT::GeneralizedParetoFactory::buildTimeVarying
+"Estimate a non stationary GPD from a time-dependent parametric model.
 
 Parameters
 ----------
 sample : 2-d sequence of float
-    Sample drawn from a GPD.
+    Sample drawn from :math:`Z_t`.
 u : float
     The threshold.
-covariates : 2-d sequence of float
-    Covariates sample.
-    A constant column is automatically added if none is not provided.
+timeStamps : 2-d sequence of float
+    Values of :math:`t`.
+basis : :class:`~openturns.Basis`
+    Functional basis.
 sigmaIndices : sequence of int, optional
-    Indices of covariates considered for parameter :math:`\sigma`.
-
-    By default, an empty sequence, and the index of the constant covariate is added
-    if empty or if the covariates do not initially contain a constant column.
+    Indices of basis terms considered for parameter :math:`\sigma`.
 xiIndices : sequence of int, optional
-    Indices of covariates considered for parameter :math:`\xi`.
-
-    By default, an empty sequence, and the index of the constant covariate is added
-    if empty or if the covariates do not initially contain a constant column.
+    Indices of basis terms considered for parameter :math:`\xi`.
 sigmaLink : :class:`~openturns.Function`, optional
     The :math:`h_{\sigma}` function.
 
@@ -684,14 +705,11 @@ normalizationMethod : str, optional
 
 Returns
 -------
-result : :class:`~openturns.CovariatesResult`
-    The result class."
+result : :class:`~openturns.TimeVaryingResult`
+    The result class.
 
-// ----------------------------------------------------------------------------
-
-%feature("docstring") OT::GeneralizedParetoFactory::buildTimeVarying
-"Estimate a non stationary GPD from a time-dependent parametric model.
-
+Notes
+-----
 Let :math:`Z_t` be a non stationary random variable whose excesses above the threshold :math:`u` follow a GPD. We assume that :math:`u` is known:
 
 .. math::
@@ -745,34 +763,34 @@ The estimator of  :math:`\vect{\beta}` maximizes  the likelihood of the non stat
 
 .. math::
 
-    L(\vect{\beta}) = \prod_{t=1}^{n} g(z_{t};\sigma(t), \xi(t), u)
+    L(\vect{\beta}) = \prod_{i=1}^{n} g(z_{t_i};\sigma(t_i), \xi(t_i), u)
 
 where :math:`g(z_{t};\sigma(t), \xi(t))` denotes the GPD density function with parameters
-:math:`()\sigma(t), \xi(t), u)` evaluated at :math:`z_t`.
+:math:`(\sigma(t), \xi(t), u)` evaluated at :math:`z_t`.
 
 Then, if none of the :math:`\xi(t)` is zero, the log-likelihood is defined by:
 
 .. math::
 
-    \ell (\vect{\beta}) = -\sum_{t=1}^{n} \left\{ \log(\sigma(t)) + (1 + 1 / \xi(t) )
-    \log\left[ 1+\xi(t) \left( \frac{z_t - \mu(t)}{\sigma(t)}\right) \right] + \left[ 1 +
-    \xi(t) \left( \frac{z_t- \mu(t)}{\sigma(t)} \right) \right]^{-1 / \xi(t)} \right\}
+    \ell (\vect{\beta}) = -\sum_{i=1}^{n} \left\{ \log(\sigma(t_i)) + (1 + 1 / \xi(t_i) )
+    \log\left[ 1+\xi(t_i) \left( \frac{z_{t_i} - \mu(t_i)}{\sigma(t_i)}\right) \right] + \left[ 1 +
+    \xi(t_i) \left( \frac{z_{t_i}- \mu(t_i)}{\sigma(t_i)} \right) \right]^{-1 / \xi(t_i)} \right\}
 
-defined on :math:`(\sigma, \xi, u)` such that :math:`1+\xi \left( \frac{z_t - \mu}{\sigma}
+defined on :math:`(\sigma, \xi, u)` such that :math:`1+\xi(t) \left( \frac{z_t - \mu(t)}{\sigma(t)}
 \right) > 0` for all :math:`t`.
 
-And if any of the :math:`\xi(t)` is equal to 0, the log-likelihood is defined as:
+And if any of the :math:`\xi(t_i)` is equal to 0, the log-likelihood is defined as:
 
 .. math::
 
-    \ell (\vect{\beta}) = -\sum_{t=1}^{n} \left\{ \log(\sigma(t)) + \frac{z_t - \mu(t)}
-    {\sigma(t)} + \exp \left\{ - \frac{z_t - \mu(t)}{\sigma(t)} \right\} \right\}
+    \ell (\vect{\beta}) = -\sum_{i=1}^{n} \left\{ \log(\sigma(t_i)) + \frac{z_{t_i} - \mu(t_i)}
+    {\sigma(t_i)} + \exp \left\{ - \frac{z_{t_i} - \mu(t_i)}{\sigma(t_i)} \right\} \right\}
 
 The initialization of the optimization problem is crucial.
 Two initial points :math:`(\mu_0, \sigma_0, \xi_0)` are proposed:
 
 - the *Exponential* initial point: in that case, we assume that the GPD is a stationary
-  Exponential distribution (:math:`\xi=0`) and we deduce
+  Exponential distribution :math:`(\xi=0)` and we deduce
   :math:`\sigma_0` from the mean of the data: :math:`\sigma_0 = \dfrac{1}{n}
   \sum_{i=1}^n z_{t_i}`;
 - the *Static* initial point: in that case, we assume that the GPD is stationary and
@@ -787,49 +805,33 @@ The result class produced by the method provides:
 - the normalizing function :math:`t \mapsto \tau(t)`,
 - the optimal log-likelihood value :math:`\hat{\vect{\beta}}`,
 - the GPD distribution at time :math:`t`,
-- the quantile functions of order :math:`p`: :math:`t \mapsto q_p(Z_t)`.
-
-Parameters
-----------
-sample : 2-d sequence of float
-    Sample drawn from :math:`Z_t`.
-u : float
-    The threshold.
-timeStamps : 2-d sequence of float
-    Values of :math:`t`.
-basis : :class:`~openturns.Basis`
-    Functional basis.
-sigmaIndices : sequence of int, optional
-    Indices of basis terms considered for parameter :math:`\sigma`.
-xiIndices : sequence of int, optional
-    Indices of basis terms considered for parameter :math:`\xi`.
-sigmaLink : :class:`~openturns.Function`, optional
-    The :math:`h_{\sigma}` function.
-
-    By default, the identity function.
-xiLink : :class:`~openturns.Function`, optional
-    The :math:`h_{\xi}` function.
-
-    By default, the identity function.
-initializationMethod : str, optional
-    The initialization method for the optimization problem: *Gumbel* or *Static*.
-
-    The default value depends on the key *GeneralizedExtremeValueFactory-InitializationMethod*.
-normalizationMethod : str, optional
-    The data normalization method: *CenterReduce*, *MinMax* or *None*.
-
-    The default value depends on the key *GeneralizedExtremeValueFactory-NormalizationMethod*.
-
-Returns
--------
-result : :class:`~openturns.TimeVaryingResult`
-    The result class."
+- the quantile functions of order :math:`p`: :math:`t \mapsto q_p(Z_t)`."
 
 // ----------------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelEstimator
 "Estimate a return level and its distribution from the GPD parameters.
 
+Parameters
+----------
+result : :class:`~openturns.DistributionFactoryResult`
+    Likelihood estimation result obtained to estimate the GPD :math:`(\sigma, \xi, u)`.
+sample : 2-d sequence of float
+    The initial data from which the clusters (if any) have been extracted. If the data are independent, *sample* is the sample used to get *result*.
+m : float
+    The return period expressed in terms of number of observations.
+theta : float, optional
+    The extremal index defined in :eq:`defThetaZetaU`.
+    
+    Default value is 1.
+
+Returns
+-------
+distribution : :class:`~openturns.Distribution`
+    The asymptotic distribution of :math:`\hat{z}_m`.
+
+Notes
+-----
 Let :math:`Z` a random variable whose excesses above the threshold
 :math:`u` follow a Generalized Pareto distribution
 :math:`GPD(\sigma, \xi)`. We assume that :math:`u` is known.
@@ -865,8 +867,10 @@ and :math:`\theta` the extremal index. Denoting the number of observations by
 .. math::
     :label: defThetaZetaU
 
+    \begin{align*}
     \zeta_u & = \dfrac{n_u}{n}\\
     \theta  & = \dfrac{n_c}{n_u}
+    \end{align*}
 
 If the data are independent, no clustering is performed and :math:`\theta=1`.
 
@@ -882,45 +886,13 @@ The asymptotic distribution of :math:`\hat{z}_m` is obtained by the Delta method
     \Var{\hat{z}_m} = (\nabla z_m)^T \mat{V}_n \nabla z_m
 
 where :math:`\nabla z_m = (\frac{\partial z_m}{\partial \mu}, \frac{\partial z_m}{\partial \sigma}, \frac{\partial z_m}{\partial \xi})`
-and :math:`\mat{V}_n` is the asymptotic covariance of :math:`(\hat{\sigma}, \hat{\xi}, \hat{\mu})`.
-
-Parameters
-----------
-result : :class:`~openturns.DistributionFactoryResult`
-    Likelihood estimation result obtained to estimate the GPD :math:`(\sigma, \xi, u)`.
-sample : 2-d sequence of float
-    The initial data from which the clusters (if any) have been extracted. If the data are independent, *sample* is the sample used to get *result*.
-m : float
-    The return period expressed in terms of number of observations.
-theta : float, optional
-    The extremal index defined in :eq:`defThetaZetaU`.
-    
-    Default value is 1.
-
-Returns
--------
-distribution : :class:`~openturns.Distribution`
-    The asymptotic distribution of :math:`\hat{z}_m`."
+and :math:`\mat{V}_n` is the asymptotic covariance of :math:`(\hat{\sigma}, \hat{\xi}, \hat{\mu})`."
 
 // ----------------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelProfileLikelihoodEstimator
 "Estimate :math:`(z_m, \xi)` and its distribution with the profile likelihood.
 
-Let :math:`Z` a random variable whose excesses above the threshold
-:math:`u` follow a Generalized Pareto distribution
-:math:`GPD(\sigma, \xi)`. We assume that :math:`u` is known.
-
-The return level :math:`z_m` is defined in :meth:`buildReturnLevelEstimator`. The profile log-likelihood :math:`\ell_p(z_m)` is defined in
-:meth:`buildReturnLevelProfileLikelihood`.
-
-The result class produced by the method provides:
-
-- the GPD distribution associated to :math:`(\hat{z}_m, \hat{\xi}, u)`,
-- the asymptotic distribution of :math:`(\hat{z}_m, \hat{\xi}, u)`,
-- the profile log-likelihood function :math:`z_m \mapsto \ell_p(z_m)`,
-- the optimal profile log-likelihood value :math:`\ell_p(\hat{z}_m)`,
-- confidence intervals of level :math:`(1-\alpha)` of :math:`\hat{z}_m`.
 
 Parameters
 ----------
@@ -938,13 +910,50 @@ theta : float, optional
 Returns
 -------
 result : :class:`~openturns.ProfileLikelihoodResult`
-    The result class."
+    The result class.
+
+Notes
+-----
+Let :math:`Z` a random variable whose excesses above the threshold
+:math:`u` follow a Generalized Pareto distribution
+:math:`GPD(\sigma, \xi)`. We assume that :math:`u` is known.
+
+The return level :math:`z_m` is defined in :meth:`buildReturnLevelEstimator`. The profile log-likelihood :math:`\ell_p(z_m)` is defined in
+:meth:`buildReturnLevelProfileLikelihood`.
+
+The result class produced by the method provides:
+
+- the GPD distribution associated to :math:`(\hat{z}_m, \hat{\xi}, u)`,
+- the asymptotic distribution of :math:`(\hat{z}_m, \hat{\xi}, u)`,
+- the profile log-likelihood function :math:`z_m \mapsto \ell_p(z_m)`,
+- the optimal profile log-likelihood value :math:`\ell_p(\hat{z}_m)`,
+- confidence intervals of level :math:`(1-\alpha)` of :math:`\hat{z}_m`."
 
 // ----------------------------------------------------------------------------
 
 %feature("docstring") OT::GeneralizedParetoFactory::buildReturnLevelProfileLikelihood
 "Estimate a return level and its distribution with the profile likelihood.
 
+Parameters
+----------
+sample : 2-d sequence of float
+    A sample of dimension 1.
+u : float
+    The threshold.
+m : float
+    The return period expressed in terms of number of observations.
+theta : float, optional
+    The extremal index defined in :eq:`defThetaZetaU`.
+    
+    Default value is 1.
+
+Returns
+-------
+distribution : :class:`~openturns.Normal`
+    The asymptotic distribution of :math:`\hat{z}_m`.
+
+Notes
+-----
 Let :math:`Z` a random variable whose excesses above the threshold
 :math:`u` follow a Generalized Pareto distribution
 :math:`GPD(\sigma, \xi)`. We assume that :math:`u` is known.
@@ -969,24 +978,4 @@ Then :math:`\hat{z}_m` is defined by:
 
 The asymptotic distribution of :math:`\hat{z}_m` is normal.
 
-Parameters
-----------
-sample : 2-d sequence of float
-    A sample of dimension 1.
-u : float
-    The threshold.
-m : float
-    The return period expressed in terms of number of observations.
-theta : float, optional
-    The extremal index defined in :eq:`defThetaZetaU`.
-    
-    Default value is 1.
-
-Returns
--------
-distribution : :class:`~openturns.Normal`
-    The asymptotic distribution of :math:`\hat{z}_m`.
-
-Notes
------
 The starting point of the optimization is initialized from the regular maximum likelihood method."

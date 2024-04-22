@@ -1,10 +1,24 @@
 %feature("docstring") OT::CovariatesResult
 "Estimation result class for a GEV or GPD model depending on covariates.
 
+Parameters
+----------
+factory : :class:`~openturns.DistributionFactory`
+    Parent distribution factory.
+parameterFunction : :class:`~openturns.Function`
+    The  function :math:`\vect{\theta}`.
+covariates : 2-d sequence of float
+    Values of :math:`\vect{y}`.
+parameterDistribution : :class:`~openturns.Distribution`
+    The distribution of :math:`\vect{\beta}`.
+llh : float
+    Maximum log-likelihood.
 
 Notes
 -----
-This class is created by the methods  :meth:`~openturns.GeneralizedParetoFactory.buildCovariates` or :meth:`~openturns.GeneralizedExtremeValueFactory.buildCovariates`.
+This class is created by the methods  :meth:`~openturns.GeneralizedParetoFactory.buildCovariates` of the classes
+:class:`~openturns.GeneralizedExtremeValueFactory` and
+:class:`~openturns.GeneralizedParetoFactory`.
 
 Let :math:`Z_{\vect{y}}` be a random variable which follows a GEV distribution or whose
 excesses above :math:`u` follow a GPD. We assume that the parameters of the GEV model or the GPD
@@ -14,8 +28,10 @@ denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
 
 .. math::
 
+    \begin{align*}
     Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y}))\\
-    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u(\vect{y}))
+    Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u)
+    \end{align*}
 
 We denote by :math:`(z_{\vect{y}_1}, \dots, z_{\vect{y}_n})`
 the values of :math:`Z_{\vect{y}}` associated to the values of the
@@ -58,25 +74,14 @@ The complete vector of parameters is defined by:
 
 .. math::
 
+    \begin{align*}
     \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p})} \in  \Rset^{d_t}\\
     \Tr{\vect{b}_q} & =  (\beta_1^q, \dots, \beta_{d_q}^q)\in \Rset^{d_q}
+    \end{align*}
 
 where :math:`d_t = \sum_{i=1}^p d_i`.
 
 The estimator of :math:`\Tr{\vect{b}}` maximizes the likelihood of the Parent distribution.
-
-Parameters
-----------
-factory : :class:`~openturns.DistributionFactory`
-    Parent distribution factory.
-parameterFunction : :class:`~openturns.Function`
-    The  function :math:`\vect{\theta}`.
-covariates : 2-d sequence of float
-    Values of :math:`\vect{y}`.
-parameterDistribution : :class:`~openturns.Distribution`
-    The distribution of :math:`\vect{\beta}`.
-llh : float
-    Maximum log-likelihood.
 
 See also
 --------
@@ -186,15 +191,6 @@ llh : float
 %feature("docstring") OT::CovariatesResult::drawParameterFunction1D
 "Draw the parameter function.
 
-Once the index :math:`q` has been chosen, the method draws all the graphs
-:math:`y_k \mapsto \theta_q(\vect{y})`, where all the components of
-:math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
-:math:`1 \leq k \leq d`.
-
-Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
-covariates. Hence, when the component :math:`\theta_q` does not depend on
-:math:`y_k`, the graph is reduced to one horizontal line.
-
 Parameters
 ----------
 parameterIndex : int in [0, 2]
@@ -207,22 +203,22 @@ Returns
 -------
 grid : :class:`~openturns.GridLayout`
     Graphs of :math:`y_k \mapsto \theta_q(\vect{y})` for :math:`1 \leq k \leq d`.
-"
+
+Notes
+-----
+Once the index :math:`q` has been chosen, the method draws all the graphs
+:math:`y_k \mapsto \theta_q(\vect{y})`, where all the components of
+:math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
+:math:`1 \leq k \leq d`.
+
+Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
+covariates. Hence, when the component :math:`\theta_q` does not depend on
+:math:`y_k`, the graph is reduced to one horizontal line."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::CovariatesResult::drawParameterFunction2D
 "Draw the parameter function.
-
-Once the index :math:`q` has been chosen, the method draws all the graphs
-:math:`(y_k, y_\ell) \mapsto \theta_q(\vect{y})`, where all the components of
-:math:`\vect{y}` are fixed to a reference value excepted for :math:`(y_k, y_\ell)`, for each
-:math:`1 \leq k, \ell \leq d`.
-
-Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
-covariates. Hence, when the component :math:`\theta_q` does not depend on
-:math:`(y_k, y_\ell)`, the graph is reduced to one point. If it does not depend on one of
-the two, the graph is reduced to one line.
 
 Parameters
 ----------
@@ -237,21 +233,23 @@ Returns
 grid : :class:`~openturns.GridLayout`
     Graphs of :math:`(y_k, y_\ell) \mapsto \theta_q(\vect{y})` for
     :math:`1 \leq k, \ell \leq d`.
-"
+
+Notes
+-----
+Once the index :math:`q` has been chosen, the method draws all the graphs
+:math:`(y_k, y_\ell) \mapsto \theta_q(\vect{y})`, where all the components of
+:math:`\vect{y}` are fixed to a reference value excepted for :math:`(y_k, y_\ell)`, for each
+:math:`1 \leq k, \ell \leq d`.
+
+Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
+covariates. Hence, when the component :math:`\theta_q` does not depend on
+:math:`(y_k, y_\ell)`, the graph is reduced to one point. If it does not depend on one of
+the two, the graph is reduced to one line."
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::CovariatesResult::drawQuantileFunction1D
 "Draw the quantile function.
-
-The method plots all the graphs of the quantile functions of order :math:`p`: of
-:math:`Z_{\vect{y}}`:  :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components of
-:math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
-:math:`1 \leq k \leq d`.
-
-Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
-covariates. Hence, when the component :math:`\theta_q` does not depend on
-:math:`y_k`, the graph is reduced to one horizontal line.
 
 Parameters
 ----------
@@ -265,22 +263,23 @@ Returns
 -------
 grid : :class:`~openturns.GridLayout`
     Graphs of :math:`y_k \mapsto q_p(Z_{\vect{y}})` for :math:`1 \leq k \leq d`.
+
+Notes
+-----
+The method plots all the graphs of the quantile functions of order :math:`p`: of
+:math:`Z_{\vect{y}}`:  :math:`y_k \mapsto q_p(Z_{\vect{y}})` where all the components of
+:math:`\vect{y}` are fixed to a reference value excepted for :math:`y_k`, for each
+:math:`1 \leq k \leq d`.
+
+Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
+covariates. Hence, when the component :math:`\theta_q` does not depend on
+:math:`y_k`, the graph is reduced to one horizontal line.
 "
 
 // ---------------------------------------------------------------------
 
 %feature("docstring") OT::CovariatesResult::drawQuantileFunction2D
 "Draw the quantile function.
-
-The method plots all the graphs of the quantile functions of order :math:`p`: of
-:math:`Z_{\vect{y}}`:  :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where all the
-components of :math:`\vect{y}` are fixed to a reference value excepted for
-:math:`(y_k, y_\ell)`, for each :math:`1 \leq k, \ell \leq d`.
-
-Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
-covariates. Hence, when the component :math:`\theta_q` does not depend on
-:math:`(y_k, y_\ell)`, the graph is reduced to one point. If it does not depend on one of
-the two, the graph is reduced to one line.
 
 Parameters
 ----------
@@ -294,4 +293,15 @@ Returns
 -------
 grid : :class:`~openturns.GridLayout`
     Graphs of :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})`for :math:`1 \leq k, \ell \leq d`
-"
+
+Notes
+-----
+The method plots all the graphs of the quantile functions of order :math:`p`: of
+:math:`Z_{\vect{y}}`:  :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` where all the
+components of :math:`\vect{y}` are fixed to a reference value excepted for
+:math:`(y_k, y_\ell)`, for each :math:`1 \leq k, \ell \leq d`.
+
+Each component of :math:`\vect{\theta}` potentially depends only on a subset of the
+covariates. Hence, when the component :math:`\theta_q` does not depend on
+:math:`(y_k, y_\ell)`, the graph is reduced to one point. If it does not depend on one of
+the two, the graph is reduced to one line."
