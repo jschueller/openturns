@@ -28,10 +28,8 @@ denoted by :math:`\vect{y} = \Tr{(y_1, \dots, y_d)}`:
 
 .. math::
 
-    \begin{align*}
     Z_{\vect{y}} & \sim \mbox{GEV}(\mu(\vect{y}), \sigma(\vect{y}), \xi(\vect{y}))\\
     Z_{\vect{y}} & \sim \mbox{GPD}(\sigma(\vect{y}), \xi(\vect{y}), u)
-    \end{align*}
 
 We denote by :math:`(z_{\vect{y}_1}, \dots, z_{\vect{y}_n})`
 the values of :math:`Z_{\vect{y}}` associated to the values of the
@@ -74,10 +72,8 @@ The complete vector of parameters is defined by:
 
 .. math::
 
-    \begin{align*}
-    \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p})} \in  \Rset^{d_t}\\
+    \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p} )} \in  \Rset^{d_t}\\
     \Tr{\vect{b}_q} & =  (\beta_1^q, \dots, \beta_{d_q}^q)\in \Rset^{d_q}
-    \end{align*}
 
 where :math:`d_t = \sum_{i=1}^p d_i`.
 
@@ -292,7 +288,7 @@ referencePoint : sequence of float, optional
 Returns
 -------
 grid : :class:`~openturns.GridLayout`
-    Graphs of :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})`for :math:`1 \leq k, \ell \leq d`
+    Graphs of :math:`(y_k, y_\ell) \mapsto q_p(Z_{\vect{y}})` for :math:`1 \leq k, \ell \leq d`.
 
 Notes
 -----

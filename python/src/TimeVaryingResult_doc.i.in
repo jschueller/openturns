@@ -26,10 +26,8 @@ Let :math:`Z_t` be a non stationary random variable which follows a GEV distribu
 
 .. math::
 
-    \begin{align*}
     Z_t & \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))\\
     Z_t & \sim \mbox{GPD}(\sigma(t), \xi(t), u)
-    \end{align*}
 
 For the GPD, the threshold :math:`u` is assumed to be known.
 
@@ -219,21 +217,18 @@ Notes
 -----
 Let :math:`Z_t` be a non stationary random variable which follows a GEV distribution or whose excesses above :math:`u` follow a GPD.
 The parameters of the GEV or GPD model depend on :math:`t`:
+
 .. math::
 
-    \begin{align*}
     Z_t & \sim \mbox{GEV}(\mu(t), \sigma(t), \xi(t))\\
     Z_t & \sim \mbox{GPD}(\sigma(t), \xi(t), u)
-    \end{align*}
 
 Then, the standardized variables :math:`\hat{Z}_t` defined respectively by:
 
 .. math::
 
-    \begin{align*}
     \hat{Z}_t & = \dfrac{1}{\xi(t)} \log \left[1 + \xi(t)\left( \dfrac{Z_t-\mu(t)}{\sigma(t)} \right)\right] \\
     \hat{Z}_t & = \dfrac{1}{\xi(t)} \log \left[1 + \xi(t)\left( \dfrac{Z_t-u}{\sigma(t)}      \right)\right]
-    \end{align*}
 
 respectively follows the standard Gumbel distribution (which is the GEV model with :math:`(\mu, \sigma, \xi) = (0, 1, 0)`) or the standard Exponential distribution (which is the GPD with :math:`(\sigma, \xi, u) = (1, 0, 0)`).
 

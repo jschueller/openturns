@@ -134,11 +134,9 @@ using:
 .. math::
     :label: gpd_exponential_estimator
 
-    \begin{align*}
     \hat{\xi} & = \xi^* \\
     \hat{\sigma} & = \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho} \\
     \hat{u} & = x_{(1)} - \frac{x_{(1)}}{2 + n}
-    \end{align*}
 
 Where :math:`\xi^*` maximizes:
 
@@ -176,14 +174,11 @@ Lets denote:
 Then we estimate :math:`(\hat{\sigma}, \hat{\xi}, \hat{u})` using:
 
 .. math::
-    :nowrap:
     :label: gpd_probability_weighted_moment_estimator
 
-    \begin{align*}
-        \hat{u}_n & = x_{(1)} - \frac{x_{(1)}}{2 + n}\\
-        \hat{\xi}_n & = \dfrac{1-4\rho}{1-2\rho} \\
-        \hat{\sigma}_n & = \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho}
-    \end{align*}
+    \hat{u}_n & = x_{(1)} - \frac{x_{(1)}}{2 + n}\\
+    \hat{\xi}_n & = \dfrac{1-4\rho}{1-2\rho} \\
+    \hat{\sigma}_n & = \dfrac{2(\overline{x}_n- \hat{u}_n)}{1-2\rho}
 
 This estimator is well-defined only if :math:`\hat{\xi}_n>-1/2`, otherwise the first moment does not exist."
 
@@ -215,14 +210,11 @@ Lets denote:
 Then, we estimate :math:`(\hat{\sigma}_n, \hat{\xi}_n, \hat{u}_n)` using:
 
 .. math::
-    :nowrap:
     :label: gpd_moment_estimator
 
-    \begin{align*}
-        \hat{u}_n & = x_{(1)} - \dfrac{x_{(1)}}{2 + n} \\
-        \hat{\xi}_n & = -\dfrac{1}{2}\left(\dfrac{(\overline{x}_n - \hat{u}_n)^2}{s_n^2}-1\right) \\
-        \hat{\sigma}_n & = \dfrac{(\overline{x}_n- \hat{u}_n)}{2}\left(\dfrac{(\overline{x}_n- \hat{u}_n)^2}{s_n^2}+1\right)
-    \end{align*}
+    \hat{u}_n & = x_{(1)} - \dfrac{x_{(1)}}{2 + n} \\
+    \hat{\xi}_n & = -\dfrac{1}{2}\left(\dfrac{(\overline{x}_n - \hat{u}_n)^2}{s_n^2}-1\right) \\
+    \hat{\sigma}_n & = \dfrac{(\overline{x}_n- \hat{u}_n)}{2}\left(\dfrac{(\overline{x}_n- \hat{u}_n)^2}{s_n^2}+1\right)
 
 This estimator is well-defined only if :math:`\hat{\xi}>-1/4`, otherwise the second moment does not exist."
 
@@ -393,12 +385,10 @@ where :math:`\ell (\sigma, \xi, u)` is detailed in equations :eq:`llgpdR1` and :
 The estimator is given by:
 
 .. math::
-    :nowrap:
 
-    \begin{align*}
     \hat{\xi} & =  \argmax_{\xi} \ell_p(\xi)\\
     \hat{\sigma} & = \argmax_{\sigma} \ell(\sigma, \hat{\xi}, u)
-    \end{align}
+
 "
 
 // ----------------------------------------------------------------------------
@@ -602,10 +592,8 @@ The complete vector of parameters is defined by:
 
 .. math::
 
-    \begin{align*}
     \Tr{\vect{b}} & = \Tr{( \Tr{\vect{b}_1}, \dots,  \Tr{\vect{b}_p} )} \in  \Rset^{d_t}\\
     \Tr{\vect{b}_q} & =  (\beta_1^q, \dots, \beta_{d_q}^q)\in \Rset^{d_q}
-    \end{align*}
 
 where :math:`d_t = \sum_{q=1}^p d_q`.
 
@@ -867,10 +855,8 @@ and :math:`\theta` the extremal index. Denoting the number of observations by
 .. math::
     :label: defThetaZetaU
 
-    \begin{align*}
     \zeta_u & = \dfrac{n_u}{n}\\
     \theta  & = \dfrac{n_c}{n_u}
-    \end{align*}
 
 If the data are independent, no clustering is performed and :math:`\theta=1`.
 
