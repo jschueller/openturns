@@ -1906,9 +1906,10 @@ ScopedPyObjectPointer deepCopy(PyObject * pyObj)
   return pyObjDeepCopy;
 }
 
-inline void SignalHandler(int /*signum*/)
+inline void SignalHandler(int signum)
 {
-  throw InterruptionException(HERE);
+  std::cout <<"OT SignalHandler signum=" << signum<< std::endl;
+  throw InterruptionException(HERE) << "Received interruption " << signum;
 }
 
 END_NAMESPACE_OPENTURNS
