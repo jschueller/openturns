@@ -26,6 +26,7 @@
 #include "openturns/RegularGrid.hxx"
 #include "openturns/DistFunc.hxx"
 #include "openturns/GaussLegendre.hxx"
+#include "openturns/IntervalMesher.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 
 
@@ -202,8 +203,24 @@ Scalar UniformOverMesh::computeCDF(const Point & point) const
   // Waiting for a better implementation
   const Interval quadrant(Point(getDimension(), -SpecFunc::MaxScalar), point);
   const Interval intersection(quadrant.intersect(getRange()));
-  if (intersection == getRange()) cdf = 1.0;
-  else if (!intersection.isEmpty())
+  Bool useIntegration = false;
+  if (intersection.isEmpty())
+    cdf = 0.0;
+  else if (intersection == getRange()) cdf = 1.0;
+  else if (getDimension() == 2)
+    {
+#ifdef OPENTURNS_HAVE_BOOST
+      const Mesh intersectionMesh(mesh_.intersect(IntervalMesher(Indices(2, 1)).build(intersection)));
+      const Point intersectionVolumes_(intersectionMesh.computeSimplicesVolume());
+      const Scalar intersectionVolume = std::accumulate(intersectionVolumes_.begin(), intersectionVolumes_.end(), 0.0);
+      cdf = intersectionVolume / meshVolume_;
+#else
+      useIntegration = true;
+#endif
+    }
+  else
+    useIntegration = true; // getDimension() != 2
+  if (useIntegration)
     cdf = integrationAlgorithm_.integrate(PDFWrapper(this), intersection)[0];
   return cdf;
 }
