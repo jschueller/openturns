@@ -347,7 +347,7 @@ CovarianceMatrix Mesh::computeP1Gram() const
 {
   // If no simplex, the P1 gram matrix is null
   if (simplices_.getSize() == 0) return CovarianceMatrix(0);
-  const UnsignedInteger simplexSize = getVertices().getDimension() + 1;
+  const UnsignedInteger simplexSize = getDimension() + 1;
   SquareMatrix elementaryGram(simplexSize, Point(simplexSize * simplexSize, 1.0 / (simplexSize * (simplexSize + 1.0))));
   for (UnsignedInteger i = 0; i < simplexSize; ++i) elementaryGram(i, i) *= 2.0;
   const UnsignedInteger verticesSize = vertices_.getSize();
@@ -1077,6 +1077,19 @@ Mesh Mesh::intersect(const Mesh & other) const
 #else
   throw NotYetImplementedException(HERE) << "No boost support";
 #endif
+}
+
+Mesh Mesh::getSubMesh(const Indices & simpliciesIndices) const
+{
+  if (!simpliciesIndices.check(simplices_.getSize()))
+    throw InvalidArgumentException(HERE) << "Simplices indices must be in [0, " << simplices_.getSize() << "[";
+  const UnsignedInteger simplexSize = getDimension() + 1;
+  IndicesCollection simplices(simpliciesIndices.getSize(), simplexSize);
+  for (UnsignedInteger i = 0; i < simpliciesIndices.getSize(); ++ i)
+    for (UnsignedInteger j = 0; j < simplexSize; ++ j)
+      simplices(i, j) = simplices_(simpliciesIndices[i], j);
+  Mesh result(vertices_, simplices);
+  return result;
 }
 
 /* Method save() stores the object through the StorageManager */
