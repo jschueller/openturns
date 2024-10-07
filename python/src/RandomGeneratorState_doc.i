@@ -5,10 +5,8 @@ Data structure used to save the internal state of the generator.
 
 Parameters
 ----------
-buffer : sequence of int
-    The history buffer
-index : int
-    The index into buffer"
+buffer : str
+    The history buffer"
 
 // ---------------------------------------------------------------------
 
@@ -17,15 +15,5 @@ index : int
 
 Returns
 -------
-buffer : sequence of int
+buffer : str
     The history buffer"
-
-// ---------------------------------------------------------------------
-
-%feature("docstring") OT::RandomGeneratorState::getIndex
-"Random generator state index accessor.
-
-Returns
--------
-index : int
-    The index into buffer"

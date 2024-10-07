@@ -16,7 +16,6 @@ realization = ot.RandomGenerator.Generate()
 print("one realization=%.6f" % realization)
 state = ot.RandomGenerator.GetState()
 print("state=", repr(state))
-print("new state index=", state.getIndex())
 
 # Test the generation of several realizations
 size = 10000
@@ -80,8 +79,3 @@ for i in range(slice):
 with ott.assert_raises(TypeError):
     ot.RandomGenerator.IntegerGenerate(0)
 
-# SetState with out-of-bounds index should throw
-state = ot.RandomGenerator.GetState()
-badState = ot.RandomGeneratorState(state.getBuffer(), 99999)
-with ott.assert_raises(TypeError):
-    ot.RandomGenerator.SetState(badState)
