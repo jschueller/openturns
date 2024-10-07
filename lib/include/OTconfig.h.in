@@ -113,8 +113,21 @@
 
 #define OPENTURNS_VERSION @OPENTURNS_VERSION_NR@
 
-/* Define to 1 if big endian system */
-#cmakedefine DSFMT_BIG_ENDIAN
+/* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
+   `char[]'. */
+#cmakedefine YYTEXT_POINTER
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#cmakedefine malloc
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#cmakedefine size_t
 
 /* Define to 1 if UnsignedInteger and uint64_t are the same type */
 #cmakedefine OPENTURNS_UNSIGNEDLONG_SAME_AS_UINT64

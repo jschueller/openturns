@@ -401,15 +401,6 @@ if (MSVC)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
 endif ()
 
-if (CMAKE_VERSION VERSION_LESS 3.20)
-  include (TestBigEndian)
-  test_big_endian (DSFMT_BIG_ENDIAN)
-else ()
-  if (CMAKE_CXX_BYTE_ORDER STREQUAL "BIG_ENDIAN")
-    set (DSFMT_BIG_ENDIAN 1)
-  endif ()
-endif ()
-
 try_compile(OPENTURNS_UNSIGNEDLONG_SAME_AS_UINT64
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/unsignedlong_same_as_uint64_t.cxx)
@@ -633,15 +624,15 @@ include (CPack)
 
 install (FILES COPYING
                 COPYING.LESSER
+		COPYING.cephes
                 COPYING.cobyla
-                COPYING.dsfmt
                 COPYING.ev3
                 COPYING.exprtk
                 COPYING.faddeeva
                 COPYING.fastgl
                 COPYING.kendall
                 COPYING.kissfft
-                COPYING.cephes
+                COPYING.pcg
                 COPYING.tnc
           DESTINATION ${OPENTURNS_DOC_PATH}
        )

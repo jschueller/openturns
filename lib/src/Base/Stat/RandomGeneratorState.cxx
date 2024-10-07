@@ -33,14 +33,13 @@ static const Factory<RandomGeneratorState> Factory_RandomGeneratorState;
 
 /* Default constructor */
 RandomGeneratorState::RandomGeneratorState()
-  : buffer_(0), index_(0)
 {
   // Nothing to do
 }
 
 /* Standard constructor */
-RandomGeneratorState::RandomGeneratorState(const Indices buffer, const UnsignedInteger index)
-  : buffer_(buffer), index_(index)
+RandomGeneratorState::RandomGeneratorState(const String buffer)
+  : buffer_(buffer)
 {
   // Nothing to do
 }
@@ -55,34 +54,26 @@ RandomGeneratorState * RandomGeneratorState::clone() const
 String RandomGeneratorState::__repr__() const
 {
   return OSS(true) << "RandomGeneratorState("
-         << "buffer=" << buffer_ << ", "
-         << "index=" << index_ << ")";
+         << "buffer=" << buffer_ << ")";
 }
 
 String RandomGeneratorState::__str__(const String & ) const
 {
   return OSS(false) << "RandomGeneratorState("
-         << "buffer=" << buffer_ << ", "
-         << "index=" << index_ << ")";
+         << "buffer=" << buffer_ << ")";
 }
 
 /* Buffer Accessor */
-Indices RandomGeneratorState::getBuffer() const
+String RandomGeneratorState::getBuffer() const
 {
   return buffer_;
-}
-
-/* Index Accessor */
-UnsignedInteger RandomGeneratorState::getIndex() const
-{
-  return index_;
 }
 
 /* Comparison operator */
 Bool RandomGeneratorState::operator ==(const RandomGeneratorState & other) const
 {
   Bool result = true;
-  if (this != &other) result = (buffer_ == other.buffer_) && (index_ == other.index_);
+  if (this != &other) result = (buffer_ == other.buffer_);
 
   return result;
 }
@@ -91,16 +82,14 @@ Bool RandomGeneratorState::operator ==(const RandomGeneratorState & other) const
 void RandomGeneratorState::save(Advocate & adv) const
 {
   PersistentObject::save(adv);
-  adv.saveAttribute( "buffer_", buffer_);
-  adv.saveAttribute( "index_", index_);
+  adv.saveAttribute("buffer_", buffer_);
 }
 
 /* Method load() reloads the object from the StorageManager */
 void RandomGeneratorState::load(Advocate & adv)
 {
   PersistentObject::load(adv);
-  adv.loadAttribute( "buffer_", buffer_);
-  adv.loadAttribute( "index_", index_);
+  adv.loadAttribute("buffer_", buffer_);
 }
 
 END_NAMESPACE_OPENTURNS
