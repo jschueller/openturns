@@ -41,7 +41,7 @@ public:
   RandomGeneratorState();
 
   /** Standard constructor */
-  RandomGeneratorState(const Indices buffer, const UnsignedInteger index);
+  explicit RandomGeneratorState(const String buffer);
 
   /** Virtual constructor */
   RandomGeneratorState * clone() const override;
@@ -51,10 +51,7 @@ public:
   String __str__(const String & offset = "") const override;
 
   /** Buffer Accessor */
-  Indices getBuffer() const;
-
-  /** Index Accessor */
-  UnsignedInteger getIndex() const;
+  String getBuffer() const;
 
   /** Comparison operator */
   using PersistentObject::operator ==;
@@ -68,9 +65,7 @@ public:
 
 
 private:
-  Indices buffer_;
-  UnsignedInteger index_;
-
+  String buffer_;
 
 }; /* end class RandomGeneratorState */
 

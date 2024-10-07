@@ -18,8 +18,10 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include <cstdlib>
-#include "dsfmt.h"
+#include <random>
+
+#include "pcg_random.hpp"
+
 #include "openturns/RandomGenerator.hxx"
 #include "openturns/RandomGeneratorState.hxx"
 #include "openturns/ResourceMap.hxx"
@@ -27,24 +29,9 @@
 
 BEGIN_NAMESPACE_OPENTURNS
 
-class MersenneTwister : public tutils::dsfmt19937
-{
-public:
-  explicit MersenneTwister(UnsignedInteger seed)
-    : tutils::dsfmt19937(seed)
-  {}
-};
-
-
+static ::pcg64 Generator_ = ::pcg64(ResourceMap::GetAsUnsignedInteger("RandomGenerator-InitialSeed"));
 
 Bool RandomGenerator::IsInitialized_ = false;
-
-MersenneTwister RandomGenerator::Generator_(ResourceMap::GetAsUnsignedInteger("RandomGenerator-InitialSeed"));
-
-/* Sub-classes methods */
-
-
-
 
 /* DefaultConstructor */
 RandomGenerator::RandomGenerator()
@@ -55,23 +42,16 @@ RandomGenerator::RandomGenerator()
 /* Seed accessor */
 void RandomGenerator::SetSeed(const UnsignedInteger seed)
 {
-  Generator_.init((uint32_t)(seed));
+  Generator_.seed(seed);
   IsInitialized_ = true;
 }
 
 /* State accessor */
 void RandomGenerator::SetState(const RandomGeneratorState & state)
 {
-  const UnsignedInteger size = state.buffer_.getSize();
-  const UnsignedInteger stateSize = Generator_.get_state_length_32();
-  /* The unusual case, the given seed is too small. It is completed with 0 */
-  Indices stateArray(state.buffer_);
-  for (UnsignedInteger i = size; i < stateSize; ++i)
-    stateArray.add(0);
-  // Set the state array
-  Generator_.set_state(&stateArray[0]);
-  // Set the index
-  Generator_.set_index(state.index_);
+  std::stringstream oss;
+  oss << state.getBuffer();
+  oss >> Generator_;
   IsInitialized_ = true;
   return;
 }
@@ -79,12 +59,9 @@ void RandomGenerator::SetState(const RandomGeneratorState & state)
 /* Seed accessor */
 RandomGeneratorState RandomGenerator::GetState()
 {
-  const UnsignedInteger size = (UnsignedInteger)(Generator_.get_state_length_32());
-  // Create the state and get the index at the same time
-  RandomGeneratorState state(Indices(size, 0), (UnsignedInteger)(Generator_.get_index()));
-  // Get the state array
-  Generator_.get_state(&state.buffer_[0]);
-  return state;
+  std::stringstream oss;
+  oss << Generator_;
+  return RandomGeneratorState(oss.str());
 }
 
 void RandomGenerator::Initialize()
@@ -100,14 +77,16 @@ void RandomGenerator::Initialize()
 Scalar RandomGenerator::Generate()
 {
   Initialize();
-  return Generator_.gen();
+  std::uniform_real_distribution<Scalar> uniform(0.0, 1.0);
+  return uniform(Generator_);
 }
 
 /* Generate a pseudo-random integer uniformly distributed over [[0,...,n-1]] */
 UnsignedInteger RandomGenerator::IntegerGenerate(const UnsignedInteger n)
 {
   Initialize();
-  return Generator_.igen((uint32_t)(n));
+  std::uniform_int_distribution<UnsignedInteger> uniform(0, n - 1);
+  return uniform(Generator_);
 }
 
 /* Generate a pseudo-random vector of numbers uniformly distributed over ]0, 1[ */
@@ -115,22 +94,20 @@ Point RandomGenerator::Generate(const UnsignedInteger size)
 {
   Point result(size);
   Initialize();
+  std::uniform_real_distribution<Scalar> uniform(0.0, 1.0);
   for (UnsignedInteger i = 0; i < size; ++ i)
-  {
-    result[i] = Generator_.gen();
-  }
+    result[i] = uniform(Generator_);
   return result;
 }
 
-/* Generate a pseudo-random vector of numbers uniformly distributed over ]0, 1[ */
+/* Generate a pseudo-random vector of numbers uniformly distributed over [[0,...,n-1]] */
 RandomGenerator::UnsignedIntegerCollection RandomGenerator::IntegerGenerate(const UnsignedInteger size, const UnsignedInteger n)
 {
   UnsignedIntegerCollection result(size);
   Initialize();
+  std::uniform_int_distribution<UnsignedInteger> uniform(0, n - 1);
   for (UnsignedInteger i = 0; i < size; ++ i)
-  {
-    result[i] = Generator_.igen((uint32_t)(n));
-  }
+    result[i] = uniform(Generator_);
   return result;
 }
 

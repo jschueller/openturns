@@ -26,11 +26,8 @@
 #include "openturns/Point.hxx"
 #include "openturns/RandomGeneratorState.hxx"
 
+
 BEGIN_NAMESPACE_OPENTURNS
-
-
-
-class MersenneTwister;
 
 /**
  * @class RandomGenerator
@@ -68,7 +65,6 @@ private:
   static void Initialize();
 
   static Bool IsInitialized_;
-  static MersenneTwister Generator_;
 
 }; /* class RandomGenerator */
 

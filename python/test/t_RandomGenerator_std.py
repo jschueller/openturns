@@ -15,7 +15,6 @@ realization = ot.RandomGenerator.Generate()
 print("one realization=%.6f" % realization)
 state = ot.RandomGenerator.GetState()
 print("state=", repr(state))
-print("new state index=", state.getIndex())
 
 # Test the generation of several realizations
 size = 10000

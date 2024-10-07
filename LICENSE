@@ -2,7 +2,7 @@ The OpenTURNS library and all its derivatives are distributed under the LGPL lic
 
 This library bundles several third-party codes with various licenses compatible with the LGPL:
 - COBYLA optimization solver (lib/src/Base/Optim/algocobyla.*) under Expat license, see COPYING.cobyla
-- Mersenne twister RNG (lib/src/Base/Stat/dsfmt.*) under BSD license, see COPYING.dsfmt
+- PCG RNG (lib/src/Base/Stat/pcg.*) under MIT license, see COPYING.pcg
 - Ev3 symbolic library (lib/src/Base/Diff/Ev3/*) under LGPL license, see COPYING.ev3
 - ExprTk symbolic parser (lib/src/Base/Func/openturns/exprtk.hpp) under Expat license, see COPYING.exprtk
 - Faddeeva function (lib/src/Base/Func/SpecFunc/Faddeeva.*) under Expat license, see COPYING.faddeeva
