@@ -31,10 +31,11 @@ Files: lib/src/Base/Optim/algotnc.*
 Copyright: 2002-2005 Jean-Sebastien Roy (js@jeannot.org)
 License: Expat
 
-Files: lib/src/Base/Stat/dsfmt.*
-Copyright: 2007 Takashi Takekawa.
-           2007 Mutsuo Saito, Makoto Matsumoto and Hiroshima University.
-License: BSD-3-clause
+Files: lib/src/Base/Stat/pcg_extras.hpp
+ lib/src/Base/Stat/pcg_random.hpp
+ lib/src/Base/Stat/pcg_uint128.hpp
+Copyright: 2014-2017 Melissa O'Neill and PCG Project contributors
+License: Expat
 
 Files: lib/src/Base/Stat/kendall.c
  lib/src/Base/Stat/kendall.h
