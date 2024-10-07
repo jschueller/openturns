@@ -107,7 +107,7 @@ print(
     "discrepancy=",
     ot.LowDiscrepancySequenceImplementation.ComputeStarDiscrepancy(sample),
 )
-graph = ot.Graph("Mersenne Twister", "", "")
+graph = ot.Graph("PCG", "", "")
 cloud = ot.Cloud(sample)
 graph.add(cloud)
 view = otv.View(graph)

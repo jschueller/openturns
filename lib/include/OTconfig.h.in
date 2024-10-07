@@ -115,9 +115,6 @@
 
 #define OPENTURNS_VERSION @OPENTURNS_VERSION_NR@
 
-/* Define to 1 if big endian system */
-#cmakedefine DSFMT_BIG_ENDIAN
-
 /* Define to 1 if UnsignedInteger and uint64_t are the same type */
 #cmakedefine OPENTURNS_UNSIGNEDLONG_SAME_AS_UINT64
 

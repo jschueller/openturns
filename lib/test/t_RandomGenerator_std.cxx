@@ -35,12 +35,12 @@ int main(int, char *[])
     RandomGenerator::SetSeed(0);
     // Test the state accessor for reading
     RandomGeneratorState initialState(RandomGenerator::GetState());
-    fullprint << "state index=" << initialState.getIndex() << " state array=" << initialState.getBuffer() << std::endl;
+    fullprint << "state array=" << initialState.getBuffer() << std::endl;
     // Test the generation of one realization
     Scalar realization = RandomGenerator::Generate();
     fullprint << "one realization=" << realization << std::endl;
     RandomGeneratorState state(RandomGenerator::GetState());
-    fullprint << "new state index=" << state.getIndex() << std::endl;
+    fullprint << "state array=" << state.getBuffer() << std::endl;
     // Test the generation of several realizations
     UnsignedInteger size = 10000;
     Point several(RandomGenerator::Generate(size));
