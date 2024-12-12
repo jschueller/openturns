@@ -1,0 +1,46 @@
+%feature("docstring") OT::SlicedInverseRegressionResult
+"Result class for SIR method."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegressionResult::getTransformation
+"Transformation function accessor.
+
+Returns
+-------
+transformation : :class:`~openturns.Function`
+    Transformation function
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegressionResult::getInverseTransformation
+"Inverse transformation function accessor.
+
+Returns
+-------
+inverseTransformation : :class:`~openturns.Function`
+    Inverse transformation function
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegressionResult::getDirections
+"Directions accessor.
+
+Returns
+-------
+directions : :class:`~openturns.Matrix`
+    Directions matrix
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegressionResult::getEigenvalues
+"Eigen values accessor.
+
+Returns
+-------
+eigenvalues : :class:`~openturns.Point`
+    Eigen values
+"

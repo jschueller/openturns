@@ -44,6 +44,10 @@
 %include ConstantEvaluation.i
 %include ConstantFunction.i
 
+/* Base/Algo */
+%include SlicedInverseRegressionResult.i
+%include SlicedInverseRegression.i
+
 /* Uncertainty/Model */
 
 /* Uncertainty/Distribution */

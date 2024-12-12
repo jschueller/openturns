@@ -1,0 +1,82 @@
+%feature("docstring") OT::SlicedInverseRegression
+"SlicedInverseRegression algorithm.
+
+Parameters
+----------
+X, Y : class:`~openturns.Sample`
+    Input, feature samples
+
+Examples
+--------
+>>> import openturns as ot
+>>> import openturns.experimental as otexp
+>>> N = 100
+>>> X = ot.Normal([0.0] * 2, [0.1] * 2).getSample(N)
+>>> X += [[-i / (N - 1), 2 * i / (N - 1)] for i in range(N)]
+>>> X = X - X.computeMean()
+>>> f = ot.SymbolicFunction(['x1', 'x2'], ['4*(x1+2*x2)+2'])
+>>> Y = f(X) + ot.Normal(0.0, 0.2).getSample(N)
+>>> algo = otexp.SlicedInverseRegression(X, Y)
+>>> algo.run()
+>>> transformation = algo.getResult().getTransformation()
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::run
+"Run the algorithm."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::getResult
+"Accessor to the result.
+
+Returns
+-------
+result : :class:`~openturns.experimental.SlicedInverseRegressionResult`
+    Result class
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::setSliceNumber
+"Accessor to the number of slices.
+
+Parameters
+----------
+sliceNumber : int
+    Number of slices
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::getSliceNumber
+"Accessor to the number of slices.
+
+Returns
+-------
+sliceNumber : int
+    Number of slices
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::setModesNumber
+"Accessor to the number of modes.
+
+Parameters
+----------
+modesNumber : int
+    Number of modes retained.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::SlicedInverseRegression::getModesNumber
+"Accessor to the number of modes.
+
+Returns
+-------
+modesNumber : int
+    Number of modes retained.
+"
