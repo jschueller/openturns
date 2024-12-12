@@ -42,6 +42,10 @@
 %include ConstantFunction.i
 %include VertexFieldToPointFunction.i
 
+/* Base/Algo */
+%include SlicedInverseRegressionResult.i
+%include SlicedInverseRegression.i
+
 /* Uncertainty/Model */
 
 /* Uncertainty/Distribution */
