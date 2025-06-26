@@ -1,0 +1,27 @@
+%feature("docstring") OT::HiGHS
+"Linear optimization solver.
+
+.. warning::
+    This class is experimental and likely to be modified in future releases.
+    To use it, import the ``openturns.experimental`` submodule.
+
+This class exposes the linear solver from the `HiGHS <https://highs.dev/>`_ library.
+
+Parameters
+----------
+problem : :class:`~openturns.OptimizationProblem`
+    The problem
+
+Examples
+--------
+>>> import openturns as ot
+>>> dim = 2
+>>> model = ot.SymbolicFunction(['x', 'y'], ['x^2+y^2*(1-x)^3'])
+>>> bounds = ot.Interval([-2.0] * dim, [3.0] * dim)
+>>> problem = ot.OptimizationProblem(model)
+>>> problem.setBounds(bounds)
+>>> algo = ot.HiGHS(problem)
+>>> algo.run()
+>>> result = algo.getResult()
+>>> x = result.getOptimalPoint()
+"
