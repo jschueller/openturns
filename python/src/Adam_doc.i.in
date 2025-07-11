@@ -1,0 +1,95 @@
+%feature("docstring") OT::Adam
+"Abdo-Rackwitz solver.
+
+This solver uses first derivative information and can only be used to solve level function problems.
+
+Available constructors:
+    Adam(*problem*)
+
+    Adam(*problem, tau, omega, smooth*)
+
+Parameters
+----------
+problem : :class:`~openturns.OptimizationProblem`
+    Optimization problem to solve.
+tau : float
+    Multiplicative decrease of linear step.
+omega : float
+    Armijo factor.
+smooth : float
+    Growing factor in penalization term.
+
+See also
+--------
+Cobyla, SQP, TNC, NLopt
+
+Examples
+--------
+>>> import openturns as ot
+>>> model = ot.SymbolicFunction(['E', 'F', 'L', 'I'], ['-F*L^3/(3*E*I)'])
+>>> problem = ot.NearestPointProblem(model, 5.0)
+>>> algo = ot.Adam(problem)
+>>> algo.setStartingPoint([1.0] * 4)
+>>> algo.run()
+>>> result = algo.getResult()"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::getTau
+"Accessor to tau parameter.
+
+Returns
+-------
+tau : float
+    Multiplicative decrease of linear step."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::setTau
+"Accessor to tau parameter.
+
+Parameters
+----------
+tau : float
+    Multiplicative decrease of linear step."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::getOmega
+"Accessor to omega parameter.
+
+Returns
+-------
+omega : float
+    Armijo factor."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::setOmega
+"Accessor to omega parameter.
+
+Parameters
+----------
+omega : float
+    Armijo factor."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::getSmooth
+"Accessor to smooth parameter.
+
+Returns
+-------
+smooth : float
+    Growing factor in penalization term."
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::Adam::setSmooth
+"Accessor to smooth parameter.
+
+Parameters
+----------
+smooth : float
+    Growing factor in penalization term."
+

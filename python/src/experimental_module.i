@@ -31,6 +31,7 @@
 
 /* Base/Optim */
 %import optim_module.i
+%include Adam.i
 
 /* Base/Stat */
 %include LatentVariableModel.i
