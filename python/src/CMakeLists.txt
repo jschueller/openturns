@@ -1013,6 +1013,7 @@ ot_add_python_module(testing testing_module.i
                     )
 
 ot_add_python_module(experimental experimental_module.i
+                     Adam.i Adam_doc.i.in
                      CombinationsDistribution.i CombinationsDistribution_doc.i.in
                      PointConditionalDistribution.i PointConditionalDistribution_doc.i.in
                      SequentialSamplingAlgorithm.i SequentialSamplingAlgorithm_doc.i.in
