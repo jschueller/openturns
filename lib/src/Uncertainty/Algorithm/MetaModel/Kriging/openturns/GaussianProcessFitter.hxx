@@ -141,6 +141,7 @@ private:
     Point operator() (const Point & point) const override
     {
       const Point value(algorithm_.computeReducedLogLikelihood(point));
+      callsNumber_.increment();
       return value;
     }
 
