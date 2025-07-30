@@ -277,6 +277,7 @@ ot_pyinstallcheck_test (NonCenteredFiniteDifferenceGradient_std)
 
 ## Optim
 ot_pyinstallcheck_test (AbdoRackwitz_std IGNOREOUT)
+ot_pyinstallcheck_test (Adam_std IGNOREOUT)
 if (Bonmin_FOUND)
   ot_pyinstallcheck_test (Bonmin_std IGNOREOUT)
   ot_pyinstallcheck_test (Bonmin_4dsoo IGNOREOUT)

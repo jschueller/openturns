@@ -65,8 +65,6 @@ void Adam::checkProblem(const OptimizationProblem & problem) const
  */
 void Adam::run()
 {
-  // initialize();
-
   /* Get a local copy of the level function */
   const Function levelFunction(getProblem().getObjective());
   /* Get a local copy of the level value */
@@ -100,7 +98,10 @@ void Adam::run()
   Point xPrev(x);
   Point y;
   Point yPrev(levelFunction(x));
-  
+  Scalar beta1Decayed = beta1_;
+  Scalar beta2Decayed = beta2_;
+  const Scalar sign = getProblem().isMinimization() ? 1.0 : -1.0;
+
   if (getProblem().hasBounds() && !getProblem().getBounds().contains(x))
   {
     const Point lowerBound(getProblem().getBounds().getLowerBound());
@@ -115,14 +116,14 @@ void Adam::run()
         x[i] = upperBound[i];
     }
   }
-  
+
   while ((!stop) && (iterationNumber <= getMaximumIterationNumber()))
   {
     /* Go to next iteration */
     ++ iterationNumber;
 
     /* Compute the level function gradient at the current point -> Grad(G) */
-    Point g(levelFunction.gradient(x) * Point(1, 1.0));
+    Point g(levelFunction.gradient(x) * Point(1, sign));
     LOGDEBUG(OSS() << "current point=" << x << " current level value=" << y << " current gradient=" << g);
     /* Compute the current Lagrange multiplier */
     const Scalar normGradientSquared = g.normSquare();
@@ -133,13 +134,16 @@ void Adam::run()
     for (UnsignedInteger i = 0; i < dimension; ++ i)
     {
       m[i] = beta1_ * m[i] + (1.0 - beta1_) * g[i];
-      v[i] = beta2_ * v[i] + (1.0 - beta2_) * g[i]*g[i];
+      v[i] = beta2_ * v[i] + (1.0 - beta2_) * g[i] * g[i];
 
-      const Scalar mhat = m[i] / (1.0 - std::pow(beta1_, iterationNumber + 1.0));
-      const Scalar vhat = v[i] / (1.0 - std::pow(beta2_, iterationNumber + 1.0));
+      // bias correction
+      const Scalar mhat = m[i] / (1.0 - beta1Decayed);
+      const Scalar vhat = v[i] / (1.0 - beta2Decayed);
       
       x[i] -= alpha_ * mhat / (std::sqrt(vhat) + epsilon_);
     }
+    beta1Decayed *= beta1_;
+    beta2Decayed *= beta2_;
 
     if (getProblem().hasBounds() && !getProblem().getBounds().contains(x))
     {
@@ -155,14 +159,12 @@ void Adam::run()
           x[i] = upperBound[i];
       }
     }
-    
+
     y = levelFunction(x);
 
     // update number of evaluations
     evaluationNumber = levelFunction.getEvaluationCallsNumber() - initialEvaluationNumber;
 
-    std::cout << "evaluationNumber=" << evaluationNumber << std::endl;
-    
     /* Check if convergence has been achieved */
     absoluteError = (x - xPrev).normInf();
     // constraintError = std::abs(currentLevelValue_ - levelValue);
@@ -229,8 +231,6 @@ void Adam::run()
     }
   }
 
-  std::cout << "result" << result_ << std::endl;
-  
   if (result_.getStatus() != OptimizationResult::SUCCESS)
   {
     if (getCheckStatus())

@@ -4,44 +4,27 @@ import openturns as ot
 import openturns.experimental as otexp
 import openturns.testing as ott
 
-# ot.Log.Show(ot.Log.DEBUG)
-ot.TESTPREAMBLE()
-
-# Set precision
-ot.PlatformInfo.SetNumericalPrecision(6)
-
-# Calibration of default optimizer
-ot.ResourceMap.SetAsScalar(
-    "GaussianProcessFitter-DefaultOptimizationLowerBound", 1.0e-5
-)
-ot.ResourceMap.SetAsScalar("GaussianProcessFitter-DefaultOptimizationUpperBound", 100)
-ot.ResourceMap.SetAsBool("GeneralLinearModelAlgorithm-UseAnalyticalAmplitudeEstimate", False)
-
-
-# Data & estimation
-inputDimension = 1
-X = ot.Normal().getSample(100)
-X = X.sortAccordingToAComponent(0)
-covarianceModel = ot.SquaredExponential([1.0], [1.0])
-model = ot.SymbolicFunction(["x"], ["x - 0.6 * cos(x/3)"])
-Y = model(X)
-basis = ot.QuadraticBasisFactory(inputDimension).build()
-algo = otexp.GaussianProcessFitter(X, Y, covarianceModel, basis)
-algo.setKeepCholeskyFactor(False)
-algo.setOptimizationAlgorithm(ot.NLopt("LN_NELDERMEAD"))
-algo.setOptimizationAlgorithm(otexp.Adam())
-algo.run()
-
-# perform an evaluation
-result = algo.getResult()
-metaModel = result.getMetaModel()
-conditionalCovariance = result.getCovarianceModel()
-print(conditionalCovariance)
-
-residual = metaModel(X) - Y
-ott.assert_almost_equal(residual.computeCentralMoment(2), [1.06e-05], 1e-5, 1e-5)
-ott.assert_almost_equal(
-    conditionalCovariance.getParameter(), [0.619144, 0.000937], 5e-3, 1e-3
-)
-likelihood = algo.getReducedLogLikelihoodFunction()
-assert likelihood.getInputDimension() == 1, "likelihood dim"
+dim = 2
+f = ot.SymbolicFunction(["x1", "x2"], ["1+100*(x2-x1^2)^2+(1-x1)^2"])
+x0 = [1e-3] * dim
+algo = otexp.Adam()
+algo.setAlpha(1e-2)
+for minimization in [True, False]:
+    problem = ot.OptimizationProblem(f)
+    problem.setMinimization(minimization)
+    algo.setProblem(problem)
+    algo.setStartingPoint(x0)
+    try:
+        algo.run()
+    except Exception as e:
+        print("-- ", e)
+        continue
+    result = algo.getResult()
+    x = result.getOptimalPoint()
+    y = result.getOptimalValue()[0]
+    print("x^=", x, "y^=", y)
+    # Adam does not read the actual minimum at [1, 1]
+    if minimization:
+        assert y < 1.1
+    else:
+        assert y > 1e2
