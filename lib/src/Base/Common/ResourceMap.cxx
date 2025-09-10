@@ -1587,6 +1587,7 @@ void ResourceMap::loadDefaultConfiguration()
 
   // GaussianProcessFitter parameters //
   addAsBool("GaussianProcessFitter-KeepCovariance", true);
+  addAsBool("GaussianProcessFitter-OptimizationNormalization", true);
   addAsBool("GaussianProcessFitter-OptimizeParameters", true);
   addAsBool("GaussianProcessFitter-UnbiasedVariance", true);
   addAsBool("GaussianProcessFitter-UseAnalyticalAmplitudeEstimate", true);
