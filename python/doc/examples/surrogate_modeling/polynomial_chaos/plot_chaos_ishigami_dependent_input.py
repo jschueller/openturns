@@ -1,15 +1,22 @@
 """
+<<<<<<< HEAD
 Create a FCE for dependent inputs: transformation vs domination
 ===============================================================
 """
 
 # %%
 #
+=======
+FCE for dependent inputs: transformation vs domination
+======================================================
+"""
+
+# %%
 # In this example, we create a functional chaos expansion for the
 # :ref:`Ishigami function<use-case-ishigami>` when the input distribution
 # has dependent marginals.
 #
-# refer to :ref:`functional_chaos` to learn more about functional chaos expansion.
+# Refer to :ref:`functional_chaos` to learn more about functional chaos expansion.
 #
 # We provide one input sample and one output sample of the Ishigami function. We build two meta models:
 #
@@ -126,7 +133,6 @@ view = otv.View(graph)
 # We implement the same steps as before, until the validation graph.
 chaos_algo.setUseDomination(True)
 chaos_algo.run()
-
 chaos_result = chaos_algo.getResult()
 metamodel_dom = chaos_result.getMetaModel()
 metamodel_dom_predictions = metamodel_dom(inputTest)
@@ -139,6 +145,7 @@ view = otv.View(graph)
 
 # %%
 # We can see that the meta model obtained with the domination metho is largely better than the previous one.
+
 # %%
 # Display all figures
 otv.View.ShowAll()
