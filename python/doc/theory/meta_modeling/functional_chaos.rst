@@ -25,7 +25,6 @@ Methodology: principles
 We consider the output random vector:
 
 .. math::
-
     \outputRV = \model(\inputRV)
 
 where :math:`\model: \Rset^{\inputDim} \rightarrow \Rset^{\outputDim}` is the model,
@@ -46,7 +45,6 @@ The functional space
 product defined by:
 
   .. math::
-
         \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
         = \Expect{h_1(\inputRV) h_2(\inputRV)}
 
@@ -56,14 +54,14 @@ For a continuous random variable, the inner product is defined by:
   .. math::
 
         \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
-        & =  \int h_1(\vect{x}) h_2(\vect{x})\, \mu_{\inputRV}(\vect{x}) d\vect{x}.
+         =  \int h_1(\vect{x}) h_2(\vect{x})\, \mu_{\inputRV}(\vect{x}) d\vect{x}.
 
 For a discrete random variable, the scalar product is:
 
   .. math::
 
         \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
-        & = \sum_\vect{x} h_1(\vect{x}) h_2(\vect{x})\, \Prob{\inputRV = \vect{x}}.
+         = \sum_\vect{x} h_1(\vect{x}) h_2(\vect{x})\, \Prob{\inputRV = \vect{x}}.
 
 The associated norm is defined by:
 
