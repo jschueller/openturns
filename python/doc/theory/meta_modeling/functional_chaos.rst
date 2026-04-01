@@ -25,7 +25,6 @@ Methodology: principles
 We consider the output random vector:
 
 .. math::
-
     \outputRV = \model(\inputRV)
 
 where :math:`\model: \Rset^{\inputDim} \rightarrow \Rset^{\outputDim}` is the model,
