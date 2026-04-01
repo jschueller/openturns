@@ -24,6 +24,7 @@ Least squares surrogate models
     :maxdepth: 1
 
     least_squares
+    polynomial_least_squares
     polynomial_sparse_least_squares
 
 
@@ -42,11 +43,10 @@ Functional chaos
 .. toctree::
     :maxdepth: 1
 
-    orthogonal_polynomials
+    orthonormal_polynomials
     chaos_basis
     enumeration_strategy
     functional_chaos
-    pce_cross_validation
 
 
 Surrogate validation
