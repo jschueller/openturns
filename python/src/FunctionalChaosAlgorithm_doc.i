@@ -63,7 +63,7 @@ When the *adaptiveStrategy* is unspecified, the following :class:`~openturns.Fix
 The associated basis is built as the tensorization of the univariate polynomials family
 orthonormal to the standard representative of the input marginals distribution (if not specified, the input 
 distribution is fitted on the input sample).
-The basis is associated to the enumerate function is chosen according to
+The basis which is associated to the enumerate function is chosen according to
 the `FunctionalChaosAlgorithm-QNorm` parameter of the :class:`~openturns.ResourceMap`:
 
 - If this parameter is equal to 1, then the :class:`~openturns.LinearEnumerateFunction` class is used.

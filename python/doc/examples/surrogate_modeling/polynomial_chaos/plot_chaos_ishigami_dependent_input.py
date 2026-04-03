@@ -1,9 +1,10 @@
 """
-FCE for dependent inputs: transformation vs domination
-======================================================
+Create a FCE for dependent inputs: transformation vs domination
+===============================================================
 """
 
 # %%
+#
 # In this example, we create a functional chaos expansion for the
 # :ref:`Ishigami function<use-case-ishigami>` when the input distribution
 # has dependent marginals.
@@ -89,15 +90,7 @@ view = otv.View(graph)
 
 # %%
 # We create the functional chaos algorithm.
-enumerateFunc = ot.HyperbolicAnisotropicEnumerateFunction(3, 0.5)
-basis = ot.OrthogonalProductPolynomialFactory([ot.LegendreFactory()] * 3, enumerateFunc)
-basisSize = enumerateFunc.getBasisSizeFromTotalDegree(10)
-chaos_algo = ot.LeastSquaresExpansion(inputTrain, outputTrain, input_dist, basis, basisSize)
-
-adaptive = ot.FixedStrategy(basis, basisSize)
-projection = ot.LeastSquaresStrategy()
-chaos_algo = ot.FunctionalChaosAlgorithm(inputTrain, outputTrain, input_dist, adaptive, projection)
-
+chaos_algo = ot.FunctionalChaosAlgorithm(inputTrain, outputTrain, input_dist)
 chaos_algo.setUseDomination(False)
 chaos_algo.run()
 
@@ -130,12 +123,10 @@ view = otv.View(graph)
 # adaptive strategy is used to project the model. This basis is not orthonormal to :math:`\mu`.
 #
 # We use the :meth:`~openturns.FunctionalChaosAlgorithm.setUseDomination` method.
+# We implement the same steps as before, until the validation graph.
 chaos_algo.setUseDomination(True)
-
-print("basis = ", chaos_algo.getAdaptiveStrategy().getBasis())
-print("pojection size = ", chaos_algo.getProjectionStrategy())
-
 chaos_algo.run()
+
 chaos_result = chaos_algo.getResult()
 metamodel_dom = chaos_result.getMetaModel()
 metamodel_dom_predictions = metamodel_dom(inputTest)

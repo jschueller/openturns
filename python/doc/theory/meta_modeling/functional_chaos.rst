@@ -373,6 +373,12 @@ In that case, the Sobol' indices can easily be deduced from the coefficients
 :math:`(a_k)_{k \in I_n, k\neq 0}`: see :class:`~openturns.FunctionalChaosSobolIndices` for
 more details on this topic.
 
+  .. math::
+    :label: defPsi0
+
+      \psi_0 = 1
+
+
 .. topic:: API:
 
     - See :class:`~openturns.FunctionalChaosAlgorithm`
