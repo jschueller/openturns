@@ -19,7 +19,7 @@ the model :math:`\model`.
 
 The principles of the building of a functional chaos expansion are described in the sequel.
 
-Methogology: principles
+Methodology: principles
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 We consider the output random vector:
@@ -87,7 +87,7 @@ The meta model is the truncation of the expansion to a *finite* subset :math:`I`
     \metaModel =  \sum_{k \in I} a_k \psi_k
 
 
-Methogology: step by step
+Methodology: step by step
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The construction of a meta model as a truncated functional expansion consists in choosing:
@@ -104,7 +104,7 @@ The construction of a meta model as a truncated functional expansion consists in
 .. math::
    :label: UnionPn
 
-   \cP = \bigcup{n \in \Nset} \cP_n
+   \cP = \bigcup_{n \in \Nset} \cP_n
 
 which implies that any function in :math:`L^2\left(\mu_{\inputRV}\right)` is the limit with
 respect to :math:`L^2\left(\mu_{\inputRV}\right)` of a sequence :math:`(h_n)_{n \in \Nset}` such
@@ -140,12 +140,12 @@ which amounts to solving:
 
    \metaModel = \arg\min_{h_n \in \cP_n} | \model - h_n |^2_{L^2\left(\mu_{\inputRV}\right)}
 
-This problem is a least-squares problem.
+This problem is a linear least-squares problem.
 
 Which approximation space and sequence of nested approximation spaces?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Many choices are possible for :math:`\cP` and :math:`(\cP_n)_{n \in \Nset}`.
+Many choices are possible for :math:`\cP` and the associated sequence :math:`(\cP_n)_{n \in \Nset}`.
 
 For instance, one may choose :math:`\cP` to be the set of multivariate polynomials,
 provided that  :math:`\cP` verifies the condition :eq:`fermetureP` (see also [sullivan2015]_,
@@ -157,7 +157,7 @@ construct a complete family using graded polynomials by introducing a bijection 
 from :math:`\Nset` into :math:`\Nset^\inputDim`. The mapping  :math:`\phi(k)` specifies the
 multi-index of marginal degrees (this bijection ensures that all polynomials are covered and
 that any finite family is linearly independent). Then, :math:`\cP_n` is the space spanned by
-polynomials with marginal degrees :math:`\phi(1), \dots, \phi(n)`. Depending on the choice of
+polynomials with marginal degrees :math:`\phi(0), \dots, \phi(n)`. Depending on the choice of
 :math:`\phi`, :math:`\cP_n` may correspond to the set of polynomials of total degree less than
 :math:`n`. See :ref:`enumeration_strategy` for more details on this topic.
 
@@ -353,9 +353,29 @@ class for more details on this topic.
 
 The second usage assumes that the input distribution :math:`\mu_{\inputRV}` has independent
 marginals and that the basis :math:`\left(\psi_k\right)_{k \in I_n}` is orthonormal with respect
-to  :math:`\mu_{\inputRV}`. In that case, the Sobol' indices can easily be deduced from the coefficients
-:math:`(a_k)_{k \in I_n}`: see :class:`~openturns.FunctionalChaosSobolIndices` for
+to  :math:`\mu_{\inputRV}` and that the first element be:
+
+  .. math::
+    :label: defPsi0
+
+      \psi_0 = 1
+
+The orthogonality of the functions implies that:
+
+  .. math::
+      \mathbf{E}_{\mu}\left[\psi_{i}(\vect{X})\right] = \scalarproduct{\psi_{i}}{\psi_{0}}_{L^2\left(\mu\right)} = 0
+
+for any non-zero :math:`i\neq 0`.
+
+In that case, the Sobol' indices can easily be deduced from the coefficients
+:math:`(a_k)_{k \in I_n, k\neq 0}`: see :class:`~openturns.FunctionalChaosSobolIndices` for
 more details on this topic.
+
+  .. math::
+    :label: defPsi0
+
+      \psi_0 = 1
+
 
 .. topic:: API:
 

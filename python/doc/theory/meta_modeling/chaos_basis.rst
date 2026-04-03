@@ -30,20 +30,6 @@ for any :math:`k, \ell \geq 0` where :math:`\delta_{k, \ell}` is the Kronecker s
   0 & \textrm{otherwise.}
   \end{cases}
 
-In the library, we require that the first element be:
-
-  .. math::
-    :label: defPsi0
-
-      \psi_0 = 1
-
-The orthogonality of the functions implies that:
-
-  .. math::
-      \mathbf{E}_{\mu}\left[\psi_{i}(\vect{X})\right] = \scalarproduct{\psi_{i}}{\psi_{0}}_{L^2\left(\mu\right)} = 0
-
-for any non-zero :math:`i\neq 0`.
-
 
 Case of independent marginals: Tensorized univariate chaos basis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,7 +58,7 @@ bijection).
 
 The univariate bases may be:
 
-- *polynomials*: the associated distribution :math:`\mu_i` can be continuous
+- polynomials: the associated distribution :math:`\mu_i` can be continuous
   or discrete.
   The orthonormal polynomial basis is represented by its three-term recurrence and
   the reverse Clenshaw algorithm enables fast, stable evaluation of the polynomials
@@ -119,16 +105,17 @@ where :math:`F_i` is the cumulative distribution function of the :math:`i`-th ma
 :math:`(\varphi^{(i)}_{\alpha_i})_{\alpha_i}` the polynomial basis orthonormal with respect to :math:`\mu_i`.
 
 It is important to note that although :math:`(\varphi_{\alpha_i})_{\alpha_i}` is a polynomial basis,
-:math:`(\psi_{\vect{\alpha}})_\vect{\alpha}` is not a polynomial basis.
+:math:`(\psi_{\vect{\alpha}})_\vect{\alpha}` is not a polynomial basis. In addition,
+:math:`(\varphi_\vect{0}) \neq 0` if the copula is not the independent copula.
 
 Furthermore, this basis generates approximation subspaces of poor quality.
 Indeed, for most copulas, the density :math:`c` tends to infinity at :math:`\vect{0}` or :math:`\vect{1}`
 (and possibly at other points).
 As a consequence, all the basis functions :math:`(\psi_{\vect{\alpha}})_\vect{\alpha}`
 vanish at these points and take small values in their neighborhoods.
-Therefore, the coefficients in the expansion of a function that reaches
-large values at these points must necessarily be of large magnitude.
-This leads to numerical stability issues, both for the computation of the expansion coefficients
+Therefore, the coefficients in the expansion of a function that takes non zero
+values at these points must necessarily be large.
+This leads to numerical instabilities, both for the computation of the expansion coefficients
 and for the evaluation of the metamodel.
 
 That is the reason why the use of such a multivariate orthonormal basis is not recommended.
