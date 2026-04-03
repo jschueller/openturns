@@ -247,7 +247,7 @@ computed is too large, this can lead to *overfitting*. This may happen for insta
 total polynomial order we choose is too large.
 
 In order to limit this effect, one method is to define a strategy for exploring the basis (see
-:ref:`polynomial_sparse_least_squares`) as well as a strategu to select the coefficients which
+:ref:`polynomial_sparse_least_squares` for a polynomial basis) as well as a strategy to select the coefficients which
 best predict the output (see  :class:`~openturns.FixedStrategy` and :class:`~openturns.CleaningStrategy`).
 
 Estimate the coefficients
@@ -256,7 +256,7 @@ In this section, we give some elements to estimate the coefficients of the expan
 
 The vector of coefficients is the solution of the *linear least-squares problem* defined in
 :eq:`metaModeleF` (see :class:`~openturns.LeastSquaresStrategy` for more details on the resolution
-of least-squares problem).
+of least-squares problem and :ref:`polynomial_least_squares` if the basis is polynomials).
 
 The choice of basis of :math:`\cP_n` has a major impact on the conditioning of the
 least-squares problem :eq:`metaModeleF`.
@@ -316,6 +316,23 @@ Several algorithms are available to compute the coefficients
 - see :class:`~openturns.FunctionalChaosAlgorithm` for an algorithm that
   can manage both methods.
 
+Cross Validation of the functional chaos expansion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The cross-validation of a polynomial chaos expansion
+uses the theory presented in :ref:`cross_validation`.
+In [blatman2009]_ page 84, the author applies the LOO equation to polynomial
+chaos expansion
+(see appendix D page 203 for a proof).
+If the coefficients are estimated from integration, the same derivation cannot,
+in theory, be applied.
+
+The fast methods presented in :ref:`cross_validation` can be applied:
+
+- the fast leave-one-out cross-validation,
+- the fast K-Fold cross-validation.
+
+Refer to :class:`~openturns.FunctionalChaosValidation`.
 
 Usual exploitation of the functional chaos expansion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -348,6 +365,7 @@ more details on this topic.
     - See :class:`~openturns.OrthogonalUniVariatePolynomialFamily`
     - See :class:`~openturns.OrthogonalUniVariatePolynomialFactory`
     - See :class:`~openturns.experimental.FiniteOrthogonalFunctionFactory`
+    - See :class:`~openturns.FunctionalChaosValidation`.
 
 
 .. topic:: Examples:
@@ -365,3 +383,4 @@ more details on this topic.
     - [dahlquist2008]_
     - [rudin1987]_
     - [ghanem1991]_
+    - [blatman2009]_

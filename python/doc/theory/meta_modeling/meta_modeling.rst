@@ -46,7 +46,6 @@ Functional chaos
     chaos_basis
     enumeration_strategy
     functional_chaos
-    pce_cross_validation
 
 
 Surrogate validation
