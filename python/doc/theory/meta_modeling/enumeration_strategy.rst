@@ -1,7 +1,7 @@
 .. _enumeration_strategy:
 
-Basis enumeration strategies
-----------------------------
+Multivariate basis enumeration strategies
+-----------------------------------------
 
 Enumeration strategies are some functions that help to enumerate a multivariate basis built as the tensorization of univariate basis, using the indexation of each marginal basis.
 
