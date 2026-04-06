@@ -59,8 +59,10 @@ In order to use the domination method, use the :meth:`setUseDomination` method.
 **Default settings for the adaptive strategy**
 
 When the *adaptiveStrategy* is unspecified, the following :class:`~openturns.FixedStrategy` is selected as an
-# an :class:`~openturns.adaptiveStrategy`. The associated basis is built as the tensorization of the univariate polynomials family
-orthonormal to the standard representative of the input marginals distribution (if not specified, the input distribution is fitted
+# an :class:`~openturns.adaptiveStrategy`. The associated basis is built as the tensorization of the univariate
+polynomials family
+orthonormal to the standard representative of the input marginals distribution (if not specified, the input 
+distribution is fitted
 on the input sample). The basis is associated to the enumerate function is chosen according to
 the `FunctionalChaosAlgorithm-QNorm` parameter of the :class:`~openturns.ResourceMap`:
 
@@ -70,7 +72,7 @@ the `FunctionalChaosAlgorithm-QNorm` parameter of the :class:`~openturns.Resourc
 The first elements of the basis are used to build the approximation space. By default, the number of elements is
 defined by the keys `FunctionalChaosAlgorithm-BasisSize` and  `FunctionalChaosAlgorithm-TotalDegree`:
 
-- is the BasisSize is 0, then the number is computed from the total degree (using the enumerate funciton of the basis);
+- is the BasisSize is 0, then the number is computed from the total degree (using the enumerate function of the basis);
 - is the BasisSize is less than the input sample size, this value is used;
 - is the BasisSize is greater than the input sample size, the number is the input sample size.
 

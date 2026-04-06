@@ -74,13 +74,16 @@ view = otv.View(graph)
 # As the adaptive strategy is not specified, the following one is used:
 #
 # - the associated basis is built as the tensorization of the univariate polynomials family
-#   orthonormal to the marginals of the input distribution. Then the basis is
-#   orthonormal to the distribution :math:`\tilde{\mu} = \circ \mu_i`
+#   orthonormal to the standard representative of the input marginals distribution. Then the basis is
+#   orthonormal to the distribution denoted by :math:`\tilde{\mu}`;
 # - the enumerate function is chosen according to
 #   the `FunctionalChaosAlgorithm-QNorm` parameter of the :class:`~openturns.ResourceMap`:
 #   if this parameter is equal to 1, then the :class:`~openturns.LinearEnumerateFunction` class is used,
 #   otherwise, the :class:`~openturns.HyperbolicAnisotropicEnumerateFunction` class is used. The default
 #   value of the key being 0.5, we use the Hyperbolic Anisotropic EnumerateFunction.
+# - the first elements of the basis are used to build the approximation space. The number of elements
+#   is computed from the total degree (using the enumerate function of the basis) specified as default value
+#   in `FunctionalChaosAlgorithm-TotalDegree` of the :class:`~openturns.ResourceMap`.
 #
 # The projection stategy is not specified neither: we use the least-squares strategy  with no model selection
 # if the key `FunctionalChaosAlgorithm-Sparse` of the :class:`~openturns.ResourceMap` is *False* and

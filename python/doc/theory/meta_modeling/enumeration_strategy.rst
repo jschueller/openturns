@@ -1,100 +1,93 @@
 .. _enumeration_strategy:
 
-Chaos basis enumeration strategies
-----------------------------------
+Basis enumeration strategies
+----------------------------
 
-The *functional chaos* expansion allows one to obtain an explicit
-representation of the random response :math:`\vect{Y}` of the
-model under consideration. More precisely, the response is cast
-as a converging series featuring an orthonormal basis. For
-computational purpose, it is necessary though to retain a finite
-number of terms by truncating the expansion. First of all, a specific
-strategy for enumerating the infinite PC series has to be defined.
-This is the scope of the current section.
+Enumeration strategies are some functions that help to enumerate a multivariate basis built as the tensorization of univariate basis, using the indexation of each marginal basis.
 
-Given an input random vector :math:`\vect{X}` with prescribed
-probability density function (PDF) :math:`f_{\vect{X}}(\vect{x})`, it is
-possible to build up a *functional chaos* multivariate basis
-:math:`\{\psi_{\idx},\idx \in \NM\}` by tensorization of univariate
-functions associated to each marginal input variable.
+Such a  multivariate basis, built as the tensorization of univariate basis, is used, for example, in the functional chaos expansion setting
+(refer to  :ref:`functional_chaos`).
 
-We define the multi-indices associated to the marginal degrees of the
-univariate marginal functions:
+Let consider some :math:`\inputDim` univariate basis, denoted by
+:math:`(\pi_{k}^{(i)})_{k \geq 0}` for :math:`1 \leq i \leq \inputDim`, where each
+:math:`\pi_{k}^{(i)}: \Rset \rightarrow \Rset`.
+
+Let denote by :math:`\{\psi_{\vect{\alpha}},\vect{\alpha} \in \N^\inputDim\}` a multivariate basis built as the tensorization of the univariate basis. The multivariate index :math:`\vect{\alpha}` is a vector of indices:
 
 .. math::
 
-    \idx = (\alpha_1, \dots, \alpha_{n_X}) \in \mathbb{N}^{n_X}
+    \vect{\alpha} = (\alpha_1, \dots, \alpha_{\inputDim}) \in \Nset^{\inputDim}
 
-The component :math:`\alpha_i` defines the marginal degree of the univariate
-basis term associated to the variable :math:`X_i`.
-For :math:`i = 1, ..., n_X`, let :math:`\pi_{\alpha_i}^{(i)}` be a univariate basis term of marginal degree :math:`\alpha_i` depending on the i-th standardized variable :math:`\xi_i`.
-Then, the multivariate basis term :math:`\psi_{\idx}` is defined by the product:
+and the multivariate basis term :math:`\psi_{\vect{\alpha}}` is defined by the product:
 
 .. math::
 
-    \psi_{\idx} (\vect{\xi}) = \pi_{\alpha_1}^{(1)}(\xi_1) \times \dots \times \pi_{\alpha_{n_X}}^{({n_X})}(\xi_{n_X})
+    \psi_{\vect{\alpha}} (\vect{\xi}) = \pi_{\alpha_1}^{(1)}(\xi_1) \times \dots \times \pi_{\alpha_{\inputDim}}^{({\inputDim})}(\xi_{\inputDim})
 
-for any :math:`\vect{\xi} \in \mathbb{R}^{n_X}`.
+for any :math:`\vect{\xi} \in \mathbb{R}^{\inputDim}`.
 
-Let us first define the *length* of any multi-index :math:`{\idx} \in {\Nset}^{n_X}` by
+Let us first define the *length* of any multi-index :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}` by
 
 .. math::
 
-    |{\idx}| = \sum_{i=1}^{n_X} \alpha_i
+    |{\vect{\alpha}}| = \sum_{i=1}^{\inputDim} \alpha_i
 
-When the multi-index represents the marginal degrees of a polynomial,
+When the univariate basis are polynomials such that :math:`\alpha_i`
+is the degree of :math:`\pi_{\alpha_i}^{(i)}`, then the multi-index represents
+the marginal degrees of the polynomial :math:`\psi_{\vect{\alpha}}`. In that case,
 the length of the multi-index is the total degree of the polynomial.
 
 An enumeration rule is a method to explore this basis.
-It is defined by an enumeration function :math:`\tau` from :math:`\Nset` to :math:`\NM`,
-which creates a one-to-one mapping between an integer :math:`j` and a multi-index :math:`\idx`.
-
-Mathematically speaking, it is a bijective enumeration function :math:`\tau` defined by:
+It is defined by an enumeration function :math:`\tau` from :math:`\Nset` to :math:`\N^{\inputDim}`,
+which creates a one-to-one mapping between an integer :math:`j` and a multi-index :math:`\vect{\alpha}`. The funciton :math:`\tau` is a bjection defined by:
 
 .. math::
 
    \begin{array}{llcl}
-         \tau \, : & \Nset & \longrightarrow & \NM \\
-         &  j & \longmapsto & \idx = \{\alpha_1(j),\dots, \alpha_{n_X}(j)\} \\
-       \end{array}
+         \tau \, : & \Nset & \longrightarrow & \Nset^{\inputDim} \\
+         &  j & \longmapsto & \vect{\alpha}(j) = \{\alpha_1(j),\dots, \alpha_{\inputDim}(j)\}
+    \end{array}
+
 
 Linear enumeration strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A natural choice to sort the PC basis (i.e. the multi-indices :math:`\idx`) is the
+A natural choice to sort the multivariate basis (i.e. the multi-indices :math:`\vect{\alpha}`) is the
 lexicographical order with a constraint of increasing total degree.
 
-The linear enumeration function :math:`\tau : \Nset \longrightarrow \Nset^{n_X}` is a function:
+The linear enumeration function :math:`\tau : \Nset \longrightarrow \Nset^{\inputDim}` is a function:
 
 .. math::
 
-    \idx(j) = (\alpha_1(j),\dots, \alpha_{n_X}(j))
+    \tau(j) = \vect{\alpha}(j) = (\alpha_1(j),\dots, \alpha_{\inputDim}(j))
 
 for :math:`j \in \Nset` such that:
 
-.. math::
-
-    \idx(0) = (0,\dots,0).
-
-Furthermore, for any :math:`k \in \Nset` and any :math:`j \in \{1, ..., k - 1\}`, we say that:
+- first, :math:`\vect{\alpha}(0) = (0,\dots,0)`,
+- for any :math:`k \in \Nset` and any :math:`j \in \{1, ..., k - 1\}`, we have:
 
 .. math::
 
-    \idx(j) < \idx(k)
+    \vect{\alpha}(j) < \vect{\alpha}(k)
 
-if either (i) the length of :math:`\idx(j)` is strictly lower than :math:`\idx(k)` i.e.:
+which means that:
 
-.. math::
-
-    \left|\idx(j)\right| < \left|\idx(k)\right|
-
-or (ii) the length of :math:`\idx(j)` equal to the length of :math:`\idx(k)` i.e.
+- either the length of :math:`\vect{\alpha}(j)` is strictly lower than :math:`\vect{\alpha}(k)`:
 
 .. math::
+    :label: cond_i
 
-    \left|\idx(j)\right| = \left|\idx(k)\right|
+    \left|\vect{\alpha}(j)\right| < \left|\vect{\alpha}(k)\right|
 
-and there exists :math:`m \in \{1,\dots,n_X\}` such that:
+
+- or the length of :math:`\vect{\alpha}(j)` equal to the length of :math:`\vect{\alpha}(k)`:.
+
+.. math::
+    :label: cond_ii
+
+    \left|\vect{\alpha}(j)\right| = \left|\vect{\alpha}(k)\right|
+
+  and there exists :math:`m \in \{1,\dots,\inputDim\}` such that:
 
 .. math::
 
@@ -106,15 +99,15 @@ and there exists :math:`m \in \{1,\dots,n_X\}` such that:
     & \alpha_m(j) < \alpha_m(k).
     \end{array}
 
-The conditions (i) and (ii) ensure that the mapping :math:`\tau` implies a strict order on the set :math:`{\idx} \in {\Nset}^{n_X}`.
+Both conditions :eq:`cond_i` and :eq:`cond_ii` ensure that the mapping :math:`\tau` implies a strict order on the set :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}`.
 
-The condition (i) states that the two multi-indices :math:`\idx_j` and :math:`\idx_k` are not on the same strata.
+Condition :eq:`cond_i` states that the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are not on the same strata.
 
-The condition (ii) states that, if the two multi-indices :math:`\idx_j` and :math:`\idx_k` are on the same strata,
+Condition :eq:`cond_ii` states that, if the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are on the same strata,
 then at least one of the component (denoted by :math:`m` in the definition) is different while the previous components are equal.
 
 Such an enumeration strategy is illustrated in a two-dimensional case
-(i.e. :math:`n_X=2`) in the figure below:
+(i.e. :math:`\inputDim=2`) in the figure below:
 
 .. plot::
 
@@ -193,7 +186,7 @@ Such an enumeration strategy is illustrated in a two-dimensional case
 This corresponds to the following enumeration of the multi-indices:
 
 +-------------+-----------------------------------------------+----------------+
-| :math:`j`   | :math:`\idx \, = \, \{\alpha_1,\alpha_2\}`    | :math:`|\idx|` |
+| :math:`j`   | :math:`\vect{\alpha} \, = \, \{\alpha_1,\alpha_2\}`    | :math:`|\vect{\alpha}|` |
 +=============+===============================================+================+
 | :math:`0`   | :math:`\{0,0\}`                               | 0              |
 +-------------+-----------------------------------------------+----------------+
@@ -228,39 +221,41 @@ reasonably small number of nonzero components, prior to selecting
 those associated with higher-order interactions.
 For any real number :math:`q` in :math:`(0,1]`, one defines the
 :math:`q`-*hyperbolic norm* (or :math:`q`-*norm* for short) of a
-multi-index :math:`\idx` by:
+multi-index :math:`\vect{\alpha}` by:
 
-  .. math:: \|\idx\|_{q} \, \, = \, \, \left(\sum_{i=1}^{n_X} \; \alpha_i^q \right)^{1/q}
+  .. math:: \|\vect{\alpha}\|_{q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; \alpha_i^q \right)^{1/q}
 
-Strictly speaking, :math:`\|\cdot\|_q` is not properly a norm but
-rather a *quasi-norm* since it does not satisfy the triangular
+The operator :math:`\|\cdot\|_q` is  a norm if anf only if :math:`q \geq 1` and is
+a *pseudo-norm* if :math:`0 < q < 1` since it does not satisfy the triangular
 inequality. However this abuse of language will be used in the
 following. Note that the case :math:`q=1` corresponds to the
-definition of the total degree.
+definition of the length of :math:`\vect{\alpha}`.
 
-Let :math:`\lambda` be a real positive number. One defines the set of
+Let :math:`\lambda` be a real positive number. Let :math:`\cA_{\lambda}` be the set of
 multi-indices with :math:`q`-norm not greater than :math:`\lambda` as
 follows:
 
   .. math::
     :label: eq_q_set
 
-      \cA_{\lambda} \, \, = \, \, \{\idx \in \NM \, : \, \|\idx\|_q \, \leq \lambda \}
+      \cA_{\lambda} \, \, = \, \, \{\vect{\alpha} \in \Nset^{\inputDim} \, : \, \|\vect{\alpha}\|_q \, \leq \lambda \}.
 
-Moreover, one defines the *front* of :math:`\cA_{\lambda}` by:
+Moreover, let the *front* of :math:`\cA_{\lambda}` be defined by:
 
-  .. math:: \partial \cA_{\lambda} \, \, = \, \, \left\{\idx \in \cA_{\lambda} \, : \, \exists \; i \; \in \; \{1,\dots,n_X\} \, , \, \, \idx \, + \, \vect{e_i} \, \notin \, \cA_{\lambda} \right\}
+  .. math:: \partial \cA_{\lambda} \, \, = \, \, \left\{\vect{\alpha} \in \cA_{\lambda} \, : \, \exists \; i \; \in \; \{1,\dots,\inputDim\} \, , \, \, \vect{\alpha} \, + \, \vect{e_i} \, \notin \, \cA_{\lambda} \right\}
 
 where :math:`\vect{e_i}` is a multi-index with a unit :math:`i`-entry
 and zero :math:`k`-entries, :math:`k\neq i`.
 
-The idea consists in exploring the space :math:`\NM` by progressively
+The idea consists in exploring the space :math:`\Nset^{\inputDim}` by progressively
 increasing the :math:`q`-norm of its elements. In this purpose, one
-wants to construct an enumeration function that relies upon (1) the
-bijection :math:`\tau` defined in the previous paragraph and (2) an
-appropriate increasing sequence :math:`(\lambda_n)_{\Nset}` that tends
-to infinity. Such a sequence can be used to define a specific
-partition of :math:`\NM` into *strata* :math:`(\Delta_n)_{\Nset}`.
+wants to construct an enumeration function that relies upon:
+
+- (1) the bijection :math:`\tau` defined in the previous paragraph,
+- (2) an appropriate increasing sequence :math:`(\lambda_n)_{\Nset}` that tends
+  to infinity. Such a sequence can be used to define a specific partition
+  of :math:`\Nset^{\inputDim}` into *strata* :math:`(\Delta_n)_{\Nset}`.
+
 Precisely, the enumeration of the multi-indices is achieved by sorting
 the elements of :math:`\Delta_n` in ascending order of the
 :math:`q`-norm, and then by sorting the possible elements having the
@@ -277,11 +272,11 @@ of strata as follows:
        \begin{array}{l}
          \Delta_0 \, \, = \, \, \{\vect{0}\} \\
          \forall \; n  \geq  1 \, \, , \, \, \Delta_n \, \, = \, \, \cA_{n} \; \setminus \; \cA_{n-1}  \, \, = \, \,
-         \{\idx \in \NM \, : \, n - 1 \, < \, \|\idx\|_q \, \leq n \}      \\
+         \{\vect{\alpha} \in \Nset^{\inputDim} \, : \, n - 1 \, < \, \|\vect{\alpha}\|_q \, \leq n \}      \\
        \end{array}
        \right.
 
-The progressive exploration of :math:`\NM` is depicted in the
+The progressive exploration of :math:`\Nset^{\inputDim}` is depicted in the
 two-dimensional case for various values of the parameter :math:`q`:
 
 .. plot::
@@ -361,7 +356,7 @@ not belong to the former one. Hence the sequence of strata:
        \end{array}
        \right.
 
-Note that this partition of :math:`\NM` is finer than the one based
+Note that this partition of :math:`\Nset^{\inputDim}` is finer than the one based
 on total degrees, since the cardinality of the strata is smaller.
 
 Anisotropic hyperbolic enumeration strategy
@@ -370,13 +365,13 @@ Anisotropic hyperbolic enumeration strategy
 One might also consider enumeration strategies based on an
 *anisotropic* hyperbolic norm defined by:
 
-  .. math:: \|\idx\|_{\vect{w},q} \, \, = \, \, \left(\sum_{i=1}^{n_X} \; w_i\; \alpha_i^q \right)^{1/q}
+  .. math:: \|\vect{\alpha}\|_{\vect{w},q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; w_i\; \alpha_i^q \right)^{1/q}
 
 where the :math:`w_i`\ ’s are real positive numbers. This would lead
 to first select the basis terms depending on a specific subset
 of input variables.
 
-In this setup, it is also possible to explore the space :math:`\NM` of
+In this setup, it is also possible to explore the space :math:`\Nset^{\inputDim}` of
 the multi-indices by partitioning it according to one of the two
 schemes outlined in the previous paragraph (it is only necessary to
 replace the isotropic :math:`q`-norm in :eq:`eq_q_set` with the
@@ -387,7 +382,7 @@ degree* of the most important variable, i.e. the one associated to the
 :math:`(\lambda_n)_{\Nset}` is equal to :math:`\Nset` and the sets
 :math:`\cA_{\lambda}` are defined by:
 
-  .. math:: \cA_{\lambda} \, \, = \, \, \{\idx \in \NM \, : \, \alpha_{i^*} \, \leq \lambda \} \quad \quad , \quad \quad i^* \, \, = \, \, \mbox{arg} \min \left\{w_i \; , \; 1\leq i \leq n_X \right\}
+  .. math:: \cA_{\lambda} \, \, = \, \, \{\vect{\alpha} \in \Nset^{\inputDim} \, : \, \alpha_{i^*} \, \leq \lambda \} \quad \quad , \quad \quad i^* \, \, = \, \, \mbox{arg} \min \left\{w_i \; , \; 1\leq i \leq \inputDim \right\}
 
 If strata with larger cardinalities are of interest, one may rather
 consider the partial degree of the least significant variable, i.e.
@@ -395,19 +390,19 @@ the one associated with the *greatest* weight :math:`w_i`. To this
 end, the index :math:`i^*` in the previous formula has to be defined
 by:
 
-  .. math:: i^* \, \, = \, \, \mbox{arg} \max \left\{w_i \; , \; 1\leq i \leq n_X \right\}
+  .. math:: i^* \, \, = \, \, \mbox{arg} \max \left\{w_i \; , \; 1\leq i \leq \inputDim \right\}
 
 Infinity norm enumeration strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 One might also consider an enumeration strategies based on the infinite norm:
 
-  .. math:: \|\idx\|_{\infty} \, \, = \, \, \max_{i=1}^{n_X} \; \alpha_i
+  .. math:: \|\vect{\alpha}\|_{\infty} \, \, = \, \, \max_{i=1}^{\inputDim} \; \alpha_i
 
 This corresponds to the following enumeration of the multi-indices:
 
 +-------------+-----------------------------------------------+----------------+
-| :math:`j`   | :math:`\idx \, = \, \{\alpha_1,\alpha_2\}`    | :math:`|\idx|` |
+| :math:`j`   | :math:`\vect{\alpha} \, = \, \{\alpha_1,\alpha_2\}`    | :math:`|\vect{\alpha}|` |
 +=============+===============================================+================+
 | :math:`0`   | :math:`\{0,0\}`                               | 0              |
 +-------------+-----------------------------------------------+----------------+
