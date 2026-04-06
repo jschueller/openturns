@@ -9,9 +9,11 @@ as the tensorization of univariate basis, using the indexation of each marginal 
 Such a  multivariate basis, built as the tensorization of univariate basis, is used,
 for example, in the functional chaos expansion setting (refer to  :ref:`functional_chaos`).
 
+
 Let consider some :math:`\inputDim` univariate basis, denoted by
 :math:`(\pi_{k}^{(i)})_{k \geq 0}` for :math:`1 \leq i \leq \inputDim`, where each
 :math:`\pi_{k}^{(i)}: \Rset \rightarrow \Rset`.
+
 
 Let denote by :math:`\{\psi_{\vect{\alpha}},\vect{\alpha} \in \Nset^{\inputDim}\}` a multivariate basis
 built as the tensorization of the univariate basis.
@@ -41,6 +43,7 @@ the marginal degrees of the polynomial :math:`\psi_{\vect{\alpha}}`. In that cas
 the length of the multi-index is the total degree of the polynomial.
 
 An enumeration rule is a method to explore this basis.
+
 It is defined by an enumeration function :math:`\tau` from :math:`\Nset` to :math:`\Nset^{\inputDim}`,
 which creates a one-to-one mapping between an integer :math:`j` and a multi-index :math:`\vect{\alpha}`.
 The function :math:`\tau` is a bjection defined by:
@@ -90,6 +93,7 @@ which means that:
     :label: cond_ii
 
     \left|\vect{\alpha}(j)\right| = \left|\vect{\alpha}(k)\right|
+
 
 and there exists :math:`m \in \{1,\dots,\inputDim\}` such that:
 
@@ -213,6 +217,7 @@ This corresponds to the following enumeration of the multi-indices:
 +-------------+--------------------------------------------------------+-------------------------+
 | :math:`9`   | :math:`\{0,3\}`                                        | 3                       |
 +-------------+--------------------------------------------------------+-------------------------+
+
 
 Hyperbolic enumeration strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -429,6 +434,7 @@ This corresponds to the following enumeration of the multi-indices:
 +-------------+--------------------------------------------------------+-------------------------+
 | :math:`9`   | :math:`\{3,0\}`                                        | 3                       |
 +-------------+--------------------------------------------------------+-------------------------+
+
 
 .. topic:: API:
 

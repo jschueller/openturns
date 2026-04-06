@@ -25,6 +25,7 @@ Methodology: principles
 We consider the output random vector:
 
 .. math::
+
     \outputRV = \model(\inputRV)
 
 where :math:`\model: \Rset^{\inputDim} \rightarrow \Rset^{\outputDim}` is the model,
@@ -45,6 +46,7 @@ The functional space
 product defined by:
 
   .. math::
+
         \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
         = \Expect{h_1(\inputRV) h_2(\inputRV)}
 
