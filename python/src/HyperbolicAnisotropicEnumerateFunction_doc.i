@@ -27,28 +27,21 @@ EnumerateFunction, LinearEnumerateFunction
 
 Notes
 -----
-The hyperbolic truncation strategy is inspired by the so-called sparsity-of-
-effects principle, which states that most models are principally governed by
-main effects and low-order interactions. Accordingly, one wishes to define an
-enumeration strategy which first selects those multi-indices related to main
-effects, i.e. with a reasonably small number of nonzero components, prior to
-selecting those associated with higher-order interactions.
+Enumeration functions are bijections from :math:`\Nset` to :math:`\Nset^{\inputDim}` (refer to :ref:`enumeration_strategy`).
 
-For any real number :math:`q \in ]0, 1]`, one defines the anisotropic hyperbolic
-norm of a multi-index :math:`\vect{\alpha}` by:
+They can be used to enumerate a multivariate basis
+built as the tensorization of univariate basis, using the indexation of each marginal basis
+(refer to and :ref:`enumeration_multivariate_basis`).
 
-.. math::
-    
-    \| \vect{\alpha} \|_{\vect{w}, q} = \left( \sum_{i=1}^{n_X} w_i \alpha_i^q \right)^{1/q}
+In the tensorized polynomials basis context:
 
-where :math:`n_X` is the number of input variables and :math:`(w_1, \dots , w_{n_X})` is a sequence of
-real positive numbers called weights.
-Functions of input variables with smaller weights are selected first
-for the functional basis.
+- the :eq:`hyperbolic enumeration functions <eq_q_set>` penalize the indices associated with
+  high-order interactions all the more since :math:`q` is low;
+- the :eq:`anisotropic hyperbolic enumeration functions <anisotropEnumFct>` lead to first select the
+  basis terms depending on a specific subset of input variables (those  associated to small weights). 
 
 Examples
 --------
-
 In the following example, we create an hyperbolic enumerate function
 in 2 dimension with a quasi-norm equal to 0.5.
 Notice, for example, that the function with multi-index [3,0]

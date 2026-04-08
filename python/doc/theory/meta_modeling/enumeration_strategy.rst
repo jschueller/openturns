@@ -1,52 +1,28 @@
 .. _enumeration_strategy:
 
-Multivariate basis enumeration strategies
------------------------------------------
-
-Enumeration strategies are some functions that help to enumerate a multivariate basis built
-as the tensorization of univariate basis, using the indexation of each marginal basis.
-
-Such a  multivariate basis, built as the tensorization of univariate basis, is used,
-for example, in the functional chaos expansion setting (refer to  :ref:`functional_chaos`).
+Multivariate indices enumeration functions
+------------------------------------------
 
 
-Let consider some :math:`\inputDim` univariate basis, denoted by
-:math:`(\pi_{k}^{(i)})_{k \geq 0}` for :math:`1 \leq i \leq \inputDim`, where each
-:math:`\pi_{k}^{(i)}: \Rset \rightarrow \Rset`.
+Enumeration functions are bijections from :math:`\Nset` to :math:`\Nset^{\inputDim}`. We detail here some particular bjiections:
 
+- Linear enumeration function
+- Hyperbolic enumeration function
+- Anisotropic hyperbolic enumeration function
+- Infinity norm enumeration function
 
-Let denote by :math:`\{\psi_{\vect{\alpha}},\vect{\alpha} \in \Nset^{\inputDim}\}` a multivariate basis
-built as the tensorization of the univariate basis.
-The multivariate index :math:`\vect{\alpha}` is a vector of indices:
+A possible use is to build a multivariate basis as the tensorization of univariate basis: this is the
+case for example in the functional chaos expansion setting (refer to  :ref:`functional_chaos` and :ref:`enumeration_multivariate_basis`).
+
+Let  :math:`\vect{\alpha}` be a multi-index is defined by:
 
 .. math::
 
     \vect{\alpha} = (\alpha_1, \dots, \alpha_{\inputDim}) \in \Nset^{\inputDim}
 
-and the multivariate basis term :math:`\psi_{\vect{\alpha}}` is defined by the product:
 
-.. math::
-
-    \psi_{\vect{\alpha}} (\vect{\xi}) = \pi_{\alpha_1}^{(1)}(\xi_1) \times \dots \times \pi_{\alpha_{\inputDim}}^{({\inputDim})}(\xi_{\inputDim})
-
-for any :math:`\vect{\xi} \in \mathbb{R}^{\inputDim}`.
-
-Let us first define the *length* of any multi-index :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}` by
-
-.. math::
-
-    |{\vect{\alpha}}| = \sum_{i=1}^{\inputDim} \alpha_i
-
-When the univariate basis are polynomials such that :math:`\alpha_i`
-is the degree of :math:`\pi_{\alpha_i}^{(i)}`, then the multi-index represents
-the marginal degrees of the polynomial :math:`\psi_{\vect{\alpha}}`. In that case,
-the length of the multi-index is the total degree of the polynomial.
-
-An enumeration rule is a method to explore this basis.
-
-It is defined by an enumeration function :math:`\tau` from :math:`\Nset` to :math:`\Nset^{\inputDim}`,
-which creates a one-to-one mapping between an integer :math:`j` and a multi-index :math:`\vect{\alpha}`.
-The function :math:`\tau` is a bjection defined by:
+An enumeration function :math:`\tau` is a bijection from :math:`\Nset` to :math:`\Nset^{\inputDim}`,
+which creates a one-to-one mapping between an integer :math:`j` and a multi-index :math:`\vect{\alpha}`. The function :math:`\tau` is defined by:
 
 .. math::
 
@@ -56,15 +32,23 @@ The function :math:`\tau` is a bjection defined by:
     \end{array}
 
 
-Linear enumeration strategy
+Let the *length* of any multi-index :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}` be defined by:
+
+.. math::
+
+    |{\vect{\alpha}}| = \sum_{i=1}^{\inputDim} \alpha_i
+
+
+Linear enumeration function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A natural choice to sort the multivariate basis (i.e. the multi-indices :math:`\vect{\alpha}`) is the
-lexicographical order with a constraint of increasing total degree.
+A natural choice to sort the multi-indices  :math:`\vect{\alpha}` is the
+lexicographical order with a constraint of increasing length.
 
 The linear enumeration function :math:`\tau : \Nset \longrightarrow \Nset^{\inputDim}` is a function:
 
 .. math::
+    :label: linearEnumFct
 
     \tau(j) = \vect{\alpha}(j) = (\alpha_1(j),\dots, \alpha_{\inputDim}(j))
 
@@ -95,7 +79,7 @@ which means that:
     \left|\vect{\alpha}(j)\right| = \left|\vect{\alpha}(k)\right|
 
 
-and there exists :math:`m \in \{1,\dots,\inputDim\}` such that:
+  and there exists :math:`m \in \{1,\dots,\inputDim\}` such that:
 
 .. math::
 
@@ -115,7 +99,7 @@ Condition :eq:`cond_i` states that the two multi-indices :math:`\vect{\alpha}_j`
 Condition :eq:`cond_ii` states that, if the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are on the same strata,
 then at least one of the component (denoted by :math:`m` in the definition) is different while the previous components are equal.
 
-Such an enumeration strategy is illustrated in a two-dimensional case
+Such an enumeration function is illustrated in a two-dimensional case
 (i.e. :math:`\inputDim=2`) in the figure below:
 
 .. plot::
@@ -194,46 +178,41 @@ Such an enumeration strategy is illustrated in a two-dimensional case
 
 This corresponds to the following enumeration of the multi-indices:
 
-+-------------+--------------------------------------------------------+-------------------------+
++-------------+-----------------------------------------------+----------------------------------+
 | :math:`j`   | :math:`\vect{\alpha} \, = \, \{\alpha_1,\alpha_2\}`    | :math:`|\vect{\alpha}|` |
-+=============+========================================================+=========================+
-| :math:`0`   | :math:`\{0,0\}`                                        | 0                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`1`   | :math:`\{0,1\}`                                        | 1                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`2`   | :math:`\{1,0\}`                                        | 1                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`3`   | :math:`\{2,0\}`                                        | 2                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`4`   | :math:`\{1,1\}`                                        | 2                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`5`   | :math:`\{0,2\}`                                        | 2                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`6`   | :math:`\{3,0\}`                                        | 3                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`7`   | :math:`\{2,1\}`                                        | 3                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`8`   | :math:`\{1,2\}`                                        | 3                       |
-+-------------+--------------------------------------------------------+-------------------------+
-| :math:`9`   | :math:`\{0,3\}`                                        | 3                       |
-+-------------+--------------------------------------------------------+-------------------------+
++=============+===============================================+==================================+
+| :math:`0`   | :math:`\{0,0\}`                               | 0                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`1`   | :math:`\{0,1\}`                               | 1                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`2`   | :math:`\{1,0\}`                               | 1                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`3`   | :math:`\{2,0\}`                               | 2                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`4`   | :math:`\{1,1\}`                               | 2                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`5`   | :math:`\{0,2\}`                               | 2                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`6`   | :math:`\{3,0\}`                               | 3                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`7`   | :math:`\{2,1\}`                               | 3                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`8`   | :math:`\{1,2\}`                               | 3                                |
++-------------+-----------------------------------------------+----------------------------------+
+| :math:`9`   | :math:`\{0,3\}`                               | 3                                |
++-------------+-----------------------------------------------+----------------------------------+
 
-
-Hyperbolic enumeration strategy
+Hyperbolic enumeration function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The *hyperbolic* truncation strategy is inspired by the so-called
-*sparsity-of-effects principle*, which states that most models are
-principally governed by main effects and low-order interactions.
-Accordingly, one wishes to define an enumeration strategy which first
-selects those multi-indices related to main effects, i.e. with a
-reasonably small number of nonzero components, prior to selecting
-those associated with higher-order interactions.
-For any real number :math:`q` in :math:`(0,1]`, one defines the
+For any real number :math:`q` in :math:`(0,1]`, let
 :math:`q`-*hyperbolic norm* (or :math:`q`-*norm* for short) of a
-multi-index :math:`\vect{\alpha}` by:
+multi-index :math:`\vect{\alpha}` be defined by:
 
-  .. math:: \|\vect{\alpha}\|_{q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; \alpha_i^q \right)^{1/q}
+  .. math::
+     :label: hyperBolEnumFct
+
+     \|\vect{\alpha}\|_{q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; \alpha_i^q \right)^{1/q}
 
 The operator :math:`\|\cdot\|_q` is  a norm if anf only if :math:`q \geq 1` and is
 a *pseudo-norm* if :math:`0 < q < 1` since it does not satisfy the triangular
@@ -261,20 +240,17 @@ The idea consists in exploring the space :math:`\Nset^{\inputDim}` by progressiv
 increasing the :math:`q`-norm of its elements. In this purpose, one
 wants to construct an enumeration function that relies upon:
 
-- (1) the bijection :math:`\tau` defined in the previous paragraph,
-- (2) an appropriate increasing sequence :math:`(\lambda_n)_{\Nset}` that tends
+- the bijection :math:`\tau` defined in the previous paragraph,
+- an appropriate increasing sequence :math:`(\lambda_n)_{\Nset}` that tends
   to infinity. Such a sequence can be used to define a specific partition
   of :math:`\Nset^{\inputDim}` into *strata* :math:`(\Delta_n)_{\Nset}`.
 
-Precisely, the enumeration of the multi-indices is achieved by sorting
-the elements of :math:`\Delta_n` in ascending order of the
-:math:`q`-norm, and then by sorting the possible elements having the
-same :math:`q`-norm using the bijection :math:`\tau`. Several examples
-of partition are given in the sequel.
-*Partition based on the total degree.* We can simply define the
-sequence :math:`(\lambda_n)_{\Nset}` as the set of natural integers
-:math:`\Nset`. Thus we build up a sequence :math:`(\Delta_n)_{\Nset}`
-of strata as follows:
+We detail in the sequel several possible definitions of sequaence of strata :math:`(\Delta_n)_{\Nset}`.
+
+*Partition based on disjoint fronts:* That definition consists in defining the strata :math:`(\Delta_n)_{\Nset}`
+in ascending order of the :math:`q`-norm and by sorting the elements inside each :math:`\Delta_n`
+using the bijection :math:`\tau`. In that case, we use the sequence :math:`\lambda_n = n`.
+The strata are defined by:
 
   .. math::
 
@@ -285,6 +261,7 @@ of strata as follows:
          \{\vect{\alpha} \in \Nset^{\inputDim} \, : \, n - 1 \, < \, \|\vect{\alpha}\|_q \, \leq n \}      \\
        \end{array}
        \right.
+
 
 The progressive exploration of :math:`\Nset^{\inputDim}` is depicted in the
 two-dimensional case for various values of the parameter :math:`q`:
@@ -330,17 +307,16 @@ two-dimensional case for various values of the parameter :math:`q`:
     plt.subplots_adjust(hspace=0.5)
     plt.show()
 
-
-As expected, the hyperbolic norms penalize the indices associated with
-high-order interactions all the more since :math:`q` is low. Note that
+As expected, hyperbolic norms penalize multi-indices associated with
+large marginal indices increasingly strongly as :math:`q` decreases. Note that
 setting :math:`q` equal to 1 corresponds to the usual *linear*
 enumeration strategy. Then the retained basis terms are located under
 a straight line, hence the label *linear enumeration strategy*. In
-contrast, when :math:`q < 1`, the retained basis terms are
+contrast, when :math:`q < 1`, the retained marginal indices are
 located under an hyperbola, hence the name *hyperbolic enumeration
 strategy*.
-*Partition based on disjoint fronts.* Instead of considering the
-sequence of natural integers, we define the sequence
+
+*Partition based on disjoint fronts:* That definition consists in defining the sequence
 :math:`(\lambda_n)_{\Nset}` recursively by:
 
   .. math::
@@ -355,7 +331,7 @@ sequence of natural integers, we define the sequence
 
 In other words, :math:`\lambda_n` is the infimum of the real numbers
 :math:`\lambda` for which the new front contains only element which do
-not belong to the former one. Hence the sequence of strata:
+not belong to the former one. Hence the sequence of strata is defined by:
 
   .. math::
 
@@ -367,47 +343,38 @@ not belong to the former one. Hence the sequence of strata:
        \right.
 
 Note that this partition of :math:`\Nset^{\inputDim}` is finer than the one based
-on total degrees, since the cardinality of the strata is smaller.
+on the length, since the cardinality of the strata is smaller.
 
-Anisotropic hyperbolic enumeration strategy
+Anisotropic hyperbolic enumeration function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-One might also consider enumeration strategies based on an
+We consider enumeration functions based on an
 *anisotropic* hyperbolic norm defined by:
 
-  .. math:: \|\vect{\alpha}\|_{\vect{w},q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; w_i\; \alpha_i^q \right)^{1/q}
+  .. math::
+     :label: anisotropEnumFct
 
-where the :math:`w_i`\ ’s are real positive numbers. This would lead
-to first select the basis terms depending on a specific subset
-of input variables.
+     \|\vect{\alpha}\|_{\vect{w},q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; w_i\; \alpha_i^q \right)^{1/q}
 
-In this setup, it is also possible to explore the space :math:`\Nset^{\inputDim}` of
-the multi-indices by partitioning it according to one of the two
-schemes outlined in the previous paragraph (it is only necessary to
+where the :math:`w_i`\ ’s are real positive numbers. They enable to weight
+some specific marginal indices.
+
+In this setup, we consider both schemes outlined in the previous paragraph: it is only necessary to
 replace the isotropic :math:`q`-norm in :eq:`eq_q_set` with the
-:math:`(\vect{w},q)`-anisotropic one).
-We may also build up an alternative partition related to the *partial
-degree* of the most important variable, i.e. the one associated to the
-*smallest* weight :math:`w_i`. Then the sequence
-:math:`(\lambda_n)_{\Nset}` is equal to :math:`\Nset` and the sets
-:math:`\cA_{\lambda}` are defined by:
+:math:`(\vect{w},q)`-anisotropic one.
 
-  .. math:: \cA_{\lambda} \, \, = \, \, \{\vect{\alpha} \in \Nset^{\inputDim} \, : \, \alpha_{i^*} \, \leq \lambda \} \quad \quad , \quad \quad i^* \, \, = \, \, \mbox{arg} \min \left\{w_i \; , \; 1\leq i \leq \inputDim \right\}
+This enumerate function emphasizes multi-indices whose components are larger
+when the associated weights are smaller.
 
-If strata with larger cardinalities are of interest, one may rather
-consider the partial degree of the least significant variable, i.e.
-the one associated with the *greatest* weight :math:`w_i`. To this
-end, the index :math:`i^*` in the previous formula has to be defined
-by:
-
-  .. math:: i^* \, \, = \, \, \mbox{arg} \max \left\{w_i \; , \; 1\leq i \leq \inputDim \right\}
-
-Infinity norm enumeration strategy
+Infinity norm enumeration function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-One might also consider an enumeration strategies based on the infinite norm:
+We consider the enumeration function based on the infinite norm:
 
-  .. math:: \|\vect{\alpha}\|_{\infty} \, \, = \, \, \max_{i=1}^{\inputDim} \; \alpha_i
+  .. math::
+
+     \|\vect{\alpha}\|_{\infty} \, \, = \, \, \max_{i=1}^{\inputDim} \; \alpha_i
+
 
 This corresponds to the following enumeration of the multi-indices:
 
@@ -434,6 +401,7 @@ This corresponds to the following enumeration of the multi-indices:
 +-------------+--------------------------------------------------------+-------------------------+
 | :math:`9`   | :math:`\{3,0\}`                                        | 3                       |
 +-------------+--------------------------------------------------------+-------------------------+
+
 
 
 .. topic:: API:

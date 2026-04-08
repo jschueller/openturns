@@ -157,13 +157,13 @@ page 139, [dahlquist2008]_, theorem 4.5.16 page 456 and
 [rudin1987]_, section 4.24 page 85).
 
 We then consider a sequence of nested spaces :math:`(\cP_n)_{n \in \Nset}` defined as follows: we
-construct a complete family using graded polynomials by introducing a bijection :math:`\phi`
-from :math:`\Nset` into :math:`\Nset^\inputDim`. The mapping  :math:`\phi(k)` specifies the
+construct a complete family using graded polynomials by introducing a bijection :math:`\tau`
+from :math:`\Nset` into :math:`\Nset^\inputDim`. The mapping  :math:`\tau(k)` specifies the
 multi-index of marginal degrees (this bijection ensures that all polynomials are covered and
 that any finite family is linearly independent). Then, :math:`\cP_n` is the space spanned by
-polynomials with marginal degrees :math:`\phi(0), \dots, \phi(n)`. Depending on the choice of
-:math:`\phi`, :math:`\cP_n` may correspond to the set of polynomials of total degree less than
-:math:`n`. See :ref:`enumeration_strategy` for more details on this topic.
+polynomials with marginal degrees :math:`\tau(0), \dots, \tau(n)`. Depending on the choice of
+:math:`\tau`, :math:`\cP_n` may correspond to the set of polynomials of total degree less than
+:math:`n`. See :ref:`enumeration_multivariate_basis` and :ref:`enumeration_strategy` for more details on this topic.
 
 Note that, depending on the distribution :math:`\mu_{\inputRV}`, the space :math:`\cP` of
 multivariate polynomials does not always satisfy
