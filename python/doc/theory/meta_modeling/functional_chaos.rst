@@ -260,7 +260,7 @@ In this section, we give some elements to estimate the coefficients of the expan
 
 The vector of coefficients is the solution of the *linear least-squares problem* defined in
 :eq:`metaModeleF` (see :class:`~openturns.LeastSquaresStrategy` for more details on the resolution
-of least-squares problem and :ref:`polynomial_least_squares` if the basis is polynomials).
+of least-squares problem and :ref:`least_squares` if the basis is polynomials).
 
 The choice of basis of :math:`\cP_n` has a major impact on the conditioning of the
 least-squares problem :eq:`metaModeleF`.
@@ -374,12 +374,6 @@ for any non-zero :math:`i\neq 0`.
 In that case, the Sobol' indices can easily be deduced from the coefficients
 :math:`(a_k)_{k \in I_n, k\neq 0}`: see :class:`~openturns.FunctionalChaosSobolIndices` for
 more details on this topic.
-
-  .. math::
-    :label: defPsi0
-
-      \psi_0 = 1
-
 
 .. topic:: API:
 
