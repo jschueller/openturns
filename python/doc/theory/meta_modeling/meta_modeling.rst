@@ -45,7 +45,6 @@ Functional chaos
     functional_chaos
     chaos_basis
     orthonormal_polynomials
-    enumeration_strategy
     enumeration_multivariate_basis
 
 
