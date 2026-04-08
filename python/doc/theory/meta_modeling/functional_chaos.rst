@@ -251,7 +251,7 @@ computed is too large, this can lead to *overfitting*. This may happen for insta
 total polynomial order we choose is too large.
 
 In order to limit this effect, one method is to define a strategy for exploring the basis (see
-:ref:`polynomial_sparse_least_squares` for a polynomial basis) as well as a strategy to select the coefficients which
+:ref:`sparse_least_squares` for a polynomial basis) as well as a strategy to select the coefficients which
 best predict the output (see  :class:`~openturns.FixedStrategy` and :class:`~openturns.CleaningStrategy`).
 
 Estimate the coefficients

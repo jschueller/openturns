@@ -24,7 +24,7 @@ Least squares surrogate models
     :maxdepth: 1
 
     least_squares
-    polynomial_sparse_least_squares
+    sparse_least_squares.rst
 
 
 Gaussian Process Regression
