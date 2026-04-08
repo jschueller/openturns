@@ -138,5 +138,7 @@ graph.setTitle(f"R2={r2Score * 100:.2f}%, use domination = true")
 view = otv.View(graph)
 
 # %%
+# We can see that the meta model obtained with the domination metho is largely better than the previous one.
+# %%
 # Display all figures
 otv.View.ShowAll()
