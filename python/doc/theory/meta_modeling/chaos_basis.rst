@@ -31,9 +31,8 @@ for any :math:`k, \ell \geq 0` where :math:`\delta_{k, \ell}` is the Kronecker s
   \end{cases}
 
 
-Case of independent marginals: Tensorized univariate chaos basis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+Case of independent marginals: Tensorized univariate basis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We assume here that :math:`\mu` is a multivariate distribution with independent marginals
 denoted by :math:`\mu_i`:
 
@@ -53,7 +52,8 @@ The tensorized multivariate basis is defined by:
 
 where :math:`\vect{\alpha} = (\alpha_1, \dots, \alpha_{\inputDim}) \in \Nset^{\inputDim}` is a
 multi-index that enables to define each element of the multivariate basis from the elements of
-the univariate marginal basis (see :class:`~openturns.EnumerateFunction` to get details on that
+the univariate marginal basis (see :ref:`enumeration_multivariate_basis` and the class
+:class:`~openturns.EnumerateFunction` to get details on that
 bijection).
 
 The univariate bases may be:
@@ -83,7 +83,7 @@ Case of dependent marginals
 When :math:`\mu` is a multivariate distribution with dependent marginals, several methods
 enable to build a basis orthonormal with respect to :math:`\mu`.
 
-One method is to use an :ref:`isoprobabilistic_transformation` denoted by
+One method is to use an :ref:`isoprobabilistic transformation <isoprobabilistic_transformation>` denoted by
 :math:`T: \Rset^{\inputDim} \rightarrow \Rset^{\inputDim}`
 that maps the measure :math:`\mu` into a measure :math:`\tilde{\mu}` with independent marginals.
 Therefore, if  :math:`(\varphi_k)_k` is a basis orthonormal with respect to :math:`\tilde{\mu}`,

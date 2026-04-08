@@ -1,7 +1,7 @@
 .. _enumeration_multivariate_basis:
 
-Tensorized multivariate basis
------------------------------
+Tensorized multivariate basis enumeration functions
+---------------------------------------------------
 
 Enumeration functions (refer to :ref:`enumeration_strategy`) help to enumerate a multivariate basis
 built as the tensorization of univariate basis, using the indexation of each marginal basis.
@@ -39,12 +39,13 @@ Several enumeration functions can be used:
 We detail the interest of each one in the functional chaos expansion setting.
 
 Linear enumeration function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The :eq:`linear enumeration function <linearEnumFct>` explores the marginal degrees linearly, in order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The linear enumeration function (defined in :ref:`enumeration_strategy`, equation
+:eq:`linearEnumFct`) explores the marginal degrees linearly, in order
 of increasing total degree. The exploration is symmetric with respect to the components.
 
 Hyperbolic enumeration function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The hyperbolic enumeration function is inspired by the so-called
 *sparsity-of-effects principle*, which states that most models are
 principally governed by main effects and low-order interactions.
@@ -53,14 +54,17 @@ selects those multi-indices related to main effects, i.e. with a
 reasonably small number of nonzero components, prior to selecting
 those associated with higher-order interactions.
 
-The :eq:`hyperbolic enumeration functions <eq_q_set>` are based on the :eq:`q-norm <eq_q_set>`.
+The hyperbolic enumeration functions (defined in :ref:`enumeration_strategy`, equation
+:eq:`hyperBolEnumFct`) are based on the q-norm  (defined in :ref:`enumeration_strategy`,
+equation :eq:`eq_q_set`).
 They penalize the indices associated with high-order interactions all the more since :math:`q` is low.
 
 The library implements the partition based on the length of the multi-index.
 
 Anisotropic hyperbolic enumeration function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The :eq:`anisotropic hyperbolic enumeration functions <anisotropEnumFct>` lead to first select the basis terms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The anisotropic hyperbolic enumeration functions (defined in :ref:`enumeration_strategy`, equation
+:eq:`anisotropEnumFct`) lead to first select the basis terms
 depending on a specific subset of input variables. This function emphasizes multivariate polynomials
 for whose components associated to small coefficients are polynomials of high degree.
 
@@ -68,8 +72,9 @@ Therefore, when the model is governed by main effects of specific inputs, the as
 should be small compared to the other ones.
 
 Infinity norm enumeration function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The :eq:`infinity norm enumeration function <infEnumFct>` is based on polynomials with fixed maximum
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The infinity norm enumeration function (defined in :ref:`enumeration_strategy`, equation
+:eq:`infEnumFct`) is based on polynomials with fixed maximum
 marginal degree in ascending order.
 
 This function is used to define the polynomial space as large as possible with fixed maximum

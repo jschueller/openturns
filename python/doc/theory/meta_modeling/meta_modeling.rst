@@ -24,7 +24,7 @@ Least squares surrogate models
     :maxdepth: 1
 
     least_squares
-    sparse_least_squares.rst
+    sparse_least_squares
 
 
 Gaussian Process Regression
@@ -45,7 +45,6 @@ Functional chaos
     functional_chaos
     chaos_basis
     orthonormal_polynomials
-    enumeration_strategy
     enumeration_multivariate_basis
 
 

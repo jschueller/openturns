@@ -45,32 +45,32 @@ The functional space
 :math:`L^2\left(\mu_{\inputRV}\right)` is a Hilbert space equipped with an inner
 product defined by:
 
-  .. math::
+.. math::
 
-        \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
-        = \Expect{h_1(\inputRV) h_2(\inputRV)}
+    \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
+    = \Expect{h_1(\inputRV) h_2(\inputRV)}
 
 for any :math:`(h_1,h_2) \in L^2\left(\mu_{\inputRV}\right)`.
 For a continuous random variable, the inner product is defined by:
 
-  .. math::
+.. math::
 
-        \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
-         =  \int h_1(\vect{x}) h_2(\vect{x})\, \mu_{\inputRV}(\vect{x}) d\vect{x}.
+    \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
+    =  \int h_1(\vect{x}) h_2(\vect{x})\, \mu_{\inputRV}(\vect{x}) d\vect{x}.
 
 For a discrete random variable, the scalar product is:
 
-  .. math::
+.. math::
 
-        \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
-         = \sum_\vect{x} h_1(\vect{x}) h_2(\vect{x})\, \Prob{\inputRV = \vect{x}}.
+    \scalarproduct{h_1}{h_2}_{L^2\left(\mu_{\inputRV}\right)}
+    = \sum_\vect{x} h_1(\vect{x}) h_2(\vect{x})\, \Prob{\inputRV = \vect{x}}.
 
 The associated norm is defined by:
 
-  .. math::
+.. math::
 
-        \|h\|^2_{L^2\left(\mu_{\inputRV}\right)}
-        = \Expect{\left(h(\inputRV)\right)^2}
+    \|h\|^2_{L^2\left(\mu_{\inputRV}\right)}
+    = \Expect{\left(h(\inputRV)\right)^2}
 
 for any :math:`h \in L^2\left(\mu_{\inputRV}\right)`.
 
@@ -151,7 +151,7 @@ Which approximation space and sequence of nested approximation spaces?
 
 Many choices are possible for :math:`\cP` and the associated sequence :math:`(\cP_n)_{n \in \Nset}`.
 
-For instance, one may choose :math:`\cP` to be the set of multivariate polynomials,
+For instance, one may choose :math:`\cP` to be **the set of multivariate polynomials**,
 provided that  :math:`\cP` verifies the condition :eq:`fermetureP` (see also [sullivan2015]_,
 page 139, [dahlquist2008]_, theorem 4.5.16 page 456 and
 [rudin1987]_, section 4.24 page 85).
@@ -190,13 +190,13 @@ density condition :eq:`fermetureP` must also be satisfied:
   is possible that the meta model built using the basis
   :math:`\left(\psi_k\right)_{k \in I_n\}}` may be a good approximation of :math:`\model`.
 
-One may also consider non-polynomial approximation spaces :math:`\cP`. For instance, the space
+One may also consider **non-polynomial approximation spaces** :math:`\cP`. For instance, the space
 spanned by trigonometric polynomials (the so-called Fourier space) or spanned by the Haar
 wavelets.
 
 If the approximation space :math:`\cP` does not satisfy condition :eq:`fermetureP`, i.e., if
 :math:`\overline{\cP} \nsubseteq L^2\left(\mu_{\inputRV}\right)`, then one may use an
-:ref:`isoprobabilistic_transformation` :math:`T: \Rset^{\inputDim} \rightarrow \Rset^{\inputDim}`
+:ref:`isoprobabilistic transformation <isoprobabilistic_transformation>` :math:`T: \Rset^{\inputDim} \rightarrow \Rset^{\inputDim}`
 such that :math:`\vect{U} = T(\inputRV)` is a random
 vector distributed according to a density :math:`\mu_{\vect{U}}` satisfying
 :math:`\overline{\cP} = L^2\left(\mu_{\vect{U}}\right)`.
@@ -222,48 +222,48 @@ The sub-spaces :math:`(\cP_n)_{n \in \Nset}` are nested which means that the bas
 :math:`\cP_{n+1}` is constructed from that of :math:`\cP_{n}` by enrichment. Several choices
 of basis are possible.
 
-We can choose a basis which is orthonormal with respect to a :math:`\mu_{\inputRV}` (see
+We can choose **a basis which is orthonormal with respect to :math:`\mu_{\inputRV}`** (see
 :ref:`chaos_basis` for more details):
 
 - If  :math:`\mu_{\inputRV}` has independent components,
   this multivariate orthonormal basis can be built as the tensor product of the univariate basis
   orthonormal to each component of :math:`\mu_{\inputRV}`.
 - If :math:`\mu_{\inputRV}` has dependent components, we can use an
-  :ref:`isoprobabilistic_transformation`
+  :ref:`isoprobabilistic transformation <isoprobabilistic_transformation>`
   :math:`T: \Rset^{\inputDim} \rightarrow \Rset^{\inputDim}` that maps the measure
   :math:`\mu_{\inputRV}` into a measure :math:`\mu_{\vect{U}}` with independent marginals.
   We can also use the Soize-Ghanem basis but this usage is not recommended.
 
-We can also choose a basis which is not orthonormal with respect to a :math:`\mu_{\inputRV}` but
+We can also choose **a basis which is not orthonormal with respect to a :math:`\mu_{\inputRV}`** but
 which is orthonormal with respect to an *instrumental measure* :math:`\tilde{p} \neq \mu_{\inputRV}`.
 This instrumental measure is such that:
 
-- the support of :math:`\tilde{p}` is larger than the support of :math:`\mu_{\inputRV}`;
+- the support of :math:`\tilde{p}` is larger than the support of :math:`\mu_{\inputRV}`,
 - :math:`\tilde{p}` has independent components.
 
-This choice is done in the *domination* strategy.
+This choice is done in the **domination** strategy.
 
 Which sub-space of approximation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the dimension of :math:`\cP_n`, that is to say if the number of coefficients to be
-computed is too large, this can lead to *overfitting*. This may happen for instance if the
+If the dimension of :math:`\cP_n` (that is to say if the number of coefficients to be
+computed) is too large, this can lead to *overfitting*. This may happen for instance if the
 total polynomial order we choose is too large.
 
 In order to limit this effect, one method is to define a strategy for exploring the basis (see
-:ref:`sparse_least_squares` for a polynomial basis) as well as a strategy to select the coefficients which
+:ref:`sparse_least_squares`) as well as a strategy to select the coefficients which
 best predict the output (see  :class:`~openturns.FixedStrategy` and :class:`~openturns.CleaningStrategy`).
 
 Estimate the coefficients
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 In this section, we give some elements to estimate the coefficients of the expansion.
 
-The vector of coefficients is the solution of the *linear least-squares problem* defined in
-:eq:`metaModeleF` (see :class:`~openturns.LeastSquaresStrategy` for more details on the resolution
-of least-squares problem and :ref:`least_squares` if the basis is polynomials).
+The vector of coefficients is the solution of the linear least-squares problem defined in
+:ref:`functional_chaos` by equation :eq:`metaModeleF`. Refer to :ref:`least_squares`
+for more details on the resolution of the least-squares problem.
 
 The choice of basis of :math:`\cP_n` has a major impact on the conditioning of the
-least-squares problem :eq:`metaModeleF`.
+least-squares problem.
 Indeed, if the basis :math:`\left(\psi_k\right)_{k \in I_n}` is
 orthonormal with respect to :math:`\mu_{\inputRV}`, then the design matrix of
 the least squares problem is well-conditioned.
@@ -288,7 +288,7 @@ and the model
 :math:`\mu_{\vect{U}}`. Thus, we get:
 
 .. math::
-   :label: integralCoeff
+   :label: scalProdTransf
 
    a_k = \scalarproduct{h}{\psi_k}_{L^2\left(\mu_{\vect{U}}\right)} = \scalarproduct{\model}
    {\psi_k \circ T}_{L^2\left(\mu_{\inputRV}\right)}

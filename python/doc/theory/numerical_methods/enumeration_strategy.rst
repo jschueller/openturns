@@ -92,11 +92,9 @@ and there exists :math:`m \in \{1,\dots,\inputDim\}` such that:
     \end{array}
 
 Both conditions :eq:`cond_i` and :eq:`cond_ii` ensure that the mapping :math:`\tau`
-implies a strict order on the set :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}`.
-
-Condition :eq:`cond_i` states that the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are not on the same strata.
-
-Condition :eq:`cond_ii` states that, if the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are on the same strata,
+implies a strict order on the set :math:`{\vect{\alpha}} \in {\Nset}^{\inputDim}`:
+Condition :eq:`cond_i` states that the two multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are not on the same strata; Condition :eq:`cond_ii` states that, if the two
+multi-indices :math:`\vect{\alpha}_j` and :math:`\vect{\alpha}_k` are on the same strata,
 then at least one of the component (denoted by :math:`m` in the definition) is different while the previous components are equal.
 
 Such an enumeration function is illustrated in a two-dimensional case
@@ -245,7 +243,7 @@ wants to construct an enumeration function that relies upon:
   to infinity. Such a sequence can be used to define a specific partition
   of :math:`\Nset^{\inputDim}` into *strata* :math:`(\Delta_n)_{\Nset}`.
 
-We detail in the sequel several possible definitions of sequaence of strata :math:`(\Delta_n)_{\Nset}`.
+We detail in the sequel several possible definitions of sequence of strata :math:`(\Delta_n)_{\Nset}`.
 
 *Partition based on disjoint fronts:* That definition consists in defining the strata :math:`(\Delta_n)_{\Nset}`
 in ascending order of the :math:`q`-norm and by sorting the elements inside each :math:`\Delta_n`
@@ -356,7 +354,7 @@ We consider enumeration functions based on an
 
      \|\vect{\alpha}\|_{\vect{w},q} \, \, = \, \, \left(\sum_{i=1}^{\inputDim} \; w_i\; \alpha_i^q \right)^{1/q}
 
-where the :math:`w_i`\ ’s are real positive numbers. They enable to weight
+where the weights :math:`w_i` are real positive numbers. They enable to weight
 some specific marginal indices.
 
 In this setup, we consider both schemes outlined in the previous paragraph: it is only necessary to
@@ -374,7 +372,7 @@ We consider the enumeration function based on the infinite norm:
   .. math::
      :label: infEnumFct
 
-     \|\vect{\alpha}\|_{\infty} \, \, = \, \, \max_{i=1}^{\inputDim} \; \alpha_i
+     \|\vect{\alpha}\|_{\infty} \, \, = \, \, \max_{1 \leq i \leq \inputDim} \; \alpha_i
 
 
 This corresponds to the following enumeration of the multi-indices:
