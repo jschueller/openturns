@@ -31,7 +31,9 @@ outputSample : 2-d sequence of float
 weights : sequence of float
     Numerical point that are the weights associated to the input sample points
     such that the corresponding weighted experiment is a good approximation of
-    :math:`\mu`. If not precised, all weights are equals to 
+    :math:`\mu_{\inputRV}`.
+    
+    By default, all weights are equal to 
     :math:`\omega_i = \frac{1}{\sampleSize}`.
 
 See also
@@ -40,7 +42,7 @@ FunctionalChaosAlgorithm, ProjectionStrategy, LeastSquaresStrategy
 
 Notes
 -----
-This class is used in the :ref:`functional chaos expansion context <functional_chaos>` implemented in the class :class:`~openturns.FunctionalChaosAlgorithm`). It is not usable outside this context.
+This class is used in the :ref:`functional chaos expansion context <functional_chaos>` implemented in the class :class:`~openturns.FunctionalChaosAlgorithm`. It is not usable outside this context.
 
-The model is approximated by the meta model defined in :ref:`functional_chaos` by equation :eq:`metaModelPn` and the coefficients :math:`(\alpha_k)_{k \in I_n}` are computed with the inner product defined in :ref:`functional_chaos` by equation :eq:`scalProd`. This computation makes sense if and only if the basis is orthonormal with respect to the distribution :math:`\mu_{\inputRV}`.
+The model is approximated by the meta model defined in :ref:`functional_chaos` by equation :eq:`metaModelPn` and the coefficients :math:`a_k)_{k \in I_n}` are computed with the inner product defined in :ref:`functional_chaos` by equation :eq:`scalProd`. This computation makes sense if and only if the basis is orthonormal with respect to the distribution :math:`\mu_{\inputRV}`.
 )RAW"
