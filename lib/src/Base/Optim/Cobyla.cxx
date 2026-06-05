@@ -19,10 +19,9 @@
  *
  */
 #include "openturns/Cobyla.hxx"
-#include "algocobyla.h"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/Log.hxx"
-#include "openturns/SpecFunc.hxx"
+#include "prima/prima.hpp"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -79,32 +78,24 @@ void Cobyla::run()
   result_ = OptimizationResult(getProblem());
 
   const UnsignedInteger dimension = getProblem().getDimension();
-  int n(dimension);
-  int m(getProblem().getInequalityConstraint().getOutputDimension() + 2 * getProblem().getEqualityConstraint().getOutputDimension());
 
-  Point x(getStartingPoint());
-  if (x.getDimension() != dimension)
-    throw InvalidArgumentException(HERE) << "Invalid starting point dimension (" << x.getDimension() << "), expected " << dimension;
+  const Point startingPoint(getStartingPoint());
+  if (startingPoint.getDimension() != dimension)
+    throw InvalidArgumentException(HERE) << "Invalid starting point dimension (" << startingPoint.getDimension() << "), expected " << dimension;
   if (dimension == 0)
     throw InvalidArgumentException(HERE) << "Dimension of the problem is zero";
 
   if (getProblem().hasBounds())
   {
-    Interval bounds(getProblem().getBounds());
-    if (!bounds.contains(x))
+    const Interval bounds(getProblem().getBounds());
+    if (!bounds.contains(startingPoint))
     {
-      LOGWARN(OSS() << "Starting point is not inside bounds x=" << x.__str__() << " bounds=" << bounds);
-    }
-    for (UnsignedInteger i = 0; i < dimension; ++i)
-    {
-      if (bounds.getFiniteLowerBound()[i]) ++ m;
-      if (bounds.getFiniteUpperBound()[i]) ++ m;
+      LOGWARN(OSS() << "Starting point is not inside bounds startingPoint=" << startingPoint.__str__() << " bounds=" << bounds);
     }
   }
 
-  Scalar rhoEnd = getMaximumAbsoluteError();
-  int maxFun = getMaximumCallsNumber();
-  cobyla_message message = (Log::HasDebug() ? COBYLA_MSG_INFO : COBYLA_MSG_NONE);
+  const Scalar rhoEnd = getMaximumAbsoluteError();
+  const int maxFun = getMaximumCallsNumber();
 
   // initialize history
   evaluationInputHistory_ = Sample(0, dimension);
@@ -115,33 +106,120 @@ void Cobyla::run()
 
   t0_ = std::chrono::steady_clock::now();
 
-  /*
-   * cobyla : minimize a function subject to constraints
-   *
-   * n         : number of variables (>=0)
-   * m         : number of constraints (>=0)
-   * x         : on input, initial estimate ; on output, the solution
-   * rhobeg    : a reasonable initial change to the variables
-   * rhoend    : the required accuracy for the variables
-   * message   : see the cobyla_message enum
-   * maxfun    : on input, the maximum number of function evaluations
-   *             on output, the number of function evaluations done
-   * calcfc    : the function to minimize (see cobyla_function)
-   * state     : used by function (see cobyla_function)
-   *
-   * The cobyla function returns a code defined in the cobyla_rc enum.
-   *
-   * extern int cobyla(int n, int m, double *x, double rhobeg, double rhoend,
-   *  int message, int *maxfun, cobyla_function *calcfc, void *state);
-   */
-  const int returnCode = ot_cobyla(n, m, &(*x.begin()), rhoBeg_, rhoEnd, message, &maxFun, Cobyla::ComputeObjectiveAndConstraint, (void*) this);
+  // Build x0
+  Eigen::VectorXd x0(dimension);
+  for (UnsignedInteger i = 0; i < dimension; ++i)
+    x0(i) = getStartingPoint()[i];
 
-  result_ = OptimizationResult(getProblem());
-  result_.setStatusMessage(cobyla_rc_string[returnCode - COBYLA_MINRC]);
-  if (returnCode == COBYLA_MAXFUN)
+  // Wrapper for the objective function that tracks evaluations
+  const Function probObj(getProblem().getObjective());
+  const Bool minimization = getProblem().isMinimization();
+
+  auto objective = [&](const Eigen::VectorXd& x) -> double {
+    Point inP(x.size());
+    std::copy(x.data(), x.data() + x.size(), inP.begin());
+    const Point outP = probObj(inP);
+    evaluationInputHistory_.add(inP);
+    evaluationOutputHistory_.add(outP);
+    return minimization ? outP[0] : -outP[0];
+  };
+
+  // Build nonlinear constraint function matching old COBYLA convention
+  //   inequality g(x) <= 0  → constraint value = g(x)  (should be <= 0)
+  //   equality   h(x) = 0   → constraint value = h(x) + eps and -h(x) + eps  (both <= 0)
+  const Function probIneq(getProblem().getInequalityConstraint());
+  const Function probEq(getProblem().getEqualityConstraint());
+  const bool hasIneq = getProblem().hasInequalityConstraint();
+  const bool hasEq = getProblem().hasEqualityConstraint();
+
+  prima::NonlinearConstraintFunction nlcFunc;
+  if (hasIneq || hasEq)
+  {
+    nlcFunc = [&](const Eigen::VectorXd& x) -> Eigen::VectorXd {
+      Point inP(x.size());
+      std::copy(x.data(), x.data() + x.size(), inP.begin());
+
+      int totalNlcon = 0;
+      if (hasIneq) totalNlcon += probIneq.getOutputDimension();
+      if (hasEq) totalNlcon += 2 * probEq.getOutputDimension();
+
+      Eigen::VectorXd result(totalNlcon);
+      int idx = 0;
+
+      if (hasIneq)
+      {
+        const Point ineqVal = probIneq(inP);
+        inequalityConstraintHistory_.add(ineqVal);
+        for (UnsignedInteger i = 0; i < probIneq.getOutputDimension(); ++i)
+          result(idx++) = ineqVal[i];
+      }
+
+      if (hasEq)
+      {
+        const Point eqVal = probEq(inP);
+        equalityConstraintHistory_.add(eqVal);
+        const Scalar eps = getMaximumConstraintError();
+        for (UnsignedInteger i = 0; i < probEq.getOutputDimension(); ++i)
+        {
+          result(idx++) = eqVal[i] + eps;
+          result(idx++) = -eqVal[i] + eps;
+        }
+      }
+
+      return result;
+    };
+  }
+
+  // Build bounds
+  prima::Bounds* boundsPtr = nullptr;
+  prima::Bounds primaBounds;
+  if (getProblem().hasBounds())
+  {
+    const Interval bounds(getProblem().getBounds());
+    Eigen::VectorXd lb(dimension);
+    Eigen::VectorXd ub(dimension);
+    for (UnsignedInteger i = 0; i < dimension; ++i)
+    {
+      lb(i) = bounds.getFiniteLowerBound()[i] ? bounds.getLowerBound()[i] : -std::numeric_limits<double>::infinity();
+      ub(i) = bounds.getFiniteUpperBound()[i] ? bounds.getUpperBound()[i] : std::numeric_limits<double>::infinity();
+    }
+    primaBounds = prima::Bounds(lb, ub);
+    boundsPtr = &primaBounds;
+  }
+
+  // Options
+  prima::MinimizeOptions opts;
+  opts.quiet = true;
+  opts.rhobeg = rhoBeg_;
+  opts.rhoend = rhoEnd;
+  opts.maxfun = maxFun;
+  opts.iprint = Log::HasDebug() ? 1 : 0;
+
+  opts.callback = [&](const Eigen::VectorXd& /* x */, double /* f */, int nf, int /* info */, double /* cstrv */, const Eigen::VectorXd& /* nlconstr */) -> bool {
+    if (stopCallback_.first && stopCallback_.first(stopCallback_.second))
+      return true;
+
+    if (progressCallback_.first)
+      progressCallback_.first((100.0 * nf) / maxFun, progressCallback_.second);
+
+    return false;
+  };
+
+  const auto primaResult = prima::minimize(
+      objective, x0, "cobyla",
+      boundsPtr, nullptr,
+      (hasIneq || hasEq) ? &nlcFunc : nullptr,
+      opts);
+
+  // Map prima status to OT status
+  result_.setCallsNumber(primaResult.nfev);
+  if (primaResult.status == prima::SMALL_TR_RADIUS || primaResult.status == prima::FTARGET_ACHIEVED || primaResult.status == prima::CALLBACK_TERMINATE)
+    result_.setStatus(OptimizationResult::SUCCESS);
+  else if (primaResult.status == prima::MAXFUN_REACHED)
     result_.setStatus(OptimizationResult::MAXIMUMCALLS);
-  else if ((returnCode != COBYLA_NORMAL) && (returnCode != COBYLA_USERABORT))
+  else
     result_.setStatus(OptimizationResult::FAILURE);
+  result_.setStatusMessage(primaResult.message);
 
   setResultFromEvaluationHistory(evaluationInputHistory_, evaluationOutputHistory_, inequalityConstraintHistory_, equalityConstraintHistory_);
 
@@ -197,120 +275,6 @@ void Cobyla::load(Advocate & adv)
 {
   OptimizationAlgorithmImplementation::load(adv);
   adv.loadAttribute("rhoBeg_", rhoBeg_);
-}
-
-/*
- * Wrapper of the Function operator() compatible with
- * cobyla signature
- */
-int Cobyla::ComputeObjectiveAndConstraint(int n,
-    int,
-    double *x,
-    double *f,
-    double *con,
-    void *state)
-{
-  Cobyla *algorithm = static_cast<Cobyla *>(state);
-  const OptimizationProblem problem(algorithm->getProblem());
-
-  /* Convert the input vector to Point */
-  Point inP(n);
-  std::copy(x, x + n, inP.begin());
-
-  const UnsignedInteger nbIneqConst = problem.getInequalityConstraint().getOutputDimension();
-  const UnsignedInteger nbEqConst = problem.getEqualityConstraint().getOutputDimension();
-  Point constraintValue(nbIneqConst + 2 * nbEqConst, -1.0);
-
-  Point outP;
-  try
-  {
-    for (UnsignedInteger i = 0; i < inP.getDimension(); ++ i)
-      if (!std::isfinite(inP[i]))
-        throw InvalidArgumentException(HERE) << "Cobyla got a nan/inf input value";
-
-    outP = problem.getObjective().operator()(inP);
-
-    if (std::isnan(outP[0]))
-      throw InvalidArgumentException(HERE) << "Cobyla got a nan output value";
-
-    *f = problem.isMinimization() ? outP[0] : -outP[0];
-  }
-  catch (const std::exception & exc)
-  {
-    LOGINFO(OSS() << "Cobyla went to an abnormal point x=" << inP.__str__() << " y=" << outP.__str__() << " msg=" << exc.what());
-
-    // penalize it
-    *f = problem.isMinimization() ? SpecFunc::Infinity : -SpecFunc::Infinity;
-    std::copy(constraintValue.begin(), constraintValue.end(), con);
-
-    // exit gracefully
-    return 1;
-  }
-  UnsignedInteger shift = 0;
-
-  /* Compute the inequality constraints */
-  if (problem.hasInequalityConstraint())
-  {
-    const Point constraintInequalityValue(problem.getInequalityConstraint().operator()(inP));
-    algorithm->inequalityConstraintHistory_.add(constraintInequalityValue);
-    for(UnsignedInteger index = 0; index < nbIneqConst; ++index) constraintValue[index + shift] = constraintInequalityValue[index];
-    shift += nbIneqConst;
-  }
-
-  /* Compute the equality constraints */
-  if (problem.hasEqualityConstraint())
-  {
-    const Point constraintEqualityValue = problem.getEqualityConstraint().operator()(inP);
-    algorithm->equalityConstraintHistory_.add(constraintEqualityValue);
-    for(UnsignedInteger index = 0; index < nbEqConst; ++index) constraintValue[index + shift] = constraintEqualityValue[index] + algorithm->getMaximumConstraintError();
-    shift += nbEqConst;
-    for(UnsignedInteger index = 0; index < nbEqConst; ++index) constraintValue[index + shift] = -constraintEqualityValue[index] + algorithm->getMaximumConstraintError();
-  }
-
-  /* Compute the bound constraints */
-  if (problem.hasBounds())
-  {
-    const Interval bounds(problem.getBounds());
-    for (UnsignedInteger index = 0; index < bounds.getDimension(); ++index)
-    {
-      if (bounds.getFiniteLowerBound()[index])
-        constraintValue.add(inP[index] - bounds.getLowerBound()[index]);
-      if (bounds.getFiniteUpperBound()[index])
-        constraintValue.add(bounds.getUpperBound()[index] - inP[index]);
-    }
-  }
-
-  /* Convert the constraint vector in double format */
-  std::copy(constraintValue.begin(), constraintValue.end(), con);
-
-  // track input/outputs
-  algorithm->evaluationInputHistory_.add(inP);
-  algorithm->evaluationOutputHistory_.add(outP);
-
-  // update result
-  algorithm->result_.setCallsNumber(algorithm->evaluationInputHistory_.getSize());
-  algorithm->result_.store(inP, outP, 0.0, 0.0, 0.0, constraintValue.normInf(), algorithm->getMaximumConstraintError());
-
-  int returnValue = 0;
-
-  std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
-  const Scalar timeDuration = std::chrono::duration<Scalar>(t1 - algorithm->t0_).count();
-  if ((algorithm->getMaximumTimeDuration() > 0.0) && (timeDuration > algorithm->getMaximumTimeDuration()))
-    returnValue = 1;
-
-  if (algorithm->progressCallback_.first)
-  {
-    algorithm->progressCallback_.first((100.0 * algorithm->evaluationInputHistory_.getSize()) / algorithm->getMaximumCallsNumber(), algorithm->progressCallback_.second);
-  }
-  if (algorithm->stopCallback_.first && algorithm->stopCallback_.first(algorithm->stopCallback_.second))
-  {
-    // This value is passed to algocobyla. Any non-zero value should work but 1
-    // is the most standard value.
-    returnValue = 1;
-    LOGINFO(OSS() << "Cobyla was stopped by user");
-    algorithm->result_.setStatus(OptimizationResult::INTERRUPTION);
-  }
-  return returnValue;
 }
 
 END_NAMESPACE_OPENTURNS

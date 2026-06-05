@@ -25,6 +25,8 @@ if (Ceres_FOUND)
   set_source_files_properties (Base/Optim/Ceres.cxx PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 endif ()
 
+set_source_files_properties (Base/Optim/Cobyla.cxx PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+
 # Exclude Dlib sources from unity build (Lapack re-included)
 if (dlib_FOUND)
   set_source_files_properties (Base/Optim/Dlib.cxx Base/Optim/DlibFunctions.cxx PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)

@@ -4,7 +4,6 @@
 ot_add_current_dir_to_include_dirs ()
 
 ot_add_source_file (AbdoRackwitz.cxx)
-ot_add_source_file (algocobyla.c)
 ot_add_source_file (Bonmin.cxx)
 ot_add_source_file (Ceres.cxx)
 ot_add_source_file (CMinpack.cxx)

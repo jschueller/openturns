@@ -76,16 +76,6 @@ protected:
 
 private:
 
-  /**
-   * Evaluate general objective function and constraint values.
-   */
-  static int ComputeObjectiveAndConstraint(int n,
-      int m,
-      double *x,
-      double *f,
-      double *con,
-      void *state);
-
   Scalar rhoBeg_ = 0.0;
 
   /// temporary, used to track input/outputs
