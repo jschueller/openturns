@@ -21,6 +21,7 @@ volume = mesh2DBoundary.getVolume()
 ott.assert_almost_equal(volume, 7.780311648918275)
 length = compute_length(mesh2DBoundary)
 ott.assert_almost_equal(length, 7.780311648918275)
+assert mesh2DBoundary.isConvex() == mesh2D.isConvex()
 # Build a thick outside Mesh boundary
 mesh2DBoundaryOutside = ot.BoundaryMesher().build(mesh2D, 0.05)
 volume = mesh2DBoundaryOutside.getVolume()

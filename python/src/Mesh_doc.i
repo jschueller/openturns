@@ -767,7 +767,9 @@ subMesh : :class:`~openturns.Mesh`
 Parameters
 ----------
 convex : bool
-    Whether the mesh is known to be convex by construction."
+    Whether the mesh is known to be convex by construction.
+    When the intrinsic dimension is lower than the ambient space (surface mesh),
+    it tells whether the associated volume is convex."
 
 // ---------------------------------------------------------------------
 
@@ -777,4 +779,6 @@ convex : bool
 Returns
 -------
 convex : bool
-    Whether the mesh is known to be convex by construction."
+    Whether the mesh is known to be convex by construction.
+    When the intrinsic dimension is lower than the ambient space (surface mesh),
+    it tells whether the associated volume is convex."
