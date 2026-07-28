@@ -322,6 +322,7 @@ Mesh BoundaryMesher::build(const Mesh & mesh,
   Mesh boundary(boundaryVertices, boundarySimplices, false);
   boundary.setName(mesh.getName() + " boundary");
   boundary.setDescription(mesh.getDescription());
+  boundary.setIsConvex(mesh.isConvex()); // the associated volume is convex
   return boundary;
 }
 
