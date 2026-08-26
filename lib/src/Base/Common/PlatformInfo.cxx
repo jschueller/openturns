@@ -193,6 +193,12 @@ Description PlatformInfo::GetFeatures()
 #else
     Features_["cuba"] = false;
 #endif
+
+#ifdef OPENTURNS_HAVE_SYMENGINE
+    Features_["symengine"] = true;
+#else
+    Features_["symengine"] = false;
+#endif
   }
 
   Description keys;

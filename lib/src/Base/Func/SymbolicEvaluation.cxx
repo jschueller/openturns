@@ -23,8 +23,18 @@
 #include "openturns/SymbolicEvaluation.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/OTconfig.hxx"
+
+#ifdef OPENTURNS_HAVE_SYMENGINE
+#include "SymEngineUtils.hxx"
+#include <symengine/parser.h>
+#include <symengine/derivative.h>
+#include <symengine/expression.h>
+#include <symengine/symbol.h>
+#include <symengine/basic.h>
+#else
 #include "Ev3/expression.h"
 #include "Ev3/parser.h"
+#endif
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -199,6 +209,34 @@ Bool SymbolicEvaluation::isLinear() const
   // SymbolicEvaluation is linear if all its marginals are
   for (UnsignedInteger columnIndex = 0; columnIndex < outputSize; ++columnIndex)
   {
+#ifdef OPENTURNS_HAVE_SYMENGINE
+    Description formulasCopy(formulas_);
+    const std::map<std::string, std::string> renameMap1 = RenameClashingVariables(formulasCopy[columnIndex], inputVariablesNames_);
+    ReplaceUnsupportedFunctions(formulasCopy[columnIndex]);
+    SymEngine::vec_basic vars;
+    for (UnsignedInteger inputVariableIndex = 0; inputVariableIndex < inputSize; ++inputVariableIndex)
+    {
+      const std::string varName = renameMap1.count(inputVariablesNames_[inputVariableIndex])
+        ? renameMap1.at(inputVariablesNames_[inputVariableIndex])
+        : inputVariablesNames_[inputVariableIndex];
+      vars.push_back(SymEngine::symbol(varName));
+    }
+    SymEngine::RCP<const SymEngine::Basic> symExpression;
+    try
+    {
+      symExpression = SymEngine::parse(formulasCopy[columnIndex], true, GetExprTkConstantsMap());
+    }
+    catch (const SymEngine::ParseError &)
+    {
+      return false;
+    }
+    for (UnsignedInteger inputVariableIndex = 0; inputVariableIndex < inputSize; ++inputVariableIndex)
+    {
+      SymEngine::RCP<const SymEngine::Basic> deriv = SymEngine::diff(symExpression, SymEngine::rcp_dynamic_cast<const SymEngine::Symbol>(vars[inputVariableIndex]));
+      if (!SymEngine::is_a_Number(*deriv))
+        return false;
+    }
+#else
     // Parse the current formula with Ev3
     int nerr(0);
     Ev3::ExpressionParser ev3Parser;
@@ -224,6 +262,7 @@ Bool SymbolicEvaluation::isLinear() const
 
     if (!ev3Expression->IsLinear())
       return false;
+#endif
   }
 
   return true;
@@ -241,6 +280,33 @@ Bool SymbolicEvaluation::isLinearlyDependent(const UnsignedInteger index) const
   // Function depends linearly on variable i if all its marginals do
   for (UnsignedInteger columnIndex = 0; columnIndex < outputSize; ++columnIndex)
   {
+#ifdef OPENTURNS_HAVE_SYMENGINE
+    Description formulasCopy(formulas_);
+    const std::map<std::string, std::string> renameMap2 = RenameClashingVariables(formulasCopy[columnIndex], inputVariablesNames_);
+    ReplaceUnsupportedFunctions(formulasCopy[columnIndex]);
+    SymEngine::vec_basic vars;
+    for (UnsignedInteger inputVariableIndex = 0; inputVariableIndex < inputSize; ++inputVariableIndex)
+    {
+      const std::string varName = renameMap2.count(inputVariablesNames_[inputVariableIndex])
+        ? renameMap2.at(inputVariablesNames_[inputVariableIndex])
+        : inputVariablesNames_[inputVariableIndex];
+      vars.push_back(SymEngine::symbol(varName));
+    }
+    SymEngine::RCP<const SymEngine::Basic> symExpression;
+    try
+    {
+      symExpression = SymEngine::parse(formulasCopy[columnIndex], true, GetExprTkConstantsMap());
+    }
+    catch (const SymEngine::ParseError &)
+    {
+      return false;
+    }
+    SymEngine::RCP<const SymEngine::Basic> deriv = SymEngine::diff(symExpression, SymEngine::rcp_dynamic_cast<const SymEngine::Symbol>(vars[index]));
+    // Check if the derivative depends on the variable being differentiated
+    const SymEngine::set_basic freeSyms = SymEngine::free_symbols(*deriv);
+    if (freeSyms.find(vars[index]) != freeSyms.end())
+      return false;
+#else
     // Parse the current formula with Ev3
     int nerr(0);
     Ev3::ExpressionParser ev3Parser;
@@ -264,6 +330,7 @@ Bool SymbolicEvaluation::isLinearlyDependent(const UnsignedInteger index) const
 
     if (ev3Expression->DependsLinearlyOnVariable(index) == 0)
       return false;
+#endif
   }
 
   return true;

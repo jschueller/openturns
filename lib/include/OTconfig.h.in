@@ -42,6 +42,9 @@
 /* Define to 1 if you have the <exprtk.hpp> header file. */
 #cmakedefine OPENTURNS_HAVE_EXPRTK
 
+/* Define to 1 if you have the SymEngine library for symbolic differentiation. */
+#cmakedefine OPENTURNS_HAVE_SYMENGINE
+
 #if defined(OPENTURNS_HAVE_MUPARSER) || defined(OPENTURNS_HAVE_EXPRTK)
 # define OPENTURNS_HAVE_ANALYTICAL_PARSER 1
 #endif

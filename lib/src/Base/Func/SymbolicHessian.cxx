@@ -21,10 +21,21 @@
 
 #include "openturns/SymbolicHessian.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "Ev3/expression.h"
-#include "Ev3/parser.h"
+#include "openturns/OTconfig.hxx"
 #include "openturns/Log.hxx"
 #include "openturns/Exception.hxx"
+
+#ifdef OPENTURNS_HAVE_SYMENGINE
+#include "SymEngineUtils.hxx"
+#include <symengine/parser.h>
+#include <symengine/derivative.h>
+#include <symengine/expression.h>
+#include <symengine/symbol.h>
+#include <symengine/basic.h>
+#else
+#include "Ev3/expression.h"
+#include "Ev3/parser.h"
+#endif
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -151,6 +162,65 @@ void SymbolicHessian::initialize() const
   Description hessianFormulas(hessianSize);
   for (UnsignedInteger sheetIndex = 0; sheetIndex < outputSize; ++sheetIndex)
   {
+#ifdef OPENTURNS_HAVE_SYMENGINE
+    // Parse the current formula with SymEngine
+    // Rename variables that clash with SymEngine built-in constants (E, pi, I, etc.)
+    Description formulasCopy(p_evaluation_->formulas_);
+    const std::map<std::string, std::string> renameMap = RenameClashingVariables(formulasCopy[sheetIndex], p_evaluation_->inputVariablesNames_);
+    ReplaceUnsupportedFunctions(formulasCopy[sheetIndex]);
+    SymEngine::vec_basic vars;
+    for (UnsignedInteger inputVariableIndex = 0; inputVariableIndex < inputSize; ++inputVariableIndex)
+    {
+      const std::string varName = renameMap.count(p_evaluation_->inputVariablesNames_[inputVariableIndex])
+        ? renameMap.at(p_evaluation_->inputVariablesNames_[inputVariableIndex])
+        : p_evaluation_->inputVariablesNames_[inputVariableIndex];
+      vars.push_back(SymEngine::symbol(varName));
+    }
+    SymEngine::RCP<const SymEngine::Basic> symExpression;
+    try
+    {
+      symExpression = SymEngine::parse(formulasCopy[sheetIndex], true, GetExprTkConstantsMap());
+    }
+    catch (const SymEngine::ParseError & exc)
+    {
+      throw NotDefinedException(HERE) << "Cannot parse " << p_evaluation_->formulas_[sheetIndex] << " with SymEngine. No analytical hessian.";
+    }
+    for (UnsignedInteger rowIndex = 0; rowIndex < inputSize; ++rowIndex)
+    {
+      SymEngine::RCP<const SymEngine::Basic> firstDerivative;
+      try
+      {
+        firstDerivative = SymEngine::diff(symExpression, SymEngine::rcp_dynamic_cast<const SymEngine::Symbol>(vars[rowIndex]));
+        String firstFormula = ConvertSymEngineToExprTk(firstDerivative->__str__());
+        RestoreVariableNames(firstFormula, renameMap);
+        if (HasUnevaluatedDerivatives(firstFormula))
+          throw NotDefinedException(HERE) << "SymEngine produced an unevaluated derivative for " << symExpression->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[rowIndex] << ". No analytical hessian.";
+        LOGDEBUG(OSS() << "First variable=" << p_evaluation_->inputVariablesNames_[rowIndex] << ", derivative=" << firstFormula);
+      }
+      catch (const SymEngine::SymEngineException & exc)
+      {
+        throw NotDefinedException(HERE) << "Cannot compute the derivative of " << symExpression->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[rowIndex] << " :" << exc.what();
+      }
+      for (UnsignedInteger columnIndex = 0; columnIndex <= rowIndex; ++ columnIndex)
+      {
+        try
+        {
+          const SymEngine::RCP<const SymEngine::Basic> secondDerivative = SymEngine::diff(firstDerivative, SymEngine::rcp_dynamic_cast<const SymEngine::Symbol>(vars[columnIndex]));
+          String formula = ConvertSymEngineToExprTk(secondDerivative->__str__());
+          RestoreVariableNames(formula, renameMap);
+          if (HasUnevaluatedDerivatives(formula))
+            throw NotDefinedException(HERE) << "SymEngine produced an unevaluated derivative for " << firstDerivative->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[columnIndex] << ". No analytical hessian.";
+          LOGDEBUG(OSS() << "d2(" << symExpression->__str__() << ")/d(" << p_evaluation_->inputVariablesNames_[rowIndex] << ")d(" << p_evaluation_->inputVariablesNames_[columnIndex] << ")=" << formula);
+          hessianFormulas[hessianIndex] = formula;
+        }
+        catch (const SymEngine::SymEngineException & exc)
+        {
+          throw NotDefinedException(HERE) << "Cannot compute the derivative of " << firstDerivative->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[columnIndex] << " :" << exc.what();
+        }
+        ++ hessianIndex;
+      } // columnIndex
+    } // rowIndex
+#else
     // Parse the current formula with Ev3
     int nerr(0);
     Ev3::ExpressionParser ev3Parser;
@@ -194,6 +264,7 @@ void SymbolicHessian::initialize() const
         ++ hessianIndex;
       } // columnIndex
     } // rowIndex
+#endif
   } // sheetIndex
 
   parser_.setVariables(p_evaluation_->inputVariablesNames_);

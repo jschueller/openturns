@@ -21,9 +21,20 @@
 
 #include "openturns/SymbolicGradient.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
+#include "openturns/OTconfig.hxx"
+#include "openturns/Log.hxx"
+
+#ifdef OPENTURNS_HAVE_SYMENGINE
+#include "SymEngineUtils.hxx"
+#include <symengine/parser.h>
+#include <symengine/derivative.h>
+#include <symengine/expression.h>
+#include <symengine/symbol.h>
+#include <symengine/basic.h>
+#else
 #include "Ev3/expression.h"
 #include "Ev3/parser.h"
-#include "openturns/Log.hxx"
+#endif
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -138,6 +149,49 @@ void SymbolicGradient::initialize() const
   UnsignedInteger gradientIndex = 0;
   for (UnsignedInteger columnIndex = 0; columnIndex < outputSize; ++columnIndex)
   {
+#ifdef OPENTURNS_HAVE_SYMENGINE
+    // Parse the current formula with SymEngine
+    // Rename variables that clash with SymEngine built-in constants (E, pi, I, etc.)
+    Description formulasCopy(p_evaluation_->formulas_);
+    const std::map<std::string, std::string> renameMap = RenameClashingVariables(formulasCopy[columnIndex], p_evaluation_->inputVariablesNames_);
+    ReplaceUnsupportedFunctions(formulasCopy[columnIndex]);
+    SymEngine::vec_basic vars;
+    for (UnsignedInteger inputVariableIndex = 0; inputVariableIndex < inputSize; ++inputVariableIndex)
+    {
+      const std::string varName = renameMap.count(p_evaluation_->inputVariablesNames_[inputVariableIndex])
+        ? renameMap.at(p_evaluation_->inputVariablesNames_[inputVariableIndex])
+        : p_evaluation_->inputVariablesNames_[inputVariableIndex];
+      vars.push_back(SymEngine::symbol(varName));
+    }
+    SymEngine::RCP<const SymEngine::Basic> symExpression;
+    try
+    {
+      symExpression = SymEngine::parse(formulasCopy[columnIndex], true, GetExprTkConstantsMap());
+    }
+    catch (const SymEngine::ParseError & exc)
+    {
+      throw NotDefinedException(HERE) << "Cannot parse " << p_evaluation_->formulas_[columnIndex] << " with SymEngine. No analytical gradient.";
+    }
+    for (UnsignedInteger rowIndex = 0; rowIndex < inputSize; ++rowIndex)
+    {
+      try
+      {
+        const SymEngine::RCP<const SymEngine::Basic> derivative = SymEngine::diff(symExpression, SymEngine::rcp_dynamic_cast<const SymEngine::Symbol>(vars[rowIndex]));
+        String formula = ConvertSymEngineToExprTk(derivative->__str__());
+        RestoreVariableNames(formula, renameMap);
+        // SymEngine may leave Derivative/Subs unevaluated for some functions (abs, cbrt, expm1, min, max, etc.)
+        if (HasUnevaluatedDerivatives(formula))
+          throw NotDefinedException(HERE) << "SymEngine produced an unevaluated derivative for " << symExpression->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[rowIndex] << ". No analytical gradient.";
+        LOGDEBUG(OSS() << "d(" << symExpression->__str__() << ")/d(" << p_evaluation_->inputVariablesNames_[rowIndex] << ")=" << formula);
+        gradientFormulas[gradientIndex] = formula;
+      }
+      catch (const SymEngine::SymEngineException & exc)
+      {
+        throw NotDefinedException(HERE) << "Cannot compute the derivative of " << symExpression->__str__() << " wrt " << p_evaluation_->inputVariablesNames_[rowIndex] << " :" << exc.what();
+      }
+      ++ gradientIndex;
+    } // rowIndex
+#else
     // Parse the current formula with Ev3
     int nerr(0);
     Ev3::ExpressionParser ev3Parser;
@@ -168,6 +222,7 @@ void SymbolicGradient::initialize() const
       }
       ++ gradientIndex;
     } // rowIndex
+#endif
   } // columnIndex
   parser_.setVariables(p_evaluation_->inputVariablesNames_);
   parser_.setFormulas(gradientFormulas);
