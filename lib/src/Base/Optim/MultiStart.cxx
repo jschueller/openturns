@@ -138,6 +138,24 @@ void MultiStart::run()
                       absoluteErrorHistory(k, 0), relativeErrorHistory(k, 0), residualErrorHistory(k, 0), constraintErrorHistory(k, 0));
       }
       result_.setStatusMessage(localResult.getStatusMessage());
+
+      // update optimal point
+      const Point x(localResult.getOptimalPoint());
+      const Point y(localResult.getOptimalValue());
+      const Bool objectiveImproved = (!result_.getOptimalValue().getDimension())
+                                    || ((getProblem().isMinimization() && y[0] < result_.getOptimalValue()[0]) || (!getProblem().isMinimization() && y[0] > result_.getOptimalValue()[0]));
+
+      if (objectiveImproved)
+      {
+        // update values
+        result_.setAbsoluteError(localResult.getAbsoluteError());
+        result_.setRelativeError(localResult.getRelativeError());
+        result_.setResidualError(localResult.getResidualError());
+        result_.setConstraintError(localResult.getConstraintError());
+
+        result_.setOptimalPoint(x);
+        result_.setOptimalValue(y);
+      }
     }
     catch (const Exception & ex)
     {
