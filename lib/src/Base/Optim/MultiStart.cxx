@@ -68,6 +68,10 @@ void MultiStart::checkSolver(const OptimizationAlgorithm & solver) const
 
 void MultiStart::setProblem(const OptimizationProblem & problem)
 {
+  // Cannot solve multi-objective problems
+  if (problem.hasMultipleObjective())
+    throw InvalidArgumentException(HERE) << "MultiStart does not support multi-objective optimization";
+
   OptimizationAlgorithmImplementation::setProblem(problem);
   solver_.setProblem(problem);
 }
