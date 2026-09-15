@@ -392,8 +392,8 @@ Scalar KernelMixture::computeProbability(const Interval & interval) const
   if (useApproximatePDFCDF_)
   {
     const Scalar mean = getMean()[0];
-    if (lowerBound[0] > mean) return ccdfApproximation_(lowerBound)[0] - ccdfApproximation_(upperBound)[0];
-    else return cdfApproximation_(upperBound)[0] - cdfApproximation_(lowerBound)[0];
+    if (lowerBound[0] > mean) return ccdfApproximation_(lowerBound)[0] - (reducedFiniteUpper[0] ? ccdfApproximation_(upperBound)[0] : 0.0);
+    return (reducedFiniteUpper[0] ? cdfApproximation_(upperBound)[0] : 1.0) - (reducedFiniteLower[0] ? cdfApproximation_(lowerBound)[0] : 0.0);
   }
   Scalar probability = 0.0;
   const UnsignedInteger size = sample_.getSize();
