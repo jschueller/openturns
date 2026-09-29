@@ -565,6 +565,7 @@ ot_add_python_module(experimental experimental_module.i
                      FejerExperiment.i FejerExperiment_doc.i
                      EfficientGlobalOptimization.i EfficientGlobalOptimization_doc.i
                      HiGHS.i HiGHS_doc.i
+                     SCIP.i SCIP_doc.i
                      LinearProblem.i LinearProblem_doc.i
                      FiniteOrthogonalFunctionFactory.i FiniteOrthogonalFunctionFactory_doc.i
                      UniVariateDistributionPolynomialFactory.i UniVariateDistributionPolynomialFactory_doc.i
