@@ -26,6 +26,7 @@
 #include "openturns/Cobyla.hxx"
 #include "openturns/Dlib.hxx"
 #include "openturns/Ipopt.hxx"
+#include "openturns/SCIP.hxx"
 #include "openturns/SQP.hxx"
 #include "openturns/TNC.hxx"
 #include "openturns/NLopt.hxx"
@@ -284,6 +285,10 @@ OptimizationAlgorithm OptimizationAlgorithm::GetByName(const String & solverName
   {
     solver = Dlib(solverName);
   }
+  else if (PlatformInfo::HasFeature("scip") && solverName == "SCIP")
+  {
+    solver = SCIP();
+  }
   else if (PlatformInfo::HasFeature("bonmin") && Bonmin::GetAlgorithmNames().contains(solverName))
   {
     solver = Bonmin(solverName);
@@ -328,6 +333,8 @@ Description OptimizationAlgorithm::GetAlgorithmNames()
 {
   Description names;
   names.add("AbdoRackwitz");
+  if (PlatformInfo::HasFeature("scip"))
+    names.add("SCIP");
   if (PlatformInfo::HasFeature("bonmin"))
     names.add(Bonmin::GetAlgorithmNames());
   if (PlatformInfo::HasFeature("ipopt"))

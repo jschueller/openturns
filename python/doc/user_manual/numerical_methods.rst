@@ -29,6 +29,7 @@ Refer to :ref:`optimization_algorithm`.
     Dlib
     experimental.EfficientGlobalOptimization
     experimental.HiGHS
+    experimental.SCIP
     Ipopt
     MultiStart
     NLopt
