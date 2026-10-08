@@ -113,9 +113,18 @@ for i in range(sample_size):
     )
     ott.assert_almost_equal(computed_surv, computed_ccdf, rtol, atol)
     # Check quantile
-    if pr == 0.0 and x < n:
-        # The function is not invertible
-        # for this particular input.
+    if pr == 0.0 or pr == 1.0:
+        # Degenerate case: Dirac at 0 (p=0) or n (p=1), the CDF is not invertible
+        expected_q = 0.0 if pr == 0.0 else n
+        ott.assert_almost_equal(
+            distribution.computeQuantile(computed_cdf)[0], expected_q, 0.0, 0.0
+        )
+        ott.assert_almost_equal(
+            distribution.computeQuantile(computed_ccdf, True)[0],
+            expected_q,
+            0.0,
+            0.0,
+        )
         continue
     elif expected_cdfp < expected_cdfq:
         computed_x = int(distribution.computeQuantile(computed_cdf)[0])
