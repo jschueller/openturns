@@ -198,6 +198,13 @@ void MultivariatePolya::updateSpectral()
 Point MultivariatePolya::drawMultinomial(const UnsignedInteger n,
                                          const Point & p)
 {
+  return drawMultinomial(n, p, RandomGenerator::GetGlobalGenerator());
+}
+
+Point MultivariatePolya::drawMultinomial(const UnsignedInteger n,
+                                         const Point & p,
+                                         const RandomGenerator & rng)
+{
   const UnsignedInteger dimension = p.getDimension();
   Point realization(dimension);
   // Sequential conditional sampling: X_1 ~ Binomial(n, p_1), then
@@ -212,7 +219,7 @@ Point MultivariatePolya::drawMultinomial(const UnsignedInteger n,
       continue;
     }
     const Scalar pI = (pRemaining > 0.0 ? std::min(1.0, p[i] / pRemaining) : 0.0);
-    const UnsignedInteger xI = DistFunc::rBinomial(remainingN, pI);
+    const UnsignedInteger xI = DistFunc::rBinomial(remainingN, pI, rng);
     realization[i] = 1.0 * xI;
     remainingN -= xI;
     pRemaining -= p[i];
@@ -240,28 +247,28 @@ Point MultivariatePolya::getRealization() const
     Scalar gammaSum = 0.0;
     for (UnsignedInteger i = 0; i < dimension; ++i)
     {
-      const Scalar gammaI = DistFunc::rGamma(u_[i]);
+      const Scalar gammaI = DistFunc::rGamma(u_[i], getEffectiveGenerator());
       gammaSum += gammaI;
       pTilde[i] = gammaI;
     }
     for (UnsignedInteger i = 0; i < dimension; ++i) pTilde[i] /= gammaSum;
-    return drawMultinomial(n_, pTilde);
+    return drawMultinomial(n_, pTilde, getEffectiveGenerator());
   }
   // Defective case: Dirichlet for the full (d+1) categories including the rest
   Point pTilde(dimension + 1);
   Scalar gammaSum = 0.0;
   for (UnsignedInteger i = 0; i < dimension; ++i)
   {
-    const Scalar gammaI = DistFunc::rGamma(u_[i]);
+    const Scalar gammaI = DistFunc::rGamma(u_[i], getEffectiveGenerator());
     gammaSum += gammaI;
     pTilde[i] = gammaI;
   }
   const Scalar uRest = rest / c_;
-  const Scalar gammaRest = DistFunc::rGamma(uRest);
+  const Scalar gammaRest = DistFunc::rGamma(uRest, getEffectiveGenerator());
   gammaSum += gammaRest;
   pTilde[dimension] = gammaRest;
   for (UnsignedInteger i = 0; i < dimension + 1; ++i) pTilde[i] /= gammaSum;
-  const Point full(drawMultinomial(n_, pTilde));
+  const Point full(drawMultinomial(n_, pTilde, getEffectiveGenerator()));
   Point realization(dimension);
   for (UnsignedInteger i = 0; i < dimension; ++i) realization[i] = full[i];
   return realization;
@@ -287,12 +294,12 @@ Sample MultivariatePolya::getSample(const UnsignedInteger size) const
         Scalar gammaSum = 0.0;
         for (UnsignedInteger i = 0; i < dimension; ++i)
         {
-          const Scalar gammaI = DistFunc::rGamma(u_[i]);
+          const Scalar gammaI = DistFunc::rGamma(u_[i], getEffectiveGenerator());
           gammaSum += gammaI;
           pTildeClassical[i] = gammaI;
         }
         for (UnsignedInteger i = 0; i < dimension; ++i) pTildeClassical[i] /= gammaSum;
-        const Point realization(drawMultinomial(n_, pTildeClassical));
+        const Point realization(drawMultinomial(n_, pTildeClassical, getEffectiveGenerator()));
         for (UnsignedInteger i = 0; i < dimension; ++i) sample(k, i) = realization[i];
       }
       else
@@ -301,16 +308,16 @@ Sample MultivariatePolya::getSample(const UnsignedInteger size) const
         Scalar gammaSum = 0.0;
         for (UnsignedInteger i = 0; i < dimension; ++i)
         {
-          const Scalar gammaI = DistFunc::rGamma(u_[i]);
+          const Scalar gammaI = DistFunc::rGamma(u_[i], getEffectiveGenerator());
           gammaSum += gammaI;
           pTilde[i] = gammaI;
         }
         const Scalar uRest = rest / c_;
-        const Scalar gammaRest = DistFunc::rGamma(uRest);
+        const Scalar gammaRest = DistFunc::rGamma(uRest, getEffectiveGenerator());
         gammaSum += gammaRest;
         pTilde[dimension] = gammaRest;
         for (UnsignedInteger i = 0; i < dimension + 1; ++i) pTilde[i] /= gammaSum;
-        const Point realization(drawMultinomial(n_, pTilde));
+        const Point realization(drawMultinomial(n_, pTilde, getEffectiveGenerator()));
         for (UnsignedInteger i = 0; i < dimension; ++i) sample(k, i) = realization[i];
       }
     }

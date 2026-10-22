@@ -123,7 +123,7 @@ ZipfMandelbrot * ZipfMandelbrot::clone() const
 /* Get one realization of the distribution */
 Point ZipfMandelbrot::getRealization() const
 {
-  const Scalar uniformRealization = 1.0 - RandomGenerator::Generate();
+  const Scalar uniformRealization = 1.0 - generateUniform();
 
   ScalarCollection::const_iterator it(lower_bound(harmonicNumbers_.begin(),
                                       harmonicNumbers_.end(),

@@ -327,7 +327,7 @@ Point MaximumEntropyOrderStatisticsDistribution::getRealization() const
   x[0] = distributionCollection_[0].getRealization()[0];
   for(UnsignedInteger k = 1; k < dimension; ++ k)
   {
-    const Scalar xK = computeConditionalQuantile(RandomGenerator::Generate(), x);
+    const Scalar xK = computeConditionalQuantile(generateUniform(), x);
     x.add(xK);
   }
   return x;

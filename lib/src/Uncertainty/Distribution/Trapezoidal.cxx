@@ -109,7 +109,7 @@ void Trapezoidal::computeRange()
 /* Get one realization of the distribution */
 Point Trapezoidal::getRealization() const
 {
-  return Point(1, computeScalarQuantile(RandomGenerator::Generate()));
+  return Point(1, computeScalarQuantile(generateUniform()));
 }
 
 

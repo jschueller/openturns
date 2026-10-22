@@ -292,7 +292,7 @@ SquareMatrix MatrixFisher::sampleUniformRotation() const
   Scalar norm = 0.0;
   for (UnsignedInteger i = 0; i < 4; ++i)
   {
-    q[i] = DistFunc::rNormal();
+    q[i] = DistFunc::rNormal(getEffectiveGenerator());
     norm += q[i] * q[i];
   }
   norm = std::sqrt(norm);
@@ -329,7 +329,7 @@ Point MatrixFisher::getRealization() const
     for (UnsignedInteger i = 0; i < 3; ++i)
       for (UnsignedInteger j = 0; j < 3; ++j)
         trace += F_(i, j) * R(i, j);
-    if (RandomGenerator::Generate() < std::exp(trace - maxTrace_))
+    if (generateUniform() < std::exp(trace - maxTrace_))
     {
       Point result(9);
       for (UnsignedInteger i = 0; i < 3; ++i)

@@ -125,7 +125,7 @@ Hypergeometric * Hypergeometric::clone() const
 /* Get one realization of the distribution */
 Point Hypergeometric::getRealization() const
 {
-  return Point(1, DistFunc::rDiscrete(probabilities_));
+  return Point(1, DistFunc::rDiscrete(probabilities_, getEffectiveGenerator()));
 }
 
 

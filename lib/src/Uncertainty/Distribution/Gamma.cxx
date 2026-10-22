@@ -199,7 +199,7 @@ void Gamma::update()
 /* Get one realization of the distribution */
 Point Gamma::getRealization() const
 {
-  return Point(1, gamma_ + DistFunc::rGamma(k_) / lambda_);
+  return Point(1, gamma_ + DistFunc::rGamma(k_, getEffectiveGenerator()) / lambda_);
 }
 
 

@@ -111,7 +111,7 @@ Poisson * Poisson::clone() const
 /* Get one realization of the distribution */
 Point Poisson::getRealization() const
 {
-  return Point(1, DistFunc::rPoisson(lambda_));
+  return Point(1, DistFunc::rPoisson(lambda_, getEffectiveGenerator()));
 }
 
 

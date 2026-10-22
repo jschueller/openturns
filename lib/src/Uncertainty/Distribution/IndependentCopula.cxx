@@ -88,7 +88,7 @@ IndependentCopula * IndependentCopula::clone() const
 /* Get one realization of the distribution */
 Point IndependentCopula::getRealization() const
 {
-  return RandomGenerator::Generate(getDimension());
+  return generateUniform(getDimension());
 }
 
 /* Get the DDF of the distribution */

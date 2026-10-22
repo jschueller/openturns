@@ -265,7 +265,7 @@ Mixture * Mixture::clone() const
 Point Mixture::getRealization() const
 {
   // Select the atom following the weightsDistribution
-  const UnsignedInteger index = (uniformWeights_ ? RandomGenerator::IntegerGenerate(distributionCollection_.getSize()) : DistFunc::rDiscrete(base_, alias_));
+  const UnsignedInteger index = (uniformWeights_ ? generateInteger(distributionCollection_.getSize()) : DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator()));
   return distributionCollection_[index].getRealization();
 }
 

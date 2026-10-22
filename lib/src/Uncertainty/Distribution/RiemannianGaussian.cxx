@@ -481,7 +481,7 @@ Point RiemannianGaussian::getRealization() const
   // cached by updateSampler(): no factorization here
   Point z(d);
   for (UnsignedInteger i = 0; i < d; ++i)
-    z[i] = DistFunc::rNormal();
+    z[i] = DistFunc::rNormal(getEffectiveGenerator());
 
   Point v(d);
   for (UnsignedInteger i = 0; i < d; ++i)

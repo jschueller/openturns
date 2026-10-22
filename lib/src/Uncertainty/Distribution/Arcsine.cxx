@@ -104,7 +104,7 @@ void Arcsine::computeRange()
 /* Get one realization of the distribution */
 Point Arcsine::getRealization() const
 {
-  return Point(1, computeScalarQuantile(RandomGenerator::Generate()));
+  return Point(1, computeScalarQuantile(generateUniform()));
 }
 
 /* Get the DDF of the distribution */

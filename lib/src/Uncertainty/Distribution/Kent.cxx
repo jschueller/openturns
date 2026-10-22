@@ -325,14 +325,14 @@ Point Kent::getRealization() const
   const Scalar invScale3 = std::sqrt(1.0 + a3 / optimalB_);
   for (;;)
   {
-    Scalar u1 = RandomGenerator::Generate();
-    Scalar u2 = RandomGenerator::Generate();
+    Scalar u1 = generateUniform();
+    Scalar u2 = generateUniform();
     const Scalar z1 = std::sqrt(-2.0 * std::log(u1)) * std::cos(2.0 * M_PI * u2);
-    u1 = RandomGenerator::Generate();
-    u2 = RandomGenerator::Generate();
+    u1 = generateUniform();
+    u2 = generateUniform();
     const Scalar z2 = std::sqrt(-2.0 * std::log(u1)) * std::cos(2.0 * M_PI * u2);
-    u1 = RandomGenerator::Generate();
-    u2 = RandomGenerator::Generate();
+    u1 = generateUniform();
+    u2 = generateUniform();
     const Scalar z3 = std::sqrt(-2.0 * std::log(u1)) * std::cos(2.0 * M_PI * u2);
     const Scalar y1 = z1;
     const Scalar y2 = z2 / invScale2;
@@ -345,7 +345,7 @@ Point Kent::getRealization() const
     const Scalar logAccept = kappa_ * u + beta_ * (v * v - w * w) - kappa_
                              + half3MinusB
                              + 1.5 * (logB3 + std::log(xOmegaX));
-    if (std::log(RandomGenerator::Generate()) < logAccept)
+    if (std::log(generateUniform()) < logAccept)
     {
       Point result(3);
       result[0] = u * gamma_(0, 0) + v * gamma_(0, 1) + w * gamma_(0, 2);

@@ -98,7 +98,7 @@ Exponential * Exponential::clone() const
 /* Get one realization of the distribution */
 Point Exponential::getRealization() const
 {
-  return Point(1, gamma_ - std::log(RandomGenerator::Generate()) / lambda_);
+  return Point(1, gamma_ - std::log(generateUniform()) / lambda_);
 }
 
 

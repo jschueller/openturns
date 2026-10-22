@@ -188,7 +188,7 @@ Point PosteriorDistribution::getRealization() const
 {
   // If the distribution is continuous, use the ratio of uniforms method
   if (isContinuous() && sampler_.isInitialized())
-    return sampler_.getRealization();
+    return sampler_.getRealization(getEffectiveGenerator());
 
   return DistributionImplementation::getRealization();
 }
@@ -197,7 +197,7 @@ Sample PosteriorDistribution::getSample(const UnsignedInteger size) const
 {
   // If the distribution is continuous, use the ratio of uniforms method
   if (isContinuous() && sampler_.isInitialized())
-    return sampler_.getSample(size);
+    return sampler_.getSample(size, getEffectiveGenerator());
 
   return DistributionImplementation::getSample(size);
 }

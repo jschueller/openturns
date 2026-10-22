@@ -129,7 +129,7 @@ void ChiSquare::update()
 /* Get one realization of the distribution */
 Point ChiSquare::getRealization() const
 {
-  return Point(1, 2.0 * DistFunc::rGamma(0.5 * nu_));
+  return Point(1, 2.0 * DistFunc::rGamma(0.5 * nu_, getEffectiveGenerator()));
 }
 
 

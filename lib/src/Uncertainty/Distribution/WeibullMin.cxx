@@ -111,7 +111,7 @@ void WeibullMin::computeRange()
 /* Get one realization of the distribution */
 Point WeibullMin::getRealization() const
 {
-  return Point(1, gamma_ + beta_ * std::pow(-std::log(1.0 - RandomGenerator::Generate()), 1.0 / alpha_));
+  return Point(1, gamma_ + beta_ * std::pow(-std::log(1.0 - generateUniform()), 1.0 / alpha_));
 }
 
 

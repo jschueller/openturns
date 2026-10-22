@@ -118,7 +118,7 @@ Point CombinationsDistribution::getRealization() const
   const UnsignedInteger actualK = (k_ > n_ / 2 ? n_ - k_ : k_);
   while (integralRealization.getSize() < actualK)
   {
-    const UnsignedInteger i = RandomGenerator::IntegerGenerate(n_);
+    const UnsignedInteger i = generateInteger(n_);
     if (flags[i] == 0)
     {
       integralRealization.add(i);

@@ -94,6 +94,13 @@ Scalar DistFunc::qBeta(const Scalar p1,
 Scalar DistFunc::rBeta(const Scalar p1,
                        const Scalar p2)
 {
+  return rBeta(p1, p2, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rBeta(const Scalar p1,
+                       const Scalar p2,
+                       const RandomGenerator & rng)
+{
   // Strategy:
   // If (a = 1 and b = 1), Beta(1,1) = Uniform(0,1)
   // If (a = 1 or b = 1), analytic cases
@@ -102,10 +109,10 @@ Scalar DistFunc::rBeta(const Scalar p1,
   // If (a < 1 and b < 1), Atkinson and Whittaker 1
   // If (a < 1 and b > 1) or (a > 1 and b < 1), Atkinson and Whittaker 2
   // If (a > 1 and b > 1) Cheng.
-  if ((p1 == 1.0) && (p2 == 1.0)) return RandomGenerator::Generate();
+  if ((p1 == 1.0) && (p2 == 1.0)) return rng.generate();
   // Special case for p1 = 1 or p2 = 1
-  if (p1 == 1.0) return 1.0 - std::pow(RandomGenerator::Generate(), 1.0 / p2);
-  if (p2 == 1.0) return std::pow(RandomGenerator::Generate(), 1.0 / p1);
+  if (p1 == 1.0) return 1.0 - std::pow(rng.generate(), 1.0 / p2);
+  if (p2 == 1.0) return std::pow(rng.generate(), 1.0 / p1);
   // Now, the more general cases
   const Scalar minp = std::min(p1, p2);
   const Scalar maxp = std::max(p1, p2);
@@ -119,8 +126,8 @@ Scalar DistFunc::rBeta(const Scalar p1,
     {
       for (;;)
       {
-        const Scalar u = RandomGenerator::Generate();
-        const Scalar v = RandomGenerator::Generate();
+        const Scalar u = rng.generate();
+        const Scalar v = rng.generate();
         const Scalar logx = std::log(u) / p1;
         const Scalar logy = std::log(v) / p2;
         const Scalar logsum = SpecFunc::LogSumExp(logx, logy);
@@ -134,8 +141,8 @@ Scalar DistFunc::rBeta(const Scalar p1,
     // Usual form of the algorithm
     for (;;)
     {
-      const Scalar u = RandomGenerator::Generate();
-      const Scalar v = RandomGenerator::Generate();
+      const Scalar u = rng.generate();
+      const Scalar v = rng.generate();
       const Scalar x = std::pow(u, 1.0 / p1);
       const Scalar y = std::pow(v, 1.0 / p2);
       // Acceptation step
@@ -149,8 +156,8 @@ Scalar DistFunc::rBeta(const Scalar p1,
     const Scalar c = minp + 1.0 / lambda;
     for (;;)
     {
-      const Scalar u1 = RandomGenerator::Generate();
-      const Scalar u2 = RandomGenerator::Generate();
+      const Scalar u1 = rng.generate();
+      const Scalar u2 = rng.generate();
       const Scalar v = lambda * std::log(u1 / (1.0 - u1));
       const Scalar w = minp * std::exp(v);
       const Scalar z = u1 * u1 * u2;
@@ -173,8 +180,8 @@ Scalar DistFunc::rBeta(const Scalar p1,
     const Scalar p = maxp * t / (maxp * t + minp * tc);
     for (;;)
     {
-      const Scalar u = RandomGenerator::Generate();
-      const Scalar e = -std::log(RandomGenerator::Generate());
+      const Scalar u = rng.generate();
+      const Scalar e = -std::log(rng.generate());
       if (u <= p)
       {
         const Scalar x = t * std::pow(u / p, 1.0 / minp);
@@ -195,8 +202,8 @@ Scalar DistFunc::rBeta(const Scalar p1,
   const Scalar p = maxp * t / (maxp * t + minp * std::pow(tc, maxp));
   for (;;)
   {
-    const Scalar u = RandomGenerator::Generate();
-    const Scalar e = -std::log(RandomGenerator::Generate());
+    const Scalar u = rng.generate();
+    const Scalar e = -std::log(rng.generate());
     if (u <= p)
     {
       const Scalar x = t * std::pow(u / p, 1.0 / minp);
@@ -214,8 +221,16 @@ Point DistFunc::rBeta(const Scalar p1,
                       const Scalar p2,
                       const UnsignedInteger size)
 {
+  return rBeta(p1, p2, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rBeta(const Scalar p1,
+                      const Scalar p2,
+                      const UnsignedInteger size,
+                      const RandomGenerator & rng)
+{
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rBeta(p1, p2);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rBeta(p1, p2, rng);
   return result;
 }
 
@@ -304,6 +319,13 @@ Scalar DistFunc::logdBinomial(const UnsignedInteger n,
 UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
                                     const Scalar p)
 {
+  return rBinomial(n, p, RandomGenerator::GetGlobalGenerator());
+}
+
+UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
+                                    const Scalar p,
+                                    const RandomGenerator & rng)
+{
   // Quick return for degenerate cases
   if (n == 0) return 0;
   if (p == 0.0) return 0;
@@ -317,7 +339,7 @@ UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
     const Scalar r = q / (1.0 - q);
     Scalar t = std::pow(1.0 - q, static_cast<int>(n));
     Scalar s = t;
-    const Scalar u = RandomGenerator::Generate();
+    const Scalar u = rng.generate();
     for (UnsignedInteger k = 0; k <= n; ++k)
     {
       if (s >= u) return (complementary ? n - k : k);
@@ -345,7 +367,7 @@ UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
   // Main loop
   for (;;)
   {
-    Scalar v = RandomGenerator::Generate();
+    Scalar v = rng.generate();
     if (v <= urvr)
     {
       u = v / vr - 0.43;
@@ -354,13 +376,13 @@ UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
     } // v <= urvr
     if (v >= vr)
     {
-      u = RandomGenerator::Generate() - 0.5;
+      u = rng.generate() - 0.5;
     } // v >= vr
     else
     {
       u = v / vr - 0.93;
       u = (u < 0.0 ? -0.5 : 0.5) - u;
-      v = RandomGenerator::Generate() * vr;
+      v = rng.generate() * vr;
     } // v < vr
     const Scalar us = 0.5 - std::abs(u);
     k = floor((2.0 * a / us + b) * u + c);
@@ -407,6 +429,16 @@ UnsignedInteger DistFunc::rBinomial(const UnsignedInteger n,
     if (v <= h + (n + 1) * std::log(nm / nk) + (k + 0.5) * std::log(nk * r / (k + 1)) - SpecFunc::Stirlerr(static_cast<UnsignedInteger>(k + 1)) - SpecFunc::Stirlerr(static_cast<UnsignedInteger>(nk))) return (complementary ? static_cast<UnsignedInteger>(n - k) : static_cast<UnsignedInteger>(k));
   } // for(;;)
 } // rBinomial
+
+Indices DistFunc::rBinomial(const UnsignedInteger n,
+                            const Scalar p,
+                            const UnsignedInteger size,
+                            const RandomGenerator & rng)
+{
+  Indices result(size);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rBinomial(n, p, rng);
+  return result;
+}
 
 Indices DistFunc::rBinomial(const UnsignedInteger n,
                             const Scalar p,
@@ -598,33 +630,61 @@ void DistFunc::rDiscreteSetup(const Point & probabilities,
 UnsignedInteger DistFunc::rDiscrete(const Point & base,
                                     const Indices & alias)
 {
-  const UnsignedInteger i = RandomGenerator::IntegerGenerate(base.getSize());
-  if (RandomGenerator::Generate() < base[i]) return i;
-  return alias[i];
+  return rDiscrete(base, alias, RandomGenerator::GetGlobalGenerator());
 }
 
 Indices DistFunc::rDiscrete(const Point & base,
                             const Indices & alias,
                             const UnsignedInteger size)
 {
+  return rDiscrete(base, alias, size, RandomGenerator::GetGlobalGenerator());
+}
+
+UnsignedInteger DistFunc::rDiscrete(const Point & base,
+                                    const Indices & alias,
+                                    const RandomGenerator & rng)
+{
+  const UnsignedInteger i = rng.integerGenerate(base.getSize());
+  if (rng.generate() < base[i]) return i;
+  return alias[i];
+}
+
+Indices DistFunc::rDiscrete(const Point & base,
+                            const Indices & alias,
+                            const UnsignedInteger size,
+                            const RandomGenerator & rng)
+{
   Indices result(size);
   for (UnsignedInteger i = 0; i < size; ++i)
-    result[i] = rDiscrete(base, alias);
+    result[i] = rDiscrete(base, alias, rng);
   return result;
 }
 
 UnsignedInteger DistFunc::rDiscrete(const Point & probabilities)
 {
-  return rDiscrete(probabilities, 1)[0];
+  return rDiscrete(probabilities, RandomGenerator::GetGlobalGenerator());
 }
 
 Indices DistFunc::rDiscrete(const Point & probabilities,
                             const UnsignedInteger size)
 {
+  return rDiscrete(probabilities, size, RandomGenerator::GetGlobalGenerator());
+}
+
+UnsignedInteger DistFunc::rDiscrete(const Point & probabilities,
+                                     const RandomGenerator & rng)
+{
+  return rDiscrete(probabilities, 1, rng)[0];
+}
+
+Indices DistFunc::rDiscrete(const Point & probabilities,
+                            const UnsignedInteger size,
+                            const RandomGenerator & rng)
+{
   Point base;
   Indices alias;
   rDiscreteSetup(probabilities, base, alias);
-  return rDiscrete(base, alias, size);
+  return rDiscrete(base, alias, size, rng);
 }
 
 /*******************************************************************************************************/
@@ -671,12 +731,18 @@ Scalar DistFunc::qChi(const Scalar nu,
 */
 Scalar DistFunc::rGamma(const Scalar k)
 {
+  return rGamma(k, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rGamma(const Scalar k,
+                        const RandomGenerator & rng)
+{
   // Special case k < 1.0
   Scalar correction = 1.0;
   Scalar alpha = k;
   if (alpha < 1.0)
   {
-    correction = std::pow(RandomGenerator::Generate(), 1.0 / alpha);
+    correction = std::pow(rng.generate(), 1.0 / alpha);
     ++alpha;
   }
   const Scalar d = alpha - 0.3333333333333333333333333;
@@ -687,12 +753,12 @@ Scalar DistFunc::rGamma(const Scalar k)
   {
     do
     {
-      x = rNormal();
+      x = rNormal(rng);
       v = 1.0 + c * x;
     }
     while (v <= 0.0);
     v = v * v * v;
-    const Scalar u = RandomGenerator::Generate();
+    const Scalar u = rng.generate();
     const Scalar x2 = x * x;
     // Quick acceptation test
     // 0.03431688782875261396035499 is the numerical solution of the squeezing
@@ -706,8 +772,15 @@ Scalar DistFunc::rGamma(const Scalar k)
 Point DistFunc::rGamma(const Scalar k,
                        const UnsignedInteger size)
 {
+  return rGamma(k, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rGamma(const Scalar k,
+                       const UnsignedInteger size,
+                       const RandomGenerator & rng)
+{
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rGamma(k);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rGamma(k, rng);
   return result;
 }
 
@@ -848,6 +921,32 @@ UnsignedInteger DistFunc::rHypergeometric(const UnsignedInteger n,
   return rDiscrete(probabilities);
 }
 
+UnsignedInteger DistFunc::rHypergeometric(const UnsignedInteger n,
+    const UnsignedInteger k,
+    const UnsignedInteger m,
+    const RandomGenerator & rng)
+{
+  // Generate the probability table
+  Point probabilities(n + 1);
+  UnsignedInteger xMin = (k + m >= n ? k + m - n : 0);
+  UnsignedInteger xMax = std::min(m, k);
+  UnsignedInteger xMode = ((k + 1) * (m + 1)) / (n + 2);
+  Scalar p = DistFunc::dHypergeometric(n, k, m, xMode);
+  probabilities[xMode] = p;
+  for (UnsignedInteger x = xMode + 1; x <= xMax; ++x)
+  {
+    p *= ((1.0 + k - x) / x) * ((1.0 + m - x) / (n + x - m - k));
+    probabilities[x] = p;
+  }
+  p = probabilities[xMode];
+  for (UnsignedInteger x = xMode; x > xMin; --x)
+  {
+    p *= (x / (k - x + 1.0)) * ((n + x - m - k) / (m - x + 1.0));
+    probabilities[x - 1] = p;
+  }
+  return rDiscrete(probabilities, rng);
+}
+
 Indices DistFunc::rHypergeometric(const UnsignedInteger n,
                                   const UnsignedInteger k,
                                   const UnsignedInteger m,
@@ -872,6 +971,33 @@ Indices DistFunc::rHypergeometric(const UnsignedInteger n,
     probabilities[x - 1] = p;
   }
   return rDiscrete(probabilities, size);
+}
+
+Indices DistFunc::rHypergeometric(const UnsignedInteger n,
+                                  const UnsignedInteger k,
+                                  const UnsignedInteger m,
+                                  const UnsignedInteger size,
+                                  const RandomGenerator & rng)
+{
+  // Generate the probability table
+  Point probabilities(n + 1);
+  UnsignedInteger xMin = (k + m >= n ? k + m - n : 0);
+  UnsignedInteger xMax = std::min(m, k);
+  UnsignedInteger xMode = ((k + 1) * (m + 1)) / (n + 2);
+  Scalar p = DistFunc::dHypergeometric(n, k, m, xMode);
+  probabilities[xMode] = p;
+  for (UnsignedInteger x = xMode + 1; x <= xMax; ++x)
+  {
+    p *= ((1.0 + k - x) / x) * ((1.0 + m - x) / (n + x - m - k));
+    probabilities[x] = p;
+  }
+  p = probabilities[xMode];
+  for (UnsignedInteger x = xMode; x > xMin; --x)
+  {
+    p *= (x / (k - x + 1.0)) * ((n + x - m - k) / (m - x + 1.0));
+    probabilities[x - 1] = p;
+  }
+  return rDiscrete(probabilities, size, rng);
 }
 
 /****************************/
@@ -1110,21 +1236,36 @@ Scalar DistFunc::pNonCentralChiSquare(const Scalar nu,
 Scalar DistFunc::rNonCentralChiSquare(const Scalar nu,
                                       const Scalar lambda)
 {
+  return rNonCentralChiSquare(nu, lambda, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rNonCentralChiSquare(const Scalar nu,
+                                      const Scalar lambda,
+                                      const RandomGenerator & rng)
+{
   if (!(nu >= 0.0)) throw InvalidArgumentException(HERE) << "Error: the number of degrees of freedom nu must be >= 0.";
   if (!(lambda >= 0.0)) throw InvalidArgumentException(HERE) << "Error: the non-centrality parameter lambda must be >= 0.";
   // If the non-central parameter is zero return a usual chi-square realization
-  if (lambda == 0.0) return 2.0 * rGamma(0.5 * nu);
+  if (lambda == 0.0) return 2.0 * rGamma(0.5 * nu, rng);
   // Use the decomposition of a zero degree of freedom non-central chisquare and a nu degrees of freedom central chisquare
-  const Scalar n = rPoisson(0.5 * lambda);
-  return 2.0 * rGamma(0.5 * nu + n);
+  const Scalar n = rPoisson(0.5 * lambda, rng);
+  return 2.0 * rGamma(0.5 * nu + n, rng);
 }
 
 Point DistFunc::rNonCentralChiSquare(const Scalar nu,
                                      const Scalar lambda,
                                      const UnsignedInteger size)
 {
+  return rNonCentralChiSquare(nu, lambda, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rNonCentralChiSquare(const Scalar nu,
+                                     const Scalar lambda,
+                                     const UnsignedInteger size,
+                                     const RandomGenerator & rng)
+{
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNonCentralChiSquare(nu, lambda);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNonCentralChiSquare(nu, lambda, rng);
   return result;
 }
 
@@ -1163,15 +1304,30 @@ Scalar DistFunc::pNonCentralStudent(const Scalar nu,
 Scalar DistFunc::rNonCentralStudent(const Scalar nu,
                                     const Scalar delta)
 {
-  return StudentFunctions::NonCentralStudentRealization(nu, delta);
+  return rNonCentralStudent(nu, delta, RandomGenerator::GetGlobalGenerator());
 }
 
 Point DistFunc::rNonCentralStudent(const Scalar nu,
                                    const Scalar delta,
                                    const UnsignedInteger size)
 {
+  return rNonCentralStudent(nu, delta, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rNonCentralStudent(const Scalar nu,
+                                    const Scalar delta,
+                                    const RandomGenerator & rng)
+{
+  return StudentFunctions::NonCentralStudentRealization(nu, delta, rng);
+}
+
+Point DistFunc::rNonCentralStudent(const Scalar nu,
+                                   const Scalar delta,
+                                   const UnsignedInteger size,
+                                   const RandomGenerator & rng)
+{
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = StudentFunctions::NonCentralStudentRealization(nu, delta);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = StudentFunctions::NonCentralStudentRealization(nu, delta, rng);
   return result;
 }
 
@@ -1429,10 +1585,20 @@ Point DistFunc::qNormal(const Point & p,
 */
 Scalar DistFunc::rNormal()
 {
+  return rNormal(RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rNormal(const UnsignedInteger size)
+{
+  return rNormal(size, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rNormal(const RandomGenerator & rng)
+{
   for (;;)
   {
-    const Scalar u = 2.0 * RandomGenerator::Generate() - 1.0;
-    const UnsignedInteger index = RandomGenerator::IntegerGenerate(DistFunc::NumberOfBandNormalZigurrat);
+    const Scalar u = 2.0 * rng.generate() - 1.0;
+    const UnsignedInteger index = rng.integerGenerate(DistFunc::NumberOfBandNormalZigurrat);
     /* Are we in a rectangular band of the ziggurat? */
     if (std::abs(u) < DistFunc::NormalZigguratRatio[index]) return u * NormalZigguratAbscissa[index + 1];
     /* No, we are either on a wedge or in the upper tail of the Normal distribution */
@@ -1444,8 +1610,8 @@ Scalar DistFunc::rNormal()
       /* Marsaglia method */
       do
       {
-        x = std::log(RandomGenerator::Generate()) / DistFunc::NormalZigguratTail;
-        y = std::log(RandomGenerator::Generate());
+        x = std::log(rng.generate()) / DistFunc::NormalZigguratTail;
+        y = std::log(rng.generate());
       }
       while (-(y + y) < x * x);
       return (u > 0.0) ? x - DistFunc::NormalZigguratTail : DistFunc::NormalZigguratTail - x;
@@ -1457,14 +1623,15 @@ Scalar DistFunc::rNormal()
     const Scalar pdfX = std::exp(-0.5 * x * x);
     const Scalar pdfI = std::exp(-0.5 * xI * xI);
     const Scalar pdfIp1 = std::exp(-0.5 * xIp1 * xIp1);
-    if (RandomGenerator::Generate() * (pdfI - pdfIp1) < pdfX - pdfIp1) return x;
+    if (rng.generate() * (pdfI - pdfIp1) < pdfX - pdfIp1) return x;
   }
 }
 
-Point DistFunc::rNormal(const UnsignedInteger size)
+Point DistFunc::rNormal(const UnsignedInteger size,
+                        const RandomGenerator & rng)
 {
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNormal();
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNormal(rng);
   return result;
 }
 
@@ -1547,6 +1714,12 @@ Scalar DistFunc::qPoisson(const Scalar lambda,
 */
 UnsignedInteger DistFunc::rPoisson(const Scalar lambda)
 {
+  return rPoisson(lambda, RandomGenerator::GetGlobalGenerator());
+}
+
+UnsignedInteger DistFunc::rPoisson(const Scalar lambda,
+                                   const RandomGenerator & rng)
+{
   Scalar mu = floor(lambda);
   // Small case. The bound 6 is quite arbitrary, but must be < 80 to avoid overflow.
   if (mu < 6)
@@ -1554,7 +1727,7 @@ UnsignedInteger DistFunc::rPoisson(const Scalar lambda)
     UnsignedInteger x = 0;
     Scalar sum = std::exp(-lambda);
     Scalar prod = sum;
-    const Scalar u = RandomGenerator::Generate();
+    const Scalar u = rng.generate();
     for (;;)
     {
       if (u <= sum) return x;
@@ -1574,8 +1747,8 @@ UnsignedInteger DistFunc::rPoisson(const Scalar lambda)
   const Scalar safetyBound = hatCenter + 6.0 * hatWidth;
   for (;;)
   {
-    const Scalar u = RandomGenerator::Generate();
-    const Scalar x = hatCenter + hatWidth * (RandomGenerator::Generate() - 0.5) / u;
+    const Scalar u = rng.generate();
+    const Scalar x = hatCenter + hatWidth * (rng.generate() - 0.5) / u;
     if (x < 0 || x >= safetyBound) continue;
     const UnsignedInteger k = static_cast< UnsignedInteger >(floor(x));
     const Scalar logPdf = k * logLambda - SpecFunc::LogGamma(k + 1.0) - pdfMode;
@@ -1591,8 +1764,15 @@ UnsignedInteger DistFunc::rPoisson(const Scalar lambda)
 Indices DistFunc::rPoisson(const Scalar lambda,
                            const UnsignedInteger size)
 {
+  return rPoisson(lambda, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Indices DistFunc::rPoisson(const Scalar lambda,
+                           const UnsignedInteger size,
+                           const RandomGenerator & rng)
+{
   Indices result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rPoisson(lambda);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rPoisson(lambda, rng);
   return result;
 }
 
@@ -1759,14 +1939,27 @@ Point DistFunc::qStudent(const Scalar nu,
 */
 Scalar DistFunc::rStudent(const Scalar nu)
 {
-  return StudentFunctions::StudentRealization(nu);
+  return rStudent(nu, RandomGenerator::GetGlobalGenerator());
 }
 
 Point DistFunc::rStudent(const Scalar nu,
                          const UnsignedInteger size)
 {
+  return rStudent(nu, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rStudent(const Scalar nu,
+                          const RandomGenerator & rng)
+{
+  return StudentFunctions::StudentRealization(nu, rng);
+}
+
+Point DistFunc::rStudent(const Scalar nu,
+                         const UnsignedInteger size,
+                         const RandomGenerator & rng)
+{
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = StudentFunctions::StudentRealization(nu);
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = StudentFunctions::StudentRealization(nu, rng);
   return result;
 }
 
@@ -2087,10 +2280,17 @@ Scalar DistFunc::qDickeyFullerNoConstant(const Scalar p,
 Point DistFunc::rUniformSegment(const Point & a,
                                 const Point & b)
 {
+  return rUniformSegment(a, b, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rUniformSegment(const Point & a,
+                                const Point & b,
+                                const RandomGenerator & rng)
+{
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   Point result(dimension);
-  rUniformSegment(&a[0], &b[0], dimension, &result[0]);
+  rUniformSegment(&a[0], &b[0], dimension, &result[0], rng);
   return result;
 }
 
@@ -2099,7 +2299,16 @@ void DistFunc::rUniformSegment(const Scalar * a,
                                const UnsignedInteger dimension,
                                Scalar * result)
 {
-  const Scalar u = RandomGenerator::Generate();
+  rUniformSegment(a, b, dimension, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformSegment(const Scalar * a,
+                               const Scalar * b,
+                               const UnsignedInteger dimension,
+                               Scalar * result,
+                               const RandomGenerator & rng)
+{
+  const Scalar u = rng.generate();
   const Scalar v = 1.0 - u;
   for (UnsignedInteger i = 0; i < dimension; ++i)
     result[i] = u * a[i] + v * b[i];
@@ -2109,10 +2318,18 @@ Sample DistFunc::rUniformSegment(const Point & a,
                                  const Point & b,
                                  const UnsignedInteger size)
 {
+  return rUniformSegment(a, b, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Sample DistFunc::rUniformSegment(const Point & a,
+                                 const Point & b,
+                                 const UnsignedInteger size,
+                                 const RandomGenerator & rng)
+{
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   Sample result(size, dimension);
-  rUniformSegment(&a[0], &b[0], dimension, size, &result(0, 0));
+  rUniformSegment(&a[0], &b[0], dimension, size, &result(0, 0), rng);
   return result;
 }
 
@@ -2122,10 +2339,20 @@ void DistFunc::rUniformSegment(const Scalar * a,
                                const UnsignedInteger size,
                                Scalar * result)
 {
+  rUniformSegment(a, b, dimension, size, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformSegment(const Scalar * a,
+                               const Scalar * b,
+                               const UnsignedInteger dimension,
+                               const UnsignedInteger size,
+                               Scalar * result,
+                               const RandomGenerator & rng)
+{
   UnsignedInteger index = 0;
   for (UnsignedInteger j = 0; j < size; ++j)
   {
-    const Scalar u = RandomGenerator::Generate();
+    const Scalar u = rng.generate();
     const Scalar v = 1.0 - u;
     for (UnsignedInteger i = 0; i < dimension; ++i)
     {
@@ -2176,11 +2403,19 @@ Point DistFunc::rUniformTriangle(const Point & a,
                                  const Point & b,
                                  const Point & c)
 {
+  return rUniformTriangle(a, b, c, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rUniformTriangle(const Point & a,
+                                 const Point & b,
+                                 const Point & c,
+                                 const RandomGenerator & rng)
+{
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   if (c.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the third point has a dimension=" << c.getDimension() << ", expected dimension=" << dimension;
   Point result(dimension);
-  rUniformTriangle(&a[0], &b[0], &c[0], dimension, &result[0]);
+  rUniformTriangle(&a[0], &b[0], &c[0], dimension, &result[0], rng);
   return result;
 }
 
@@ -2190,8 +2425,18 @@ void DistFunc::rUniformTriangle(const Scalar * a,
                                 const UnsignedInteger dimension,
                                 Scalar * result)
 {
-  const Scalar u = RandomGenerator::Generate();
-  const Scalar sqrtV = std::sqrt(RandomGenerator::Generate());
+  rUniformTriangle(a, b, c, dimension, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformTriangle(const Scalar * a,
+                                const Scalar * b,
+                                const Scalar * c,
+                                const UnsignedInteger dimension,
+                                Scalar * result,
+                                const RandomGenerator & rng)
+{
+  const Scalar u = rng.generate();
+  const Scalar sqrtV = std::sqrt(rng.generate());
   const Scalar x = 1.0 - sqrtV;
   const Scalar y = (1.0 - u) * sqrtV;
   const Scalar z = u * sqrtV;
@@ -2204,12 +2449,21 @@ Sample DistFunc::rUniformTriangle(const Point & a,
                                   const Point & c,
                                   const UnsignedInteger size)
 {
+  return rUniformTriangle(a, b, c, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Sample DistFunc::rUniformTriangle(const Point & a,
+                                  const Point & b,
+                                  const Point & c,
+                                  const UnsignedInteger size,
+                                  const RandomGenerator & rng)
+{
   // Here we reproduce the algorithm in order to avoid costly data copy and tests
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   if (c.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the third point has a dimension=" << c.getDimension() << ", expected dimension=" << dimension;
   Sample result(size, dimension);
-  rUniformTriangle(&a[0], &b[0], &c[0], dimension, size, &result(0, 0));
+  rUniformTriangle(&a[0], &b[0], &c[0], dimension, size, &result(0, 0), rng);
   return result;
 }
 
@@ -2220,11 +2474,22 @@ void DistFunc::rUniformTriangle(const Scalar * a,
                                 const UnsignedInteger size,
                                 Scalar * result)
 {
+  rUniformTriangle(a, b, c, dimension, size, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformTriangle(const Scalar * a,
+                                const Scalar * b,
+                                const Scalar * c,
+                                const UnsignedInteger dimension,
+                                const UnsignedInteger size,
+                                Scalar * result,
+                                const RandomGenerator & rng)
+{
   UnsignedInteger index = 0;
   for (UnsignedInteger n = 0; n < size; ++n)
   {
-    const Scalar u = RandomGenerator::Generate();
-    const Scalar sqrtV = std::sqrt(RandomGenerator::Generate());
+    const Scalar u = rng.generate();
+    const Scalar sqrtV = std::sqrt(rng.generate());
     const Scalar x = 1.0 - sqrtV;
     const Scalar y = (1.0 - u) * sqrtV;
     const Scalar z = u * sqrtV;
@@ -2242,12 +2507,21 @@ Point DistFunc::rUniformTetrahedron(const Point & a,
                                     const Point & c,
                                     const Point & d)
 {
+  return rUniformTetrahedron(a, b, c, d, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rUniformTetrahedron(const Point & a,
+                                    const Point & b,
+                                    const Point & c,
+                                    const Point & d,
+                                    const RandomGenerator & rng)
+{
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   if (c.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the third point has a dimension=" << c.getDimension() << ", expected dimension=" << dimension;
   if (d.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the fourth point has a dimension=" << d.getDimension() << ", expected dimension=" << dimension;
   Point result(dimension);
-  rUniformTetrahedron(&a[0], &b[0], &c[0], &d[0], dimension, &result[0]);
+  rUniformTetrahedron(&a[0], &b[0], &c[0], &d[0], dimension, &result[0], rng);
   return result;
 }
 
@@ -2258,9 +2532,20 @@ void DistFunc::rUniformTetrahedron(const Scalar * a,
                                    const UnsignedInteger dimension,
                                    Scalar * result)
 {
-  const Scalar u = RandomGenerator::Generate();
-  const Scalar sqrtV = std::sqrt(RandomGenerator::Generate());
-  const Scalar cbrtW = std::cbrt(RandomGenerator::Generate());
+  rUniformTetrahedron(a, b, c, d, dimension, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformTetrahedron(const Scalar * a,
+                                   const Scalar * b,
+                                   const Scalar * c,
+                                   const Scalar * d,
+                                   const UnsignedInteger dimension,
+                                   Scalar * result,
+                                   const RandomGenerator & rng)
+{
+  const Scalar u = rng.generate();
+  const Scalar sqrtV = std::sqrt(rng.generate());
+  const Scalar cbrtW = std::cbrt(rng.generate());
   const Scalar x = u * sqrtV * cbrtW;
   const Scalar y = (1.0 - u) * sqrtV * cbrtW;
   const Scalar z = (1.0 - sqrtV) * cbrtW;
@@ -2269,17 +2554,27 @@ void DistFunc::rUniformTetrahedron(const Scalar * a,
 }
 
 Sample DistFunc::rUniformTetrahedron(const Point & a,
-                                     const Point & b,
-                                     const Point & c,
-                                     const Point & d,
-                                     const UnsignedInteger size)
+                                   const Point & b,
+                                   const Point & c,
+                                   const Point & d,
+                                   const UnsignedInteger size)
+{
+  return rUniformTetrahedron(a, b, c, d, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Sample DistFunc::rUniformTetrahedron(const Point & a,
+                                   const Point & b,
+                                   const Point & c,
+                                   const Point & d,
+                                   const UnsignedInteger size,
+                                   const RandomGenerator & rng)
 {
   // Here we reproduce the algorithm in order to avoid costly data copy and tests
   const UnsignedInteger dimension = a.getDimension();
   if (b.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the second point has a dimension=" << b.getDimension() << ", expected dimension=" << dimension;
   if (c.getDimension() != dimension) throw InvalidArgumentException(HERE) << "Error: the third point has a dimension=" << c.getDimension() << ", expected dimension=" << dimension;
   Sample result(size, dimension);
-  rUniformTetrahedron(&a[0], &b[0], &c[0], &d[0], dimension, &result(0, 0));
+  rUniformTetrahedron(&a[0], &b[0], &c[0], &d[0], dimension, &result(0, 0), rng);
   return result;
 }
 
@@ -2291,12 +2586,24 @@ void DistFunc::rUniformTetrahedron(const Scalar * a,
                                    const UnsignedInteger size,
                                    Scalar * result)
 {
+  rUniformTetrahedron(a, b, c, d, dimension, size, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformTetrahedron(const Scalar * a,
+                                   const Scalar * b,
+                                   const Scalar * c,
+                                   const Scalar * d,
+                                   const UnsignedInteger dimension,
+                                   const UnsignedInteger size,
+                                   Scalar * result,
+                                   const RandomGenerator & rng)
+{
   UnsignedInteger index = 0;
   for (UnsignedInteger n = 0; n < size; ++n)
   {
-    const Scalar u = RandomGenerator::Generate();
-    const Scalar sqrtV = std::sqrt(RandomGenerator::Generate());
-    const Scalar cbrtW = std::cbrt(RandomGenerator::Generate());
+    const Scalar u = rng.generate();
+    const Scalar sqrtV = std::sqrt(rng.generate());
+    const Scalar cbrtW = std::cbrt(rng.generate());
     const Scalar x = u * sqrtV * cbrtW;
     const Scalar y = (1.0 - u) * sqrtV * cbrtW;
     const Scalar z = (1.0 - sqrtV) * cbrtW;
@@ -2312,11 +2619,17 @@ void DistFunc::rUniformTetrahedron(const Scalar * a,
 // For uniform distribution over a simplex
 Point DistFunc::rUniformSimplex(const Sample & vertices)
 {
+  return rUniformSimplex(vertices, RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rUniformSimplex(const Sample & vertices,
+                                const RandomGenerator & rng)
+{
   const UnsignedInteger numVertices = vertices.getSize();
   if (numVertices == 0) throw InvalidArgumentException(HERE) << "Error: expected at least one vertex to define a simplex.";
   const UnsignedInteger dimension = vertices.getDimension();
   Point result(dimension);
-  rUniformSimplex(&vertices(0, 0), dimension, numVertices, &result[0]);
+  rUniformSimplex(&vertices(0, 0), dimension, numVertices, &result[0], rng);
   return result;
 }
 
@@ -2325,6 +2638,15 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
                                const UnsignedInteger numVertices,
                                Scalar * result)
 {
+  rUniformSimplex(vertices, dimension, numVertices, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformSimplex(const Scalar * vertices,
+                               const UnsignedInteger dimension,
+                               const UnsignedInteger numVertices,
+                               Scalar * result,
+                               const RandomGenerator & rng)
+{
   if (numVertices == 1)
   {
     std::copy(vertices, vertices + dimension, result);
@@ -2332,24 +2654,24 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
   }
   if (numVertices == 2)
   {
-    rUniformSegment(vertices, vertices + dimension, dimension, result);
+    rUniformSegment(vertices, vertices + dimension, dimension, result, rng);
     return;
   }
   if (numVertices == 3)
   {
-    rUniformTriangle(vertices, vertices + dimension, vertices + 2 * dimension, dimension, result);
+    rUniformTriangle(vertices, vertices + dimension, vertices + 2 * dimension, dimension, result, rng);
     return;
   }
   if (numVertices == 4)
   {
-    rUniformTetrahedron(vertices, vertices + dimension, vertices + 2 * dimension, vertices + 3 * dimension, dimension, result);
+    rUniformTetrahedron(vertices, vertices + dimension, vertices + 2 * dimension, vertices + 3 * dimension, dimension, result, rng);
     return;
   }
   std::copy(vertices, vertices + dimension, result);
   UnsignedInteger shift = dimension;
   for (UnsignedInteger i = 1; i < numVertices; ++i)
   {
-    const Scalar u = std::pow(RandomGenerator::Generate(), 1.0 / i);
+    const Scalar u = std::pow(rng.generate(), 1.0 / i);
     for (UnsignedInteger j = 0; j < dimension; ++j) result[j] = u * result[j] + (1.0 - u) * vertices[shift + j];
     shift += dimension;
   }
@@ -2358,11 +2680,18 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
 Sample DistFunc::rUniformSimplex(const Sample & vertices,
                                  const UnsignedInteger size)
 {
+  return rUniformSimplex(vertices, size, RandomGenerator::GetGlobalGenerator());
+}
+
+Sample DistFunc::rUniformSimplex(const Sample & vertices,
+                                 const UnsignedInteger size,
+                                 const RandomGenerator & rng)
+{
   const UnsignedInteger numVertices = vertices.getSize();
   if (numVertices == 0) throw InvalidArgumentException(HERE) << "Error: expected at least one vertex to define a simplex.";
   const UnsignedInteger dimension = vertices.getDimension();
   Sample result(size, dimension);
-  rUniformSimplex(&vertices(0, 0), dimension, numVertices, size, &result(0, 0));
+  rUniformSimplex(&vertices(0, 0), dimension, numVertices, size, &result(0, 0), rng);
   return result;
 }
 
@@ -2372,6 +2701,16 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
                                const UnsignedInteger size,
                                Scalar * result)
 {
+  rUniformSimplex(vertices, dimension, numVertices, size, result, RandomGenerator::GetGlobalGenerator());
+}
+
+void DistFunc::rUniformSimplex(const Scalar * vertices,
+                               const UnsignedInteger dimension,
+                               const UnsignedInteger numVertices,
+                               const UnsignedInteger size,
+                               Scalar * result,
+                               const RandomGenerator & rng)
+{
   if (numVertices == 1)
   {
     for (UnsignedInteger i = 0; i < size; ++i)
@@ -2380,17 +2719,17 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
   }
   if (numVertices == 2)
   {
-    rUniformSegment(vertices, vertices + dimension, dimension, size, result);
+    rUniformSegment(vertices, vertices + dimension, dimension, size, result, rng);
     return;
   }
   if (numVertices == 3)
   {
-    rUniformTriangle(vertices, vertices + dimension, vertices + 2 * dimension, dimension, size, result);
+    rUniformTriangle(vertices, vertices + dimension, vertices + 2 * dimension, dimension, size, result, rng);
     return;
   }
   if (numVertices == 4)
   {
-    rUniformTetrahedron(vertices, vertices + dimension, vertices + 2 * dimension, vertices + 3 * dimension, dimension, size, result);
+    rUniformTetrahedron(vertices, vertices + dimension, vertices + 2 * dimension, vertices + 3 * dimension, dimension, size, result, rng);
     return;
   }
   UnsignedInteger shiftResult = 0;
@@ -2400,7 +2739,7 @@ void DistFunc::rUniformSimplex(const Scalar * vertices,
     UnsignedInteger shift = dimension;
     for (UnsignedInteger i = 1; i < numVertices; ++i)
     {
-      const Scalar u = std::pow(RandomGenerator::Generate(), 1.0 / i);
+      const Scalar u = std::pow(rng.generate(), 1.0 / i);
       for (UnsignedInteger j = 0; j < dimension; ++j) result[shiftResult + j] = u * result[shiftResult + j] + (1.0 - u) * vertices[shift + j];
       shift += dimension;
     } // i

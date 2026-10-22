@@ -129,7 +129,7 @@ void Beta::update()
 /* Get one realization of the distribution */
 Point Beta::getRealization() const
 {
-  return Point(1, a_ + (b_ - a_) * DistFunc::rBeta(alpha_, beta_));
+  return Point(1, a_ + (b_ - a_) * DistFunc::rBeta(alpha_, beta_, getEffectiveGenerator()));
 }
 
 /* Get the DDF of the distribution */

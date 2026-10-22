@@ -111,7 +111,7 @@ SmoothedUniform * SmoothedUniform::clone() const
 /* Get one realization of the distribution */
 Point SmoothedUniform::getRealization() const
 {
-  return Point(1, a_ + (b_ - a_) * RandomGenerator::Generate() + sigma_ * DistFunc::rNormal());
+  return Point(1, a_ + (b_ - a_) * generateUniform() + sigma_ * DistFunc::rNormal(getEffectiveGenerator()));
 }
 
 /* Get a sample of the distribution */
@@ -120,7 +120,7 @@ Sample SmoothedUniform::getSample(const UnsignedInteger size) const
   const Scalar ba = b_ - a_;
   Point data(size);
   for (UnsignedInteger i = 0; i < size; ++i)
-    data[i] = a_ + ba * RandomGenerator::Generate() + sigma_ * DistFunc::rNormal();
+    data[i] = a_ + ba * generateUniform() + sigma_ * DistFunc::rNormal(getEffectiveGenerator());
   Sample result(size, 1);
   result.getImplementation()->setData(data);
   return result;

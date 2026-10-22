@@ -114,7 +114,7 @@ Point MultivariateUniform::getRealization() const
   const UnsignedInteger dimension = getDimension();
   Point realization(dimension);
   for (UnsignedInteger i = 0; i < dimension; ++i)
-    realization[i] = a_[i] + (b_[i] - a_[i]) * RandomGenerator::Generate();
+    realization[i] = a_[i] + (b_[i] - a_[i]) * generateUniform();
   return realization;
 }
 

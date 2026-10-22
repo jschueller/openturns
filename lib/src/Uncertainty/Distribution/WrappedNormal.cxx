@@ -353,7 +353,7 @@ Point WrappedNormal::getRealization() const
   // Sample from N(mu, sigma) in R^d, then wrap to torus
   Point z(d);
   for (UnsignedInteger i = 0; i < d; ++i)
-    z[i] = DistFunc::rNormal();
+    z[i] = DistFunc::rNormal(getEffectiveGenerator());
 
   // Apply sigma^{1/2} and add mu using cached eigendecomposition
   Point sample(d);

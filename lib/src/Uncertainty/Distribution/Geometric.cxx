@@ -121,7 +121,7 @@ void Geometric::computeRange()
 Point Geometric::getRealization() const
 {
   if (p_ == 1.0) return {1.0};
-  return Point(1, std::max(1.0, std::ceil(std::log(RandomGenerator::Generate()) / log1p(-p_))));
+  return Point(1, std::max(1.0, std::ceil(std::log(generateUniform()) / log1p(-p_))));
 }
 
 

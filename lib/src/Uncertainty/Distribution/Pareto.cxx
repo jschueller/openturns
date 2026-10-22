@@ -112,7 +112,7 @@ void Pareto::computeRange()
 /* Get one realization of the distribution */
 Point Pareto::getRealization() const
 {
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   return Point(1, computeScalarQuantile(u));
 }
 

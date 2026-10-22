@@ -122,7 +122,7 @@ void LogNormal::computeRange()
 /* Get one realization of the distribution */
 Point LogNormal::getRealization() const
 {
-  return Point(1, gamma_ + std::exp(muLog_ + sigmaLog_ * DistFunc::rNormal()));
+  return Point(1, gamma_ + std::exp(muLog_ + sigmaLog_ * DistFunc::rNormal(getEffectiveGenerator())));
 }
 
 /* Get the DDF of the distribution */

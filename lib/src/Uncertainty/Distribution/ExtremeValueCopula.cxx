@@ -104,9 +104,9 @@ Point ExtremeValueCopula::getRealization() const
 {
   Point realization(2);
   // We use the general algorithm based on conditional CDF inversion
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   realization[0] = u;
-  const Scalar q = RandomGenerator::Generate();
+  const Scalar q = generateUniform();
   realization[1] = computeConditionalQuantile(q, Point(1, u));
   return realization;
 }

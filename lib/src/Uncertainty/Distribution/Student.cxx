@@ -199,11 +199,11 @@ Student * Student::clone() const
 Point Student::getRealization() const
 {
   const UnsignedInteger dimension = getDimension();
-  if (dimension == 1) return Point(1, mean_[0] + sigma_[0] * DistFunc::rStudent(nu_));
+  if (dimension == 1) return Point(1, mean_[0] + sigma_[0] * DistFunc::rStudent(nu_, getEffectiveGenerator()));
   Point value(dimension);
   // First, a realization of independent standard normal coordinates
-  for (UnsignedInteger i = 0; i < dimension; ++i) value[i] = DistFunc::rNormal();
-  return std::sqrt(0.5 * nu_ / DistFunc::rGamma(0.5 * nu_)) * (getCholesky() * value) + mean_;
+  for (UnsignedInteger i = 0; i < dimension; ++i) value[i] = DistFunc::rNormal(getEffectiveGenerator());
+  return std::sqrt(0.5 * nu_ / DistFunc::rGamma(0.5 * nu_, getEffectiveGenerator())) * (getCholesky() * value) + mean_;
 }
 
 
@@ -215,8 +215,8 @@ Sample Student::getSample(const UnsignedInteger size) const
   for (UnsignedInteger i = 0; i < size; ++i)
   {
     for (UnsignedInteger j = 0; j < dimension; ++j)
-      normalSample(i, j) = DistFunc::rNormal();
-    gammaDeviates[i] = DistFunc::rGamma(0.5 * nu_);
+      normalSample(i, j) = DistFunc::rNormal(getEffectiveGenerator());
+    gammaDeviates[i] = DistFunc::rGamma(0.5 * nu_, getEffectiveGenerator());
   }
   Sample result;
   if (dimension == 1)

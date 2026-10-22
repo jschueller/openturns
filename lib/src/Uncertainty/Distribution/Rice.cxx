@@ -112,8 +112,8 @@ void Rice::computeRange()
 /* Get one realization of the distribution */
 Point Rice::getRealization() const
 {
-  const Scalar x = beta_ * DistFunc::rNormal() + nu_;
-  const Scalar y = beta_ * DistFunc::rNormal();
+  const Scalar x = beta_ * DistFunc::rNormal(getEffectiveGenerator()) + nu_;
+  const Scalar y = beta_ * DistFunc::rNormal(getEffectiveGenerator());
   return Point(1.0, std::sqrt(x * x + y * y));
 }
 

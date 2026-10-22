@@ -90,7 +90,7 @@ NonCentralStudent * NonCentralStudent::clone() const
 /* Get one realization of the distribution */
 Point NonCentralStudent::getRealization() const
 {
-  return Point(1, gamma_ + DistFunc::rNonCentralStudent(nu_, delta_));
+  return Point(1, gamma_ + DistFunc::rNonCentralStudent(nu_, delta_, getEffectiveGenerator()));
 }
 
 /* Get the PDF of the distribution */

@@ -96,9 +96,9 @@ Point AliMikhailHaqCopula::getRealization() const
 {
   Point realization(2);
   // We use the general algorithm based on conditional CDF inversion
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   realization[0] = u;
-  const Scalar v = RandomGenerator::Generate();
+  const Scalar v = generateUniform();
   const Scalar theta2 = theta_ * theta_;
   const Scalar a = 1.0 - u;
   const Scalar b = -theta_ * (2.0 * a * v + 1.0) + 2.0 * theta2 * a * a * v + 1.0;

@@ -2,6 +2,7 @@
 
 import openturns as ot
 import openturns.testing as ott
+import os
 
 ot.TESTPREAMBLE()
 
@@ -78,4 +79,57 @@ for i in range(slice):
 # IntegerGenerate(0) should throw (div by zero guard)
 with ott.assert_raises(TypeError):
     ot.RandomGenerator.IntegerGenerate(0)
+
+# Independent per-distribution streams: distributions with spawned
+# generators must be reproducible and isolated from the global stream
+ot.RandomGenerator.SetSeed(0)
+children = ot.RandomGenerator.Spawn(2)
+
+uniform = ot.Uniform(0.0, 1.0)
+uniform.setRandomGenerator(children[0])
+assert uniform.hasRandomGenerator()
+
+normal = ot.Normal(0.0, 1.0)
+normal.setRandomGenerator(children[1])
+assert normal.hasRandomGenerator()
+
+x1 = uniform.getSample(5)
+y1 = normal.getSample(5)
+
+# Reproducibility: same spawned generators give the same samples
+ot.RandomGenerator.SetSeed(0)
+children = ot.RandomGenerator.Spawn(2)
+uniform2 = ot.Uniform(0.0, 1.0)
+uniform2.setRandomGenerator(children[0])
+normal2 = ot.Normal(0.0, 1.0)
+normal2.setRandomGenerator(children[1])
+ott.assert_almost_equal(x1, uniform2.getSample(5))
+ott.assert_almost_equal(y1, normal2.getSample(5))
+
+# Isolation: local draws do not advance the global stream
+ot.RandomGenerator.SetSeed(0)
+before = ot.RandomGenerator.Generate()
+ot.RandomGenerator.SetSeed(0)
+uniform.getSample(100)
+after = ot.RandomGenerator.Generate()
+ott.assert_almost_equal(before, after)
+
+# Clearing falls back to the global generator
+uniform.clearRandomGenerator()
+assert not uniform.hasRandomGenerator()
+
+# Persistence of the attached generator state
+uniform.setRandomGenerator(ot.RandomGenerator(42))
+buffer = uniform.getRandomGenerator().getState().getBuffer()
+fileName = "study_local_rng.xml"
+study = ot.Study(fileName)
+study.add("uniform", uniform)
+study.save()
+loaded = ot.Uniform()
+study2 = ot.Study(fileName)
+study2.load()
+study2.fillObject("uniform", loaded)
+os.remove(fileName)
+assert loaded.hasRandomGenerator()
+assert loaded.getRandomGenerator().getState().getBuffer() == buffer
 

@@ -109,7 +109,7 @@ void LogUniform::computeRange()
 /* Get one realization of the distribution */
 Point LogUniform::getRealization() const
 {
-  return Point(1, std::exp(aLog_ + (bLog_ - aLog_) * RandomGenerator::Generate()));
+  return Point(1, std::exp(aLog_ + (bLog_ - aLog_) * generateUniform()));
 }
 
 

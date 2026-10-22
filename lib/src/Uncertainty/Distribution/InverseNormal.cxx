@@ -96,12 +96,12 @@ InverseNormal * InverseNormal::clone() const
 /* Get one realization of the distribution */
 Point InverseNormal::getRealization() const
 {
-  const Scalar nu = DistFunc::rNormal();
+  const Scalar nu = DistFunc::rNormal(getEffectiveGenerator());
   const Scalar y = nu * nu;
   const Scalar w = mu_ * y / lambda_;
   // Lower bound computed by Maple to insure double precision
   const Scalar x = w < 5.015e5 ? mu_ * (1.0 + 0.5 * w * (1.0 - std::sqrt(1.0 + 4.0 / w))) : mu_ * ((5.0 / w - 2.0) / w + 1.0) / w;
-  const Scalar z = RandomGenerator::Generate();
+  const Scalar z = generateUniform();
   if (z * (mu_ + x) <= mu_) return Point(1, x);
   return Point(1, mu_ * mu_ / x);
 }

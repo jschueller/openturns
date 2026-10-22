@@ -147,11 +147,11 @@ Point TruncatedNormal::getRealization() const
   /* Find a better method, e.g.
      Algorithm from John Geweke, "Efficient Simulation from the Multivariate Normal and Student-t Distributions Subject to Linear Constraints and the Evaluation of Constraint Probabilities", communication at the meeting "Computer Science and Statistics: the Twenty-Third Symposium on the Interface", April 22-24, 1991. */
   // If the truncation is strong, use CDF inversion, else use rejection. The cut-off must balance the cost of the two methods
-  if (PhiBNorm_ - PhiANorm_ < 0.25) return computeQuantile(RandomGenerator::Generate());
+  if (PhiBNorm_ - PhiANorm_ < 0.25) return computeQuantile(generateUniform());
   Scalar value = -1.0;
   do
   {
-    value = DistFunc::rNormal();
+    value = DistFunc::rNormal(getEffectiveGenerator());
   }
   while ((value < aNorm_) || (value >= bNorm_));
   return Point(1, mu_ + sigma_ * value);

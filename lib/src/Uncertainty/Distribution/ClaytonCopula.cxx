@@ -95,7 +95,7 @@ ClaytonCopula * ClaytonCopula::clone() const
 Point ClaytonCopula::getRealization() const
 {
   Point realization(2);
-  const Scalar u1 = RandomGenerator::Generate();
+  const Scalar u1 = generateUniform();
   // We use the general algorithm based on conditional CDF inversion
   // W case
   if (theta_ == -1.0)
@@ -105,7 +105,7 @@ Point ClaytonCopula::getRealization() const
     return realization;
   }
   // The inverse conditional CDF U2|U1
-  const Scalar u2 = RandomGenerator::Generate();
+  const Scalar u2 = generateUniform();
   // Independent case
   if (theta_ == 0.0)
   {
@@ -124,7 +124,7 @@ Point ClaytonCopula::getRealization() const
   {
     const Scalar x = -std::log(u1);
     const Scalar y = -std::log(u2);
-    const Scalar z = DistFunc::rGamma(1.0 / theta_);
+    const Scalar z = DistFunc::rGamma(1.0 / theta_, getEffectiveGenerator());
     realization[0] = std::exp(-theta_ * log1p(x / z));
     realization[1] = std::exp(-theta_ * log1p(y / z));
     return realization;

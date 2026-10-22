@@ -84,7 +84,7 @@ MinCopula * MinCopula::clone() const
 /* Get one realization of the distribution */
 Point MinCopula::getRealization() const
 {
-  return Point(getDimension(), RandomGenerator::Generate());
+  return Point(getDimension(), generateUniform());
 }
 
 /* Get the DDF of the distribution */

@@ -664,17 +664,17 @@ Point PointConditionalDistribution::getRealization() const
   if (useSimplifiedVersion_)
     return simplifiedVersion_.getRealization();
   if (useGenericConditionalMethods_)
-    return Point(1, distribution_.computeConditionalQuantile(RandomGenerator::Generate(), conditioningValues_));
+    return Point(1, distribution_.computeConditionalQuantile(generateUniform(), conditioningValues_));
 
   if (isDiscrete())
   {
-    const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_);
+    const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator());
     return support_[index];
   }
 
   const UnsignedInteger dimension = getDimension();
   if (isContinuous() && dimension <= ResourceMap::GetAsUnsignedInteger("PointConditionalDistribution-SmallDimension") && sampler_.isInitialized())
-    return sampler_.getRealization();
+    return sampler_.getRealization(getEffectiveGenerator());
 
   return DistributionImplementation::getRealization();
 }
@@ -687,13 +687,13 @@ Sample PointConditionalDistribution::getSample(const UnsignedInteger size) const
 
   if (isDiscrete() && !useGenericConditionalMethods_)
   {
-    const Indices indices(DistFunc::rDiscrete(base_, alias_, size));
+    const Indices indices(DistFunc::rDiscrete(base_, alias_, size, getEffectiveGenerator()));
     return support_.select(indices);
   }
 
   const UnsignedInteger dimension = getDimension();
   if (isContinuous() && dimension <= ResourceMap::GetAsUnsignedInteger("PointConditionalDistribution-SmallDimension") && sampler_.isInitialized())
-    return sampler_.getSample(size);
+    return sampler_.getSample(size, getEffectiveGenerator());
 
   return DistributionImplementation::getSample(size);
 }

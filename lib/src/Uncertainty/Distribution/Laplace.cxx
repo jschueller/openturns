@@ -98,7 +98,7 @@ Laplace * Laplace::clone() const
 /* Get one realization of the distribution */
 Point Laplace::getRealization() const
 {
-  const Scalar d = RandomGenerator::Generate() - 0.5;
+  const Scalar d = generateUniform() - 0.5;
   if (d < 0.0) return Point(1, mu_ + log1p(2.0 * d) / lambda_);
   return Point(1, mu_ - log1p(-2.0 * d) / lambda_);
 }

@@ -85,7 +85,7 @@ NonCentralChiSquare * NonCentralChiSquare::clone() const
 /* Get one realization of the distribution */
 Point NonCentralChiSquare::getRealization() const
 {
-  return DistFunc::rNonCentralChiSquare(nu_, lambda_, 1);
+  return DistFunc::rNonCentralChiSquare(nu_, lambda_, 1, getEffectiveGenerator());
 }
 
 /* Get the PDF of the distribution */

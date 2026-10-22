@@ -117,7 +117,7 @@ Binomial * Binomial::clone() const
 /* Get one realization of the distribution */
 Point Binomial::getRealization() const
 {
-  return Point(1, DistFunc::rBinomial(n_, p_));
+  return Point(1, DistFunc::rBinomial(n_, p_, getEffectiveGenerator()));
 }
 
 

@@ -99,7 +99,7 @@ Point PlackettCopula::getRealization() const
 {
   Point realization(2);
   // We use the general algorithm based on conditional CDF inversion
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   realization[0] = u;
   // If this is the Min copula
   if (theta_ == 0.0)
@@ -107,7 +107,7 @@ Point PlackettCopula::getRealization() const
     realization[1] = u;
     return realization;
   }
-  const Scalar t = RandomGenerator::Generate();
+  const Scalar t = generateUniform();
   // If this is the independent copula
   if (thetaMinus1_ == 0.0)
   {

@@ -117,7 +117,7 @@ Skellam * Skellam::clone() const
 Point Skellam::getRealization() const
 {
   // Must cast the second Poisson realization to avoid overflow by taking the opposite of an UnsignedInteger
-  return Point(1, DistFunc::rPoisson(lambda1_) - static_cast<Scalar>(DistFunc::rPoisson(lambda2_)));
+  return Point(1, DistFunc::rPoisson(lambda1_, getEffectiveGenerator()) - static_cast<Scalar>(DistFunc::rPoisson(lambda2_, getEffectiveGenerator())));
 }
 
 

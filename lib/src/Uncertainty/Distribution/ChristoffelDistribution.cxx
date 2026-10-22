@@ -1009,7 +1009,7 @@ Point ChristoffelDistribution::drawSequentialTensor() const
     };
     const auto drawProposal = [&]()
     {
-      const Scalar u = RandomGenerator::Generate();
+      const Scalar u = generateUniform();
       if (proposalKind == Proposal::Uniform) return lower + width * u;
       if (proposalKind == Proposal::TwoSidedCauchy) return proposalCenter + proposalScale * std::tan(M_PI * (u - 0.5));
       if (proposalKind == Proposal::LowerHalfCauchy) return proposalCenter + proposalScale * std::tan(0.5 * M_PI * u);
@@ -1095,7 +1095,7 @@ Point ChristoffelDistribution::drawSequentialTensor() const
           throw InternalException(HERE) << "Error: non-finite slice envelope after an exceedance along dimension " << j << ".";
         continue;
       }
-      if (RandomGenerator::Generate() * envelope <= ratio)
+      if (generateUniform() * envelope <= ratio)
       {
         point[j] = proposal;
         break;
@@ -1130,7 +1130,7 @@ Point ChristoffelDistribution::drawByRejection() const
       }
       continue;
     }
-    if (RandomGenerator::Generate() * envelope <= kn) return proposal;
+    if (generateUniform() * envelope <= kn) return proposal;
   }
 }
 
@@ -1155,7 +1155,7 @@ Point ChristoffelDistribution::getRealization() const
 {
   if (size_ == 0) return DistributionImplementation::getRealization();
   if (isTensorProduct_ && measure_.hasIndependentCopula()) return drawSequentialTensor();
-  if (preferRatioOfUniforms()) return sampler_.getRealization();
+  if (preferRatioOfUniforms()) return sampler_.getRealization(getEffectiveGenerator());
   return drawByRejection();
 }
 
@@ -1163,7 +1163,7 @@ Point ChristoffelDistribution::getRealization() const
 Sample ChristoffelDistribution::getSample(const UnsignedInteger size) const
 {
   if (size_ != 0 && !isTensorProduct_ && preferRatioOfUniforms())
-    return sampler_.getSample(size);
+    return sampler_.getSample(size, getEffectiveGenerator());
   return DistributionImplementation::getSample(size);
 }
 

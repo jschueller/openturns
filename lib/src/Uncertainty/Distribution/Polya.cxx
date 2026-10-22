@@ -117,7 +117,7 @@ Polya * Polya::clone() const
 /* Get one realization of the distribution */
 Point Polya::getRealization() const
 {
-  return Point(1, DistFunc::rPoisson(DistFunc::rGamma(r_) * p_ / (1.0 - p_)));
+  return Point(1, DistFunc::rPoisson(DistFunc::rGamma(r_, getEffectiveGenerator()) * p_ / (1.0 - p_), getEffectiveGenerator()));
 }
 
 

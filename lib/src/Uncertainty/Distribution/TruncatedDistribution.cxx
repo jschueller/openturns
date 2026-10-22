@@ -481,7 +481,7 @@ Point TruncatedDistribution::getRealization() const
 
   // Use CDF inversion only if P([a, b]) < tau
   if ((getDimension() == 1) && (thresholdRealization_ * normalizationFactor_ > 1.0))
-    return computeQuantile(RandomGenerator::Generate());
+    return computeQuantile(generateUniform());
 
   // Here we use simple rejection of the underlying distribution against the bounds
   for (;;)

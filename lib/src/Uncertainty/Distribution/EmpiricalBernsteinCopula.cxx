@@ -172,10 +172,10 @@ Point EmpiricalBernsteinCopula::getRealization() const
   Point realization(dimension);
   const UnsignedInteger size = copulaSample_.getSize();
   // Select the atom
-  const UnsignedInteger atomIndex(RandomGenerator::IntegerGenerate(size));
+  const UnsignedInteger atomIndex(generateInteger(size));
   for (UnsignedInteger j = 0; j < dimension; ++j)
   {
-    realization[j] = DistFunc::rBeta(logFactors_(atomIndex, j), binNumber_ - logFactors_(atomIndex, j) + 1.0);
+    realization[j] = DistFunc::rBeta(logFactors_(atomIndex, j), binNumber_ - logFactors_(atomIndex, j) + 1.0, getEffectiveGenerator());
   }
   return realization;
 }
@@ -189,10 +189,10 @@ Sample EmpiricalBernsteinCopula::getSample(const UnsignedInteger size) const
   for (UnsignedInteger i = 0; i < size; ++i)
   {
     // Select the atom
-    const UnsignedInteger atomIndex(RandomGenerator::IntegerGenerate(mixtureSize));
+    const UnsignedInteger atomIndex(generateInteger(mixtureSize));
     for (UnsignedInteger j = 0; j < dimension; ++j)
     {
-      sample(i, j) = DistFunc::rBeta(logFactors_(atomIndex, j), binNumber_ - logFactors_(atomIndex, j) + 1.0);
+      sample(i, j) = DistFunc::rBeta(logFactors_(atomIndex, j), binNumber_ - logFactors_(atomIndex, j) + 1.0, getEffectiveGenerator());
     } // j
   } // i
   sample.setDescription(getDescription());

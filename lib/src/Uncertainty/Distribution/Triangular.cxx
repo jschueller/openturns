@@ -108,7 +108,7 @@ Point Triangular::getRealization() const
 {
   const Scalar ma = m_ - a_;
   const Scalar ba = b_ - a_;
-  const Scalar prob = RandomGenerator::Generate();
+  const Scalar prob = generateUniform();
   if (ba * prob < ma) return Point(1, a_ + std::sqrt(prob * ba * ma));
   return Point(1, b_ - std::sqrt((1.0 - prob) * ba * (b_ - m_)));
 }

@@ -177,7 +177,7 @@ void MixedHistogramFiniteDiscreteDistribution::computeRange()
 Point MixedHistogramFiniteDiscreteDistribution::getRealization() const
 {
   const UnsignedInteger dimension = getDimension();
-  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_);
+  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator());
   Point realization(dimension);
   for (UnsignedInteger j = 0; j < discreteIndices_.getSize(); ++j)
   {
@@ -191,7 +191,7 @@ Point MixedHistogramFiniteDiscreteDistribution::getRealization() const
     const UnsignedInteger jContinuous = continuousIndices_[j];
     const UnsignedInteger k = allIndices_(index, jContinuous);
     const Point ticks(ticksCollection_[jContinuous]);
-    realization[jContinuous] = ticks[k] + (ticks[k + 1] - ticks[k]) * RandomGenerator::Generate();
+    realization[jContinuous] = ticks[k] + (ticks[k + 1] - ticks[k]) * generateUniform();
   }
   return realization;
 }

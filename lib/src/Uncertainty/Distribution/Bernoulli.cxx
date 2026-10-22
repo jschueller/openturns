@@ -111,7 +111,7 @@ Bernoulli * Bernoulli::clone() const
 /* Get one realization of the distribution */
 Point Bernoulli::getRealization() const
 {
-  return Point(1, (RandomGenerator::Generate() < p_ ? 1.0 : 0.0));
+  return Point(1, (generateUniform() < p_ ? 1.0 : 0.0));
 }
 
 

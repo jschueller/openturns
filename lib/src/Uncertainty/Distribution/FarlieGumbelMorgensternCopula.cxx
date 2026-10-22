@@ -99,8 +99,8 @@ Point FarlieGumbelMorgensternCopula::getRealization() const
 {
   Point realization(2);
   // We use the algorithm described in Nelsen, "An Introduction to Copulas 2nd Edition", Exercise 3.23 to speed-up generation.
-  const Scalar u = RandomGenerator::Generate();
-  const Scalar t = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
+  const Scalar t = generateUniform();
   const Scalar a = 1.0 + theta_ * (1.0 - 2.0 * u);
   // The discriminant is mathematically nonnegative but roundoff can make it slightly negative
   const Scalar b = std::sqrt(std::max(0.0, a * a - 4.0 * (a - 1.0) * t));

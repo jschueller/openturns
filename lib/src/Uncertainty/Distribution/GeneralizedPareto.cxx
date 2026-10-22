@@ -131,7 +131,7 @@ void GeneralizedPareto::computeRange()
 /* Get one realization of the distribution */
 Point GeneralizedPareto::getRealization() const
 {
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   if (xi_ == 0.0) return Point(1, u_ - sigma_ * std::log(u));
   return Point(1, u_ + sigma_ * expm1(-xi_ * std::log(u)) / xi_);
 }

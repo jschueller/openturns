@@ -26,6 +26,7 @@
 #include "openturns/Point.hxx"
 #include "openturns/Indices.hxx"
 #include "openturns/Sample.hxx"
+#include "openturns/RandomGenerator.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -131,6 +132,13 @@ OT_API Scalar rBeta(const Scalar p1,
 OT_API Point rBeta(const Scalar p1,
                    const Scalar p2,
                    const UnsignedInteger size);
+OT_API Scalar rBeta(const Scalar p1,
+                    const Scalar p2,
+                    const RandomGenerator & rng);
+OT_API Point rBeta(const Scalar p1,
+                   const Scalar p2,
+                   const UnsignedInteger size,
+                   const RandomGenerator & rng);
 
 OT_API Scalar logdBinomial(const UnsignedInteger n,
                            const Scalar p,
@@ -143,6 +151,13 @@ OT_API UnsignedInteger rBinomial(const UnsignedInteger n,
 OT_API Indices rBinomial(const UnsignedInteger n,
                          const Scalar p,
                          const UnsignedInteger size);
+OT_API UnsignedInteger rBinomial(const UnsignedInteger n,
+                                 const Scalar p,
+                                 const RandomGenerator & rng);
+OT_API Indices rBinomial(const UnsignedInteger n,
+                         const Scalar p,
+                         const UnsignedInteger size,
+                         const RandomGenerator & rng);
 // For discrete distribution
 #ifndef SWIG
 OT_API void rDiscreteSetup(const Point & probabilities,
@@ -153,10 +168,22 @@ OT_API UnsignedInteger rDiscrete(const Point & base,
 OT_API Indices rDiscrete(const Point & base,
                          const Indices & alias,
                          const UnsignedInteger size);
+OT_API UnsignedInteger rDiscrete(const Point & base,
+                                 const Indices & alias,
+                                 const RandomGenerator & rng);
+OT_API Indices rDiscrete(const Point & base,
+                         const Indices & alias,
+                         const UnsignedInteger size,
+                         const RandomGenerator & rng);
 #endif
 OT_API UnsignedInteger rDiscrete(const Point & probabilities);
 OT_API Indices rDiscrete(const Point & probabilities,
                          const UnsignedInteger size);
+OT_API UnsignedInteger rDiscrete(const Point & probabilities,
+                                 const RandomGenerator & rng);
+OT_API Indices rDiscrete(const Point & probabilities,
+                         const UnsignedInteger size,
+                         const RandomGenerator & rng);
 // For Gamma distribution
 OT_API Scalar pGamma(const Scalar k,
                      const Scalar x,
@@ -167,6 +194,11 @@ OT_API Scalar qGamma(const Scalar k,
 OT_API Scalar rGamma(const Scalar k);
 OT_API Point rGamma(const Scalar k,
                     const UnsignedInteger size);
+OT_API Scalar rGamma(const Scalar k,
+                     const RandomGenerator & rng);
+OT_API Point rGamma(const Scalar k,
+                    const UnsignedInteger size,
+                    const RandomGenerator & rng);
 
 // For Chi distribution
 OT_API Scalar qChiSquare(const Scalar nu,
@@ -197,6 +229,15 @@ OT_API Indices rHypergeometric(const UnsignedInteger n,
                                const UnsignedInteger k,
                                const UnsignedInteger m,
                                const UnsignedInteger size);
+OT_API UnsignedInteger rHypergeometric(const UnsignedInteger n,
+                                       const UnsignedInteger k,
+                                       const UnsignedInteger m,
+                                       const RandomGenerator & rng);
+OT_API Indices rHypergeometric(const UnsignedInteger n,
+                               const UnsignedInteger k,
+                               const UnsignedInteger m,
+                               const UnsignedInteger size,
+                               const RandomGenerator & rng);
 // For Kolmogorov distribution
 OT_API Scalar pKolmogorov(const UnsignedInteger n,
                           const Scalar x,
@@ -224,6 +265,13 @@ OT_API Scalar rNonCentralChiSquare(const Scalar nu,
 OT_API Point rNonCentralChiSquare(const Scalar nu,
                                   const Scalar lambda,
                                   const UnsignedInteger size);
+OT_API Scalar rNonCentralChiSquare(const Scalar nu,
+                                   const Scalar lambda,
+                                   const RandomGenerator & rng);
+OT_API Point rNonCentralChiSquare(const Scalar nu,
+                                  const Scalar lambda,
+                                  const UnsignedInteger size,
+                                  const RandomGenerator & rng);
 // For NonCentralStudent distribution
 OT_API Scalar dNonCentralStudent(const Scalar nu,
                                  const Scalar delta,
@@ -237,6 +285,13 @@ OT_API Scalar rNonCentralStudent(const Scalar nu,
 OT_API Point rNonCentralStudent(const Scalar nu,
                                 const Scalar delta,
                                 const UnsignedInteger size);
+OT_API Scalar rNonCentralStudent(const Scalar nu,
+                                 const Scalar delta,
+                                 const RandomGenerator & rng);
+OT_API Point rNonCentralStudent(const Scalar nu,
+                                const Scalar delta,
+                                const UnsignedInteger size,
+                                const RandomGenerator & rng);
 // For Normal distribution
 OT_API Scalar pNormal(const Scalar x,
                       const Bool tail = false);
@@ -275,6 +330,9 @@ OT_API Point qNormal(const Point & p,
                      const Bool tail = false);
 OT_API Scalar rNormal();
 OT_API Point rNormal(const UnsignedInteger size);
+OT_API Scalar rNormal(const RandomGenerator & rng);
+OT_API Point rNormal(const UnsignedInteger size,
+                     const RandomGenerator & rng);
 
 OT_API Scalar dNormal(const Scalar x);
 OT_API Point dNormal(const Point &x);
@@ -291,6 +349,11 @@ OT_API Scalar qPoisson(const Scalar lambda,
 OT_API UnsignedInteger rPoisson(const Scalar lambda);
 OT_API Indices rPoisson(const Scalar lambda,
                         const UnsignedInteger size);
+OT_API UnsignedInteger rPoisson(const Scalar lambda,
+                                const RandomGenerator & rng);
+OT_API Indices rPoisson(const Scalar lambda,
+                        const UnsignedInteger size,
+                        const RandomGenerator & rng);
 
 // For Pearson test
 OT_API Scalar pPearsonCorrelation(const UnsignedInteger size, const Scalar rho, const Bool tail = false);
@@ -345,6 +408,11 @@ OT_API Point qStudent(const Scalar nu,
 OT_API Scalar rStudent(const Scalar nu);
 OT_API Point rStudent(const Scalar nu,
                       const UnsignedInteger size);
+OT_API Scalar rStudent(const Scalar nu,
+                       const RandomGenerator & rng);
+OT_API Point rStudent(const Scalar nu,
+                      const UnsignedInteger size,
+                      const RandomGenerator & rng);
 // For uniform distribution over a segment
 OT_API Point rUniformSegment(const Point & a,
                              const Point & b);
@@ -361,7 +429,25 @@ OT_API void rUniformSegment(const Scalar * a,
                             const UnsignedInteger dimension,
                             const UnsignedInteger size,
                             Scalar * result);
+OT_API void rUniformSegment(const Scalar * a,
+                            const Scalar * b,
+                            const UnsignedInteger dimension,
+                            Scalar * result,
+                            const RandomGenerator & rng);
+OT_API void rUniformSegment(const Scalar * a,
+                            const Scalar * b,
+                            const UnsignedInteger dimension,
+                            const UnsignedInteger size,
+                            Scalar * result,
+                            const RandomGenerator & rng);
 #endif
+OT_API Point rUniformSegment(const Point & a,
+                             const Point & b,
+                             const RandomGenerator & rng);
+OT_API Sample rUniformSegment(const Point & a,
+                              const Point & b,
+                              const UnsignedInteger size,
+                              const RandomGenerator & rng);
 // For uniform distribution over a triangle
 OT_API Point rUniformTriangle(const Point & a,
                               const Point & b,
@@ -382,7 +468,29 @@ OT_API void rUniformTriangle(const Scalar * a,
                              const UnsignedInteger dimension,
                              const UnsignedInteger size,
                              Scalar * result);
+OT_API void rUniformTriangle(const Scalar * a,
+                             const Scalar * b,
+                             const Scalar * c,
+                             const UnsignedInteger dimension,
+                             Scalar * result,
+                             const RandomGenerator & rng);
+OT_API void rUniformTriangle(const Scalar * a,
+                             const Scalar * b,
+                             const Scalar * c,
+                             const UnsignedInteger dimension,
+                             const UnsignedInteger size,
+                             Scalar * result,
+                             const RandomGenerator & rng);
 #endif
+OT_API Point rUniformTriangle(const Point & a,
+                              const Point & b,
+                              const Point & c,
+                              const RandomGenerator & rng);
+OT_API Sample rUniformTriangle(const Point & a,
+                               const Point & b,
+                               const Point & c,
+                               const UnsignedInteger size,
+                               const RandomGenerator & rng);
 // For uniform distribution over a tetrahedron
 OT_API Point rUniformTetrahedron(const Point & a,
                                  const Point & b,
@@ -407,11 +515,42 @@ OT_API void rUniformTetrahedron(const Scalar * a,
                                 const UnsignedInteger dimension,
                                 const UnsignedInteger size,
                                 Scalar * result);
+OT_API void rUniformTetrahedron(const Scalar * a,
+                                const Scalar * b,
+                                const Scalar * c,
+                                const Scalar * d,
+                                const UnsignedInteger dimension,
+                                Scalar * result,
+                                const RandomGenerator & rng);
+OT_API void rUniformTetrahedron(const Scalar * a,
+                                const Scalar * b,
+                                const Scalar * c,
+                                const Scalar * d,
+                                const UnsignedInteger dimension,
+                                const UnsignedInteger size,
+                                Scalar * result,
+                                const RandomGenerator & rng);
 #endif
+OT_API Point rUniformTetrahedron(const Point & a,
+                                 const Point & b,
+                                 const Point & c,
+                                 const Point & d,
+                                 const RandomGenerator & rng);
+OT_API Sample rUniformTetrahedron(const Point & a,
+                                  const Point & b,
+                                  const Point & c,
+                                  const Point & d,
+                                  const UnsignedInteger size,
+                                  const RandomGenerator & rng);
 // For uniform distribution over a simplex
 OT_API Point rUniformSimplex(const Sample & vertices);
 OT_API Sample rUniformSimplex(const Sample & vertices,
                               const UnsignedInteger size);
+OT_API Point rUniformSimplex(const Sample & vertices,
+                             const RandomGenerator & rng);
+OT_API Sample rUniformSimplex(const Sample & vertices,
+                              const UnsignedInteger size,
+                              const RandomGenerator & rng);
 #ifndef SWIG
 OT_API void rUniformSimplex(const Scalar * vertices,
                             const UnsignedInteger dimension,
@@ -422,6 +561,17 @@ OT_API void rUniformSimplex(const Scalar * vertices,
                             const UnsignedInteger numVertices,
                             const UnsignedInteger size,
                             Scalar * result);
+OT_API void rUniformSimplex(const Scalar * vertices,
+                            const UnsignedInteger dimension,
+                            const UnsignedInteger numVertices,
+                            Scalar * result,
+                            const RandomGenerator & rng);
+OT_API void rUniformSimplex(const Scalar * vertices,
+                            const UnsignedInteger dimension,
+                            const UnsignedInteger numVertices,
+                            const UnsignedInteger size,
+                            Scalar * result,
+                            const RandomGenerator & rng);
 #endif
 // Compute the expectation of the min of n independent standard normal random variables
 OT_API Scalar eZ1(const UnsignedInteger n);

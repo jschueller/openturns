@@ -102,14 +102,14 @@ GumbelCopula * GumbelCopula::clone() const
 Point GumbelCopula::getRealization() const
 {
   Point realization(2);
-  const Scalar u = (RandomGenerator::Generate() - 0.5) * M_PI;
+  const Scalar u = (generateUniform() - 0.5) * M_PI;
   const Scalar u2 = u + M_PI_2;
-  const Scalar e = -std::log(RandomGenerator::Generate());
+  const Scalar e = -std::log(generateUniform());
   const Scalar inverseTheta = 1.0 / theta_;
   const Scalar t = std::cos(u - u2 * inverseTheta) / e;
   const Scalar gamma = std::pow(std::sin(u2 * inverseTheta) / t, inverseTheta) * t / std::cos(u);
-  realization[0] = std::exp(-std::pow(-std::log(RandomGenerator::Generate()), inverseTheta) / gamma);
-  realization[1] = std::exp(-std::pow(-std::log(RandomGenerator::Generate()), inverseTheta) / gamma);
+  realization[0] = std::exp(-std::pow(-std::log(generateUniform()), inverseTheta) / gamma);
+  realization[1] = std::exp(-std::pow(-std::log(generateUniform()), inverseTheta) / gamma);
   return realization;
 }
 

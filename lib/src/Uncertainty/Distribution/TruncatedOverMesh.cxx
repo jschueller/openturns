@@ -185,7 +185,7 @@ Point TruncatedOverMesh::getRealization() const
     return x;
   }
   // pick a simplex
-  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_);
+  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator());
   const Sample simplexVertices(getSimplexVertices(index));
 
   Point x;
@@ -195,10 +195,10 @@ Point TruncatedOverMesh::getRealization() const
   do
   {
     // draw x uniformly in the simplex
-    x = DistFunc::rUniformSimplex(simplexVertices);
+    x = DistFunc::rUniformSimplex(simplexVertices, getEffectiveGenerator());
 
     // draw y in [0, pdfsup]
-    y = RandomGenerator::Generate() * pdfSup_[index];
+    y = generateUniform() * pdfSup_[index];
 
   }
   while (y > distribution_.computePDF(x));

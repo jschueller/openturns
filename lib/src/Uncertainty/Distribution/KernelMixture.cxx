@@ -198,7 +198,7 @@ KernelMixture * KernelMixture::clone() const
 Point KernelMixture::getRealization() const
 {
   // Select the atom uniformly amongst the possible points
-  Point result(sample_[RandomGenerator::IntegerGenerate(sample_.getSize())]);
+  Point result(sample_[generateInteger(sample_.getSize())]);
   // Then add a random noise according to the product kernel
   const UnsignedInteger dimension = getDimension();
   const Sample kernelSample(p_kernel_->getSample(dimension));

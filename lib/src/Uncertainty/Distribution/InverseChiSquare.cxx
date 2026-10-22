@@ -140,7 +140,7 @@ void InverseChiSquare::update()
 /* Get one realization of the distribution */
 Point InverseChiSquare::getRealization() const
 {
-  return Point(1, 1.0 / (2.0 * DistFunc::rGamma(0.5 * nu_)));
+  return Point(1, 1.0 / (2.0 * DistFunc::rGamma(0.5 * nu_, getEffectiveGenerator())));
 }
 
 

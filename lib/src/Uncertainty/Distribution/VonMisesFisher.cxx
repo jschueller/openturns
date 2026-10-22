@@ -108,10 +108,10 @@ Point VonMisesFisher::getCosSample(const UnsignedInteger size) const
       UnsignedInteger m = std::max(size, static_cast<UnsignedInteger>(1.5 * (size - found)));
       for (UnsignedInteger i = 0; i < m; ++i)
         {
-          const Scalar z = DistFunc::rBeta(alpha, alpha);
+          const Scalar z = DistFunc::rBeta(alpha, alpha, getEffectiveGenerator());
           const Scalar t = (1.0 - (1.0 + b_) * z) / (1.0 - (1.0 - b_) * z);
           const Scalar test = kappa_ * t + dM1 * std::log1p(-t * x0_) - c_;
-          if (test > std::log(RandomGenerator::Generate()))
+          if (test > std::log(generateUniform()))
             {
               cosRNG[found] = t;
               ++found;
@@ -139,7 +139,7 @@ Sample VonMisesFisher::getSample(const UnsignedInteger size) const
       // Standard normal samples
       for (UnsignedInteger j = 0; j < dimension_; ++j)
         {
-          const Scalar rNorm = DistFunc::rNormal();
+          const Scalar rNorm = DistFunc::rNormal(getEffectiveGenerator());
           result(i, j) = rNorm;
           zNorm += rNorm * rNorm;
         }

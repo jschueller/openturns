@@ -168,6 +168,9 @@ private:
   /** Draw one realization of a multinomial distribution with probabilities p */
   static Point drawMultinomial(const UnsignedInteger n,
                                const Point & p);
+  static Point drawMultinomial(const UnsignedInteger n,
+                               const Point & p,
+                               const RandomGenerator & rng);
 
   /** Compute the generating function of a sum of truncated negative binomial distributions as needed in the computeCDF() method */
   Complex computeGlobalPhi(const Complex & z,

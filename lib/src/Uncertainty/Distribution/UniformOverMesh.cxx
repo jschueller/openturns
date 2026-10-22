@@ -107,7 +107,7 @@ void UniformOverMesh::computeRange()
 /* Get one realization of the distribution */
 Point UniformOverMesh::getRealization() const
 {
-  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_);
+  const UnsignedInteger index = DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator());
   const UnsignedInteger dimension = getDimension();
   Point result(dimension);
   if (intrinsicDimension_ < dimension)
@@ -117,22 +117,22 @@ Point UniformOverMesh::getRealization() const
     for (UnsignedInteger j = 0; j <= intrinsicDimension_; ++j)
       for (UnsignedInteger k = 0; k < dimension; ++k)
         vertexSample(j, k) = vertices_(simplices_(index, j), k);
-    DistFunc::rUniformSimplex(&vertexSample(0, 0), dimension, intrinsicDimension_ + 1, &result[0]);
+    DistFunc::rUniformSimplex(&vertexSample(0, 0), dimension, intrinsicDimension_ + 1, &result[0], getEffectiveGenerator());
     return result;
   }
   if (dimension == 1)
   {
-    DistFunc::rUniformSegment(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), dimension, &result[0]);
+    DistFunc::rUniformSegment(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), dimension, &result[0], getEffectiveGenerator());
     return result;
   }
   if (dimension == 2)
   {
-    DistFunc::rUniformTriangle(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), dimension, &result[0]);
+    DistFunc::rUniformTriangle(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), dimension, &result[0], getEffectiveGenerator());
     return result;
   }
   if (dimension == 3)
   {
-    DistFunc::rUniformTetrahedron(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), &vertices_(simplices_(index, 3), 0), dimension, &result[0]);
+    DistFunc::rUniformTetrahedron(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), &vertices_(simplices_(index, 3), 0), dimension, &result[0], getEffectiveGenerator());
     return result;
   }
   Sample vertices(dimension + 1, dimension);
@@ -141,7 +141,7 @@ Point UniformOverMesh::getRealization() const
     const UnsignedInteger vertexIndex = simplices_(index, i);
     std::copy(vertices_.getImplementation()->data_begin() + vertexIndex * dimension, vertices_.getImplementation()->data_begin() + (vertexIndex + 1) * dimension, vertices.getImplementation()->data_begin() + i * dimension);
   } // i
-  DistFunc::rUniformSimplex(&vertices(0, 0), dimension, dimension + 1, &result[0]);
+  DistFunc::rUniformSimplex(&vertices(0, 0), dimension, dimension + 1, &result[0], getEffectiveGenerator());
   return result;
 }
 
@@ -149,7 +149,7 @@ Point UniformOverMesh::getRealization() const
 /* Get a sample of the distribution */
 Sample UniformOverMesh::getSample(const UnsignedInteger size) const
 {
-  const Indices indices(DistFunc::rDiscrete(base_, alias_, size));
+  const Indices indices(DistFunc::rDiscrete(base_, alias_, size, getEffectiveGenerator()));
   const UnsignedInteger dimension = getDimension();
   Sample result(size, dimension);
   if (intrinsicDimension_ < dimension)
@@ -162,7 +162,7 @@ Sample UniformOverMesh::getSample(const UnsignedInteger size) const
       for (UnsignedInteger j = 0; j <= intrinsicDimension_; ++j)
         for (UnsignedInteger k = 0; k < dimension; ++k)
           vertexSample(j, k) = vertices_(simplices_(index, j), k);
-      DistFunc::rUniformSimplex(&vertexSample(0, 0), dimension, intrinsicDimension_ + 1, &result(n, 0));
+      DistFunc::rUniformSimplex(&vertexSample(0, 0), dimension, intrinsicDimension_ + 1, &result(n, 0), getEffectiveGenerator());
     } // n
     result.setDescription(getDescription());
     return result;
@@ -172,7 +172,7 @@ Sample UniformOverMesh::getSample(const UnsignedInteger size) const
     for (UnsignedInteger n = 0; n < size; ++n)
     {
       const UnsignedInteger index = indices[n];
-      DistFunc::rUniformSegment(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), dimension, &result(n, 0));
+      DistFunc::rUniformSegment(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), dimension, &result(n, 0), getEffectiveGenerator());
     } // n
     result.setDescription(getDescription());
     return result;
@@ -182,7 +182,7 @@ Sample UniformOverMesh::getSample(const UnsignedInteger size) const
     for (UnsignedInteger n = 0; n < size; ++n)
     {
       const UnsignedInteger index = indices[n];
-      DistFunc::rUniformTriangle(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), dimension, &result(n, 0));
+      DistFunc::rUniformTriangle(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), dimension, &result(n, 0), getEffectiveGenerator());
     }
     result.setDescription(getDescription());
     return result;
@@ -192,7 +192,7 @@ Sample UniformOverMesh::getSample(const UnsignedInteger size) const
     for (UnsignedInteger n = 0; n < size; ++n)
     {
       const UnsignedInteger index = indices[n];
-      DistFunc::rUniformTetrahedron(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), &vertices_(simplices_(index, 3), 0), dimension, &result(n, 0));
+      DistFunc::rUniformTetrahedron(&vertices_(simplices_(index, 0), 0), &vertices_(simplices_(index, 1), 0), &vertices_(simplices_(index, 2), 0), &vertices_(simplices_(index, 3), 0), dimension, &result(n, 0), getEffectiveGenerator());
     }
     result.setDescription(getDescription());
     return result;
@@ -206,7 +206,7 @@ Sample UniformOverMesh::getSample(const UnsignedInteger size) const
       const UnsignedInteger vertexIndex = simplices_(index, i);
       std::copy(vertices_.getImplementation()->data_begin() + vertexIndex * dimension, vertices_.getImplementation()->data_begin() + (vertexIndex + 1) * dimension, vertices.getImplementation()->data_begin() + i * dimension);
     } // i
-    DistFunc::rUniformSimplex(&vertices(0, 0), dimension, dimension + 1, &result(n, 0));
+    DistFunc::rUniformSimplex(&vertices(0, 0), dimension, dimension + 1, &result(n, 0), getEffectiveGenerator());
   } // n
   result.setDescription(getDescription());
   return result;

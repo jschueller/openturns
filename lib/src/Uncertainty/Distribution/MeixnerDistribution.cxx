@@ -459,9 +459,9 @@ Point MeixnerDistribution::getRealization() const
 {
   while (true)
   {
-    const Scalar u = b_ * RandomGenerator::Generate();
+    const Scalar u = b_ * generateUniform();
     if (u == 0.0) continue;
-    const Scalar v = c_ + dc_ * RandomGenerator::Generate();
+    const Scalar v = c_ + dc_ * generateUniform();
     const Scalar rho = v / u;
     if (2.0 * std::log(u) <= computeLogPDF(rho)) return Point(1, rho);
   }

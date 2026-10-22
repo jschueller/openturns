@@ -964,12 +964,12 @@ void Dirichlet::computeRange()
 Point Dirichlet::getRealization() const
 {
   const UnsignedInteger dimension = getDimension();
-  if (dimension == 1) return Point(1, DistFunc::rBeta(theta_[0], theta_[1]));
+  if (dimension == 1) return Point(1, DistFunc::rBeta(theta_[0], theta_[1], getEffectiveGenerator()));
   Point realization(dimension);
-  Scalar sum = DistFunc::rGamma(theta_[dimension]);
+  Scalar sum = DistFunc::rGamma(theta_[dimension], getEffectiveGenerator());
   for (UnsignedInteger i = 0; i < dimension; ++i)
   {
-    const Scalar yI = DistFunc::rGamma(theta_[i]);
+    const Scalar yI = DistFunc::rGamma(theta_[i], getEffectiveGenerator());
     sum += yI;
     realization[i] = yI;
   }

@@ -107,7 +107,7 @@ void Burr::computeRange()
 /* Get one realization of the distribution */
 Point Burr::getRealization() const
 {
-  return Point(1, computeScalarQuantile(RandomGenerator::Generate()));
+  return Point(1, computeScalarQuantile(generateUniform()));
 }
 
 

@@ -224,12 +224,18 @@ Scalar StudentQuantile(const Scalar nu,
 */
 Scalar StudentRealization(const Scalar nu)
 {
+  return StudentRealization(nu, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar StudentRealization(const Scalar nu,
+                          const RandomGenerator & rng)
+{
   if (!(nu > 0.0)) throw InvalidArgumentException(HERE) << "Error: nu must be positive, here nu=" << nu;
-  const Scalar n = DistFunc::rNormal();
+  const Scalar n = DistFunc::rNormal(rng);
   Scalar g = -1.0;
   do
   {
-    g = DistFunc::rGamma(0.5 * nu);
+    g = DistFunc::rGamma(0.5 * nu, rng);
   }
   while (g == 0.0);
   return std::sqrt(0.5 * nu / g) * n;
@@ -563,11 +569,18 @@ Scalar NonCentralStudentPDF(const Scalar nu,
 Scalar NonCentralStudentRealization(const Scalar nu,
                                     const Scalar delta)
 {
-  const Scalar n = DistFunc::rNormal() + delta;
+  return NonCentralStudentRealization(nu, delta, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar NonCentralStudentRealization(const Scalar nu,
+                                    const Scalar delta,
+                                    const RandomGenerator & rng)
+{
+  const Scalar n = DistFunc::rNormal(rng) + delta;
   Scalar g = -1.0;
   do
   {
-    g = DistFunc::rGamma(0.5 * nu);
+    g = DistFunc::rGamma(0.5 * nu, rng);
   }
   while (g == 0.0);
   return std::sqrt(0.5 * nu / g) * n;

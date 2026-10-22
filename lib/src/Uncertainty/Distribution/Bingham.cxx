@@ -415,7 +415,7 @@ Point Bingham::getRealization() const
     Scalar norm = 0.0;
     for (UnsignedInteger i = 0; i < n; ++i)
     {
-      const Scalar zi = DistFunc::rNormal() * invScale[i];
+      const Scalar zi = DistFunc::rNormal(getEffectiveGenerator()) * invScale[i];
       z[i] = zi;
       norm += zi * zi;
     }
@@ -428,7 +428,7 @@ Point Bingham::getRealization() const
       u += delta[i] * yi * yi;
     }
     const Scalar logAccept = -u + halfN * std::log(b + u) - logMaxAccept;
-    if (std::log(RandomGenerator::Generate()) < logAccept)
+    if (std::log(generateUniform()) < logAccept)
     {
       // Rotate the diagonalizing frame back to the original one: x = gamma * y
       Point result(n);

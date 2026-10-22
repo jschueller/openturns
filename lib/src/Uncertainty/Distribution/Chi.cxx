@@ -133,7 +133,7 @@ void Chi::update()
 /* Get one realization of the distribution */
 Point Chi::getRealization() const
 {
-  return Point(1, std::sqrt(2.0 * DistFunc::rGamma(0.5 * nu_)));
+  return Point(1, std::sqrt(2.0 * DistFunc::rGamma(0.5 * nu_, getEffectiveGenerator())));
 }
 
 

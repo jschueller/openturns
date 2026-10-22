@@ -107,7 +107,7 @@ void Rayleigh::computeRange()
 /* Get one realization of the distribution */
 Point Rayleigh::getRealization() const
 {
-  return Point(1, gamma_ + beta_ * std::sqrt(-2.0 * std::log(RandomGenerator::Generate())));
+  return Point(1, gamma_ + beta_ * std::sqrt(-2.0 * std::log(generateUniform())));
 }
 
 

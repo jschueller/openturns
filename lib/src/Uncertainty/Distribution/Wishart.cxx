@@ -139,9 +139,9 @@ CovarianceMatrix Wishart::getRealizationAsMatrix() const
   // The diagonal elements are chi-distributed
   for (UnsignedInteger i = 0; i < p; ++i)
   {
-    A(i, i) = std::sqrt(2.0 * DistFunc::rGamma(0.5 * (nu_ - i)));
+    A(i, i) = std::sqrt(2.0 * DistFunc::rGamma(0.5 * (nu_ - i), getEffectiveGenerator()));
     // The off-diagonal elements are normally distributed
-    for (UnsignedInteger j = 0; j < i; ++j) A(i, j) = DistFunc::rNormal();
+    for (UnsignedInteger j = 0; j < i; ++j) A(i, j) = DistFunc::rNormal(getEffectiveGenerator());
   }
   return (cholesky_ * A).computeGram(false).getImplementation();
 }

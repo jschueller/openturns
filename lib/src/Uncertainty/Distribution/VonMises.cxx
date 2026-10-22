@@ -170,8 +170,8 @@ Point VonMises::getRealization() const
 {
   for (;;)
   {
-    const Scalar r1 = RandomGenerator::Generate();
-    const Scalar r2 = RandomGenerator::Generate();
+    const Scalar r1 = generateUniform();
+    const Scalar r2 = generateUniform();
     const Scalar theta = ratioOfUniformsBound_ * (2.0 * r2 - 1.0) / r1;
     // Quick rejection
     if (std::abs(theta) > M_PI) continue;

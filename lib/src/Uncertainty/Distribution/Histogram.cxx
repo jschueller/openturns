@@ -142,7 +142,7 @@ void Histogram::computeRange()
 /* Get one realization of the distribution */
 Point Histogram::getRealization() const
 {
-  return computeQuantile(RandomGenerator::Generate());
+  return computeQuantile(generateUniform());
 }
 
 

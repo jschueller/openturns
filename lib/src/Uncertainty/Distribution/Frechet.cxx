@@ -118,7 +118,7 @@ Scalar Frechet::computeProbability(const Interval & interval) const
 /* Get one realization of the distribution */
 Point Frechet::getRealization() const
 {
-  return Point(1, computeScalarQuantile(RandomGenerator::Generate()));
+  return Point(1, computeScalarQuantile(generateUniform()));
 }
 
 Point Frechet::computeDDF(const Point & point) const

@@ -154,7 +154,7 @@ Point Multinomial::getRealization() const
   for (UnsignedInteger i = 0; i < dimension; ++i)
   {
     /* The current component follow a binomial distribution with parameters p_[i] and N */
-    const UnsignedInteger xI = DistFunc::rBinomial(n, p_[i] / sum);
+    const UnsignedInteger xI = DistFunc::rBinomial(n, p_[i] / sum, getEffectiveGenerator());
     realization[i] = xI;
     n -= xI;
     if (n == 0) break;
@@ -180,7 +180,7 @@ Sample Multinomial::getSample(const UnsignedInteger size) const
     for (UnsignedInteger i = 0; i < dimension; ++i)
     {
       /* The current component follow a binomial distribution with parameters p_[i] and N */
-      xI = DistFunc::rBinomial(n, p_[i] / sum);
+      xI = DistFunc::rBinomial(n, p_[i] / sum, getEffectiveGenerator());
       sample(k, i) = xI;
       n -= xI;
       if (n == 0) break;

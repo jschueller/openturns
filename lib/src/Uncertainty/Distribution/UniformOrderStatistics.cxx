@@ -99,7 +99,7 @@ void UniformOrderStatistics::computeRange()
 /* Get one realization of the distribution. */
 Point UniformOrderStatistics::getRealization() const
 {
-  return DistFunc::rUniformSimplex(vertices_);
+  return DistFunc::rUniformSimplex(vertices_, getEffectiveGenerator());
 }
 
 /* Get the PDF of the distribution */

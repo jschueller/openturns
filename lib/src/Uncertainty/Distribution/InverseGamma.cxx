@@ -176,7 +176,7 @@ void InverseGamma::update()
 /* Get one realization of the distribution */
 Point InverseGamma::getRealization() const
 {
-  return Point(1, 1.0 / (lambda_ * DistFunc::rGamma(k_)));
+  return Point(1, 1.0 / (lambda_ * DistFunc::rGamma(k_, getEffectiveGenerator())));
 }
 
 

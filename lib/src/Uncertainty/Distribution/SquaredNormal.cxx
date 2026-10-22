@@ -87,12 +87,12 @@ SquaredNormal * SquaredNormal::clone() const
 
 Point SquaredNormal::getRealization() const
 {
-  return Point(1, std::pow(mu_ + sigma_ * DistFunc::rNormal(), 2.0));
+  return Point(1, std::pow(mu_ + sigma_ * DistFunc::rNormal(getEffectiveGenerator()), 2.0));
 }
 
 Sample SquaredNormal::getSample(const UnsignedInteger size) const
 {
-  const Point xi(DistFunc::rNormal(size));
+  const Point xi(DistFunc::rNormal(size, getEffectiveGenerator()));
   Sample result(size, 1);
   for (UnsignedInteger i = 0; i < size; ++i)
     result(i, 0) = std::pow((mu_ + sigma_ * xi[i]), 2);

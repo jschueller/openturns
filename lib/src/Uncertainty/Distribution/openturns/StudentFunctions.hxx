@@ -24,6 +24,7 @@
 
 #include "openturns/OTprivate.hxx"
 #include "openturns/ResourceMap.hxx"
+#include "openturns/RandomGenerator.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -38,6 +39,8 @@ Scalar StudentQuantile(const Scalar nu,
                        const Bool tail = false);
 
 Scalar StudentRealization(const Scalar nu);
+Scalar StudentRealization(const Scalar nu,
+                          const RandomGenerator & rng);
 
 Scalar NonCentralStudentCDF(const Scalar nu,
                             const Scalar delta,
@@ -50,6 +53,9 @@ Scalar NonCentralStudentPDF(const Scalar nu,
 
 Scalar NonCentralStudentRealization(const Scalar nu,
                                     const Scalar delta);
+Scalar NonCentralStudentRealization(const Scalar nu,
+                                    const Scalar delta,
+                                    const RandomGenerator & rng);
 } // StudentFunctions
 
 END_NAMESPACE_OPENTURNS

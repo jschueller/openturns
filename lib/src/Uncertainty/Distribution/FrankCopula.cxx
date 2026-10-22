@@ -95,9 +95,9 @@ Point FrankCopula::getRealization() const
 {
   Point realization(2);
   // We use the general algorithm based on conditional CDF inversion
-  const Scalar u = RandomGenerator::Generate();
+  const Scalar u = generateUniform();
   realization[0] = u;
-  const Scalar v = RandomGenerator::Generate();
+  const Scalar v = generateUniform();
   if (theta_ == 0.0)
   {
     realization[1] = v;

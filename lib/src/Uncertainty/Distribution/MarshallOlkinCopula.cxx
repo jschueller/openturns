@@ -223,23 +223,23 @@ Point MarshallOlkinCopula::getRealization() const
   if ((alpha_ == 0.0) || (beta_ == 0.0))
   {
     // This is the independent copula
-    const Scalar u = RandomGenerator::Generate();
-    const Scalar v = RandomGenerator::Generate();
+    const Scalar u = generateUniform();
+    const Scalar v = generateUniform();
     realization[0] = u;
     realization[1] = v;
   }
   else if ((alpha_ == 1.0) && (beta_ == 1.0))
   {
     // This is the min-copula
-    const Scalar u = RandomGenerator::Generate();
+    const Scalar u = generateUniform();
     realization[0] = u;
     realization[1] = u;
   }
   else
   {
-    const Scalar r = RandomGenerator::Generate();
-    const Scalar s = RandomGenerator::Generate();
-    const Scalar t = RandomGenerator::Generate();
+    const Scalar r = generateUniform();
+    const Scalar s = generateUniform();
+    const Scalar t = generateUniform();
     const Scalar logr = std::log(r);
     const Scalar logs = std::log(s);
     const Scalar logt = std::log(t);

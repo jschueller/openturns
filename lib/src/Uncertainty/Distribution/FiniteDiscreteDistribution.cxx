@@ -161,9 +161,9 @@ Point FiniteDiscreteDistribution::getRealization() const
   const UnsignedInteger size = points_.getSize();
   UnsignedInteger index = 0;
   // Efficient algorithm for uniform weights
-  if (hasUniformWeights_) index = RandomGenerator::IntegerGenerate(size);
+  if (hasUniformWeights_) index = generateInteger(size);
   // Alias method for nonuniform weights
-  else index = DistFunc::rDiscrete(base_, alias_);
+  else index = DistFunc::rDiscrete(base_, alias_, getEffectiveGenerator());
   return points_[index];
 }
 
@@ -175,12 +175,12 @@ Sample FiniteDiscreteDistribution::getSample(const UnsignedInteger size) const
   // Efficient algorithm for uniform weights
   if (hasUniformWeights_)
   {
-    Collection<UnsignedInteger> values(RandomGenerator::IntegerGenerate(size, supportSize));
+    Collection<UnsignedInteger> values(generateInteger(size, supportSize));
     indices = Indices(values.begin(), values.end());
   }
   // Alias method for nonuniform weights
   else
-    indices = DistFunc::rDiscrete(base_, alias_, size);
+    indices = DistFunc::rDiscrete(base_, alias_, size, getEffectiveGenerator());
   return points_.select(indices);
 }
 

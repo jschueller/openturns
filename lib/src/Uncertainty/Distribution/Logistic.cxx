@@ -96,7 +96,7 @@ Logistic * Logistic::clone() const
 /* Get one realization of the distribution */
 Point Logistic::getRealization() const
 {
-  Scalar prob = RandomGenerator::Generate();
+  Scalar prob = generateUniform();
   return Point(1, mu_ + beta_ * std::log(prob / (1.0 - prob)));
 }
 

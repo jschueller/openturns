@@ -95,7 +95,7 @@ Gumbel * Gumbel::clone() const
 /* Get one realization of the distribution */
 Point Gumbel::getRealization() const
 {
-  return Point(1, gamma_ - beta_ * std::log(-std::log(RandomGenerator::Generate())));
+  return Point(1, gamma_ - beta_ * std::log(-std::log(generateUniform())));
 }
 
 

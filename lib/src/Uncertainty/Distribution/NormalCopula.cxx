@@ -107,7 +107,7 @@ NormalCopula * NormalCopula::clone() const
 Point NormalCopula::getRealization() const
 {
   UnsignedInteger dimension = getDimension();
-  if (hasIndependentCopula()) return RandomGenerator::Generate(dimension);
+  if (hasIndependentCopula()) return generateUniform(dimension);
   else
   {
     Point realization(normal_.getRealization());
@@ -145,7 +145,7 @@ Sample NormalCopula::getSample(const UnsignedInteger size) const
   {
     const UnsignedInteger dimension = getDimension();
     Sample result(size, dimension);
-    const Point rawData(RandomGenerator::Generate(dimension * size));
+    const Point rawData(generateUniform(dimension * size));
     result.getImplementation()->setData(rawData);
     result.setName(getName());
     result.setDescription(getDescription());

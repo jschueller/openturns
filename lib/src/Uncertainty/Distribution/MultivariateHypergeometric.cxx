@@ -184,7 +184,7 @@ Point MultivariateHypergeometric::getRealization() const
   {
     /* The current component follows a hypergeometric distribution with parameters
      * colors_[i] among the remaining balls */
-    const UnsignedInteger xI = DistFunc::rHypergeometric(remainingTotal, colors_[i], remainingN);
+    const UnsignedInteger xI = DistFunc::rHypergeometric(remainingTotal, colors_[i], remainingN, getEffectiveGenerator());
     realization[i] = xI;
     remainingN -= xI;
     if (remainingN == 0) break;
@@ -208,7 +208,7 @@ Sample MultivariateHypergeometric::getSample(const UnsignedInteger size) const
     remainingTotal = total_;
     for (UnsignedInteger i = 0; i < dimension; ++i)
     {
-      const UnsignedInteger xI = DistFunc::rHypergeometric(remainingTotal, colors_[i], remainingN);
+      const UnsignedInteger xI = DistFunc::rHypergeometric(remainingTotal, colors_[i], remainingN, getEffectiveGenerator());
       sample(k, i) = xI;
       remainingN -= xI;
       if (remainingN == 0) break;
