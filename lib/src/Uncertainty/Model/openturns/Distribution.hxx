@@ -627,6 +627,12 @@ public:
   /** Get a dispersion indicator for a 1D distribution */
   Scalar getDispersionIndicator() const;
 
+  /** Random generator accessor: attach an independent stream to this distribution */
+  void setRandomGenerator(const RandomGenerator & rng);
+  RandomGenerator getRandomGenerator() const;
+  Bool hasRandomGenerator() const;
+  void clearRandomGenerator();
+
 }; /* class Distribution */
 
 

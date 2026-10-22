@@ -1306,6 +1306,29 @@ void Distribution::setParameter(const Point & parameters)
   getImplementation()->setParameter(parameters);
 }
 
+/* Random generator accessor: attach an independent stream to this distribution */
+void Distribution::setRandomGenerator(const RandomGenerator & rng)
+{
+  copyOnWrite();
+  getImplementation()->setRandomGenerator(rng);
+}
+
+RandomGenerator Distribution::getRandomGenerator() const
+{
+  return getImplementation()->getRandomGenerator();
+}
+
+Bool Distribution::hasRandomGenerator() const
+{
+  return getImplementation()->hasRandomGenerator();
+}
+
+void Distribution::clearRandomGenerator()
+{
+  copyOnWrite();
+  getImplementation()->clearRandomGenerator();
+}
+
 Point Distribution::getParameter() const
 {
   return getImplementation()->getParameter();

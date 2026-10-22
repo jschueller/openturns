@@ -5993,6 +5993,56 @@ void DistributionImplementation::setParallel(const Bool flag)
   isParallel_ = flag;
 }
 
+/* Random generator accessor: attach an independent stream to this distribution */
+void DistributionImplementation::setRandomGenerator(const RandomGenerator & rng)
+{
+  rng_ = rng;
+  hasLocalGenerator_ = true;
+}
+
+RandomGenerator DistributionImplementation::getRandomGenerator() const
+{
+  return getEffectiveGenerator();
+}
+
+Bool DistributionImplementation::hasRandomGenerator() const
+{
+  return hasLocalGenerator_;
+}
+
+void DistributionImplementation::clearRandomGenerator()
+{
+  hasLocalGenerator_ = false;
+}
+
+/* Draw from the local generator if set, else from the global generator */
+const RandomGenerator & DistributionImplementation::getEffectiveGenerator() const
+{
+  if (hasLocalGenerator_) return rng_;
+  return RandomGenerator::GetGlobalGenerator();
+}
+
+Scalar DistributionImplementation::generateUniform() const
+{
+  return getEffectiveGenerator().generate();
+}
+
+UnsignedInteger DistributionImplementation::generateInteger(const UnsignedInteger n) const
+{
+  return getEffectiveGenerator().integerGenerate(n);
+}
+
+Point DistributionImplementation::generateUniform(const UnsignedInteger size) const
+{
+  return getEffectiveGenerator().generate(size);
+}
+
+Collection<UnsignedInteger> DistributionImplementation::generateInteger(const UnsignedInteger size,
+    const UnsignedInteger n) const
+{
+  return getEffectiveGenerator().integerGenerate(size, n);
+}
+
 /* Method save() stores the object through the StorageManager */
 void DistributionImplementation::save(Advocate & adv) const
 {
@@ -6011,6 +6061,12 @@ void DistributionImplementation::save(Advocate & adv) const
   adv.saveAttribute( "isCopula_", isCopula_ );
   adv.saveAttribute( "isParallel_", isParallel_ );
   adv.saveAttribute( "supportEpsilon_", supportEpsilon_ );
+  // The local generator is stored only when set, so default archives are unchanged
+  if (hasLocalGenerator_)
+  {
+    adv.saveAttribute( "hasLocalGenerator_", hasLocalGenerator_ );
+    adv.saveAttribute( "localGeneratorState_", rng_.getState().getBuffer() );
+  }
 }
 
 /* Method load() reloads the object from the StorageManager */
@@ -6039,6 +6095,16 @@ void DistributionImplementation::load(Advocate & adv)
     adv.loadAttribute( "isParallel_", isParallel_ );
   if (adv.hasAttribute("supportEpsilon_"))
     adv.loadAttribute( "supportEpsilon_", supportEpsilon_ );
+  if (adv.hasAttribute("hasLocalGenerator_"))
+  {
+    adv.loadAttribute( "hasLocalGenerator_", hasLocalGenerator_ );
+    if (hasLocalGenerator_)
+    {
+      String buffer;
+      adv.loadAttribute( "localGeneratorState_", buffer );
+      rng_.setState(RandomGeneratorState(buffer));
+    }
+  }
 }
 
 /* Transformation of distributions by usual functions */

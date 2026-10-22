@@ -3890,3 +3890,71 @@ levelSets : collection of :class:`~openturns.LevelSet`
 OT_Distribution_computeMinimumVolumeLevelSetCollectionWithThreshold_doc
 %feature("docstring") OT::DistributionImplementation::computeMinimumVolumeLevelSetCollectionWithThreshold
 OT_Distribution_computeMinimumVolumeLevelSetCollectionWithThreshold_doc
+
+// ---------------------------------------------------------------------
+
+%define OT_Distribution_setRandomGenerator_doc
+"Attach an independent random stream to the distribution.
+
+Parameters
+----------
+rng : :class:`~openturns.RandomGenerator`
+    Independent random generator, typically obtained from :meth:`~openturns.RandomGenerator.spawn`.
+
+Notes
+-----
+When no generator is attached, sampling uses the global generator.
+Attaching a generator isolates the distribution stream from the global
+stream and from other distributions, which is useful for parallel
+simulations. The generator state is saved and loaded with the
+distribution.
+"
+%enddef
+%feature("docstring") OT::Distribution::setRandomGenerator
+OT_Distribution_setRandomGenerator_doc
+%feature("docstring") OT::DistributionImplementation::setRandomGenerator
+OT_Distribution_setRandomGenerator_doc
+
+// ---------------------------------------------------------------------
+
+%define OT_Distribution_getRandomGenerator_doc
+"Get the effective random generator of the distribution.
+
+Returns
+-------
+rng : :class:`~openturns.RandomGenerator`
+    The attached generator, or a copy of the current global generator
+    state when none is attached.
+"
+%enddef
+%feature("docstring") OT::Distribution::getRandomGenerator
+OT_Distribution_getRandomGenerator_doc
+%feature("docstring") OT::DistributionImplementation::getRandomGenerator
+OT_Distribution_getRandomGenerator_doc
+
+// ---------------------------------------------------------------------
+
+%define OT_Distribution_hasRandomGenerator_doc
+"Tell whether an independent random stream is attached.
+
+Returns
+-------
+hasGenerator : bool
+    Whether :meth:`setRandomGenerator` was called.
+"
+%enddef
+%feature("docstring") OT::Distribution::hasRandomGenerator
+OT_Distribution_hasRandomGenerator_doc
+%feature("docstring") OT::DistributionImplementation::hasRandomGenerator
+OT_Distribution_hasRandomGenerator_doc
+
+// ---------------------------------------------------------------------
+
+%define OT_Distribution_clearRandomGenerator_doc
+"Detach the independent random stream, back to the global generator.
+"
+%enddef
+%feature("docstring") OT::Distribution::clearRandomGenerator
+OT_Distribution_clearRandomGenerator_doc
+%feature("docstring") OT::DistributionImplementation::clearRandomGenerator
+OT_Distribution_clearRandomGenerator_doc

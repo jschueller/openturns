@@ -1409,10 +1409,20 @@ Point DistFunc::qNormal(const Point & p,
 */
 Scalar DistFunc::rNormal()
 {
+  return rNormal(RandomGenerator::GetGlobalGenerator());
+}
+
+Point DistFunc::rNormal(const UnsignedInteger size)
+{
+  return rNormal(size, RandomGenerator::GetGlobalGenerator());
+}
+
+Scalar DistFunc::rNormal(const RandomGenerator & rng)
+{
   for (;;)
   {
-    const Scalar u = 2.0 * RandomGenerator::Generate() - 1.0;
-    const UnsignedInteger index = RandomGenerator::IntegerGenerate(DistFunc::NumberOfBandNormalZigurrat);
+    const Scalar u = 2.0 * rng.generate() - 1.0;
+    const UnsignedInteger index = rng.integerGenerate(DistFunc::NumberOfBandNormalZigurrat);
     /* Are we in a rectangular band of the ziggurat? */
     if (std::abs(u) < DistFunc::NormalZigguratRatio[index]) return u * NormalZigguratAbscissa[index + 1];
     /* No, we are either on a wedge or in the upper tail of the Normal distribution */
@@ -1424,8 +1434,8 @@ Scalar DistFunc::rNormal()
       /* Marsaglia method */
       do
       {
-        x = std::log(RandomGenerator::Generate()) / DistFunc::NormalZigguratTail;
-        y = std::log(RandomGenerator::Generate());
+        x = std::log(rng.generate()) / DistFunc::NormalZigguratTail;
+        y = std::log(rng.generate());
       }
       while (-(y + y) < x * x);
       return (u > 0.0) ? x - DistFunc::NormalZigguratTail : DistFunc::NormalZigguratTail - x;
@@ -1437,14 +1447,15 @@ Scalar DistFunc::rNormal()
     const Scalar pdfX = std::exp(-0.5 * x * x);
     const Scalar pdfI = std::exp(-0.5 * xI * xI);
     const Scalar pdfIp1 = std::exp(-0.5 * xIp1 * xIp1);
-    if (RandomGenerator::Generate() * (pdfI - pdfIp1) < pdfX - pdfIp1) return x;
+    if (rng.generate() * (pdfI - pdfIp1) < pdfX - pdfIp1) return x;
   }
 }
 
-Point DistFunc::rNormal(const UnsignedInteger size)
+Point DistFunc::rNormal(const UnsignedInteger size,
+                        const RandomGenerator & rng)
 {
   Point result(size);
-  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNormal();
+  for (UnsignedInteger i = 0; i < size; ++i) result[i] = rNormal(rng);
   return result;
 }
 

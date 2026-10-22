@@ -44,6 +44,7 @@
 #include "openturns/IteratedQuadrature.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/SpecFunc.hxx"
+#include "openturns/RandomGenerator.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -838,7 +839,24 @@ public:
   void setSupportEpsilon(const Scalar epsilon);
   Scalar getSupportEpsilon() const;
 
-protected:
+  /** Random generator accessor: attach an independent stream to this distribution */
+  void setRandomGenerator(const RandomGenerator & rng);
+  RandomGenerator getRandomGenerator() const;
+  Bool hasRandomGenerator() const;
+  void clearRandomGenerator();
+
+ protected:
+  /** Draw from the local generator if set, else from the global generator */
+  Scalar generateUniform() const;
+  UnsignedInteger generateInteger(const UnsignedInteger n) const;
+  Point generateUniform(const UnsignedInteger size) const;
+  Collection<UnsignedInteger> generateInteger(const UnsignedInteger size,
+      const UnsignedInteger n) const;
+#ifndef SWIG
+  /** Accessor to the effective generator (local if set, else global) */
+  const RandomGenerator & getEffectiveGenerator() const;
+#endif
+
   /** Filter identical entries */
   static Description DeduplicateDescription(const Description & description);
 
@@ -2473,6 +2491,10 @@ protected:
 
   /** Flag to tell if the distribution is indeed a copula */
   Bool isCopula_;
+
+  /** Local random generator (unset means use the global generator) */
+  mutable RandomGenerator rng_;
+  Bool hasLocalGenerator_ = false;
 
 }; /* class DistributionImplementation */
 

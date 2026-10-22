@@ -26,6 +26,7 @@
 #include "openturns/Point.hxx"
 #include "openturns/Indices.hxx"
 #include "openturns/Sample.hxx"
+#include "openturns/RandomGenerator.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -267,6 +268,9 @@ OT_API Point qNormal(const Point & p,
                      const Bool tail = false);
 OT_API Scalar rNormal();
 OT_API Point rNormal(const UnsignedInteger size);
+OT_API Scalar rNormal(const RandomGenerator & rng);
+OT_API Point rNormal(const UnsignedInteger size,
+                     const RandomGenerator & rng);
 
 OT_API Scalar dNormal(const Scalar x);
 OT_API Point dNormal(const Point &x);
