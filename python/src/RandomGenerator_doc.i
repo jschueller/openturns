@@ -110,3 +110,158 @@ initialized to 0 when a session is launched.)RAW"
 
 Uses the default initial seed set in the :class:`~openturns.ResourceMap` entry `RandomGenerator-InitialSeed`.
 "
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::SetStream
+"Select an independent stream of the global random generator.
+
+Parameters
+----------
+stream : int
+    Stream index, selects one of the 2^127 independent PCG streams.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::Advance
+"Advance the global random generator without generating.
+
+Parameters
+----------
+delta : int
+    Number of steps to skip.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::Spawn
+"Spawn independent child generators from the global generator.
+
+Parameters
+----------
+n : positive int
+    Number of child generators.
+
+Returns
+-------
+children : collection of :class:`~openturns.RandomGenerator`
+    Independent generators derived from the global generator state,
+    suitable for parallel simulations.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::setSeed
+"Set the seed of the generator.
+
+Parameters
+----------
+seed : int
+    Seed value.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::setStream
+"Select an independent stream of the generator.
+
+Parameters
+----------
+stream : int
+    Stream index, selects one of the 2^127 independent PCG streams.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::setState
+"Set the state of the generator.
+
+Parameters
+----------
+state : :class:`~openturns.RandomGeneratorState`
+    State of the generator.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::getState
+"Get the state of the generator.
+
+Returns
+-------
+state : :class:`~openturns.RandomGeneratorState`
+    State of the generator.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::advance
+"Advance the generator without generating.
+
+Parameters
+----------
+delta : int
+    Number of steps to skip.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::spawn
+"Spawn independent child generators from this generator.
+
+Parameters
+----------
+n : positive int
+    Number of child generators.
+
+Returns
+-------
+children : collection of :class:`~openturns.RandomGenerator`
+    Independent generators derived from this generator state,
+    suitable for parallel simulations.
+
+Examples
+--------
+>>> import openturns as ot
+>>> rng = ot.RandomGenerator(0)
+>>> children = rng.spawn(2)
+>>> len(children)
+2
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::generate
+"Generate pseudo-random numbers uniformly distributed over :math:`[0, 1[`.
+
+Parameters
+----------
+size : positive int
+    Number of realizations required. When not given, by default it is equal to
+    1.
+
+Returns
+-------
+numbers : float, :class:`~openturns.Point`
+    Pseudo-random numbers.
+"
+
+// ---------------------------------------------------------------------
+
+%feature("docstring") OT::RandomGenerator::integerGenerate
+"Generate pseudo-random integers uniformly distributed over :math:`[0,...,n-1]`.
+
+Parameters
+----------
+n : positive int
+    Upper bound of the interval.
+size : positive int
+    Number of integers to generate. When not given, by default it is equal to
+    1.
+
+Returns
+-------
+integers : int, :class:`~openturns.UnsignedIntegerCollection`
+    Pseudo-random integers.
+"
