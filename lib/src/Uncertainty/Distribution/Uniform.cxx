@@ -104,14 +104,14 @@ void Uniform::computeRange()
 /* Get one realization of the distribution */
 Point Uniform::getRealization() const
 {
-  return Point(1, a_ + (b_ - a_) * RandomGenerator::Generate());
+  return Point(1, a_ + (b_ - a_) * generateUniform());
 }
 
 /* Get a sample of the distribution */
 Sample Uniform::getSample(const UnsignedInteger size) const
 {
   Sample result(size, 1);
-  result.getImplementation()->setData(RandomGenerator::Generate(size));
+  result.getImplementation()->setData(generateUniform(size));
   result *= Point(1, b_ - a_);
   result += Point(1, a_);
   result.setName(getName());

@@ -220,6 +220,14 @@ OT_Distribution_isElliptical_doc
 OT_Distribution_isIntegral_doc
 %feature("docstring") OT::Distribution::setDescription
 OT_Distribution_setDescription_doc
+%feature("docstring") OT::Distribution::setRandomGenerator
+OT_Distribution_setRandomGenerator_doc
+%feature("docstring") OT::Distribution::getRandomGenerator
+OT_Distribution_getRandomGenerator_doc
+%feature("docstring") OT::Distribution::hasRandomGenerator
+OT_Distribution_hasRandomGenerator_doc
+%feature("docstring") OT::Distribution::clearRandomGenerator
+OT_Distribution_clearRandomGenerator_doc
 %feature("docstring") OT::Distribution::setParametersCollection
 OT_Distribution_setParametersCollection_doc
 %feature("docstring") OT::Distribution::cos

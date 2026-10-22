@@ -165,9 +165,9 @@ Normal * Normal::clone() const
 Point Normal::getRealization() const
 {
   const UnsignedInteger dimension = getDimension();
-  if (dimension == 1) return Point(1, mean_[0] + sigma_[0] * DistFunc::rNormal());
+  if (dimension == 1) return Point(1, mean_[0] + sigma_[0] * DistFunc::rNormal(getEffectiveGenerator()));
   // First, a realization of independent standard coordinates
-  Point value(DistFunc::rNormal(dimension));
+  Point value(DistFunc::rNormal(dimension, getEffectiveGenerator()));
   // Then, transform the independent standard coordinates into the needed ones
   if (hasIndependentCopula_)
   {
@@ -187,10 +187,10 @@ Sample Normal::getSample(const UnsignedInteger size) const
   const UnsignedInteger dimension = getDimension();
   Sample result(size, dimension);
   if (dimension == 1)
-    result.getImplementation()->setData(sigma_[0] * DistFunc::rNormal(size));
+    result.getImplementation()->setData(sigma_[0] * DistFunc::rNormal(size, getEffectiveGenerator()));
   else
   {
-    result.getImplementation()->setData(DistFunc::rNormal(size * dimension));
+    result.getImplementation()->setData(DistFunc::rNormal(size * dimension, getEffectiveGenerator()));
     if (hasIndependentCopula_) result *= sigma_;
     else
     {
