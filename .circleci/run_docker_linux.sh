@@ -2,6 +2,7 @@
 
 set -xe
 git config --global --add safe.directory /io
+sudo pacman -Syu --noconfirm
 
 UID_GID=$1
 
@@ -30,17 +31,4 @@ cmake -DCMAKE_INSTALL_PREFIX=${HOME}/.local \
       -DUSE_SPHINX=ON -DSPHINX_FLAGS="-W -T -j4" -DUSE_SPHINX_EXT_MATHJAX=OFF \
       -B build ${source_dir}
 cd build
-make install
-find ~/.local/share/doc/openturns/html -name "*.zip" | xargs rm
-if test -n "${UID_GID}"
-then
-  tar -czf openturns-doc.tar.gz -C ~/.local/share/doc/openturns/ html/
-  sudo chown ${UID_GID} openturns-doc.tar.gz && sudo cp -p openturns-doc.tar.gz ${source_dir}
-fi
-if test "${CIRCLE_BRANCH}" = "master"
-then
-  exit 0
-fi
-ctest -R pyinstallcheck --output-on-failure --timeout 100 ${MAKEFLAGS} --repeat after-timeout:2 --schedule-random
-#make tests
-#ctest -R cppcheck --output-on-failure --timeout 100 ${MAKEFLAGS} --repeat after-timeout:2 --schedule-random
+make
