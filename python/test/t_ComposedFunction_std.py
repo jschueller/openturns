@@ -248,3 +248,22 @@ assert not (nh != ot.NoHessian())
 _ = nh.getCallsNumber()
 with ott.assert_raises(Exception):
     nh.hessian(ot.Point())
+
+# setParameter must update evaluation, gradient, hessian and parameterGradient
+f = ot.ParametricFunction(ot.SymbolicFunction(["y", "a"], ["a*y^2"]), [1], [2.0])
+g = ot.ParametricFunction(ot.SymbolicFunction(["x", "b"], ["x+b"]), [1], [3.0])
+h = ot.ComposedFunction(f, g)
+x = [1.0]
+ott.assert_almost_equal(h(x), [32.0])
+ott.assert_almost_equal(h.gradient(x), ot.Matrix([[16.0]]))
+h.setParameter([5.0, 7.0])
+ott.assert_almost_equal(h.getParameter(), [5.0, 7.0])
+ott.assert_almost_equal(h.getLeftFunction().getParameter(), [7.0])
+ott.assert_almost_equal(h.getRightFunction().getParameter(), [5.0])
+fRef = ot.ParametricFunction(ot.SymbolicFunction(["y", "a"], ["a*y^2"]), [1], [7.0])
+gRef = ot.ParametricFunction(ot.SymbolicFunction(["x", "b"], ["x+b"]), [1], [5.0])
+hRef = ot.ComposedFunction(fRef, gRef)
+ott.assert_almost_equal(h(x), hRef(x))
+ott.assert_almost_equal(h.gradient(x), hRef.gradient(x))
+ott.assert_almost_equal(h.hessian(x), hRef.hessian(x))
+ott.assert_almost_equal(h.parameterGradient(x), hRef.parameterGradient(x))

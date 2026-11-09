@@ -97,6 +97,29 @@ UnsignedInteger ComposedGradient::getOutputDimension() const
   return leftGradient_.getOutputDimension();
 }
 
+/* Parameters value accessor */
+Point ComposedGradient::getParameter() const
+{
+  Point parameter(rightFunction_.getParameter());
+  parameter.add(leftGradient_.getParameter());
+  return parameter;
+}
+
+void ComposedGradient::setParameter(const Point & parameter)
+{
+  const UnsignedInteger rightDimension = rightFunction_.getParameterDimension();
+  if (parameter.getDimension() < rightDimension) throw InvalidArgumentException(HERE) << "Required parameter of dimension at least " << rightDimension << " provided " << parameter.getDimension();
+  const UnsignedInteger leftDimension = parameter.getDimension() - rightDimension;
+  Point rightParameter(rightDimension);
+  std::copy(parameter.begin(), parameter.begin() + rightDimension, rightParameter.begin());
+  Point leftParameter(leftDimension);
+  std::copy(parameter.begin() + rightDimension, parameter.end(), leftParameter.begin());
+  rightFunction_.setParameter(rightParameter);
+  rightGradient_.setParameter(rightParameter);
+  leftGradient_.setParameter(leftParameter);
+  GradientImplementation::setParameter(parameter);
+}
+
 /* Method save() stores the object through the StorageManager */
 void ComposedGradient::save(Advocate & adv) const
 {

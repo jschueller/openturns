@@ -131,6 +131,31 @@ UnsignedInteger ComposedHessian::getOutputDimension() const
   return leftHessian_.getOutputDimension();
 }
 
+/* Parameters value accessor */
+Point ComposedHessian::getParameter() const
+{
+  Point parameter(rightFunction_.getParameter());
+  parameter.add(leftHessian_.getParameter());
+  return parameter;
+}
+
+void ComposedHessian::setParameter(const Point & parameter)
+{
+  const UnsignedInteger rightDimension = rightFunction_.getParameterDimension();
+  if (parameter.getDimension() < rightDimension) throw InvalidArgumentException(HERE) << "Required parameter of dimension at least " << rightDimension << " provided " << parameter.getDimension();
+  const UnsignedInteger leftDimension = parameter.getDimension() - rightDimension;
+  Point rightParameter(rightDimension);
+  std::copy(parameter.begin(), parameter.begin() + rightDimension, rightParameter.begin());
+  Point leftParameter(leftDimension);
+  std::copy(parameter.begin() + rightDimension, parameter.end(), leftParameter.begin());
+  rightFunction_.setParameter(rightParameter);
+  rightGradient_.setParameter(rightParameter);
+  rightHessian_.setParameter(rightParameter);
+  leftGradient_.setParameter(leftParameter);
+  leftHessian_.setParameter(leftParameter);
+  HessianImplementation::setParameter(parameter);
+}
+
 /* Method save() stores the object through the StorageManager */
 void ComposedHessian::save(Advocate & adv) const
 {

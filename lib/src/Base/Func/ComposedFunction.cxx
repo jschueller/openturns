@@ -192,6 +192,36 @@ Matrix ComposedFunction::parameterGradient(const Point & inP) const
   return grad;
 }
 
+/* Parameters value accessor */
+void ComposedFunction::setParameter(const Point & parameter)
+{
+  const UnsignedInteger rightDimension = p_rightFunction_->getParameterDimension();
+  const UnsignedInteger leftDimension = p_leftFunction_->getParameterDimension();
+  if (parameter.getDimension() != rightDimension + leftDimension) throw InvalidArgumentException(HERE) << "Required parameter of dimension " << rightDimension + leftDimension << " provided " << parameter.getDimension();
+  Point rightParameter(rightDimension);
+  std::copy(parameter.begin(), parameter.begin() + rightDimension, rightParameter.begin());
+  Point leftParameter(leftDimension);
+  std::copy(parameter.begin() + rightDimension, parameter.end(), leftParameter.begin());
+  p_rightFunction_->setParameter(rightParameter);
+  p_leftFunction_->setParameter(leftParameter);
+  FunctionImplementation::setParameter(parameter);
+}
+
+/* Parameters description accessor */
+void ComposedFunction::setParameterDescription(const Description & description)
+{
+  const UnsignedInteger rightDimension = p_rightFunction_->getParameterDescription().getSize();
+  const UnsignedInteger leftDimension = p_leftFunction_->getParameterDescription().getSize();
+  if (description.getSize() != rightDimension + leftDimension) throw InvalidArgumentException(HERE) << "Required parameter description of dimension " << rightDimension + leftDimension << " provided " << description.getSize();
+  Description rightDescription(rightDimension);
+  std::copy(description.begin(), description.begin() + rightDimension, rightDescription.begin());
+  Description leftDescription(leftDimension);
+  std::copy(description.begin() + rightDimension, description.end(), leftDescription.begin());
+  p_rightFunction_->setParameterDescription(rightDescription);
+  p_leftFunction_->setParameterDescription(leftDescription);
+  FunctionImplementation::setParameterDescription(description);
+}
+
 /* Method save() stores the object through the StorageManager */
 void ComposedFunction::save(Advocate & adv) const
 {
