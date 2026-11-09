@@ -76,20 +76,54 @@ Point InverseRosenblattEvaluation::operator () (const Point & inP) const
   return y;
 }
 
-/*
- * Gradient according to the marginal parameters.
- * F(Q(y, p), p) = Id
- * F:RxRp->R
- * Q:RxRp->R
- * dF/dp = dF/dx(Q(y, p), p) . dQ/dp(y, p) + dF/dp(Q(y, p), p)
- *       = f(Q(y, p), p) . dQ/dp(y, p) + dF/dp(Q(y, p), p)
- *       = 0
- * => dQ/dp(y, p) = - dF/dp(Q(y, p), p) / f(Q(y, p), p)
+/* Gradient according to the marginal parameters.
+ * No analytical derivative of the inverse Rosenblatt map with respect to
+ * the distribution parameters is available, so it is computed numerically
+ * by central finite differences.
  */
-Matrix InverseRosenblattEvaluation::parameterGradient(const Point & ) const
+Matrix InverseRosenblattEvaluation::parameterGradient(const Point & inP) const
 {
-  Matrix grad(0, getOutputDimension());
-  return grad;
+  const UnsignedInteger inputDimension = getInputDimension();
+  if (inP.getDimension() != inputDimension) throw InvalidArgumentException(HERE) << "Error: expected a point of dimension=" << inputDimension << ", got dimension=" << inP.getDimension();
+  const Point parameter(distribution_.getParameter());
+  const UnsignedInteger parameterDimension = parameter.getDimension();
+  const UnsignedInteger outputDimension = getOutputDimension();
+  Matrix gradient(parameterDimension, outputDimension);
+  if (parameterDimension == 0) return gradient;
+  const Scalar epsilon = ResourceMap::GetAsScalar("Evaluation-ParameterEpsilon");
+  for (UnsignedInteger i = 0; i < parameterDimension; ++i)
+  {
+    Point parameterPlus(parameter);
+    parameterPlus[i] += epsilon;
+    InverseRosenblattEvaluation evaluationPlus(*this);
+    evaluationPlus.distribution_.setParameter(parameterPlus);
+    const Point valuePlus(evaluationPlus.operator()(inP));
+    Point parameterMinus(parameter);
+    parameterMinus[i] -= epsilon;
+    InverseRosenblattEvaluation evaluationMinus(*this);
+    evaluationMinus.distribution_.setParameter(parameterMinus);
+    const Point valueMinus(evaluationMinus.operator()(inP));
+    for (UnsignedInteger j = 0; j < outputDimension; ++j)
+      gradient(i, j) = (valuePlus[j] - valueMinus[j]) / (2.0 * epsilon);
+  }
+  return gradient;
+}
+
+/* Parameters value accessor */
+Point InverseRosenblattEvaluation::getParameter() const
+{
+  return distribution_.getParameter();
+}
+
+void InverseRosenblattEvaluation::setParameter(const Point & parameter)
+{
+  distribution_.setParameter(parameter);
+}
+
+/* Parameters description accessor */
+Description InverseRosenblattEvaluation::getParameterDescription() const
+{
+  return distribution_.getParameterDescription();
 }
 
 /* Accessor for input point dimension */
