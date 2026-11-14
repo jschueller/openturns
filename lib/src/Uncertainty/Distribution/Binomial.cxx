@@ -204,14 +204,14 @@ Point Binomial::getStandardDeviation() const
 /* Get the skewness of the distribution */
 Point Binomial::getSkewness() const
 {
-  if ((p_ == 0.0) || (p_ == 1.0)) throw NotDefinedException(HERE) << "Error: the skewness is not defined for the Binomial distribution when p is zero or one.";
+  if ((n_ == 0) || (p_ == 0.0) || (p_ == 1.0)) throw NotDefinedException(HERE) << "Error: the skewness is not defined for the Binomial distribution when p is zero or one.";
   return Point(1, (1.0 - 2.0 * p_) / std::sqrt(n_ * p_ * (1.0 - p_)));
 }
 
 /* Get the kurtosis of the distribution */
 Point Binomial::getKurtosis() const
 {
-  if ((p_ == 0.0) || (p_ == 1.0)) throw NotDefinedException(HERE) << "Error: the kurtosis is not defined for the Binomial distribution when p is zero or one.";
+  if ((n_ == 0) || (p_ == 0.0) || (p_ == 1.0)) throw NotDefinedException(HERE) << "Error: the kurtosis is not defined for the Binomial distribution when p is zero or one.";
   return Point(1, 3.0 - 6.0 / n_ + 1.0 / (n_ * p_ * (1.0 - p_)));
 }
 

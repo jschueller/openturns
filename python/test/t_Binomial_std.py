@@ -212,3 +212,8 @@ ott.assert_almost_equal(ot.Binomial(5, 1.0).computeQuantile(0.3), [5.0], 0.0, 0.
 ott.assert_almost_equal(ot.Binomial(0, 0.5).computeQuantile(0.0), [0.0], 0.0, 0.0)
 ott.assert_almost_equal(ot.Binomial(0, 0.5).computeQuantile(0.3), [0.0], 0.0, 0.0)
 ott.assert_almost_equal(ot.Binomial(0, 0.5).computeQuantile(1.0), [0.0], 0.0, 0.0)
+# n=0 is degenerate: moments undefined like p=0/1
+with ott.assert_raises(Exception):
+    ot.Binomial(0, 0.5).getSkewness()
+with ott.assert_raises(Exception):
+    ot.Binomial(0, 0.5).getKurtosis()
