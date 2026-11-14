@@ -65,3 +65,6 @@ print("zero-IQR high-dim estimated=", estimated_high.getParameter())
 for s in estimated_high.getSigma():
     assert s >= ot.SpecFunc.ScalarEpsilon
     assert s > 0.0
+# empty sample must throw instead of aborting (was SIGABRT via build(Point) overload)
+with ott.assert_raises(TypeError):
+    factory.build(ot.Sample(0, 1))

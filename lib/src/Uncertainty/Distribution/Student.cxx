@@ -902,7 +902,7 @@ void Student::setParameter(const Point & parameter)
   // N = 2*d+((d-1)*d)/2+1
   const UnsignedInteger size = parameter.getSize();
   Scalar dimReal = 0.5 * std::sqrt(1.0 + 8.0 * size) - 1.5;
-  if (dimReal != round(dimReal)) throw InvalidArgumentException(HERE) << "Error: invalid parameter number for Student";
+  if (!(dimReal >= 1.0) || dimReal != round(dimReal)) throw InvalidArgumentException(HERE) << "Error: invalid parameter number for Student";
   const UnsignedInteger dimension = dimReal;
   const Scalar nu = parameter[0];
 
