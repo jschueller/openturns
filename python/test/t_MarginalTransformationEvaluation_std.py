@@ -294,3 +294,8 @@ ott.assert_almost_equal(transformation.getParameter(), before)
 with ott.assert_raises(TypeError):
     transformation.setParameter([1.0, 2.0])
 ott.assert_almost_equal(transformation.getParameter(), before)
+# wrong-size points raise instead of aborting/truncating (SIGABRT before)
+with ott.assert_raises(TypeError):
+    transformation(ot.Point(0))
+with ott.assert_raises(TypeError):
+    transformation(ot.Point([0.0, 0.0]))

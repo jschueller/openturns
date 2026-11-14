@@ -371,6 +371,8 @@ Bool MarginalTransformationEvaluation::equals(const EvaluationImplementation & o
 /* Evaluation */
 Point MarginalTransformationEvaluation::operator () (const Point & inP) const
 {
+  const UnsignedInteger inputDimension = getInputDimension();
+  if (inP.getDimension() != inputDimension) throw InvalidArgumentException(HERE) << "Error: expected a point of dimension=" << inputDimension << ", got dimension=" << inP.getDimension();
   const UnsignedInteger dimension = getOutputDimension();
   Point result(dimension);
   // The marginal transformation apply G^{-1} o F to each component of the input, where F is the ith input CDF and G the ith output CDf
