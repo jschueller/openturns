@@ -149,6 +149,30 @@ Point MaximumDistribution::getRealization() const
 Scalar MaximumDistribution::computePDF(const Point & point) const
 {
   if (point.getDimension() != 1) throw InvalidArgumentException(HERE) << "Error: the given point must have dimension=1, here dimension=" << point.getDimension();
+  // Discrete case first: the maximum has atoms with
+  // P(max = k) = Prod F_i(k) - Prod P(X_i < k) and
+  // P(X_i < k) = F_i(k) - p_i(k). The bound convention below
+  // (density zero at finite range bounds) must not kill atoms.
+  if (isDiscrete())
+  {
+    if (allSame_)
+    {
+      const Scalar cdf = distribution_.computeCDF(point);
+      const Scalar less = std::max(cdf - distribution_.computePDF(point), 0.0);
+      return std::pow(cdf, static_cast<Scalar>(variablesNumber_)) - std::pow(less, static_cast<Scalar>(variablesNumber_));
+    }
+    const UnsignedInteger size = distribution_.getDimension();
+    Scalar prodLE = 1.0;
+    Scalar prodLT = 1.0;
+    for (UnsignedInteger i = 0; i < size; ++ i)
+    {
+      const Distribution marginal(distribution_.getMarginal(i));
+      const Scalar cdf = marginal.computeCDF(point);
+      prodLE *= cdf;
+      prodLT *= std::max(cdf - marginal.computePDF(point), 0.0);
+    }
+    return prodLE - prodLT;
+  }
   // Library convention, enforced by the validation harness: the density is
   // zero at finite range bounds of continuous laws, even when the continuous
   // extension would be nonzero there

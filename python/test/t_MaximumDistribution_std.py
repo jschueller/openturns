@@ -118,3 +118,14 @@ ott.assert_almost_equal(
 ott.assert_almost_equal(
     ot.MaximumDistribution(ot.Uniform(0.0, 1.0), 2).computePDF([0.99]), 1.98, 1e-12, 0.0
 )
+# --- MaximumDistribution: discrete PDF is the atom mass, consistent with CDF ---
+p1 = ot.Poisson(2.0)
+p2 = ot.Poisson(3.0)
+m = ot.MaximumDistribution([p1, p2])
+ott.assert_almost_equal(m.computePDF([0.0]), p1.computeCDF([0.0]) * p2.computeCDF([0.0]), 1e-12, 0.0)
+ott.assert_almost_equal(
+    m.computePDF([1.0]),
+    p1.computeCDF([1.0]) * p2.computeCDF([1.0]) - p1.computeCDF([0.0]) * p2.computeCDF([0.0]),
+    1e-12,
+    0.0,
+)
