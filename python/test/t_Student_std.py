@@ -408,3 +408,10 @@ with ott.assert_raises(Exception):
     ot.Student(5.0, [0.0, 0.0], [1.0, 1.0]).setParametersCollection(
         ot.PointCollection([ot.Point(3), ot.Point(1), ot.Point(2)])
     )
+# singular correlation is regularized like Normal (#2161 machinery): finite
+# density on the manifold, zero off it
+R = ot.CorrelationMatrix(2)
+R[0, 1] = 1.0
+ssing = ot.Student(3.0, [0.0, 0.0], [1.0, 1.0], R)
+assert ssing.computePDF([0.0, 0.0]) > 0.0
+ott.assert_almost_equal(ssing.computePDF([0.0, 1.0]), 0.0, 0.0, 1e-12)

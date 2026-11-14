@@ -382,3 +382,9 @@ with ott.assert_raises(Exception):
     )
 with ott.assert_raises(Exception):
     ot.Normal(1).setParametersCollection(ot.PointCollection(2, ot.Point(2)))
+# singular covariance is regularized, not rejected (#2161): finite density
+# on the manifold, zero off it, near-manifold sampling
+sing = ot.Normal([0.0, 0.0], ot.CovarianceMatrix([[1.0, 1.0], [1.0, 1.0]]))
+assert sing.computePDF([0.0, 0.0]) > 0.0
+ott.assert_almost_equal(sing.computePDF([0.0, 1.0]), 0.0, 0.0, 0.0)
+ott.assert_almost_equal(sing.getSample(100).computeStandardDeviation()[0], 1.0, 1e-1, 0.0)
