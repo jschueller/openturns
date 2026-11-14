@@ -193,7 +193,35 @@ Scalar FrankCopula::computeCDF(const Point & point) const
   // If we are in the support
   // Independent case
   if (theta_ == 0.0) return u * v;
-  // General case
+  // General case: the closed form below overflows for large |theta|
+  // (exp(-theta) saturates, 1+R rounds to 0, CDF comes out inf/nan),
+  // so large |theta| use overflow-safe reformulations tending to the
+  // Frechet bounds. For |theta| <= 1 the closed form is exact.
+  if (theta_ > 1.0)
+  {
+    // C -> min(u, v): with a = exp(-theta*u), b = exp(-theta*v),
+    // write S = (a*b-a-b+c)/(c-1) with c = exp(-theta) as
+    // S = |N|/|D| with |N| = a*((1-b)+(b-c)/a), so with lo = min(u,v),
+    // hi = max(u,v): log|N| = -theta*lo
+    //   + log(1-b+exp(-theta*(hi-lo))-exp(-theta*(1-lo))),
+    // all exponentials in [0, 1] with graceful underflow.
+    const Scalar lo = std::min(u, v);
+    const Scalar hi = std::max(u, v);
+    const Scalar logN = -theta_ * lo + std::log(1.0 - std::exp(-theta_ * hi) + std::exp(-theta_ * (hi - lo)) - std::exp(-theta_ * (1.0 - lo)));
+    return (std::log1p(-std::exp(-theta_)) - logN) / theta_;
+  }
+  if (theta_ < -1.0)
+  {
+    // C -> max(u+v-1, 0): with phi = -theta, write R = A*B/D as
+    // R = exp(E)*K with E = phi*(u+v-1) and K in (0, 1], then
+    // C = log1p(R)/phi, using log(1+exp(E)*K) = E+log(K+exp(-E))
+    // for E > 0 to avoid overflow.
+    const Scalar phi = -theta_;
+    const Scalar K = (1.0 - std::exp(-phi * u)) * (1.0 - std::exp(-phi * v)) / (1.0 - std::exp(-phi));
+    const Scalar E = phi * (u + v - 1.0);
+    if (E <= 0.0) return std::log1p(std::exp(E) * K) / phi;
+    return (E + std::log(K + std::exp(-E))) / phi;
+  }
   const Scalar expm1MinusTheta = expm1(-theta_);
   const Scalar expm1MinusThetaU = expm1(-theta_ * point[0]);
   const Scalar expm1MinusThetaV = expm1(-theta_ * point[1]);

@@ -148,3 +148,8 @@ assert frankNeg.getCovariance()[0, 1] < 0.0
 meanMC = sampleMC.computeMean()
 covMC = ((sampleMC - meanMC).computeCovariance()[0, 1])
 ott.assert_almost_equal(frankNeg.getCovariance()[0, 1], covMC, 1e-2, 1e-3)
+# --- FrankCopula: large |theta| CDF tends to the Frechet bounds ---
+ott.assert_almost_equal(ot.FrankCopula(700.0).computeCDF([0.5, 0.7]), 0.5, 1e-9, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(1e10).computeCDF([0.5, 0.7]), 0.5, 1e-9, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-700.0).computeCDF([0.5, 0.7]), 0.2, 1e-9, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-1e10).computeCDF([0.5, 0.7]), 0.2, 1e-9, 0.0)
