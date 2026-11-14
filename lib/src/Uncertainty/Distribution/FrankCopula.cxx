@@ -47,6 +47,7 @@ FrankCopula::FrankCopula(const Scalar theta)
   : ArchimedeanCopula()
   , theta_(theta)
 {
+  if (!std::isfinite(theta)) throw InvalidArgumentException(HERE) << "Theta must be finite, here theta=" << theta;
   setName( "FrankCopula" );
   // We set the dimension of the FrankCopula distribution
   setDimension( 2 );
@@ -405,6 +406,7 @@ Bool FrankCopula::hasIndependentCopula() const
 /* Theta accessor */
 void FrankCopula::setTheta(const Scalar theta)
 {
+  if (!std::isfinite(theta)) throw InvalidArgumentException(HERE) << "Theta must be finite, here theta=" << theta;
   if (theta != theta_)
   {
     theta_ = theta;

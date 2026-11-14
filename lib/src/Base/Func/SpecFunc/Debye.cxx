@@ -54,6 +54,14 @@ double debyen(const double x, const int n)
     /* n!*zeta(n+1) is the integral for x=infinity , 27.1.3 */
     sum = nzetan[n] ;
 
+    /* For x >= 1e3 the e^(-x*k) series correction underflows to exactly 0
+       in doubles, so the integral is bit-identical to its n!*zeta(n+1)
+       limit (checked against mpmath quadrature); return it directly,
+       also avoiding static_cast<int>(x) overflow below for huge x
+       (e.g. theta=1e10 in FrankCopula::getKendallTau) */
+    if (x >= 1.0e3)
+      return sum ;
+
     /* the number of terms needed in the k-sum for x=0,1,2,3...
      * Reflects the n=1 case, because higher n need less terms.
      */

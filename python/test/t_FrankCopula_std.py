@@ -119,6 +119,19 @@ ot.Log.Show(ot.Log.TRACE)
 validation = ott.DistributionValidation(copula)
 validation.run()
 
+# --- FrankCopula: large |theta| Kendall/Spearman, non-finite theta rejected ---
+# used to segfault via static_cast<int>(x) overflow in debyen
+ott.assert_almost_equal(ot.FrankCopula(1e10).getKendallTau()[1, 0], 1.0, 1e-6, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-1e10).getKendallTau()[1, 0], -1.0, 1e-6, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(1e10).getSpearmanCorrelation()[1, 0], 1.0, 1e-6, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-1e10).getSpearmanCorrelation()[1, 0], -1.0, 1e-6, 0.0)
+with ott.assert_raises(TypeError):
+    ot.FrankCopula(float("inf"))
+with ott.assert_raises(TypeError):
+    ot.FrankCopula(float("nan"))
+with ott.assert_raises(TypeError):
+    ot.FrankCopula(2.5).setTheta(float("inf"))
+
 # --- FrankCopula: negative dependence uses the general formulas ---
 frankNeg = ot.FrankCopula(-5.0)
 assert m.isfinite(frankNeg.computeEntropy())
