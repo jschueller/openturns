@@ -178,3 +178,6 @@ with ott.assert_raises(TypeError):
     ot.GumbelCopula(float("inf"))
 with ott.assert_raises(TypeError):
     ot.GumbelCopula(2.0).setTheta(float("inf"))
+# --- GumbelCopula: PDF stays finite on the diagonal at extreme theta ---
+ott.assert_almost_equal(ot.GumbelCopula(1e10).computePDF([0.5, 0.5]) / 1e10, 0.7213, 1e-3, 0.0)
+ott.assert_almost_equal(ot.GumbelCopula(1e10).computePDF([0.5, 0.7]), 0.0, 0.0, 0.0)

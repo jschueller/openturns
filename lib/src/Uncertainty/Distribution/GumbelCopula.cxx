@@ -190,7 +190,22 @@ Scalar GumbelCopula::computePDF(const Point & point) const
   const Scalar minusLogVPowerTheta = std::pow(-logV, theta_);
   const Scalar sum1 = minusLogUPowerTheta + minusLogVPowerTheta;
   const Scalar pow1 = std::pow(sum1, 1.0 / theta_);
-  return pow1 * minusLogUPowerTheta * minusLogVPowerTheta * std::exp(-pow1) * (pow1 + theta_ - 1.0) / (u * v * logU * logV * sum1 * sum1);
+  const Scalar pdf = pow1 * minusLogUPowerTheta * minusLogVPowerTheta * std::exp(-pow1) * (pow1 + theta_ - 1.0) / (u * v * logU * logV * sum1 * sum1);
+  if (std::isfinite(pdf)) return pdf;
+  // Fallback for extreme theta: the power terms under/overflow to 0/0
+  // while the density stays finite on the diagonal. Work in log-space with
+  // A = log(-log u), B = log(-log v), M = max(A, B): with
+  // sum1 = exp(theta*M)*(1+exp(-theta*|B-A|)) everything stays finite.
+  const Scalar A = std::log(-logU);
+  const Scalar B = std::log(-logV);
+  const Scalar M = std::max(A, B);
+  const Scalar d = std::abs(B - A);
+  const Scalar log1pTerm = std::log1p(std::exp(-theta_ * d));
+  const Scalar logSum1 = theta_ * M + log1pTerm;
+  const Scalar logPow1 = M + log1pTerm / theta_;
+  const Scalar pow1Stable = std::exp(logPow1);
+  const Scalar logPDF = logPow1 + theta_ * (A + B) - pow1Stable + std::log(pow1Stable + theta_ - 1.0) - std::log(u) - std::log(v) - std::log(-logU) - std::log(-logV) - 2.0 * logSum1;
+  return std::exp(logPDF);
 }
 
 /* Get the CDF of the distribution */
