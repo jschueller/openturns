@@ -153,3 +153,8 @@ ott.assert_almost_equal(ot.FrankCopula(700.0).computeCDF([0.5, 0.7]), 0.5, 1e-9,
 ott.assert_almost_equal(ot.FrankCopula(1e10).computeCDF([0.5, 0.7]), 0.5, 1e-9, 0.0)
 ott.assert_almost_equal(ot.FrankCopula(-700.0).computeCDF([0.5, 0.7]), 0.2, 1e-9, 0.0)
 ott.assert_almost_equal(ot.FrankCopula(-1e10).computeCDF([0.5, 0.7]), 0.2, 1e-9, 0.0)
+# --- FrankCopula: PDF stays finite on the Frechet bound at extreme |theta| ---
+ott.assert_almost_equal(ot.FrankCopula(2000.0).computePDF([0.5, 0.5]), 500.0, 1e-6, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(1e10).computePDF([0.5, 0.5]), 2.5e9, 1e-4, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-1e10).computePDF([0.5, 0.5]), 2.5e9, 1e-4, 0.0)
+ott.assert_almost_equal(ot.FrankCopula(-1e10).computePDF([0.5, 0.7]), 0.0, 0.0, 0.0)

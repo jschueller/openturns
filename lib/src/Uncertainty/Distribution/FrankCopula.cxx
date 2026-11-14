@@ -159,7 +159,31 @@ Scalar FrankCopula::computePDF(const Point & point) const
   const Scalar expMinusThetaU = std::exp(-theta_ * point[0]);
   const Scalar expMinusThetaV = std::exp(-theta_ * point[1]);
   const Scalar sum1 = expMinusTheta + expMinusThetaU * expMinusThetaV - expMinusThetaU - expMinusThetaV;
-  return -theta_ * expMinusThetaU * expMinusThetaV * expm1(-theta_) / (sum1 * sum1);
+  const Scalar pdf = -theta_ * expMinusThetaU * expMinusThetaV * expm1(-theta_) / (sum1 * sum1);
+  if (std::isfinite(pdf)) return pdf;
+  // Fallback for extreme |theta|: the direct terms under/overflow to 0/0
+  // while the density stays finite on the Frechet bound. Work in log-space:
+  // logPDF = log|theta| - theta*(u+v) + log|D| - 2*logS with D = expm1(-theta)
+  // and S the same 1+R as the CDF, factored as in computeCDF.
+  if (theta_ > 1.0)
+  {
+    const Scalar lo = std::min(u, v);
+    const Scalar hi = std::max(u, v);
+    const Scalar logN = -theta_ * lo + std::log(1.0 - std::exp(-theta_ * hi) + std::exp(-theta_ * (hi - lo)) - std::exp(-theta_ * (1.0 - lo)));
+    const Scalar logD = std::log1p(-std::exp(-theta_));
+    const Scalar logS = logN - logD;
+    return std::exp(std::log(theta_) - theta_ * (u + v) - logD - 2.0 * logS);
+  }
+  if (theta_ < -1.0)
+  {
+    const Scalar phi = -theta_;
+    const Scalar K = (1.0 - std::exp(-phi * u)) * (1.0 - std::exp(-phi * v)) / (1.0 - std::exp(-phi));
+    const Scalar E = phi * (u + v - 1.0);
+    const Scalar logS = (E <= 0.0) ? std::log1p(std::exp(E) * K) : E + std::log(K + std::exp(-E));
+    const Scalar logD = phi + std::log1p(-std::exp(-phi));
+    return std::exp(std::log(phi) + phi * (u + v) + logD - 2.0 * (logD + logS));
+  }
+  return pdf;
 }
 
 /* Get the CDF of the distribution */
