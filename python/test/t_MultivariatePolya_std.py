@@ -268,3 +268,9 @@ validation.skipParameters()  # classical total==sum has no margin for independen
 validation.run()
 
 print("OK")
+# --- MultivariatePolya: border quantiles follow the range-box convention ---
+# same as Multinomial: no in-support point has CDF 1, so quantile(1) is the
+# range upper bound, quantile(0) the range lower bound
+mp = otexp.MultivariatePolya(5, [1, 1, 1], 1)
+ott.assert_almost_equal(mp.computeQuantile(1.0), mp.getRange().getUpperBound(), 0.0, 0.0)
+ott.assert_almost_equal(mp.computeQuantile(0.0), mp.getRange().getLowerBound(), 0.0, 0.0)
