@@ -173,3 +173,7 @@ for thetaClayton in [0.0, 2.0, 50.0, 200.0]:
         ott.assert_almost_equal(
             clayton.computeLogPDF(pt), m.log(clayton.computePDF(pt)), 1e-12, 0.0
         )
+# --- ClaytonCopula: rank correlation stays within [-1, 1] at extreme theta ---
+rho = ot.ClaytonCopula(1e10).getSpearmanCorrelation()[1, 0]
+assert rho <= 1.0
+ott.assert_almost_equal(rho, 1.0, 1e-3, 0.0)

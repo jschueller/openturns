@@ -3550,7 +3550,12 @@ void DistributionImplementation::computeCovarianceCopula() const
           CopulaCovarianceWrapper functionWrapper(marginalDistribution);
           Function function(bindMethod<CopulaCovarianceWrapper, Point, Point>(functionWrapper, &CopulaCovarianceWrapper::kernel, 2, 1));
           // Compute the covariance element
-          covariance_(rowIndex, columnIndex) = integrator.integrate(function, unitSquare)[0];
+          const Scalar covariance = integrator.integrate(function, unitSquare)[0];
+          // Uniform margins have variance exactly 1/12, so by Cauchy-Schwarz
+          // |cov| <= 1/12: clip the quadrature result, which can overshoot
+          // slightly for near-degenerate copulas (e.g. Clayton/Gumbel at
+          // theta = 1e10 gave rho = 1.0000092)
+          covariance_(rowIndex, columnIndex) = std::clamp(covariance, -0.08333333333333333, 0.08333333333333333);
         }
       } // loop over column indices
     } // loop over row indices
