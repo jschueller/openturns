@@ -2681,6 +2681,11 @@ Scalar LinearCombinationDistribution::computeScalarQuantile(const Scalar prob,
   }
   if (isContinuous())
   {
+    // Border values first: in the flat tail Newton converges anywhere
+    // (dx = 0/0), possibly far outside the range; return the range
+    // bounds like the generic implementation
+    if (prob == 0.0) return (tail ? getRange().getUpperBound()[0] : getRange().getLowerBound()[0]);
+    if (prob == 1.0) return (tail ? getRange().getLowerBound()[0] : getRange().getUpperBound()[0]);
     // General continuous case
     // Try a Newton method to benefit from the additive nature of Poisson's summation formula:
     // F(x_n+dx_n)~F(x_n)+p(x_n)dx_n

@@ -618,3 +618,7 @@ assert levelSet.contains(analytical.getMean()), "mean outside level set"
 levelSetPoint, threshold = analytical.computeMinimumVolumeLevelSetWithThreshold(0.9)
 assert levelSetPoint.contains(analytical.getMean()), "mean outside level set"
 assert threshold > 0.0, "bad threshold"
+# --- LinearCombination: border quantiles stay on the range bounds ---
+lc = ot.LinearCombinationDistribution([ot.Normal(), ot.Normal()], [1.0, 1.0])
+ott.assert_almost_equal(lc.computeQuantile(0.0), lc.getRange().getLowerBound(), 0.0, 0.0)
+ott.assert_almost_equal(lc.computeQuantile(1.0), lc.getRange().getUpperBound(), 0.0, 0.0)
