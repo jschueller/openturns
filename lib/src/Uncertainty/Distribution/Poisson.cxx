@@ -274,7 +274,10 @@ Description Poisson::getParameterDescription() const
 /* Lambda accessor */
 void Poisson::setLambda(const Scalar lambda)
 {
-  if (!(lambda > 0.0)) throw InvalidArgumentException(HERE) << "Lambda must be positive, here lambda=" << lambda;
+  // The boost discrete quantile used for the range fails above ~1e11
+  // (verified working at 5e10), so cap lambda with margin; the negated
+  // comparisons also reject NaN and infinite values
+  if (!(lambda > 0.0) || !(lambda <= 5.0e10)) throw InvalidArgumentException(HERE) << "Lambda must be positive and below 5e10 for numerical reasons, here lambda=" << lambda;
   if (lambda != lambda_)
   {
     lambda_ = lambda;

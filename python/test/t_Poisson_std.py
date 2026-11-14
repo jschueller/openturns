@@ -76,3 +76,11 @@ dist = ot.Poisson(4.0)
 ott.assert_almost_equal(
     dist.getRoughness(), sum(p * p for p in dist.getProbabilities())
 )
+# --- Poisson: huge/non-finite lambda rejected (boost quantile fails above ~1e11) ---
+with ott.assert_raises(TypeError):
+    ot.Poisson(1e300)
+with ott.assert_raises(TypeError):
+    ot.Poisson(float("inf"))
+with ott.assert_raises(TypeError):
+    ot.Poisson(float("nan"))
+assert ot.Poisson(1e10).getMean()[0] == 1e10
