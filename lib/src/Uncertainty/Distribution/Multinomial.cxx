@@ -542,6 +542,23 @@ Scalar Multinomial::computeConditionalQuantile(const Scalar p, const Point & xco
   return Binomial(static_cast<UnsignedInteger>(round(n_ - sumY)), condP).computeQuantile(p)[0];
 }
 
+/* Compute the sequential conditional CDF, i.e. the Rosenblatt map input.
+ * The generic implementation integrates the conditional PDF, which is null
+ * almost everywhere for lattice laws; chain the exact conditional CDFs
+ * instead so the map inverts correctly (roundtrip is the identity). */
+Point Multinomial::computeSequentialConditionalCDF(const Point & x) const
+{
+  if (x.getDimension() != getDimension()) throw InvalidArgumentException(HERE) << "Error: expected a point of dimension=" << getDimension() << ", got dimension=" << x.getDimension();
+  Point result(getDimension());
+  Point conditioning(0);
+  for (UnsignedInteger i = 0; i < getDimension(); ++ i)
+  {
+    result[i] = computeConditionalCDF(x[i], conditioning);
+    conditioning.add(x[i]);
+  }
+  return result;
+} // computeSequentialConditionalCDF
+
 /* Get the i-th marginal distribution */
 Distribution Multinomial::getMarginal(const UnsignedInteger i) const
 {

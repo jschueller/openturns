@@ -336,3 +336,10 @@ print("OK")
 m = ot.Multinomial(5, [0.3, 0.3])
 ott.assert_almost_equal(m.computeQuantile(1.0), m.getRange().getUpperBound(), 0.0, 0.0)
 ott.assert_almost_equal(m.computeQuantile(0.0), m.getRange().getLowerBound(), 0.0, 0.0)
+# --- Multinomial: Rosenblatt roundtrip is the identity (sequential conditionals) ---
+m = ot.Multinomial(10, [0.2, 0.3, 0.5])
+x = [2.0, 3.0, 5.0]
+u = m.computeSequentialConditionalCDF(x)
+ott.assert_almost_equal(u, [0.6778, 0.6514, 1.0], 1e-3, 0.0)
+iso = ot.RosenblattEvaluation(m)
+ott.assert_almost_equal(ot.InverseRosenblattEvaluation(m)(iso(x)), x, 0.0, 0.0)
