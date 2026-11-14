@@ -329,3 +329,10 @@ ott.assert_almost_equal(
 )
 
 print("OK")
+# --- Multinomial: border quantiles follow the range-box convention ---
+# quantile(1) is the smallest point with CDF 1, i.e. the range upper bound;
+# no in-support point has CDF 1 (it must dominate e.g. [5,0] and [0,5]
+# componentwise), same as Dirichlet on its simplex. Bounds, not samples.
+m = ot.Multinomial(5, [0.3, 0.3])
+ott.assert_almost_equal(m.computeQuantile(1.0), m.getRange().getUpperBound(), 0.0, 0.0)
+ott.assert_almost_equal(m.computeQuantile(0.0), m.getRange().getLowerBound(), 0.0, 0.0)
