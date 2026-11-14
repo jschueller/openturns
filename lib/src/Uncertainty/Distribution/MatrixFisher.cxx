@@ -76,6 +76,9 @@ MatrixFisher::MatrixFisher(const SquareMatrix & F)
   const UnsignedInteger n = F.getDimension();
   if (n != 3)
     throw InvalidArgumentException(HERE) << "in MatrixFisher: F must be 3x3, got dimension=" << n;
+  for (UnsignedInteger j = 0; j < n; ++ j)
+    for (UnsignedInteger i = 0; i < n; ++ i)
+      if (!std::isfinite(F(i, j))) throw InvalidArgumentException(HERE) << "in MatrixFisher: F must have finite entries";
 
   F_ = F;
   setName("MatrixFisher");
@@ -429,6 +432,9 @@ void MatrixFisher::setF(const SquareMatrix & F)
   const UnsignedInteger n = F.getDimension();
   if (n != 3)
     throw InvalidArgumentException(HERE) << "in MatrixFisher::setF: F must be 3x3, got dimension=" << n;
+  for (UnsignedInteger j = 0; j < n; ++ j)
+    for (UnsignedInteger i = 0; i < n; ++ i)
+      if (!std::isfinite(F(i, j))) throw InvalidArgumentException(HERE) << "in MatrixFisher::setF: F must have finite entries";
 
   if (F != F_)
   {

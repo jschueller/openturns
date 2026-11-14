@@ -188,3 +188,8 @@ validation.run()
 # __repr__ and __str__
 assert "MatrixFisher" in repr(distribution)
 assert "MatrixFisher" in str(distribution)
+# non-finite F must throw instead of hanging in quadrature/SVD
+with ott.assert_raises(TypeError):
+    otexp.MatrixFisher(ot.SquareMatrix([[float("inf"), 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]))
+with ott.assert_raises(TypeError):
+    otexp.MatrixFisher(ot.SquareMatrix([[float("nan"), 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]))
