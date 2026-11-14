@@ -209,8 +209,16 @@ Scalar GumbelCopula::computeCDF(const Point & point) const
   if (u >= 1.0) return v;
   // If we are outside of the support for v, in the upper part
   if (v >= 1.0) return u;
-  // If we are in the support
-  return std::exp(-std::pow(std::pow(-std::log(u), theta_) + std::pow(-std::log(v), theta_), 1.0 / theta_));
+  // If we are in the support: C(u,v) = exp(-((-log u)^theta + (-log v)^theta)^(1/theta)).
+  // Factor out max(-log u, -log v) so large theta cannot underflow both
+  // terms to 0 (which wrongly gave C = 1): with m = max and r = min/m in
+  // [0, 1], the power is m * (1 + r^theta)^(1/theta) -> m, i.e. C -> min(u,v).
+  const Scalar minusLogU = -std::log(u);
+  const Scalar minusLogV = -std::log(v);
+  const Scalar m = std::max(minusLogU, minusLogV);
+  const Scalar ratio = std::min(minusLogU, minusLogV) / m;
+  const Scalar pow1 = m * std::pow(1.0 + std::pow(ratio, theta_), 1.0 / theta_);
+  return std::exp(-pow1);
 }
 
 /* Get the PDFGradient of the distribution */
@@ -397,7 +405,7 @@ Bool GumbelCopula::hasIndependentCopula() const
 /* Theta accessor */
 void GumbelCopula::setTheta(const Scalar theta)
 {
-  if (!(theta >= 1.0)) throw InvalidArgumentException(HERE) << "Theta MUST be greater or equal to 1";
+  if (!(theta >= 1.0) || !std::isfinite(theta)) throw InvalidArgumentException(HERE) << "Theta MUST be finite and greater or equal to 1";
   if (theta != theta_)
   {
     theta_ = theta;

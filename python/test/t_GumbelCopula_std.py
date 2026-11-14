@@ -170,3 +170,11 @@ assert m.isfinite(ot.GumbelCopula(1.0).computePDFGradient([0.3, 0.4])[0])
 
 # --- GumbelCopula: entropy at independence is zero ---
 ott.assert_almost_equal(ot.GumbelCopula(1.0).computeEntropy(), 0.0, 1e-12, 0.0)
+# --- GumbelCopula: large-theta CDF tends to min(u,v), inf theta rejected ---
+ott.assert_almost_equal(ot.GumbelCopula(1e10).computeCDF([0.5, 0.7]), 0.5, 1e-6, 0.0)
+ott.assert_almost_equal(ot.GumbelCopula(1e10).computeCDF([0.5, 0.5]), 0.5, 1e-6, 0.0)
+ott.assert_almost_equal(ot.GumbelCopula(1e10).getSpearmanCorrelation()[1, 0], 1.0, 1e-3, 0.0)
+with ott.assert_raises(TypeError):
+    ot.GumbelCopula(float("inf"))
+with ott.assert_raises(TypeError):
+    ot.GumbelCopula(2.0).setTheta(float("inf"))
