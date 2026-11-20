@@ -20,13 +20,11 @@
  */
 #include "openturns/MarginalUniformOrderStatistics.hxx"
 #include "openturns/PersistentObjectFactory.hxx"
-#include "openturns/SimplicialCubature.hxx"
 #include "openturns/CubaIntegration.hxx"
 #include "openturns/GaussLegendre.hxx"
 #include "openturns/IntervalMesher.hxx"
 #include "openturns/UniformOrderStatistics.hxx"
 #include "openturns/DistFunc.hxx"
-#include "openturns/PlatformInfo.hxx"
 
 BEGIN_NAMESPACE_OPENTURNS
 
@@ -117,18 +115,9 @@ Scalar MarginalUniformOrderStatistics::computeCDF(const Point & point) const
   // Large N case leads to a stack overflow
   if (getN() > ResourceMap::GetAsUnsignedInteger("MarginalUniformOrderStatistics-LargeCaseCDF"))
   {
-    if (PlatformInfo::HasFeature("cuba"))
-    {
-      const CubaIntegration algo("cuhre");
-      return SpecFunc::Clip01(algo.integrate(Function(PDFWrapper(this)), Interval(Point(dimension_), point))[0]);
-    } // cuba
-    else
-    {
-      SimplicialCubature algo;
-      algo.setMaximumCallsNumber(ResourceMap::GetAsUnsignedInteger("MarginalUniformOrderStatistics-MaximumCallsNumber"));
-      const Mesh domain(simplex_.getVertices() * point, simplex_.getSimplices());
-      return SpecFunc::Clip01(algo.integrate(Function(PDFWrapper(this)), domain)[0]);
-    } // simplicial
+    // The Cuhre adaptive cubature is implemented natively, always available
+    const CubaIntegration algo("cuhre");
+    return SpecFunc::Clip01(algo.integrate(Function(PDFWrapper(this)), Interval(Point(dimension_), point))[0]);
   } // large case
   return MarginalDistribution::computeCDF(point);
 }

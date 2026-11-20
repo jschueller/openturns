@@ -73,8 +73,7 @@ Simplification mechanisms to compute :eq:`condPDF` are implemented for some dist
 To know if a simplification is used, ask the method *hasSimplifiedVersion*.
 
 If the dimension of :math:`\inputRV_\cI` is greater than 1, the default integration algorithm is :class:`~openturns.CubaIntegration`
-defined in the entry ``PointConditionalDistribution-CubaAlgorithm`` if available and the
-:class:`~openturns.SimplicialCubature` algorithm if not. If the
+defined in the entry ``PointConditionalDistribution-CubaAlgorithm``. If the
 dimension of :math:`\inputRV_\cI` is 1, then the default integration algorithm is the :class:`~openturns.GaussKronrod` algorithm with its default
 quadrature formula.
 
@@ -155,7 +154,7 @@ We assign to :math:`\inputRV_{\overline{\cI}}|\inputRV_\cI = \vect{x}_\cI` the n
 The following :class:`~openturns.ResourceMap` keys are used:
 
 - ``PointConditionalDistribution-UseSimplifiedVersion`` (``Bool``, default: ``true``): whether the simplified version of the algorithm is used,
-- ``PointConditionalDistribution-CubaAlgorithm`` (``String``, default: ``cuhre``): the default Cuba algorithm used to compute the CDF when the conditioning values are multivariate,
+- ``PointConditionalDistribution-CubaAlgorithm`` (``String``, default: ``cuhre``): the default Cuhre algorithm used to compute the CDF when the conditioning values are multivariate,
 - ``PointConditionalDistribution-OptimizationAlgorithm`` (``String``, default: ``Cobyla``): the name of the default optimization algorithm used,
 - ``PointConditionalDistribution-RatioUniformCandidateNumber`` (``UnsignedInteger``, default: ``10000``): the number of candidates used to find feasible points for the ratio of uniforms method initialization,
 - ``PointConditionalDistribution-InitializeSampling`` (``Bool``, default: ``true``): whether the ratio of uniforms method is initialized,
@@ -235,7 +234,7 @@ algo : :class:`~openturns.IntegrationAlgorithm`
 Notes
 -----
 By default, if the dimension of :math:`\inputRV_\cI` is greater than 1, the integration algorithm is :class:`~openturns.CubaIntegration`
-defined in the entry ``PointConditionalDistribution-CubaAlgorithm`` if available and the :class:`~openturns.SimplicialCubature` algorithm if not. If the
+defined in the entry ``PointConditionalDistribution-CubaAlgorithm``. If the
 dimension of :math:`\inputRV_\cI` is 1, then the integration algorithm is the :class:`~openturns.GaussKronrod` algorithm with ts default quadrature
 formula.)RAW"
 // ---------------------------------------------------------------------

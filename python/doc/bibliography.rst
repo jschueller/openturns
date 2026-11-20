@@ -267,6 +267,9 @@ Bibliography
 .. [hahn2005] Thomas Hahn, *Cuba - a library for multidimensional numerical integration*
     Computer Physics Communications, 168(2), 78-95.
     `pdf <https://arxiv.org/pdf/hep-ph/0404043>`__
+.. [berntsen1991] Berntsen, J., Espelid, T. O., Genz, A., *An adaptive algorithm
+    for the approximate calculation of multiple integrals*,
+    ACM Transactions on Mathematical Software, 17(4), 437-451, 1991.
 .. [hale2013] Hale, N., Townsend, A. (2013).
     *Fast and accurate computation of Gauss-Legendre and Gauss-Jacobi quadrature nodes and weights.*
     SIAM Journal on Scientific Computing, 35(2), A652-A674.

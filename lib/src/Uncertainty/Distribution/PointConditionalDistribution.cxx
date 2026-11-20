@@ -28,7 +28,6 @@
 #include "openturns/PersistentObjectFactory.hxx"
 #include "openturns/ResourceMap.hxx"
 #include "openturns/RandomGenerator.hxx"
-#include "openturns/SimplicialCubature.hxx"
 #include "openturns/CubaIntegration.hxx"
 #include "openturns/Tuples.hxx"
 #include "openturns/ArchimedeanCopula.hxx"
@@ -43,7 +42,6 @@
 #include "openturns/NormalCopula.hxx"
 #include "openturns/Student.hxx"
 #include "openturns/DomainEvent.hxx"
-#include "openturns/PlatformInfo.hxx"
 #include "openturns/GaussKronrod.hxx"
 #include "openturns/DistFunc.hxx"
 #include "openturns/SobolSequence.hxx"
@@ -146,15 +144,9 @@ PointConditionalDistribution::PointConditionalDistribution(const Distribution & 
   }
   else
   {
-    if (PlatformInfo::HasFeature("cuba"))
-    {
-      const String algo(ResourceMap::GetAsString("PointConditionalDistribution-CubaAlgorithm"));
-      integrationAlgorithm_ = CubaIntegration(algo);
-    }
-    else
-    {
-      integrationAlgorithm_ = SimplicialCubature();
-    }
+    // The Cuhre adaptive cubature is implemented natively, always available
+    const String algo(ResourceMap::GetAsString("PointConditionalDistribution-CubaAlgorithm"));
+    integrationAlgorithm_ = CubaIntegration(algo);
   }
   update();
 }

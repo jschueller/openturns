@@ -28,7 +28,6 @@ Build-Depends: debhelper-compat (= 12),
                libtbb-dev,
                libxml2-dev,
                libnanoflann-dev,
-               libcuba-dev,
                python3-dev,
                swig
 Standards-Version: 4.6.0

@@ -188,11 +188,6 @@ Description PlatformInfo::GetFeatures()
     Features_["muparser"] = false;
 #endif
 
-#ifdef OPENTURNS_HAVE_CUBA
-    Features_["cuba"] = true;
-#else
-    Features_["cuba"] = false;
-#endif
   }
 
   Description keys;

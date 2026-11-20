@@ -1,15 +1,14 @@
 %feature("docstring") OT::CubaIntegration
-R"RAW(Multidimensional integration algorithms.
+R"RAW(Multidimensional integration algorithm.
 
 Parameters
 ----------
 algorithmName : str
-    The name of the integration routine to use. It must be 'cuhre', 'divonne',
-    'suave', or 'vegas'.
+    The name of the integration routine to use. Only 'cuhre' is available.
 
 Notes
 -----
-The Cuba algorithms enable one to approximate the definite integral:
+The Cuhre algorithm approximates the definite integral:
 
 .. math::
 
@@ -20,16 +19,14 @@ which takes values in :math:`\Rset^p`, with :math:`f: \Rset^n \mapsto \Rset^p`,
 :math:`I_n=[a_1, b_1]\times\cdots\times[a_n, b_n]\subset\Rset^n`,
 having :math:`a_i<b_i` for all :math:`i=1,...,n`.
 
-The four available integration routines work on vector integrands. While Cuhre
-is deterministic, the three other ones use Monte Carlo methods. Cuhre employs a
-cubature rule for subregion estimation in an adaptative subdivision scheme.
-Divonne works by stratified sampling. Suave combines techniques from importance
-sampling and subregion sampling. Vegas uses importance sampling for variance
-reduction. The result is returned as a :class:`~openturns.Point` of dimension
+Cuhre is deterministic: it combines Genz-Malik cubature rules of degree 7, 9,
+11 or 13 for subregion estimation within an adaptative subdivision scheme
+[berntsen1991]_. The integration domain must be at least 2-dimensional.
+The result is returned as a :class:`~openturns.Point` of dimension
 :math:`p`, which is the number of components of the return value of the
 :class:`~openturns.Function` that one will integrate.
 
-All the integration routines and the parameters are discussed in [hahn2005]_.
+The algorithm and its parameters are discussed in [hahn2005]_.
 
 The following :class:`~openturns.ResourceMap` keys are used:
 
@@ -47,51 +44,20 @@ The following :class:`~openturns.ResourceMap` keys are used:
      - Default maximum number of integrand calls.
    * - ``CubaIntegration-mineval`` (``UnsignedInteger``, default: ``0``)
      - Minimum number of integrand evaluations.
-   * - ``CubaIntegration-seed`` (``UnsignedInteger``, default: ``0``)
-     - Random number generator seed.
    * - ``CubaIntegration-cuhre-key`` (``UnsignedInteger``, default: ``0``)
-     - Cuhre integration key.
+     - Cuhre integration key: 7, 9, 11 (3D only) or 13 (2D only) select the
+       cubature rule, 0 selects the default rule (13 in 2D, 11 in 3D, 9
+       otherwise).
    * - ``CubaIntegration-flags`` (``UnsignedInteger``, default: ``0``)
-     - Global flags.
-   * - ``CubaIntegration-divonne-border`` (``Scalar``, default: ``0.0``)
-     - Divonne border parameter.
-   * - ``CubaIntegration-divonne-maxchisq`` (``Scalar``, default: ``10.0``)
-     - Divonne maximum chi-square.
-   * - ``CubaIntegration-divonne-mindeviation`` (``Scalar``, default: ``0.25``)
-     - Divonne minimum deviation.
-   * - ``CubaIntegration-divonne-key1`` (``UnsignedInteger``, default: ``47``)
-     - Divonne key1 parameter.
-   * - ``CubaIntegration-divonne-key2`` (``UnsignedInteger``, default: ``1``)
-     - Divonne key2 parameter.
-   * - ``CubaIntegration-divonne-key3`` (``UnsignedInteger``, default: ``1``)
-     - Divonne key3 parameter.
-   * - ``CubaIntegration-divonne-maxpass`` (``UnsignedInteger``, default: ``5``)
-     - Divonne maximum passes.
-   * - ``CubaIntegration-divonne-ngiven`` (``UnsignedInteger``, default: ``0``)
-     - Divonne number of given points.
-   * - ``CubaIntegration-divonne-nextra`` (``UnsignedInteger``, default: ``0``)
-     - Divonne number of extra points.
-   * - ``CubaIntegration-suave-flatness`` (``Scalar``, default: ``25.0``)
-     - Suave flatness parameter.
-   * - ``CubaIntegration-suave-nnew`` (``UnsignedInteger``, default: ``1000``)
-     - Suave number of new integrand evaluations.
-   * - ``CubaIntegration-suave-nmin`` (``UnsignedInteger``, default: ``2``)
-     - Suave minimum number of evaluations.
-   * - ``CubaIntegration-vegas-nstart`` (``UnsignedInteger``, default: ``1000``)
-     - Vegas initial number of integrand evaluations.
-   * - ``CubaIntegration-vegas-nincrease`` (``UnsignedInteger``, default: ``500``)
-     - Vegas increase in evaluations per iteration.
-   * - ``CubaIntegration-vegas-nbatch`` (``UnsignedInteger``, default: ``1000``)
-     - Vegas batch size.
-   * - ``CubaIntegration-vegas-gridno`` (``UnsignedInteger``, default: ``0``)
-     - Vegas grid number.
+     - Global flags, only bit 2 is used: if set, only the last iteration
+       contributes to the final result.
 
 Examples
 --------
-Create a Cuba algorithm:
+Create a Cuhre algorithm:
 
 >>> import openturns as ot
->>> algo = ot.CubaIntegration('vegas')
+>>> algo = ot.CubaIntegration('cuhre')
 )RAW"
 
 // ---------------------------------------------------------------------
@@ -103,7 +69,7 @@ Parameters
 ----------
 f : :class:`~openturns.Function`, :math:`f: \Rset^n \mapsto \Rset^p`
     The integrand function.
-interval : :class:`~openturns.Interval`, :math:`interval \subset \Rset^n` 
+interval : :class:`~openturns.Interval`, :math:`interval \subset \Rset^n`
     The integration domain.
 
 Returns
@@ -116,7 +82,7 @@ Examples
 >>> import openturns as ot
 >>> f = ot.SymbolicFunction(['x', 'y', 'z'], ['sin(x) * cos(y) * exp(z)'])
 >>> interval = ot.Interval([0.0] * 3, [1.0] * 3)
->>> algoC = ot.CubaIntegration('vegas')
+>>> algoC = ot.CubaIntegration('cuhre')
 >>> value = algoC.integrate(f, interval)  # doctest: +SKIP
 )RAW"
 
@@ -188,7 +154,7 @@ algoName : :class:`~openturns.Description`
 Parameters
 ----------
 algorithmName : str
-    The name of the integration routine used by the algorithm. It must be 'cuhre', 'divonne', 'suave', or 'vegas'."
+    The name of the integration routine used by the algorithm. Only 'cuhre' is available."
 
 // ---------------------------------------------------------------------
 
@@ -209,4 +175,3 @@ Parameters
 ----------
 N : int, :math:`N>0`
     The maximal number of times the algorithm will attempt to call the integrand."
-

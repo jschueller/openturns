@@ -399,9 +399,7 @@ ot_pyinstallcheck_test (KarhunenLoeveValidation_std IGNOREOUT)
 ot_pyinstallcheck_test (P1LagrangeInterpolation_std)
 ot_pyinstallcheck_test (P1LagrangeEvaluation_std IGNOREOUT)
 ot_pyinstallcheck_test (SimplicialCubature_std IGNOREOUT)
-if (Cuba_FOUND)
-  ot_pyinstallcheck_test (CubaIntegration_std IGNOREOUT)
-endif ()
+ot_pyinstallcheck_test (CubaIntegration_std IGNOREOUT)
 ot_pyinstallcheck_test (SlicedInverseRegression_std IGNOREOUT)
 
 ## Model

@@ -8,6 +8,7 @@
 
 ==== API changes ====
 
+ * Cuhre integration rule reimplemented natively in CubaIntegration, libcuba dependency and Divonne/Suave/Vegas routines removed
  * HiGHS moved out of experimental
  * FiniteOrthogonalFunctionFactory moved out of experimental
  * Removed deprecated SoizeGhanemFactory class

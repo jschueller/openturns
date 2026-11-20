@@ -15,7 +15,6 @@ BuildRequires:  libxml2-devel
 BuildRequires:  hdf5-devel
 BuildRequires:  nlopt-devel
 BuildRequires:  tbb-devel
-BuildRequires:  cuba-devel
 BuildRequires:  pagmo2-devel
 BuildRequires:  python3-devel
 BuildRequires:  spectra-devel

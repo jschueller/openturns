@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief Implement the Cuba method for multidimensional integration
+ *  @brief Implement the Cuhre adaptive cubature method for multidimensional integration
  *
  *  Copyright 2005-2027 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -38,7 +38,7 @@ class OT_API CubaIntegration
 public:
 
   /** Parameter constructor */
-  explicit CubaIntegration(const String algorithmName = "vegas");
+  explicit CubaIntegration(const String algorithmName = "cuhre");
 
   /** Virtual copy constructor */
   CubaIntegration * clone() const override;
@@ -80,12 +80,8 @@ public:
   void load(Advocate & adv) override;
 private:
 
-  /* Static routine to compute the integrand function with parameter types
-     suitable for Cuba */
-  static int ComputeIntegrand(const int *ndim, const double x[], const int *ncomp, double f[], void *userdata);
-
   /* The name of the optimization routine to use */
-  String algorithmName_ = "vegas";
+  String algorithmName_ = "cuhre";
 
   /* The requested relative accuracy */
   Scalar maximumRelativeError_ = 0.0;

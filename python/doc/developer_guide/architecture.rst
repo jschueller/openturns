@@ -229,9 +229,6 @@ The tools chosen for the development of the platform are:
    * - Optimization (optional)
      - `Pagmo <https://esa.github.io/pagmo2/>`_
      - 2.12.0
-   * - Integration (optional)
-     - `Cuba <https://feynarts.de/cuba/>`_
-     - 4.2.2
    * - XML support (optional)
      - `LibXml2 <http://xmlsoft.org/>`_
      - 2.9.4
