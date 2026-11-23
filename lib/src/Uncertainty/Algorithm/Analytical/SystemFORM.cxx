@@ -24,6 +24,7 @@
 #include "openturns/FORM.hxx"
 #include "openturns/IntersectionEvent.hxx"
 #include "openturns/UnionEvent.hxx"
+#include "openturns/StandardEvent.hxx"
 #include "openturns/ThresholdEventImplementation.hxx"
 #include "openturns/Normal.hxx"
 #include "openturns/SpecFunc.hxx"
@@ -144,7 +145,24 @@ void SystemFORM::run()
       const FORMResult result(algo.getResult());
       const Scalar beta = result.getGeneralisedReliabilityIndex();
       idToBetaMap[id] = beta;
-      idToAlphaMap[id] = (beta > 0.0 ? result.getStandardSpaceDesignPoint() * (1.0 / beta) : Point(result.getStandardSpaceDesignPoint().getDimension(), 0.0));
+      const Point standardSpaceDesignPoint(result.getStandardSpaceDesignPoint());
+      if ((beta != 0.0) && (standardSpaceDesignPoint.norm() > 0.0))
+        idToAlphaMap[id] = standardSpaceDesignPoint * (1.0 / beta);
+      else
+      {
+        // beta == 0 means the design point is at the origin, the direction
+        // cannot be recovered from u*/beta: use the normalized gradient of
+        // the standard limit-state function instead
+        const StandardEvent standardEvent(leafEventCollection[i]);
+        const Scalar sign = standardEvent.getOperator().compare(0.0, 1.0) ? -1.0 : 1.0;
+        const Point gradient(standardEvent.getImplementation()->getFunction().gradient(standardSpaceDesignPoint) * Point(1, 1.0));
+        const Point signedGradient(sign * gradient);
+        const Scalar norm = signedGradient.norm();
+        if (norm > 0.0)
+          idToAlphaMap[id] = signedGradient * (1.0 / norm);
+        else
+          idToAlphaMap[id] = Point(standardSpaceDesignPoint.getDimension(), 0.0);
+      }
       formResultCollection.add(result);
       LOGINFO(OSS() << "SystemFORM: event=" << id << " beta=" << result.getGeneralisedReliabilityIndex());
     }
