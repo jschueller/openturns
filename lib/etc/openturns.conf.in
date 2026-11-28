@@ -336,6 +336,14 @@
   <CubaIntegration-vegas-nbatch value_int="1000" />
   <CubaIntegration-vegas-gridno value_int="0" />
 
+  <!-- OT::CuhreIntegration parameters -->
+  <CuhreIntegration-DefaultMaximumAbsoluteError value_float="1.0e-4" />
+  <CuhreIntegration-DefaultMaximumRelativeError value_float="1.0e-4" />
+  <CuhreIntegration-DefaultMaximumCallsNumber value_int="1000000" />
+  <CuhreIntegration-mineval value_int="0" />
+  <CuhreIntegration-key value_int="0" />
+  <CuhreIntegration-flags value_int="0" />
+
   <!-- OT::GaussKronrod parameters -->
   <GaussKronrod-MaximumError        value_float="1.0e-12"       />
   <GaussKronrod-MaximumSubIntervals value_int="100" />

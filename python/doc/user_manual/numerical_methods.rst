@@ -63,7 +63,7 @@ Integration
 
     IntegrationAlgorithm
     FilonQuadrature
-    CubaIntegration
+    experimental.CuhreIntegration
     SimplicialCubature
     ExperimentIntegration
 

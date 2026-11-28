@@ -41,8 +41,10 @@
 %include QuadraticProgrammingProblem.i
 
 /* Base/Algo */
+%import algo_module.i
 %include SlicedInverseRegressionResult.i
 %include SlicedInverseRegression.i
+%include CuhreIntegration.i
 
 /* Uncertainty/Distribution */
 %include UncertaintyModelCopulaCollection.i

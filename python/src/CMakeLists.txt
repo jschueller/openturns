@@ -272,6 +272,7 @@ ot_add_python_module(experimental experimental_module.i
                      MemoizePointToFieldFunction.i MemoizePointToFieldFunction_doc.i
                      SlicedInverseRegression.i SlicedInverseRegression_doc.i
                      SlicedInverseRegressionResult.i SlicedInverseRegressionResult_doc.i
+                     CuhreIntegration.i CuhreIntegration_doc.i
                      CirculantEmbeddingGaussianProcess.i CirculantEmbeddingGaussianProcess_doc.i
                      P1InterpolatedProcess.i P1InterpolatedProcess_doc.i
                      CurlFreeModel.i CurlFreeModel_doc.i

@@ -981,6 +981,14 @@ void ResourceMap::loadDefaultConfiguration()
   addAsUnsignedInteger("CubaIntegration-vegas-nbatch", 1000);
   addAsUnsignedInteger("CubaIntegration-vegas-gridno", 0);
 
+  // CuhreIntegration parameters //
+  addAsScalar("CuhreIntegration-DefaultMaximumAbsoluteError", 1.0e-4);
+  addAsScalar("CuhreIntegration-DefaultMaximumRelativeError", 1.0e-4);
+  addAsUnsignedInteger("CuhreIntegration-DefaultMaximumCallsNumber", 1000000);
+  addAsUnsignedInteger("CuhreIntegration-mineval", 0);
+  addAsUnsignedInteger("CuhreIntegration-key", 0);
+  addAsUnsignedInteger("CuhreIntegration-flags", 0);
+
   // GaussKronrod parameters //
   addAsScalar("GaussKronrod-MaximumError",  1.0e-12);
   addAsUnsignedInteger("GaussKronrod-MaximumSubIntervals", 100);

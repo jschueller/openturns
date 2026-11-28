@@ -6,8 +6,10 @@
 
 ==== New classes ====
 
-==== API changes ====
+ * CuhreIntegration (openturns.experimental): native Cuhre adaptive cubature rule for multidimensional integration
 
+==== API changes ====
+ * CubaIntegration is deprecated, use CuhreIntegration instead
  * HiGHS moved out of experimental
  * FiniteOrthogonalFunctionFactory moved out of experimental
  * Removed deprecated SoizeGhanemFactory class

@@ -1,6 +1,9 @@
 %feature("docstring") OT::CubaIntegration
 R"RAW(Multidimensional integration algorithms.
 
+.. deprecated:: 1.29
+   Use :class:`~openturns.experimental.CuhreIntegration` instead.
+
 Parameters
 ----------
 algorithmName : str

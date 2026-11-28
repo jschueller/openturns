@@ -1,4 +1,5 @@
 Remove deprecated Graph showAxes, legendPosition, legendFontSize, logScale arguments
+Remove deprecated CubaIntegration class in some future version
 Remove deprecated KrigingAlgorithm, KrigingRandomVector, GeneralLinearModelAlgorithm classes (+results) in some future version
 Remove deprecated StandardDistributionPolynomialFactory in some future version
 Remove deprecated Collection/Sample find method (%ignore)

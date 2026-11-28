@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief Implement the Cuba method for multidimensional integration
+ *  @brief Implement the Cuba method for multidimensional integration (deprecated)
  *
  *  Copyright 2005-2027 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -27,6 +27,7 @@ BEGIN_NAMESPACE_OPENTURNS
 
 /**
  * @class CubaIntegration
+ * @deprecated Use CuhreIntegration instead.
  */
 
 class OT_API CubaIntegration

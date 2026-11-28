@@ -43,6 +43,7 @@ CubaIntegration::CubaIntegration(const String algorithmName)
   , maximumAbsoluteError_(ResourceMap::GetAsScalar("CubaIntegration-DefaultMaximumAbsoluteError"))
   , maximumCallsNumber_(ResourceMap::GetAsUnsignedInteger("CubaIntegration-DefaultMaximumCallsNumber"))
 {
+  LOGWARN("CubaIntegration is deprecated, use CuhreIntegration");
   setAlgorithmName(algorithmName);
 }
 
